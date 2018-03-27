@@ -1,0 +1,24 @@
+# file temporanei vim
+*.*.swp
+*.*.swo
+
+#ignore dipendenze npm
+node_modules
+package-lock.json
+
+# file temporanei visual studio code
+.vscode
+
+# ignora gli elementi di build
+build
+
+# yarn files
+yarn.lock
+
+# css files
+Poc/src/**/*.css
+
+# test coverage dir
+coverage
+
+
