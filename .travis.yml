@@ -37,7 +37,7 @@ deploy:
   provider: surge
   file_glob: true
   skip_cleanup: true
-  project: ./build/
+  project: ./src/build/
   domain: velociraptor.surge.sh
   on:
     branch: master
