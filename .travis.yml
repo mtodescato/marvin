@@ -30,6 +30,7 @@ before_deploy:
 - ls
 - cd build
 - mv index.html 200.html
+- ls
 - cd ..
 - ls
 
@@ -37,7 +38,7 @@ deploy:
   provider: surge
   file_glob: true
   skip_cleanup: true
-  project: ./src/build/
+  project: ./build/
   domain: velociraptor.surge.sh
   on:
     branch: master
