@@ -1,0 +1,19 @@
+notifications:
+  slack:
+    rooms:
+    - novegroup:SNV4w4RI7iU2gnStO5lhsPZI#github
+  email: false
+
+language: node_js
+node_js:
+  - "6"
+
+before_install:
+- sudo apt-get update
+- npm install -g truffle
+- npm install -g solhint
+
+all_branches: true
+
+script:
+
