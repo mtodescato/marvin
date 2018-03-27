@@ -34,7 +34,6 @@
   "bugs": {
     "url": "https://github.com/mtodescato/marvin/issues"
   },
-  "homepage": "https://github.com/mtodescato/marvin#readme",
   "devDependencies": {
     "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
