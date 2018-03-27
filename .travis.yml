@@ -17,24 +17,26 @@ all_branches: true
 
 script:
 - npm install 
-- cd src/truffle
+- cd src/bc
 - solhint ./contracts/*
 - truffle compile
 - truffle test --network develop
 - cd ../..
 - npm run lint
 - npm run test
+
+before_deploy:
 - npm install eslint-plugin-jsx-a11y@^5.1.1
 - npm run build
 - cd build
 - mv index.html 200.html
-- cd ..
+- cd ../..
 
 deploy:
   provider: surge
   file_glob: true
   skip_cleanup: true
   project: ./build/
-  domain: able-crow.surge.sh
+  domain: velociraptor.surge.sh
   on:
-    branch: deploySurge
+    branch: master
