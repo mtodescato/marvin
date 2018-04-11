@@ -74,6 +74,7 @@
     "redux-saga-testing": "^1.0.5",
     "reselect": "^3.0.1",
     "truffle-contract": "^3.0.4",
-    "web3": "^0.20.0"
+    "web3": "^0.20.0",
+    "web3-fake-provider": "^0.1.0"
   }
 }
