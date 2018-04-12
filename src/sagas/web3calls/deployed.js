@@ -4,17 +4,18 @@
  * type: javascript module
  * authors: Denis Mazzucato
  * license: MIT License
- * warnings: don't use outside web3calls, utils for web3calls module
+ * warnings: utils for web3calls module, don't use outside web3calls
  * changes:
  * * Denis Mazzucato    | 2018/04/11 | file creation
  */
 
-const contract = require('truffle-contract');
+import contract from 'truffle-contract';
 
 // return metamask accounts
 export const getAccount = () => window.web3.eth.accounts[0];
 
-// open the contractModuel and return a promise with contractModule's instance
+// open the contractModule and return a promise with contractModule's instance
+// TODO: no tests has been provided for this function
 export const deployed = (contractModule) => {
   const wrapper = contract(contractModule);
   wrapper.setProvider(window.web3.currentProvider);
