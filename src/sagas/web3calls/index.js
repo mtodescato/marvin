@@ -5,7 +5,7 @@
  * authors: Denis Mazzucato
  * license: MIT License
  * warnings: package index
- * changes: 
+ * changes:
  * * Denis Mazzucato | 2018/04/11 | file creation
  */
 
