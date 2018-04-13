@@ -20,9 +20,8 @@ describe('sagas general test suite', () => {
       .to.have.property('value')
       .that.have.property('ALL')
       .that.be.an('array');
-    const end = it.next();
-    expect(end).to.have.property('value', undefined);
-    expect(end).to.have.property('done', true);
+    // eslint-disable-next-line no-unused-expressions
+    expect(it).end;
   });
 
   // general test for all saga's basic properties

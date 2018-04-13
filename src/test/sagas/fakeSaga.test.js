@@ -9,15 +9,13 @@ describe('FakeSaga test suite', () => {
     expect(it.next().value).to.deep.equal(put({
       type: 'marvin/fake-reducer/ACTION_TYPE2',
     }));
-    const end = it.next();
-    expect(end).to.have.property('value', undefined);
-    expect(end).to.have.property('done', true);
+    // eslint-disable-next-line no-unused-expressions
+    expect(it).end;
   });
   it('triggerAction should trigger FakeReducer/ACTION_TYPE1', () => {
     const it = triggerAction();
     expect(it.next().value.FORK.args[0]).to.deep.equal('marvin/fake-reducer/ACTION_TYPE1');
-    const end = it.next();
-    expect(end).to.have.property('value', undefined);
-    expect(end).to.have.property('done', true);
+    // eslint-disable-next-line no-unused-expressions
+    expect(it).end;
   });
 });
