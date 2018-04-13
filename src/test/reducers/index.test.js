@@ -12,11 +12,12 @@
  */
 
 import { createStore } from 'redux';
+import { toCamelCase } from '../../utils/global';
 import combineReducers, * as Reducers from '../../reducers/';
 
 describe('Reducers general test suite', () => {
   // no one reducer can take this dummy action
-  const actionNeverTake = 'ACTION_THAT_NOBODY_WILL_EVER_TAKE_0123';
+  const actionNeverTake = { type: 'ACTION_THAT_NOBODY_WILL_EVER_TAKE_0123' };
   // state examples
   const states = [
     { // states[0]
@@ -29,34 +30,64 @@ describe('Reducers general test suite', () => {
     .forEach((key) => {
       const element = Reducers[key];
       describe(`duck module ${key} will have basic properties`, () => {
-        it('reducer must be a property of all reducers', () => {
-          expect(element).to.have.property('reducer');
-        });
         it('reducer return the state passed if does not take care of an action', () => {
           expect(element.reducer(states[0], actionNeverTake, {}))
             .to.deep.equal(states[0]);
         });
+
         it('reducer return the initial state if state passed is undefined', () => {
           expect(element.reducer(undefined, actionNeverTake, {}))
             .to.deep.equal(element.initialState);
         });
+
+        // for each action the reducer's call don't return undefined
         Object.keys(element.types).forEach((type) => {
-          const action = element.types[type];
+          const action = { type: element.types[type] };
           it(`reducer do not return undefined for ${type} action`, () => {
             // eslint-disable-next-line no-unused-expressions
             expect(element.reducer(undefined, action, ...element))
               .to.not.be.undefined;
           });
         });
+
+        // for each action it must to be a correspondent creator
+        Object.keys(element.types).forEach((type) => {
+          it(`action ${type} have a trace in action creators`, () => {
+            expect(element.creators)
+              .to.have.property(toCamelCase(type));
+            expect(element.creators[toCamelCase(type)]())
+              .to.have.property('type', element.types[type]);
+          });
+        });
+
+        // the root selector don't have to be redifined
         it('root selectors', () => {
           expect(element).to.have.property('selectors')
             .that.have.property('root');
           expect(element.selectors.root({ root: 'root' }))
             .to.have.property('root', 'root');
         });
+
+        // check if in the combineReducers it was added the current reducer
         it('have a trace in combineReducers', () => {
           const store = createStore(combineReducers);
           expect(store.getState()).to.have.property(element.store, element.initialState);
+        });
+
+        // check if the reducer has the correct props accessor
+        it('have basic accessor', () => {
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('store').that.be.not.undefined;
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('types').that.be.not.undefined;
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('reducer').that.be.not.undefined;
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('selectors').that.be.not.undefined;
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('initialState').that.be.not.undefined;
+          // eslint-disable-next-line no-unused-expressions
+          expect(element).to.have.property('creators').that.be.not.undefined;
         });
       });
     });
