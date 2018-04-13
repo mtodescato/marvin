@@ -12,7 +12,10 @@
 import DuckModule from '../../reducers/duckModule';
 
 describe('DuckModule test suite', () => {
-  // testing DuckModule with no args
+  /* testing a DuckModular args less
+   * test if it has correct acces to props as:
+   * store, types, initialState, selectors
+   */
   describe('default init', () => {
     const defaultDuck = DuckModule({});
     it('correct prop store', () => {
@@ -38,7 +41,12 @@ describe('DuckModule test suite', () => {
         .to.have.property('root', 'root');
     });
   });
-  // testing DuckModule with all args
+
+  /* testing DuckModule with all args
+   * test if it has correct acces to props as:
+   * store, types, initialState, selectors
+   * with the expected results
+   */
   describe('DuckModule with all args', () => {
     const duck = DuckModule({
       namespace: 'root',
