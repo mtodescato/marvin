@@ -29,7 +29,7 @@ describe('Reducers general test suite', () => {
     .filter(key => key !== 'default') // default export isn't a reducer
     .forEach((key) => {
       const element = Reducers[key];
-      describe(`duck module ${key} will have basic properties`, () => {
+      describe(`duck module '${key}' will have basic properties`, () => {
         it('reducer return the state passed if does not take care of an action', () => {
           expect(element.reducer(states[0], actionNeverTake, {}))
             .to.deep.equal(states[0]);
