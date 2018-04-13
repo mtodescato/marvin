@@ -1,8 +1,8 @@
 // TODO: remove this when creating a true implementation of DuckModel
 
-import DuckModel from './duckModule';
+import DuckModule from './duckModule';
 
-export default DuckModel({
+export default DuckModule({
   store: 'fake-reducer',
   types: ['ACTION_TYPE1', 'ACTION_TYPE2'],
   initialState: { fake: 1 },
