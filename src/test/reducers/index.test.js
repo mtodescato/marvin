@@ -60,34 +60,10 @@ describe('Reducers general test suite', () => {
           });
         });
 
-        // the root selector don't have to be redifined
-        it('root selectors', () => {
-          expect(element).to.have.property('selectors')
-            .that.have.property('root');
-          expect(element.selectors.root({ root: 'root' }))
-            .to.have.property('root', 'root');
-        });
-
         // check if in the combineReducers it was added the current reducer
         it('have a trace in combineReducers', () => {
           const store = createStore(combineReducers);
           expect(store.getState()).to.have.property(element.store, element.initialState);
-        });
-
-        // check if the reducer has the correct props accessor
-        it('have basic accessor', () => {
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('store').that.be.not.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('types').that.be.not.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('reducer').that.be.not.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('selectors').that.be.not.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('initialState').that.be.not.undefined;
-          // eslint-disable-next-line no-unused-expressions
-          expect(element).to.have.property('creators').that.be.not.undefined;
         });
       });
     });
