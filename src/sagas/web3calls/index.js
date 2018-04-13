@@ -9,6 +9,4 @@
  * * Denis Mazzucato | 2018/04/11 | file creation
  */
 
-import deployCall from './web3calls';
-
-export default deployCall;
+export * from './web3calls';
