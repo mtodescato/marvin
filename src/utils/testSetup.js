@@ -13,10 +13,11 @@
 
 import { configure, shallow, mount, render } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import chai, { use } from 'chai';
+import chai, { use, Assertion } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import toJson from 'enzyme-to-json';
 import jsdom from 'jsdom';
+import isGeneratorFunction from 'is-generator-function';
 
 // configure fake DOM for test suite
 const { JSDOM } = jsdom;
@@ -26,8 +27,22 @@ global.window = document.defaultView;
 
 // configure chai with enzyme
 use(chaiEnzyme());
-configure({ adapter: new Adapter() });
 const { expect, assert } = chai;
+configure({ adapter: new Adapter() });
+// eslint-disable-next-line func-names
+chai.Assertion.addProperty('end', function () {
+  // eslint-disable-next-line no-underscore-dangle
+  const obj = this._obj;
+  Assertion(isGeneratorFunction(obj));
+
+  // second, our type check
+  const end = obj.next();
+  this.assert(
+    end.value === undefined && end.done === true,
+    'expected #{this} end in this iteration',
+    'expected #{this} not end in this iteration',
+  );
+});
 
 // define test enviroments as global var
 global.expect = expect;
