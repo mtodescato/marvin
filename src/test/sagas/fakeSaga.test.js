@@ -1,6 +1,6 @@
 // TODO: remove this when creating a true implementation of DuckModel
 
-import { takeLatest, put } from 'redux-saga/effects';
+import { put } from 'redux-saga/effects';
 import { runAction, triggerAction } from '../../sagas/fakeSaga';
 
 describe('FakeSaga test suite', () => {
