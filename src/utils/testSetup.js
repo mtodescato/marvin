@@ -29,6 +29,7 @@ global.window = document.defaultView;
 use(chaiEnzyme());
 const { expect, assert } = chai;
 configure({ adapter: new Adapter() });
+// add 'end' chaining helper for determinate generator's end
 // eslint-disable-next-line func-names
 chai.Assertion.addProperty('end', function () {
   // eslint-disable-next-line no-underscore-dangle
