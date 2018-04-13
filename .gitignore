@@ -19,6 +19,6 @@ yarn.lock
 Poc/src/**/*.css
 
 # test coverage dir
-coverage
+.nyc_output
 
 
