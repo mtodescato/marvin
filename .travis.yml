@@ -10,7 +10,7 @@ node_js:
 
 before_install:
 - sudo apt-get update
-- npm install -g truffle
+- npm install -g truffle@4.1.7
 - npm install -g solhint
 
 all_branches: true
