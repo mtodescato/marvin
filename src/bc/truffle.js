@@ -9,15 +9,4 @@ module.exports = {
     }
   }
 };
-/*
-Promise {
-  <pending>,
-  domain:
-   Domain {
-     domain: null,
-     _events: { error: [Function: debugDomainError] },
-     _eventsCount: 1,
-     _maxListeners: undefined,
-     members: [] } }
 
-*/
