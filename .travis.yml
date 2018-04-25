@@ -20,7 +20,9 @@ script:
 - cd src/bc
 - solhint ./contracts/*
 - truffle compile
-- truffle test --network develop
+- truffle develop
+- test
+- .exit
 - cd ../..
 - npm run lint
 - npm run test
