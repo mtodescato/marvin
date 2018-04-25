@@ -25,18 +25,3 @@ contract ('Prova List e factory' , () => {
 });
 
 
-/*
-(node:30802) UnhandledPromiseRejectionWarning: Error: FactoryMethod has not been deployed to detected network (network/artifact mismatch)
-    at /usr/lib/node_modules/truffle/build/webpack:/~/truffle-contract/contract.js:454:1
-    at <anonymous>
-    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
-(node:30802) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 1)
-(node:30802) [DEP0018] DeprecationWarning: Unhandled promise rejections are deprecated. In the future, promise rejections that are not handled will terminate the Node.js process with a non-zero exit code.
-Error: FactoryMethod has not been deployed to detected network (network/artifact mismatch)
-    at /usr/lib/node_modules/truffle/build/webpack:/~/truffle-contract/contract.js:454:1
-    at <anonymous>
-    at process._tickDomainCallback (internal/process/next_tick.js:228:7)
-truffle(development)> (node:30802) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 1)
-
-
-*/
