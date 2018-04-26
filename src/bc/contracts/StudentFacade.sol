@@ -13,8 +13,6 @@ contract StudentFacade {
     ListaUtenti = ListUsers(listaU);
   }
 
-
-
   function creaDomandaLaurea(bytes titoloTesi, bytes dataSottomissione, address relatoreContract) public returns() {
     require(ListaUtenti.getType(relatoreContract) == 1);
     address stdC = ListaUtenti.getUser(msg.sender);
