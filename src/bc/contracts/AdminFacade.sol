@@ -3,6 +3,7 @@ pragma solidity 0.4.23;
 import "./User.sol";
 import "./ListUsers.sol";
 import "./FactoryMethod.sol";
+import "./DomandeLaurea.sol";
 
 
 contract  AdminFacade {
