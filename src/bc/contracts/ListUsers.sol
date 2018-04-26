@@ -7,7 +7,7 @@ contract ListUsers is Ownable {
 
     struct UserInfo {
       address cAddress;
-      uint8 userType;
+      uint8 userType // student 0, professore 1, universita 2
       uint intPosition;
     }
 
@@ -30,6 +30,16 @@ contract ListUsers is Ownable {
     function getUser(uint userN) public view returns( address ) {
       require ( IntToUAddress[userN] != 0x0);
       return UAddressToUserInfo[IntToUAddress[userN]].cAddress;
+    }
+
+    function getUser(address userAdd) public view returns( address ) {
+      require ( UAddressToUserInfo[userAdd].cAddress != 0x0);
+      return UAddressToUserInfo[userAdd].cAddress;
+    }
+
+    function getType(address userAdd) public view return( uint8 ) {
+      require ( UAddressToUserInfo[userAdd].cAddress != 0x0);
+      return UAddressToUserInfo[userAdd].userType;
     }
 
     function removeUser(address uAddress) public {
