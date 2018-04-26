@@ -15,7 +15,7 @@ contract DomandeLaurea {
     }
 
     modifier onlyNewDomanda(address studentContract) {
-        require(StudentToInt[studentContract] == 0);
+        require(studentToInt[studentContract] == 0);
         _;
     }
 
@@ -24,32 +24,32 @@ contract DomandeLaurea {
     public
     onlyNewDomanda(studentContract)
     {
-        StudentContractToDomanda[studentContract] = DomandaLaurea(titoloTesi, 0, dataSottomissione, relatoreContract);
+        studentContractToDomanda[studentContract] = DomandaLaurea(titoloTesi, 0, dataSottomissione, relatoreContract);
         last += 1;
-        StudentToInt[studentContract] = last;
-        IntToSudent[last] = studentContract;
+        studentToInt[studentContract] = last;
+        intToSudent[last] = studentContract;
     }
 
     function gestisciDomanda(int8 newState, uint domanda) public {
         require(newState == -1 || newState == 1);
         require(domanda <= last);
-        address stdCont = IntToSudent[domanda];
-        StudentContractToDomanda[stdCont].statoDomanda = newState;
-        StudentToInt[stdCont] = 0;
-        IntToSudent[domanda] = IntToSudent[last];
+        address stdCont = intToSudent[domanda];
+        studentContractToDomanda[stdCont].statoDomanda = newState;
+        studentToInt[stdCont] = 0;
+        intToSudent[domanda] = intToSudent[last];
         last -= 1;
     }
 
     function getDomanda(uint domanda) public returns( bytes, int8, bytes, address) {
         require(domanda <= last);
-        address stdCont = IntToSudent[domanda];
-        DomandaLaurea d = StudentContractToDomanda[stdCont];
+        address stdCont = intToSudent[domanda];
+        DomandaLaurea d = studentContractToDomanda[stdCont];
         return ( d.titoloTesi, d.statoDomanda, d.dataSottomissione, d.relatoreContract );
     }
 
     function getDomanda(address stdC) public returns( bytes, int8, bytes, address) {
-        require(StudentContractToDomanda[stdC].relatoreContract != 0x0);
-        DomandaLaurea d = StudentContractToDomanda[stdC];
+        require(studentContractToDomanda[stdC].relatoreContract != 0x0);
+        DomandaLaurea d = studentContractToDomanda[stdC];
         return ( d.titoloTesi, d.statoDomanda, d.dataSottomissione, d.relatoreContract );
     } 
 }
