@@ -11,7 +11,7 @@ contract('Prova List e factory', () => {
 
   it('creazione List e factory', () => {
     adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 1233, 0x0656, 0);
-    ListUsersInstance.getUser.call(0).then(usr => User.at(usr))
+    ListUsersInstance.getUser().then(usr => User.at(usr))
       .then(usr => usr.getSerial())
       .then(v => assert.equal(v.toNumber(), 1233, 'test inserimento professore'));
   });
