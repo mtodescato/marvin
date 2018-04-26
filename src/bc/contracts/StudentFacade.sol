@@ -1,21 +1,21 @@
 pragma solidity 0.4.23;
-import "DomandaLaurea.sol";
-import "ListUsers.sol";
+import "./DomandeLaurea.sol";
+import "./ListUsers.sol";
 
 
 contract StudentFacade {
-  DomandaLaurea private DomandeLaurea;
+  DomandeLaurea private listaDomandeLaurea;
   ListUsers private ListaUtenti;
 
 
   function StudentFacade(address domandaLaurea, address listaU) public {
-    DomandeLaurea = DomandaLaurea(domandaLaurea);
+    listaDomandeLaurea = DomandeLaurea(domandaLaurea);
     ListaUtenti = ListUsers(listaU);
   }
 
-  function creaDomandaLaurea(bytes titoloTesi, bytes dataSottomissione, address relatoreContract) public returns() {
+  function creaDomandaLaurea(bytes titoloTesi, bytes dataSottomissione, address relatoreContract) public {
     require(ListaUtenti.getType(relatoreContract) == 1);
     address stdC = ListaUtenti.getUser(msg.sender);
-    DomandaLaurea.inserisciDomanda(stdC, dataSottomissione, relatoreContract);
+    listaDomandeLaurea.inserisciDomanda(stdC, titoloTesi, dataSottomissione, relatoreContract);
   }
 }
