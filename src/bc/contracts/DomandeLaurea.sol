@@ -40,14 +40,14 @@ contract DomandeLaurea {
         last -= 1;
     }
 
-    function getDomanda(uint domanda) public returns( bytes, int8, bytes, address) {
+    function getDomanda(uint domanda) public view returns( bytes, int8, bytes, address) {
         require(domanda <= last);
         address stdCont = intToSudent[domanda];
         DomandaLaurea d = studentContractToDomanda[stdCont];
         return ( d.titoloTesi, d.statoDomanda, d.dataSottomissione, d.relatoreContract );
     }
 
-    function getDomanda(address stdC) public returns( bytes, int8, bytes, address) {
+    function getDomanda(address stdC) public view returns( bytes, int8, bytes, address) {
         require(studentContractToDomanda[stdC].relatoreContract != 0x0);
         DomandaLaurea d = studentContractToDomanda[stdC];
         return ( d.titoloTesi, d.statoDomanda, d.dataSottomissione, d.relatoreContract );
