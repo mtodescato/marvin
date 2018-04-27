@@ -58,7 +58,7 @@ class Validator {
     if (func instanceof Function) {
       this.validators.push(func);
     } else {
-      throw new Error('validator is not a function');
+      throwError('funtion passed to validator is not a function');
     }
     return this;
   }
