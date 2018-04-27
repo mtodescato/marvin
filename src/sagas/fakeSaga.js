@@ -4,6 +4,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import { FakeReducer } from '../reducers';
 
 export function* runAction() {
+  // TODO: Applying here contract call
   yield put(FakeReducer.creators.actionType2());
 }
 

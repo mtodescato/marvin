@@ -6,68 +6,41 @@
  * license: MIT License
  * warnings: reducer for the BookletInfo state
  * changes:
- * * Francesca Lonedo    | 2018/04/24 | file creation
- * * Francesca Lonedo    | 2018/04/26 | added sagas
+ * * Francesca Lonedo   | 2018/04/24 | file creation
+ * * Francesca Lonedo   | 2018/04/26 | added sagas
+ * * Denis Mazzucato    | 2018/04/27 | refactoring after asyncFlow module was implements
  */
 
-import DuckModule from './duckModule';
+import AsyncFlow from './asyncFlow';
 
-export default new AsyncFlow({
-  store: 'booklet-Info',
+export default AsyncFlow({
+  store: 'booklet-info',
   initialState: {
-    bookletInfoAvailable: false,
-    address: '0',
     booklet: {},
   },
+  actions: ['BOOKLET_INFO'],
+}).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.BOOKLET_INFO_REQUEST:
-        return {
-          ...state,
-          bookletInfoAvailable: false,
-          address: action.payload.address,
-        };
-      case types.BOOKLET_INFO_FAILED:
-        return {
-          ...state,
-          bookletInfoAvailable: false,
-          address: '0',
-        };
       case types.BOOKLET_INFO_SUCCESS:
-        return {
-          ...state,
-          bookletInfoAvailable: true,
-          booklet: action.payload.booklet,
-        }
+        return { ...state, booklet: action.payload.booklet };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    bookletInfoRequest: address => ({ type: types.BOOKLET_INFO_REQUEST, payload: { address } }),
-    bookletInfoFailed: error => ({ type: types.BOOKLET_INFO_FAILED, error: true, payload: { error } }),
-    bookletInfoSuccess: booklet => ({ type: types.BOOKLET_INFO_SUCCESS, payload: { booklet } }),
+    bookletInfoRequest: address => ({
+      type: types.BOOKLET_INFO_REQUEST,
+      payload: { address },
+    }),
+    bookletInfoSuccess: booklet => ({
+      type: types.BOOKLET_INFO_SUCCESS,
+      payload: { booklet },
+    }),
+    bookletInfoFailed: error => ({
+      type: types.BOOKLET_INFO_FAILED,
+      error: true,
+      payload: { error },
+    }),
   }),
-  // selectors: ...
-  //saga
-  action: 'BOOKLET_INFO',
-  call: (payload) => {
-    contract: UserInfo, 
-    //contract to call
-    contractFunction: 'getBooklet', 
-    //function to call inside the contract
-    args: [payload.address], 
-    //args to pass the function
-    resultAdapter: result => result.c[0], 
-    //get back results in the right format
-    mockResult: { 
-      //to use when solidity function is not implemented yet
-      c: [
-        2, 
-        //fields I am requesting
-      ],
-    }
-  },
-  stub: true, 
-  //to use when solidity function is not implemented yet
 });
