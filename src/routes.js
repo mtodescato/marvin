@@ -1,5 +1,7 @@
 import Root from './root';
+import Home from './views/home';
 import Student from './views/student';
+import { userIsAuthenticatedStudent } from './utils/wrappers';
 
 const routes = [
   {
@@ -8,7 +10,11 @@ const routes = [
       {
         path: '/',
         exact: true,
-        component: Student,
+        component: Home,
+      },
+      {
+        path: '/student',
+        component: userIsAuthenticatedStudent(Student),
       },
     ],
   },
