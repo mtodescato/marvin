@@ -3,8 +3,8 @@ pragma solidity 0.4.23;
 
 contract AccademicYear {
     
-    mapping(uint => address) private intToCdL;
-    mapping(address => uint) private cdLToInt;
+    mapping(uint => address) private intToDegreeCourse;
+    mapping(address => uint) private degreeCourseToInt;
     uint private last = 0;
     uint private year;
     
@@ -12,10 +12,15 @@ contract AccademicYear {
         year = _year;
     }
 
-    function addCdL(address cdL) public {
-        cdLToInt[cdL] = last;
-        intToCdL[last] = cdL;
+    function addDegreeCourse(address degreeCourse) public {
+        degreeCourseToInt[degreeCourse] = last;
+        intToDegreeCourse[last] = degreeCourse;
         last += 1;
+    }
+
+    function getDegreeCourse(uint index) public view returns(address) {
+        require(index < last);
+        return intToDegreeCourse[index];
     }
 
 }
