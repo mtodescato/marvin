@@ -10,50 +10,41 @@ import Paragraph from 'grommet/components/Paragraph';
 import Footer from 'grommet/components/Footer';
 import Form from 'grommet/components/Form';
 import Box from 'grommet/components/Box';
+import PropTypes from 'prop-types';
+// import ConfirmationComponent from '../../components/student/confirmationComponent';
 
-class ConfirmationComponent extends React.Component {
-  render() {
-    return (
-
-      <Layer
-        closer
-        onClose={this.props._setLayer}
-      >
-        <Box pad="medium">
-          <Form>
-            <Header>
-              <Heading>
-            Conferma Iscrizione
-              </Heading>
-            </Header>
-            <FormFields>
-              <fieldset>
-                <Paragraph>
-              Confermi l'iscrizione al corso di laurea in {this.props.courseName} {this.props.courseYear} ?
-                </Paragraph>
-              </fieldset>
-            </FormFields>
-            <Footer pad={{ vertical: 'medium' }}>
-              <Button
-                label="Conferma"
-                type="submit"
-                primary
-              />
-            </Footer>
-          </Form>
-        </Box>
-      </Layer>
-    );
-  }
+function ConfirmationComponent(props) {
+  return (
+    <Layer
+      closer
+      onClose={props.setLayer}
+    >
+      <Box pad="medium">
+        <Form>
+          <Header>
+            <Heading>
+              Conferma Iscrizione
+            </Heading>
+          </Header>
+          <FormFields>
+            <fieldset>
+              <Paragraph>
+                Confermi l iscrizione al corso di laurea in {props.courseName} {props.courseYear} ?
+              </Paragraph>
+            </fieldset>
+          </FormFields>
+          <Footer pad={{ vertical: 'medium' }}>
+            <Button
+              label="Conferma"
+              type="submit"
+              primary
+            />
+          </Footer>
+        </Form>
+      </Box>
+    </Layer>
+  );
 }
-
-export const coursesEntry = [{
-  name: 'Informatica',
-  president: 'Tullio',
-  type: 'Triennale',
-  year: '2018/19',
-},
-];
 
 class CourseEntry extends React.Component {
   constructor(props) {
@@ -61,9 +52,9 @@ class CourseEntry extends React.Component {
     this.state = {
       showLayer: false,
     };
-    this._setLayer = this._setLayer.bind(this);
+    this.setLayer = this.setLayer.bind(this);
   }
-  _setLayer() {
+  setLayer() {
     this.setState({
       showLayer: !this.state.showLayer,
     });
@@ -77,9 +68,13 @@ class CourseEntry extends React.Component {
         <td>{this.props.president}</td>
         <td>{this.props.type}</td>
         <td>{this.props.year}</td>
-        <td><Button onClick={this._setLayer}>Iscriviti</Button></td>
+        <td><Button onClick={this.setLayer}>Iscriviti</Button></td>
         {this.state.showLayer ?
-          <ConfirmationComponent _setLayer={this._setLayer} courseName={this.props.name} courseYear={this.props.year} />
+          <ConfirmationComponent
+            setLayer={this.setLayer}
+            courseName={this.props.name}
+            courseYear={this.props.year}
+          />
            : null
         }
       </TableRow>
@@ -87,7 +82,7 @@ class CourseEntry extends React.Component {
   }
 }
 
-const CoursesListComponent = () => (
+const CoursesListComponent = props => (
   <div>
     <h4> Courses avaiable</h4>
     <Table responsive>
@@ -103,7 +98,7 @@ const CoursesListComponent = () => (
       </thead>
       <tbody>
         {
-          coursesEntry.map((element, index) => (
+          props.coursesEntry.map((element, index) => (
             <CourseEntry
               index={index}
               {...element}
@@ -115,5 +110,22 @@ const CoursesListComponent = () => (
   </div>
 );
 
+CoursesListComponent.propTypes = {
+  coursesEntry: PropTypes.arrayOf.isRequired,
+};
+
+ConfirmationComponent.propTypes = {
+  setLayer: PropTypes.func.isRequired,
+  courseName: PropTypes.string.isRequired,
+  courseYear: PropTypes.string.isRequired,
+};
+
+CourseEntry.propTypes = {
+  name: PropTypes.string.isRequired,
+  president: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  year: PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+};
 
 export default CoursesListComponent;

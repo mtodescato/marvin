@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Box, Layer, Form, Header, Heading, FormFields, Paragraph, Footer, Button } from 'grommet/components/Box';
 
 
-class ConfirmationComponent extends React.Component {
-  render() {
-    return (<Layer
+function ConfirmationComponent(props) {
+  return (
+    <Layer
       closer
-      onClose={this.props.setLayer}
+      onClose={props.setLayer}
     >
       <Box pad="medium">
         <Form>
@@ -20,8 +20,8 @@ class ConfirmationComponent extends React.Component {
             <fieldset>
               <Paragraph>
                 Confermi l iscrizione al corso di laurea in
-                {this.props.courseName}
-                {this.props.courseYear}
+                {props.courseName}
+                {props.courseYear}
                 ?
               </Paragraph>
             </fieldset>
@@ -36,9 +36,9 @@ class ConfirmationComponent extends React.Component {
         </Form>
       </Box>
     </Layer>
-    );
-  }
+  );
 }
+
 ConfirmationComponent.propTypes = {
   setLayer: PropTypes.func.isRequired,
   courseName: PropTypes.string.isRequired,
