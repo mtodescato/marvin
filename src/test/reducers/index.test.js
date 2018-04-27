@@ -9,6 +9,8 @@
  * * if implementation don't have it check the error in src/reducers/index.js
  * changes:
  * * Denis Mazzucato    | 2018/04/13 | file creation
+ * * Denis Mazzucato    | 2018/04/13 |
+ * * * correct test that check the tracein creators for each actions
  */
 
 import { createStore } from 'redux';
@@ -51,14 +53,14 @@ describe('Reducers general test suite', () => {
         });
 
         // for each action it must to be a correspondent creator
-        Object.keys(element.types).forEach((type) => {
+        Object.keys(element.types).forEach(multiType => multiType.split(',').forEach((type) => {
           it(`action ${type} have a trace in action creators`, () => {
             expect(element.creators)
               .to.have.property(toCamelCase(type));
-            expect(element.creators[toCamelCase(type)]())
+            expect(element.creators[toCamelCase(type)]({}))
               .to.have.property('type', element.types[type]);
           });
-        });
+        }));
 
         // check if in the combineReducers it was added the current reducer
         it('have a trace in combineReducers', () => {
