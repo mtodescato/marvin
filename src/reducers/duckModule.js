@@ -8,25 +8,26 @@
  * * use DuckModule({}) instead of DuckModule()
  * changes:
  * * Denis Mazzucato    | 2018/04/12 | file creation
+ * * Denis Mazzucato    | 2018/04/27 | addded validation func from utils package
  */
 
 import Duck from 'extensible-duck';
+import { validator } from '../utils/global';
 
-const validateProps = (init) => {
-  const validInit = {};
-  validInit.namespace = 'namespace' in init ? init.namespace : 'marvin';
-  validInit.store = 'store' in init ? init.store : 'default';
-  validInit.types = 'types' in init ? init.types : [];
-  validInit.const = 'const' in init ? init.const : {};
-  validInit.initialState = 'initialState' in init ? init.initialState : {};
-  return validInit;
-};
+const validateProps = props => validator().addValidator(init => ({
+  namespace: 'marvin',
+  store: 'default',
+  types: [],
+  consts: {},
+  initialState: {},
+  ...init,
+})).validate(props);
 
 /* base class for modular duck, redux best practice
  * namespace: string, used as a prefix for the types
  * store: string, used as a prefix for the types and as a redux state key
  * types: array, list of action types
- * const: array, constants you may need to declare
+ * consts: array, constants you may need to declare
  * initialState: State, state passed to the reducer when the state is undefined
  */
 export default init => new Duck({
