@@ -12,7 +12,7 @@
  */
 
 import Duck from 'extensible-duck';
-import { validator } from '../utils/global';
+import { validator, reduce } from '../utils/global';
 
 const validateProps = props => validator().addValidator(init => ({
   namespace: 'marvin',
@@ -21,7 +21,8 @@ const validateProps = props => validator().addValidator(init => ({
   consts: {},
   initialState: {},
   ...init,
-})).validate(props);
+})).addValidator(init => reduce(init, ['namespace', 'store', 'types', 'consts', 'initialState']))
+  .validate(props);
 
 /* base class for modular duck, redux best practice
  * namespace: string, used as a prefix for the types
