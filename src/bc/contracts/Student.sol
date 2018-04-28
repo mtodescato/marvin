@@ -7,4 +7,6 @@ contract Student is User {
     public
     User(_name, _surname, _socialNumber, _serial)
     {}
+
+    mapping(address => address) private teachingToExam; //solo se l'esame e' passato
 }
