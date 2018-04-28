@@ -3,11 +3,17 @@ import "./DomandeLaurea.sol";
 import "./ListUsers.sol";
 import "./Exam.sol";
 import "./Student.sol";
+import "./DegreeCourse.sol";
 
 
 contract StudentFacade {
     DomandeLaurea private listaDomandeLaurea;
     ListUsers private userList;
+
+    modifier onlyReadyStudent(address std) {
+        require(checkExam(std));
+        _;
+    }
 
     function StudentFacade(address domandaLaurea, address listaU) public {
         listaDomandeLaurea = DomandeLaurea(domandaLaurea);
@@ -18,7 +24,10 @@ contract StudentFacade {
         return userList.getUser(msg.sender);
     }
 
-    function creaDomandaLaurea(address student, bytes titoloTesi, bytes dataSottomissione, address relatore) public {
+    function createDegreeRequest(address student, bytes titoloTesi, bytes dataSottomissione, address relatore)
+    public
+    onlyReadyStudent(student)
+    {
         require(userList.getType(relatore) == 1);
         listaDomandeLaurea.inserisciDomanda(student, titoloTesi, dataSottomissione, relatore);
     }
@@ -36,5 +45,23 @@ contract StudentFacade {
             std.insertPassedExam(ex.getTeaching(), exam);
 
         }
+    }
+
+    function checkExam(address student) private view returns(bool) {
+
+        Student std = Student(student);
+        address degreeA = std.getDegreeCourse();
+        DegreeCourse degree = DegreeCourse(degreeA);
+
+        uint n = degree.getNumberOfTeaching();
+        bool ok = true;
+
+
+        for (uint i=0; i < n && ok; i++) {
+            address t = degree.getTeaching(i);
+            ok = std.checkPassedTeaching(t);
+        }
+
+        return ok;
     }
 }

@@ -17,11 +17,16 @@ contract Student is User {
         teachingToExam[teaching] = exam;
     }
 
+    function checkPassedTeaching(address teaching) public view returns(bool) {
+        bool result = teachingToExam[teaching] != 0x0;
+        return result;
+    }
+
     function getDegreeCourse() public view returns(address) {
         return degreeCourse;
     }
 
     function setDegreeCourse(address degreeC) public {
         degreeCourse = degreeC;
-    } 
+    }
 }

@@ -25,5 +25,8 @@ contract DegreeCourse {
         require(index < last);
         return intToTeaching[index];
     }
-}
 
+    function getNumberOfTeaching() public view returns(uint) {
+        return last;
+    }
+}
