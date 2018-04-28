@@ -9,13 +9,13 @@ contract StudentFacade {
     DomandeLaurea private listaDomandeLaurea;
     ListUsers private userList;
 
-    function getUserContract() public view returns(address) {
-        return userList.getUser(msg.sender);
-    }
-
     function StudentFacade(address domandaLaurea, address listaU) public {
         listaDomandeLaurea = DomandeLaurea(domandaLaurea);
         userList = ListUsers(listaU);
+    }
+
+    function getUserContract() public view returns(address) {
+        return userList.getUser(msg.sender);
     }
 
     function creaDomandaLaurea(address student, bytes titoloTesi, bytes dataSottomissione, address relatore) public {
