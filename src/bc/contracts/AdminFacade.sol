@@ -4,12 +4,16 @@ import "./User.sol";
 import "./ListUsers.sol";
 import "./FactoryMethod.sol";
 import "./DomandeLaurea.sol";
+import "./AcademicYearsList.sol";
+import "./AcademicYear.sol";
 
 
 contract  AdminFacade {
+
     ListUsers private userList;
     FactoryMethod private factory;
     DomandeLaurea private domandeLaurea;
+    AcademicYearsList private yearsList;
 
     function AdminFacade(address _userlist, address _factory, address _domande) public {
         userList = ListUsers(_userlist);
@@ -29,6 +33,10 @@ contract  AdminFacade {
 
     function gestisciDomandaLaurea(int8 newState, uint domanda) public {
         domandeLaurea.gestisciDomanda(newState, domanda);
+    }
+
+    function addAcademicYear( uint _year) public {
+        yearsList.insertNewAcademicYears(_year, new AcademicYear(_year));
     }
 
 }
