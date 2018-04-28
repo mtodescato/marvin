@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { renderRoutes } from 'react-router-config';
-import { Provider } from 'react-redux';
 import { Grommet } from 'grommet';
+import { Provider } from 'react-redux';
 import Store from './store';
 
 const Root = ({ route }) => (
