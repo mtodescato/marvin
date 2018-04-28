@@ -1,20 +1,34 @@
 pragma solidity 0.4.23;
 import "./DomandeLaurea.sol";
 import "./ListUsers.sol";
+import "./Exam.sol";
 
 
 contract StudentFacade {
     DomandeLaurea private listaDomandeLaurea;
-    ListUsers private listaUtenti;
+    ListUsers private userList;
+
+    function getUserContract() public view returns(address) {
+        return userList.getUser(msg.sender);
+    }
 
     function StudentFacade(address domandaLaurea, address listaU) public {
         listaDomandeLaurea = DomandeLaurea(domandaLaurea);
-        listaUtenti = ListUsers(listaU);
+        userList = ListUsers(listaU);
     }
 
-    function creaDomandaLaurea(bytes titoloTesi, bytes dataSottomissione, address relatoreContract) public {
-        require(listaUtenti.getType(relatoreContract) == 1);
-        address stdC = listaUtenti.getUser(msg.sender);
-        listaDomandeLaurea.inserisciDomanda(stdC, titoloTesi, dataSottomissione, relatoreContract);
+    function creaDomandaLaurea(address student, bytes titoloTesi, bytes dataSottomissione, address relatore) public {
+        require(userList.getType(relatore) == 1);
+        listaDomandeLaurea.inserisciDomanda(student, titoloTesi, dataSottomissione, relatore);
+    }
+
+    function subscribeToExam(address student, address exam) public {
+        Exam ex = Exam(exam);
+        ex.subscribe(student);
+    }
+
+    function manageVote(address student, address exam, bool mark) public {
+        Exam ex = Exam(exam);
+        ex.manageVote(student, mark);
     }
 }
