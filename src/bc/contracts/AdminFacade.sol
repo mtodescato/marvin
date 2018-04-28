@@ -39,4 +39,8 @@ contract  AdminFacade {
         yearsList.insertNewAcademicYears(_year, new AcademicYear(_year));
     }
 
+    function getAcademicYear( uint _year) public view returns(AcademicYear) {
+        yearsList.getAcademicYear(_year);
+    }
+
 }
