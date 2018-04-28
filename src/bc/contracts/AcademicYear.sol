@@ -1,14 +1,14 @@
 pragma solidity 0.4.23;
 
 
-contract AccademicYear {
-    
+contract AcademicYear {
+
     mapping(uint => address) private intToDegreeCourse;
     mapping(address => uint) private degreeCourseToInt;
     uint private last = 0;
     uint private year;
-    
-    function AccademicYear(uint _year) public {
+
+    function AcademicYear(uint _year) public {
         year = _year;
     }
 
