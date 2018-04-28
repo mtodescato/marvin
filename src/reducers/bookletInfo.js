@@ -13,7 +13,7 @@
 
 import AsyncFlow from './asyncFlow';
 
-export default () => AsyncFlow({
+export default AsyncFlow({
   store: 'booklet-info',
   initialState: {
     booklet: {},
