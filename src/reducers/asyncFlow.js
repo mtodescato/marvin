@@ -17,11 +17,12 @@ export default ({ store, initialState, actions }) => DuckModule({
     statuses: ['READY', 'PENDING', 'RESOLVED', 'ERRORED'],
     flowes: ['REQUEST', 'SUCCESS', 'FAILED'],
   },
-  types: [...actions.map(action => [
+  types: actions.reduce((accumulator, action) => [
+    ...accumulator,
     `${action}_REQUEST`,
     `${action}_SUCCESS`,
     `${action}_FAILED`,
-  ])],
+  ], []),
   initialState: ({ statuses }) => ({
     ...initialState,
     status: statuses.READY,
