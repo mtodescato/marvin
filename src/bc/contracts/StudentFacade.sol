@@ -33,7 +33,7 @@ contract StudentFacade {
         ex.manageVote(student, mark);
         if (mark) {
             Student std = Student(student);
-            std.insertPassedExam(ex.teaching, exam);
+            std.insertPassedExam(ex.getTeaching(), exam);
 
         }
     }

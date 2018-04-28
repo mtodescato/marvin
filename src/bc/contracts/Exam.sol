@@ -9,7 +9,7 @@ contract Exam {
     mapping(address => bool) private acceptedMarks;
     uint private last = 0;
     uint private date;
-    address public teaching;
+    address private teaching;
 
     modifier onlyPassed(address student) {
         require(studentToResult[student] >= 18);
@@ -49,6 +49,10 @@ contract Exam {
 
     function getVoto(address student) public onlyGivenVote(student) view returns(uint8) {
         return studentToResult[student];
+    }
+
+    function getTeaching() public view returns(address) {
+        return teaching;
     }
 
     function subscribe(address student) public {
