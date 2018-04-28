@@ -44,23 +44,27 @@ describe('Reducers general test suite', () => {
 
         // for each action the reducer's call don't return undefined
         Object.keys(element.types).forEach((type) => {
-          const action = { type: element.types[type] };
+          const action = {
+            type: element.types[type],
+            payload: {},
+            error: type.split('_').pop().trim() === 'FAILED',
+          };
           it(`reducer do not return undefined for ${type} action`, () => {
             // eslint-disable-next-line no-unused-expressions
-            expect(element.reducer(undefined, action, ...element))
+            expect(element.reducer(undefined, action, element))
               .to.not.be.undefined;
           });
         });
 
         // for each action it must to be a correspondent creator
-        Object.keys(element.types).forEach(multiType => multiType.split(',').forEach((type) => {
+        Object.keys(element.types).forEach((type) => {
           it(`action ${type} have a trace in action creators`, () => {
             expect(element.creators)
               .to.have.property(toCamelCase(type));
             expect(element.creators[toCamelCase(type)]({}))
               .to.have.property('type', element.types[type]);
           });
-        }));
+        });
 
         // check if in the combineReducers it was added the current reducer
         it('have a trace in combineReducers', () => {
