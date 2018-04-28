@@ -8,5 +8,9 @@ contract Student is User {
     User(_name, _surname, _socialNumber, _serial)
     {}
 
-    mapping(address => address) private teachingToExam; //solo se l'esame e' passato
+    mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
+
+    function insertPassedExam (address teaching, address exam) public /*onlyStudentFacade*/ {
+        teachingToExam[teaching] = exam;
+    }
 }

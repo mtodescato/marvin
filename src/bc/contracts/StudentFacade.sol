@@ -2,6 +2,7 @@ pragma solidity 0.4.23;
 import "./DomandeLaurea.sol";
 import "./ListUsers.sol";
 import "./Exam.sol";
+import "./Student.sol";
 
 
 contract StudentFacade {
@@ -30,5 +31,10 @@ contract StudentFacade {
     function manageVote(address student, address exam, bool mark) public {
         Exam ex = Exam(exam);
         ex.manageVote(student, mark);
+        if (mark) {
+            Student std = Student(student);
+            std.insertPassedExam(ex.teaching, exam);
+
+        }
     }
 }
