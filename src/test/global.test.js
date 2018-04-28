@@ -13,16 +13,22 @@ import * as Functions from '../utils/global';
 
 describe('global utils test suite', () => {
   it('#toCamelCase', () => {
+    expect(Functions).to.have.property('toCamelCase');
     expect(Functions.toCamelCase('WORD_WORD')).to.equal('wordWord');
   });
   it('#toUpperCasse', () => {
+    expect(Functions).to.have.property('toUpperCase');
     expect(Functions.toUpperCase('wordWord')).to.equal('WORD_WORD');
   });
   it('#throwError', () => {
+    expect(Functions).to.have.property('throwError');
     const msg = 'errore';
     expect(() => Functions.throwError(msg)).to.throw(Error, msg);
   });
   describe('#validator', () => {
+    it('#validator', () => {
+      expect(Functions).to.have.property('validator');
+    });
     const a = { a: 1 };
     const mustA = init => ({ a: init.a || Functions.throwError(), ...init });
     const mustB = init => ({ b: init.b || Functions.throwError(), ...init });
@@ -37,5 +43,26 @@ describe('global utils test suite', () => {
       expect(validator.addValidator(mustA).validate(a)).to.eql(a);
       expect(() => validator.addValidator(mustB).validate(a)).to.throw();
     });
+  });
+  it('#reduce', () => {
+    expect(Functions).to.have.property('reduce');
+    const obj = {
+      a: 1,
+      b: 2,
+      x: 3,
+      c: 4,
+    };
+    const reduceArray = ['a', 'b', 'c'];
+    const reducedObj = Functions.reduce(obj, reduceArray);
+    expect(reducedObj).to.have.property('a', 1);
+    expect(reducedObj).to.have.property('b', 2);
+    expect(reducedObj).to.have.property('c', 4);
+    expect(reducedObj).not.to.have.property('x');
+    const reducedObj1 = Functions.reduce(obj, ['z'], 'default value');
+    expect(reducedObj1).to.have.property('z', 'default value');
+    expect(reducedObj1).not.to.have.property('a');
+    expect(reducedObj1).not.to.have.property('b');
+    expect(reducedObj1).not.to.have.property('c');
+    expect(reducedObj1).not.to.have.property('x');
   });
 });

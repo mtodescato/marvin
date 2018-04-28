@@ -7,7 +7,9 @@
  * warnings: global utils func
  * changes:
  * * Denis Mazzucato    | 2018/04/13 | file creation
- * * Denis Mazzucato    | 2018/04/24 | added to
+ * * Denis Mazzucato    | 2018/04/24 | added toCamelCase and toUpperCase
+ * * Denis Mazzucato    | 2018/04/26 | added validator
+ * * Denis Mazzucato    | 2018/04/28 | added reduce
  */
 
 /* function that convert a string from UPPER_CASE to camelCase
@@ -68,3 +70,12 @@ class Validator {
   }
 }
 export const validator = () => new Validator();
+
+/* function that reduce a transformation
+ * reduce({ a: 1, b: 2, c: 3 }, ['b']) => { b: 2 }
+ */
+export const reduce = (obj, params, defaultValue = {}) =>
+  params.reduce((accumulator, param) => ({
+    ...accumulator,
+    [param]: obj[param] || defaultValue,
+  }), {});
