@@ -10,14 +10,10 @@ module.exports = (deployer) => {
   deployer.deploy(DomandeLaurea);
   deployer.deploy(AcademicYearsList);
   deployer.deploy(ListUsers).then(() => {
-    const factoryAddress = FactoryMethod.deployed().then(instance => instance.address);
-    const DomandeLaureaAddress = DomandeLaurea.deployed().then(instance => instance.address);
-    const AcademicYearsListAddress = AcademicYearsList.deployed()
-      .then(instance => instance.address);
-    deployer.deploy(StudentFacade, DomandeLaureaAddress, ListUsers.address);
-    return deployer.deploy(
-      AdminFacade, ListUsers.address, factoryAddress, DomandeLaureaAddress,
-      AcademicYearsListAddress,
-    );
+    const factoryA = FactoryMethod.deployed().then(instance => instance.address);
+    const DomandeLaureaA = DomandeLaurea.deployed().then(instance => instance.address);
+    const AcademicYearsListA = AcademicYearsList.deployed().then(instance => instance.address);
+    deployer.deploy(AdminFacade, ListUsers.address, factoryA, DomandeLaureaA, AcademicYearsListA);
+    return deployer.deploy(StudentFacade, DomandeLaureaA, ListUsers.address);
   });
 };
