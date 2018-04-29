@@ -44,4 +44,17 @@ contract  AdminFacade {
         yearsList.getAcademicYear(_year);
     }
 
+    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint type) public {
+        DegreeCourse dCourse = new DegreeCourse(name, president, type);
+        address acYear = yearsList.getAcademicYear(academicYear);
+        AcademicYear acYearObj = AcademicYear(acYear);
+        acYearObj.addDegreeCourse(dCourse);
+    }
+
+    function addTeaching(address course, address refProfessor, bytes name) public {
+        DegreeCourse dCourse = DegreeCourse(course);
+        Teaching newTeach = new Teaching(refProfessor, name);
+        dCourse.addTeaching(address(newTeach));
+    }
+
 }
