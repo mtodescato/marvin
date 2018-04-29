@@ -5,7 +5,8 @@
     "it": true,
     "expect": true,
     "assert":true,
-    "contract":true
+    "contract":true,
+    "web3":true
   },
   "env": {
     "browser": true,
