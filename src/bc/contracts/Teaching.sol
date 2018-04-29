@@ -7,9 +7,11 @@ contract Teaching {
     mapping(uint => address) private intToExam;
     uint private last = 0;
     address private professor;
+    bytes private name;
 
-    function Teaching(address _professor) public {
+    function Teaching(address _professor, bytes _name) public {
         professor = _professor;
+        name = _name;
     }
 
     function addExam(address exam, address sender)
@@ -29,6 +31,10 @@ contract Teaching {
 
     function getReferenceProfessor() public view returns(address) {
         return professor;
+    }
+
+    function getName() public view returns(bytes) {
+        return name;
     }
 
     modifier onlyReferenceProf (address prof) {
