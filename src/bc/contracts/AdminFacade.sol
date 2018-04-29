@@ -6,6 +6,8 @@ import "./FactoryMethod.sol";
 import "./DomandeLaurea.sol";
 import "./AcademicYearsList.sol";
 import "./AcademicYear.sol";
+import "./DegreeCourse.sol";
+import "./Teaching.sol";
 
 
 contract  AdminFacade {
@@ -44,8 +46,8 @@ contract  AdminFacade {
         yearsList.getAcademicYear(_year);
     }
 
-    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint type) public {
-        DegreeCourse dCourse = new DegreeCourse(name, president, type);
+    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint8 typeDegree) public {
+        DegreeCourse dCourse = new DegreeCourse(name, president, typeDegree);
         address acYear = yearsList.getAcademicYear(academicYear);
         AcademicYear acYearObj = AcademicYear(acYear);
         acYearObj.addDegreeCourse(dCourse);
