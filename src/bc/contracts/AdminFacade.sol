@@ -15,10 +15,11 @@ contract  AdminFacade {
     DomandeLaurea private domandeLaurea;
     AcademicYearsList private yearsList;
 
-    function AdminFacade(address _userlist, address _factory, address _domande) public {
+    function AdminFacade(address _userlist, address _factory, address _domande, address _yearsList) public {
         userList = ListUsers(_userlist);
         factory = FactoryMethod(_factory);
         domandeLaurea = DomandeLaurea(_domande);
+        yearsList = AcademicYearsList(_yearsList);
     }
 
     function addUser(bytes _name, bytes _surname, bytes _socialNumber, uint _serialNumber, address _owner, uint8  _type)
