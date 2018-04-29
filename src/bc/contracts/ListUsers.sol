@@ -1,9 +1,11 @@
 pragma solidity 0.4.23;
 import "./User.sol";
 import "./Ownable.sol";
+import "./Admin.sol";
 
 
 contract ListUsers is Ownable {
+    address private masterAdmin;
 
     struct UserInfo {
         address cAddress;
@@ -14,6 +16,10 @@ contract ListUsers is Ownable {
     mapping(address => UserInfo) private uAddressToUserInfo;
     mapping(uint => address) private intToUAddress;
     uint private last = 0; //il primo disponibile
+
+    function ListUsers() public {
+        masterAdmin = msg.sender;
+    }
 
     function addUser(address _usrAddress, uint8 _type, address _userAccount)
     public
