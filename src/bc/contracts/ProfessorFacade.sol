@@ -6,9 +6,8 @@ import "./Exam.sol";
 
 contract  ProfessorFacade {
 
-
     function insertExam(address teaching, bytes date, address professor) public {
-        Exam newExam = new Exam(date, teaching);
+        Exam newExam = new Exam(teaching, date);
         Teaching teach = Teaching(teaching);
         teach.addExam(address(newExam), professor);
     }
