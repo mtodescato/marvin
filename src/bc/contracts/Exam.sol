@@ -32,7 +32,11 @@ contract Exam {
         teaching = teach;
     }
 
-    function setMark(address student, uint8 mark, address senderProfessor) public onlySubscribed(student) {
+    function setMark(address student, uint8 mark, address senderProfessor)
+    public
+    onlySubscribed(student)
+    onlyReferenceProf(senderProfessor)
+    {
         intToStudent[last] = student;
         studentToResult[student] = mark;
         last += 1;
