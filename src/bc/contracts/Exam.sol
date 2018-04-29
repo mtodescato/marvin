@@ -1,11 +1,11 @@
 pragma solidity 0.4.23;
-
+import "./Teaching.sol";
 
 contract Exam {
 
     mapping(uint => address) private intToStudent;
     mapping(address => uint) private studentToInt;
-    mapping(address => uint8) private studentToResult; // 0 quando il voto non e' stato assegnato
+    mapping(address => uint8) private studentToResult; // 0 quando il Mark non e' stato assegnato
     mapping(address => bool) private acceptedMarks;
     uint private last = 0;
     uint private date;
@@ -32,7 +32,7 @@ contract Exam {
         teaching = teach;
     }
 
-    function setVoto(address student, uint8 mark) public onlySubscribed(student) {
+    function setMark(address student, uint8 mark, address senderProfessor) public onlySubscribed(student) {
         intToStudent[last] = student;
         studentToResult[student] = mark;
         last += 1;
@@ -42,12 +42,12 @@ contract Exam {
         acceptedMarks[student] = mark;
     }
 
-    function getVoto(uint index) public view returns(uint8) {
+    function getMark(uint index) public view returns(uint8) {
         require(index < last);
         return studentToResult[intToStudent[index]];
     }
 
-    function getVoto(address student) public onlyGivenVote(student) view returns(uint8) {
+    function getMark(address student) public onlyGivenVote(student) view returns(uint8) {
         return studentToResult[student];
     }
 
@@ -59,6 +59,13 @@ contract Exam {
         intToStudent[last] = student;
         studentToInt[student] = last;
         last += 1;
+    }
+
+    modifier onlyReferenceProf(address prof) {
+        Teaching teach = Teaching(teaching);
+        address professor = teach.getTheachingProfessor();
+        require(prof == professor);
+        _;
     }
 
 }
