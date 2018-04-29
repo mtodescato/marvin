@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 import "./Teaching.sol";
 
+
 contract Exam {
 
     mapping(uint => address) private intToStudent;
@@ -8,7 +9,7 @@ contract Exam {
     mapping(address => uint8) private studentToResult; // 0 quando il Mark non e' stato assegnato
     mapping(address => bool) private acceptedMarks;
     uint private last = 0;
-    uint private date;
+    bytes private date;
     address private teaching;
 
     modifier onlyPassed(address student) {
@@ -27,7 +28,7 @@ contract Exam {
         _;
     }
 
-    function Exam(address teach, uint _date) public {
+    function Exam(address teach, bytes _date) public {
         date = _date;
         teaching = teach;
     }
