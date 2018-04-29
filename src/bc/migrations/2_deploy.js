@@ -4,11 +4,13 @@ const AcademicYearsList = artifacts.require('./AcademicYearsList.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const StudentFacade = artifacts.require('./StudentFacade.sol');
 const DomandeLaurea = artifacts.require('./DomandeLaurea.sol');
+const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
 
 module.exports = (deployer) => {
   deployer.deploy(FactoryMethod);
   deployer.deploy(DomandeLaurea);
   deployer.deploy(AcademicYearsList);
+  deployer.deploy(ProfessorFacade);
   deployer.deploy(ListUsers).then(() => {
     const factoryA = FactoryMethod.deployed().then(instance => instance.address);
     const DomandeLaureaA = DomandeLaurea.deployed().then(instance => instance.address);
