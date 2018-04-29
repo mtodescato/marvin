@@ -1,4 +1,5 @@
 pragma solidity 0.4.23;
+import "./Exam.sol";
 
 
 contract Teaching {
@@ -42,15 +43,15 @@ contract Teaching {
         _;
     }
 
-    function getTheachingProfessor() public view return(address) {
-      return professor;
+    function getTheachingProfessor() public view returns(address) {
+        return professor;
     }
 
     modifier onlyCorrectExam (address exam) {
-      Exam ex = Exam(exam);
-      address exTeaching = ex.getTeaching();
-      require(address(this) == exTeaching);
-      _;
+        Exam ex = Exam(exam);
+        address exTeaching = ex.getTeaching();
+        require(address(this) == exTeaching);
+        _;
     }
 
 
