@@ -3,7 +3,10 @@
   "globals": {
     "artifacts": true,
     "it": true,
-    "expect": true
+    "expect": true,
+    "assert":true,
+    "contract":true,
+    "web3":true
   },
   "env": {
     "browser": true,
