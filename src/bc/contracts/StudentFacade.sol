@@ -11,7 +11,7 @@ contract StudentFacade {
     ListUsers private userList;
 
     modifier onlyReadyStudent(address std) {
-        require(checkExam(std));
+        require(checkExams(std));
         _;
     }
 
