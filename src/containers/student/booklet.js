@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import BookletComponent from '../../components/student/booklet';
 
 const user = {
