@@ -8,9 +8,9 @@ contract('prova inserimento anno accademico', () => {
 
   it('insert an academic year', () => {
     adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 1233, gAddress, 0);
-    adminFacadeInstance.addAcademicYear(796);/*
+    adminFacadeInstance.addAcademicYear(796);
     adminFacadeInstance.getAcademicYear(796).then((result) => {
-      assert.notEqual(web3.fromAscii(result), '', 'test address academic year');*/
+      assert.notEqual(web3.fromAscii(result), '', 'test address academic year');
     });
   });
 });

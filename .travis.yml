@@ -12,7 +12,7 @@ before_install:
 - sudo apt-get update
 - npm install -g truffle@4.1.7
 - npm install -g solhint
-- npm install -g ganache-cli
+- npm install -g ganache-cli@6.0.3
 
 all_branches: true
 
