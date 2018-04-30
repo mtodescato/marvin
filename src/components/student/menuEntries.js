@@ -4,8 +4,11 @@ import { Anchor } from 'grommet';
 
 export const entries = [
   'Home',
+  'Booklet',
   'Courses',
-  'Procedure Degree',
+  'Exams',
+  'Results',
+  'Degree',
 ];
 
 const MenuEntries = ({ active = 0, action }) => (
