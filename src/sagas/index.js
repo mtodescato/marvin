@@ -13,16 +13,19 @@
 import { fork, all } from 'redux-saga/effects';
 import * as fake from './fakeSaga';
 import * as bookletInfo from './bookletInfo';
+import * as addUser from './addUser';
 
 export default function* rootSaga() {
   yield all([
     fork(fake.triggerAction),
     fork(bookletInfo.triggerAction),
+    fork(addUser.triggerAction),
   ]);
 }
 
 export {
   fake,
   bookletInfo,
+  addUser,
 };
 
