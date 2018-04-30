@@ -47,7 +47,7 @@ contract StudentFacade {
         }
     }
 
-    function checkExam(address student) private view returns(bool) {
+    function checkExams(address student) private view returns(bool) {
 
         Student std = Student(student);
         address degreeA = std.getDegreeCourse();
