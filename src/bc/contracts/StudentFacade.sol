@@ -1,5 +1,5 @@
 pragma solidity 0.4.23;
-import "./DegreeRequest.sol";
+import "./DegreeRequests.sol";
 import "./ListUsers.sol";
 import "./Exam.sol";
 import "./Student.sol";
@@ -7,7 +7,7 @@ import "./DegreeCourse.sol";
 
 
 contract StudentFacade {
-    DomandeLaurea private degreeRequests;
+    DegreeRequests private degreeRequests;
     ListUsers private userList;
 
     modifier onlyReadyStudent(address student) {
@@ -29,7 +29,7 @@ contract StudentFacade {
     onlyReadyStudent(student)
     {
         require(userList.getType(professor) == 1);
-        listaDomandeLaurea.inserisciDomanda(student, thesisTitle, submissionDate, professor);
+        degreeRequests.addRequest(student, thesisTitle, submissionDate, professor);
     }
 
     function subscribeToExam(address student, address exam) public {

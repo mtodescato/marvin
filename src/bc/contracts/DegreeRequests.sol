@@ -2,7 +2,7 @@ pragma solidity 0.4.23;
 
 
 contract DegreeRequests {
-    mapping(address => DomandaLaurea) private studentContractToRequest;
+    mapping(address => DegreeRequest) private studentContractToRequest;
     mapping(uint => address) private intToSudent; // solo domande in attesa
     mapping(address => uint) private studentToInt; // solo domande in attesas
     uint private last = 1; // ultimo usato
@@ -47,7 +47,7 @@ contract DegreeRequests {
     }
 
     function getDegreeRequest(address studentContract) public view returns( bytes, int8, bytes, address) {
-        require(studentContractToDomanda[studentContract].professorContract != 0x0);
+        require(studentContractToRequest[studentContract].professorContract != 0x0);
         DegreeRequest memory request = studentContractToRequest[studentContract];
         return ( request.thesisTitle, request.requestState, request.submmissionDate, request.professorContract);
     } 

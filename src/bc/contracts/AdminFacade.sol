@@ -3,7 +3,7 @@ pragma solidity 0.4.23;
 import "./User.sol";
 import "./ListUsers.sol";
 import "./FactoryMethod.sol";
-import "./DegreeRequest.sol";
+import "./DegreeRequests.sol";
 import "./AcademicYearsList.sol";
 import "./AcademicYear.sol";
 import "./DegreeCourse.sol";
