@@ -3,7 +3,7 @@ pragma solidity 0.4.23;
 import "./User.sol";
 import "./ListUsers.sol";
 import "./FactoryMethod.sol";
-import "./DomandeLaurea.sol";
+import "./DegreeRequest.sol";
 import "./AcademicYearsList.sol";
 import "./AcademicYear.sol";
 import "./DegreeCourse.sol";
@@ -14,13 +14,13 @@ contract  AdminFacade {
 
     ListUsers private userList;
     FactoryMethod private factory;
-    DomandeLaurea private domandeLaurea;
+    DegreeRequests private degreeRequests;
     AcademicYearsList private yearsList;
 
-    function AdminFacade(address _userlist, address _factory, address _domande, address _yearsList) public {
+    function AdminFacade(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
         userList = ListUsers(_userlist);
         factory = FactoryMethod(_factory);
-        domandeLaurea = DomandeLaurea(_domande);
+        degreeRequests = DegreeRequests(_degreeRequests);
         yearsList = AcademicYearsList(_yearsList);
     }
 
@@ -34,8 +34,8 @@ contract  AdminFacade {
         userList.removeUser(accountAddress);
     }
 
-    function gestisciDomandaLaurea(int8 newState, uint domanda) public {
-        domandeLaurea.gestisciDomanda(newState, domanda);
+    function mangeDegreeRequest(int8 newState, uint request) public {
+        degreeRequests.manageRequest(newState, request);
     }
 
     function addAcademicYear( uint _year) public {
