@@ -25,7 +25,7 @@ contract('Testing AdminFacade', () => {
     ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 2, 'added user'));
     adminFacadeInstance.removeUser(gAddress);
     ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 1, 'removed user'));
-  })
+  });
 
   it('insert an academic year', () => {
     adminFacadeInstance.addAcademicYear(796, { from: gAddress });
