@@ -14,7 +14,7 @@ contract('Testing AdminFacade', () => {
 
   it('Test insert and get user', () => {
     adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, gAddress, 0, { from: gAddress });
-    ListUsersInstance.getUser().then(usr => User.at(usr))
+    ListUsersInstance.getUser(0).then(usr => User.at(usr))
       .then(usr => usr.getSerial())
       .then(v => assert.equal(v.toNumber(), 12336, 'test inserting professor'));
     ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 1, 'added user'));
