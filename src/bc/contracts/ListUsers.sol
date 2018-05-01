@@ -43,6 +43,10 @@ contract ListUsers is Ownable {
         return uAddressToUserInfo[userAdd].cAddress;
     }
 
+    function getNumberOfUsers() public view returns(uint) {
+        return last;
+    }
+
     function getType(address userAdd) public view returns( uint8 ) {
         require(uAddressToUserInfo[userAdd].cAddress != 0x0);
         return uAddressToUserInfo[userAdd].userType;

@@ -18,6 +18,13 @@ contract('Testing AdminFacade', () => {
       .then(v => assert.equal(v.toNumber(), 1233, 'test user'));
   });
 
+  it('Test remove user', () => {
+    adminFacadeInstance.addUser('simone3', 'ballarin', 'bllsmn7580297584', 1233, 0x0654333, 0);
+    ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 2, 'added user'));
+    adminFacadeInstance.removeUser(gAddress);
+    ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 1, 'removed user'));
+  });
+
   it('insert an academic year', () => {
     adminFacadeInstance.addAcademicYear(796);
     adminFacadeInstance.getAcademicYear(796).then((result) => {
