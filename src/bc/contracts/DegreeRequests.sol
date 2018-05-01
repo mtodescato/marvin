@@ -43,12 +43,12 @@ contract DegreeRequests {
         require(index <= last);
         address stdCont = intToSudent[index];
         DegreeRequest memory request = studentContractToRequest[stdCont];
-        return ( request.titoloTesi, request.statoDomanda, request.dataSottomissione, request.relatoreContract );
+        return ( request.thesisTitle, request.requestState, request.submmissionDate, request.professorContract);
     }
 
     function getDegreeRequest(address studentContract) public view returns( bytes, int8, bytes, address) {
         require(studentContractToDomanda[studentContract].professorContract != 0x0);
         DegreeRequest memory request = studentContractToRequest[studentContract];
-        return ( request.titoloTesi, request.statoDomanda, request.dataSottomissione, request.relatoreContract );
+        return ( request.thesisTitle, request.requestState, request.submmissionDate, request.professorContract);
     } 
 }
