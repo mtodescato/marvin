@@ -10,7 +10,7 @@ export default AsyncFlow({
   reducer: (state, action, { types }) => {
     switch (action.type) {
       case types.ADD_USER_SUCCESS:
-        return { ...state, userAdded: true, }
+        return { ...state, userAdded: true };
       default:
         return state;
     }
@@ -21,7 +21,7 @@ export default AsyncFlow({
       payload: { user },
     }),
     addUserSuccess: () => ({
-      type: type.ADD_USER_SUCCESS,
+      type: types.ADD_USER_SUCCESS,
     }),
     addUserFailed: error => ({
       type: types.ADD_USER_FAILED,
