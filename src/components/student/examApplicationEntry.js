@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'grommet/components/Button';
 import TableRow from 'grommet/components/TableRow';
-import ConfirmationComponent from '../../components/student/ConfirmationComponent';
+import Button from 'grommet/components/Button';
+import ConfirmationExamComponent from './confirmationExamComponent';
 
-class CourseEntry extends React.Component {
+class ExamApplicationEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -17,21 +17,20 @@ class CourseEntry extends React.Component {
       showLayer: !this.state.showLayer,
     });
   }
-
   render() {
     return (
       <TableRow>
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
+        <td>{this.props.date}</td>
         <td>{this.props.president}</td>
-        <td>{this.props.type}</td>
-        <td>{this.props.year}</td>
+        <td>{this.props.cfu}</td>
         <td><Button onClick={this.setLayer} label="Iscriviti" primary /></td>
         {this.state.showLayer ?
-          <ConfirmationComponent
+          <ConfirmationExamComponent
             setLayer={this.setLayer}
-            courseName={this.props.name}
-            courseYear={this.props.year}
+            name={this.props.name}
+            date={this.props.date}
           />
              : null
           }
@@ -40,18 +39,12 @@ class CourseEntry extends React.Component {
   }
 }
 
-ConfirmationComponent.propTypes = {
-  setLayer: PropTypes.func.isRequired,
-  courseName: PropTypes.string.isRequired,
-  courseYear: PropTypes.string.isRequired,
-};
-
-CourseEntry.propTypes = {
-  name: PropTypes.string.isRequired,
-  president: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
+ExamApplicationEntry.propTypes = {
   index: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  date: PropTypes.string.isRequired,
+  president: PropTypes.string.isRequired,
+  cfu: PropTypes.number.isRequired,
 };
 
-export default CourseEntry;
+export default ExamApplicationEntry;

@@ -5,7 +5,7 @@ import Dashboard from '../../components/student/dashboard';
 import Home from '../../containers/student/home';
 import ListStudyCourses from '../../containers/student/courses';
 import Booklet from '../../containers/student/booklet';
-import ExamApplication from '../../containers/student/examApplication';
+import ListAvaiableExams from '../../containers/student/listAvaiableExams';
 import ListPendingResults from '../../containers/student/listPendingResults';
 import CreateDegreeRequest from '../../containers/student/degreeRequest';
 
@@ -29,7 +29,7 @@ const mapStateToProps = (state) => {
     case 2:
       return { DashboardComponent: ListStudyCourses };
     case 3:
-      return { DashboardComponent: ExamApplication };
+      return { DashboardComponent: ListAvaiableExams };
     case 4:
       return { DashboardComponent: ListPendingResults };
     case 5:
