@@ -1,5 +1,5 @@
 pragma solidity 0.4.23;
-import "./DomandeLaurea.sol";
+import "./DegreeRequest.sol";
 import "./ListUsers.sol";
 import "./Exam.sol";
 import "./Student.sol";
@@ -7,29 +7,29 @@ import "./DegreeCourse.sol";
 
 
 contract StudentFacade {
-    DomandeLaurea private listaDomandeLaurea;
+    DomandeLaurea private degreeRequests;
     ListUsers private userList;
 
-    modifier onlyReadyStudent(address std) {
-        require(checkExams(std));
+    modifier onlyReadyStudent(address student) {
+        require(checkExams(student));
         _;
     }
 
-    function StudentFacade(address domandaLaurea, address listaU) public {
-        listaDomandeLaurea = DomandeLaurea(domandaLaurea);
-        userList = ListUsers(listaU);
+    function StudentFacade(address degreeRequestsAddess, address userListAddress) public {
+        degreeRequests = DegreeRequests(degreeRequestsAddess);
+        userList = ListUsers(userListAddress);
     }
 
     function getUserContract() public view returns(address) {
         return userList.getUser(msg.sender);
     }
 
-    function createDegreeRequest(address student, bytes titoloTesi, bytes dataSottomissione, address relatore)
+    function createDegreeRequest(address student, bytes thesisTitle, bytes submissionDate, address professor)
     public
     onlyReadyStudent(student)
     {
-        require(userList.getType(relatore) == 1);
-        listaDomandeLaurea.inserisciDomanda(student, titoloTesi, dataSottomissione, relatore);
+        require(userList.getType(professor) == 1);
+        listaDomandeLaurea.inserisciDomanda(student, thesisTitle, submissionDate, professor);
     }
 
     function subscribeToExam(address student, address exam) public {
