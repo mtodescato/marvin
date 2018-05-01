@@ -20,11 +20,11 @@ contract StudentFacade {
     }
 
     /**@dev Constructor of SudentFacade.
-    *  @param degreeRequestAddress Address of degreeRequest contract containig the degree requests.
+    *  @param degreeRequestsAddress Address of degreeRequest contract containig the degree requests.
     *  @param userListAddress Address ot LisrUser contract containig users.
     */
-    function StudentFacade(address degreeRequestsAddess, address userListAddress) public {
-        degreeRequests = DegreeRequests(degreeRequestsAddess);
+    function StudentFacade(address degreeRequestsAddress, address userListAddress) public {
+        degreeRequests = DegreeRequests(degreeRequestsAddress);
         userList = ListUsers(userListAddress);
     }
 
@@ -72,7 +72,7 @@ contract StudentFacade {
     }
 
     /**@dev Check if a student has passed exams far all his teachings.
-    *  @param Student Address of the student contract.
+    *  @param student Address of the student contract.
     */
     function checkExams(address student) private view returns(bool) {
 

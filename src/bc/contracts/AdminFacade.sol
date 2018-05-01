@@ -21,7 +21,7 @@ contract  AdminFacade {
     *  @param _userlist Address of the contract ListUser containing all the users.
     *  @param _factory Address to the contrat of the factory method for the users.
     *  @param _degreeRequests Address to the DegreeRequest contract containig the list of the degree requests.
-    *  @param _yearList Address of the list of the Academic years.
+    *  @param _yearsList Address of the list of the Academic years.
     */
     function AdminFacade(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
         userList = ListUsers(_userlist);
@@ -31,9 +31,9 @@ contract  AdminFacade {
     }
 
     /**@dev Create and add a new user to the user list.
-    *  @param _name 
-    *  @param _surname 
-    *  @param _socialNumber
+    *  @param _name Name of the user
+    *  @param _surname Surname of the user
+    *  @param _socialNumber Social number of the user
     *  @param _serialNumber Number used internally to the university to recognise the students.
     *  @param _owner Address of the future owner of the user account that will be created.
     *  @param _type Type of the user:0 for student, 1 for professor, 2 for admin.
@@ -67,7 +67,7 @@ contract  AdminFacade {
     }
 
     /**@dev Get the address of the academic year.
-    *  @param _year 
+    *  @param _year Year of the academic year wanted
     *  @return address Address of the contract of the academic year.
     */
     function getAcademicYear( uint _year) public view returns(address) {
@@ -90,7 +90,7 @@ contract  AdminFacade {
     /**@dev Create and add a new teaching to the DegreeCourse.
     *  @param course Address of the DegreeCourse.
     *  @param refProfessor Address of the professor of the teching.
-    *  @param name
+    *  @param name Name of the teaching
     */
     function addTeaching(address course, address refProfessor, bytes name) public {
         DegreeCourse dCourse = DegreeCourse(course);
