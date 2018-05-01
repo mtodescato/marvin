@@ -63,7 +63,8 @@ contract  AdminFacade {
     *  @param _year Numer of the year to create.
     */
     function addAcademicYear( uint _year) public {
-        yearsList.insertNewAcademicYears(_year, new AcademicYear(_year));
+        address newYear = address(new AcademicYear(_year));
+        yearsList.insertNewAcademicYears(_year, newYear);
     }
 
     /**@dev Get the address of the academic year.
