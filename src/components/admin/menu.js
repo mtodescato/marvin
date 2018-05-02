@@ -1,16 +1,28 @@
 import React from 'react';
-import { Section, Heading, Accordion } from 'grommet';
+import { Menu as MenuGrommet, Sidebar, Header, Box } from 'grommet';
 import MenuAdmin from '../../containers/admin/menuAdmin';
 
 const Menu = () => (
-  <Section fixed pad="medium" >
-    <Heading tag="h3">
+  <Sidebar
+    fixed
+    pad="medium"
+  >
+    <Header>
       Admin Menù
-    </Heading>
-    <Accordion>
-      <MenuAdmin />
-    </Accordion>
-  </Section>
+    </Header>
+    <Box
+      flex="grow"
+      justify="start"
+    >
+      <MenuGrommet
+        responsive
+        primary
+        inline
+      >
+        <MenuAdmin />
+      </MenuGrommet>
+    </Box>
+  </Sidebar>
 );
 
 export default Menu;
