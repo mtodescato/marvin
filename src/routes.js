@@ -2,7 +2,7 @@ import Root from './root';
 import Home from './views/home';
 import Student from './views/student';
 import Admin from './views/admin';
-import { userIsAuthenticatedStudent } from './utils/wrappers';
+import { userIsAuthenticatedStudent, userIsAuthenticatedAdmin } from './utils/wrappers';
 
 const routes = [
   {
@@ -19,7 +19,7 @@ const routes = [
       },
       {
         path: '/admin',
-        component: userIsAuthenticatedStudent(Admin),
+        component: userIsAuthenticatedAdmin(Admin),
       },
     ],
   },

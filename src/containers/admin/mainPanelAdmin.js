@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dashboard from '../../components/admin/dashboard.js';
-import Home from '../../components/admin/dashboard/home.js';
-import ListUsers from './listUsersContainer.js';
-import CreateUser from './createUserContainer.js';
-import CreateCourse from './createCourseContainer.js';
+import Dashboard from '../../components/admin/dashboard';
+import Home from '../../components/admin/dashboard/home';
+import ListUsers from './listUsersContainer';
+import CreateUser from './createUserContainer';
+import CreateCourse from './createCourseContainer';
 
 const MainPanel = ({ DashboardComponent }) => (
   <div>
@@ -22,11 +22,11 @@ const mapStateToProps = (state) => {
     case 0:
       return { DashboardComponent: Home };
     case 1:
-        return { DashboardComponent: CreateUser };
+      return { DashboardComponent: CreateUser };
     case 2:
       return { DashboardComponent: ListUsers };
     case 3:
-      return { DashboardComponent: CreateCourse }; 
+      return { DashboardComponent: CreateCourse };
     default:
       return { DashboardComponent: Home };
   }
