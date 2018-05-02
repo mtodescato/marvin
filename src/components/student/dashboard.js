@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Heading, Section } from 'grommet';
 
 const Dashboard = ({ Component }) => (
-  <Section>
+  <Section pad="medium">
     <Heading>Student Dashboard</Heading>
     <Component />
   </Section>
