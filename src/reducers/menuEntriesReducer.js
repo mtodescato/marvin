@@ -1,6 +1,6 @@
 import { CHANGE_ACTIVE } from '../actions/menuEntriesActions';
 
-const initialState = 0;
+const initialState = 3;
 
 const menuEntriesReducer = (state = initialState, action) => {
   switch (action.type) {

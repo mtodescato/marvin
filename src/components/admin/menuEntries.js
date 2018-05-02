@@ -4,7 +4,7 @@ import { Anchor } from 'grommet';
 import Menu from 'grommet/components/Menu';
 
 export const entries = [
-  { entry: 'Home', subItems: ['Home'] },
+  { entry: 'Home', subItems: [] },
   { entry: 'Users', subItems: ['List Users', 'Add User'] },
   { entry: 'Courses', subItems: ['List Study Courses', 'Add Study Course'] },
   { entry: 'Academic Activities', subItems: ['Add Academic Activity', 'List  Academic Activities'] },
