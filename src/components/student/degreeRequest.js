@@ -19,8 +19,7 @@ class DegreeRequest extends React.Component {
     const request = {
       title: this.state.title,
     };
-    // this.props.actions.createDegreeRequestRequest(request);
-    alert(request.title);
+    this.props.actions.createDegreeRequestRequest(request);
   }
 
   handleChangeTitle(e) {
@@ -94,6 +93,10 @@ class DegreeRequest extends React.Component {
 DegreeRequest.propTypes = {
   relators: PropTypes.arrayOf.isRequired,
   requestAlreadyDone: PropTypes.bool.isRequired,
+  actions: PropTypes.shape({
+    createDegreeRequestRequest: PropTypes.func.isRequired,
+  }).isRequired,
 };
+
 
 export default DegreeRequest;
