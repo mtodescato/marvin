@@ -18,14 +18,12 @@ import BookletInfo from './bookletInfo';
 import AddUser from './addUser';
 
 export default combineReducers({
-  [FakeReducer.store]: FakeReducer.reducer,
   [BookletInfo.store]: BookletInfo.reducer,
   [AddUser.store]: AddUser.reducer,
 });
 
 // export all reducers
 export {
-  FakeReducer,
   BookletInfo,
   AddUser,
 };
