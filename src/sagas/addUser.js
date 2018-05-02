@@ -11,7 +11,7 @@ export const mockInjection = (mock) => {
   mockResult = mock;
 };
 
-export function* runAction({ payload })  {
+export function* runAction({ payload }) {
   try {
     yield call(callWrapper, ({
       contractFunction: 'addUser',
