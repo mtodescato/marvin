@@ -15,14 +15,17 @@ import { combineReducers } from 'redux';
 // import all reducers
 import BookletInfo from './bookletInfo';
 import AddUser from './addUser';
+import Web3 from './web3';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
   [AddUser.store]: AddUser.reducer,
+  [Web3.store]: Web3.reducer,
 });
 
 // export all reducers
 export {
   BookletInfo,
   AddUser,
+  Web3,
 };
