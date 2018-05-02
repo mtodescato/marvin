@@ -6,7 +6,7 @@ import MainPanel from '../containers/admin/mainPanelAdmin';
 
 const Admin = () => (
   <Box className="Admin">
-    <Section pad='none'>
+    <Section pad="none">
       <Split flex="right">
         <Box
           colorIndex="light-2"
@@ -15,9 +15,7 @@ const Admin = () => (
         >
           <Menu />
         </Box>
-        <Box
-          
-          >
+        <Box >
           <MainPanel />
         </Box>
       </Split>

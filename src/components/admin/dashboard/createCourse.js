@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Box,  
-  Section,
+  Box,
   Label,
   Form,
   FormField,
@@ -17,9 +16,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import CourseConfirmation from './courseConfirmation'
-
-
+import CourseConfirmation from './courseConfirmation';
 
 class CreateCourse extends React.Component {
   constructor(props) {
@@ -30,7 +27,7 @@ class CreateCourse extends React.Component {
     this.handleChangePresident = this.handleChangePresident.bind(this);
     this.handleChangeRole = this.handleChangeRole.bind(this);
 
-    this._setLayer = this._setLayer.bind(this);
+    this.setLayer = this.setLayer.bind(this);
 
     this.state = {
       name: 'sdfsd',
@@ -41,17 +38,11 @@ class CreateCourse extends React.Component {
     };
   }
 
-  _setLayer() {
-    this.setState({
-      showLayer: this.state.showLayer ? false : true,
-    });
-  } 
-
-  _onConfirm() {
-
-    this._setLayer();
+  onConfirm() {
+    this.setLayer();
     this.onSubmit();
-  } 
+  }
+
   onSubmit() {
     const user = {
       name: this.state.name,
@@ -59,6 +50,12 @@ class CreateCourse extends React.Component {
       type: this.state.type,
     };
     this.props.actions.addUserRequest(user);
+  }
+
+  setLayer() {
+    this.setState({
+      showLayer: !this.state.showLayer,
+    });
   }
 
   handleChangeName(e) {
@@ -100,69 +97,89 @@ class CreateCourse extends React.Component {
             <strong>Course creation error: &quot;Transaction rejected&quot;</strong>
           </Toast>
         )}
-        <Box classname = 'PanelBox'
-            direction = 'column'
-            margin = 'small'>
-          <Box classname = 'PanelHeader'
-              direction = 'row'
-              justify = 'start'
-              align = 'center'
-              separator = 'horizontal'>
-            <FormNextLinkIcon/>
-              <Label>
-                Manage Courses        
-              </Label>
-            <FormNextLinkIcon/>
-              <Label>
-                Create Course       
-              </Label>
+        <Box
+          classname="PanelBox"
+          direction="column"
+          margin="small"
+        >
+          <Box
+            classname="PanelHeader"
+            direction="row"
+            justify="start"
+            align="center"
+            separator="horizontal"
+          >
+            <FormNextLinkIcon />
+            <Label>
+                Manage Courses
+            </Label>
+            <FormNextLinkIcon />
+            <Label>
+                Create Course
+            </Label>
           </Box>
-          <Box classname = 'PanelForm'
-              direction = 'row'
-              justify = 'center'
-              align = 'center'
-              separator = 'bottom'>
+          <Box
+            classname="PanelForm"
+            direction="row"
+            justify="center"
+            align="center"
+            separator="bottom"
+          >
             <Form>
               <Header>
-                  <Heading align ='center'
-                          tag = 'h2'>
+                <Heading
+                  align="center"
+                  tag="h2"
+                >
                     New course creation
-                  </Heading>
+                </Heading>
               </Header>
-              <FormFields>          
+              <FormFields>
                 <Paragraph>
                   Submit the info of the new course.
                 </Paragraph>
                 <FormField label="Name:">
-                  <TextInput id="name"
-                            name="Name"
-                            placeHolder="Mario"
-                            onDOMChange={this.handleChangeName}/>
+                  <TextInput
+                    id="name"
+                    name="Name"
+                    placeHolder="Mario"
+                    onDOMChange={this.handleChangeName}
+                  />
                 </FormField>
                 <FormField label="President:">
-                  <TextInput id="president"
-                            name="President"
-                            placeHolder="Rossi" 
-                            onDOMChange={this.handleChangePresident}/>
+                  <TextInput
+                    id="president"
+                    name="President"
+                    placeHolder="Rossi"
+                    onDOMChange={this.handleChangePresident}
+                  />
                 </FormField>
                 <FormField label="Type:">
-                  <Select id="type"
-                        options={['Triennale', 'Magistrale']}
-                        value={this.state.roleString}
-                        onChange={this.handleChangeRole}/>
+                  <Select
+                    id="type"
+                    options={['Triennale', 'Magistrale']}
+                    value={this.state.roleString}
+                    onChange={this.handleChangeRole}
+                  />
                 </FormField>
               </FormFields>
               <Footer pad={{ vertical: 'small' }}>
-                <Button label="Submit"
-                      primary
-                      onClick={this._setLayer}/>
-                  {this.state.showLayer ?
-                    <CourseConfirmation _onConfirm = {this._onConfirm} courseName = {this.state.name} courseYear = {this.props.year}/> : null
+                <Button
+                  label="Submit"
+                  primary
+                  onClick={this.setLayer}
+                />
+                {this.state.showLayer ?
+                  <CourseConfirmation
+                    onConfirm={this.onConfirm}
+                    courseName={this.state.name}
+                    courseYear={this.props.year}
+                  /> : null
                   }
               </Footer>
             </Form>
           </Box>
-        </Box>        
+        </Box>
       </div>
     );
   }
@@ -175,8 +192,9 @@ CreateCourse.propTypes = {
     isSuccess: PropTypes.bool.isRequired,
     isFailed: PropTypes.bool.isRequired,
   }).isRequired,
+  year: PropTypes.string.isRequired,
 };
 
 export default CreateCourse;
 
-//onClick={this.onSubmit}
+// onClick={this.onSubmit}

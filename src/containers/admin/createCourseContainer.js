@@ -10,7 +10,7 @@ const CreateCourseContainer = ({ state, actions }) => (
   </div>
 );
 
-CreateCourseContainer.propTypes = { 
+CreateCourseContainer.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,

@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Box,  
-  Section,
+  Box,
   Label,
   Form,
   FormField,
@@ -17,8 +16,6 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-
-
 
 class AddUser extends React.Component {
   constructor(props) {
@@ -95,72 +92,90 @@ class AddUser extends React.Component {
             <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
           </Toast>
         )}
-        <Box classname = 'PanelBox'
-            direction = 'column'
-            margin = 'small'>
-          <Box classname = 'PanelHeader'
-              direction = 'row'
-              justify = 'start'
-              align = 'center'
-              separator = 'horizontal'>
-            <FormNextLinkIcon/>
-              <Label>
-                Manage Users        
-              </Label>
-            <FormNextLinkIcon/>
-              <Label>
-                Create User       
-              </Label>
+        <Box
+          classname="PanelBox"
+          direction="column"
+          margin="small"
+        >
+          <Box
+            classname="PanelHeader"
+            direction="row"
+            justify="start"
+            align="center"
+            separator="horizontal"
+          >
+            <FormNextLinkIcon />
+            <Label>
+                Manage Users
+            </Label>
+            <FormNextLinkIcon />
+            <Label>
+                Create User
+            </Label>
           </Box>
-          <Box classname = 'PanelForm'
-              direction = 'row'
-              justify = 'center'
-              align = 'center'
-              separator = 'bottom'>
+          <Box
+            classname="PanelForm"
+            direction="row"
+            justify="center"
+            align="center"
+            separator="bottom"
+          >
             <Form>
               <Header>
-                  <Heading align ='center'
-                          tag = 'h2'>
+                <Heading
+                  align="center"
+                  tag="h2"
+                >
                     New user creation
-                  </Heading>
+                </Heading>
               </Header>
-              <FormFields>          
+              <FormFields>
                 <Paragraph>
                   Submit the info of the new user.
                 </Paragraph>
                 <FormField label="Name:">
-                  <TextInput id="name"
-                            name="Name"
-                            placeHolder="Mario"
-                            onDOMChange={this.handleChangeName}/>
+                  <TextInput
+                    id="name"
+                    name="Name"
+                    placeHolder="Mario"
+                    onDOMChange={this.handleChangeName}
+                  />
                 </FormField>
                 <FormField label="Surname:">
-                  <TextInput id="surname"
-                            name="Surname"
-                            placeHolder="Rossi"
-                            onDOMChange={this.handleChangeSurname}/>
+                  <TextInput
+                    id="surname"
+                    name="Surname"
+                    placeHolder="Rossi"
+                    onDOMChange={this.handleChangeSurname}
+                  />
                 </FormField>
                 <FormField label="Address:">
-                  <TextInput id="address"
-                            name="Address"
-                            placeHolder="0x0"
-                            onDOMChange={this.handleChangeAddress}/>
+                  <TextInput
+                    id="address"
+                    name="Address"
+                    placeHolder="0x0"
+                    onDOMChange={this.handleChangeAddress}
+                  />
                 </FormField>
                 <FormField label="Role:">
-                  <Select id="role"
-                        options={['Student', 'Professor', 'University (admin)']}
-                        value={this.state.roleString}
-                        onChange={this.handleChangeRole}/>
+                  <Select
+                    id="role"
+                    options={['Student', 'Professor', 'University (admin)']}
+                    value={this.state.roleString}
+                    onChange={this.handleChangeRole}
+                  />
                 </FormField>
               </FormFields>
               <Footer pad={{ vertical: 'medium' }}>
-                <Button label="Submit"
-                      primary
-                      onClick={this.onSubmit}/>
+                <Button
+                  label="Submit"
+                  primary
+                  onClick={this.onSubmit}
+                />
               </Footer>
             </Form>
           </Box>
-        </Box>        
+        </Box>
       </div>
     );
   }

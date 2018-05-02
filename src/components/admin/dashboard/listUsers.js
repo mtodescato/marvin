@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, TableRow, Table, Heading, Header, Title, Search } from 'grommet';
+import { Box, TableRow, Table, Heading, Search } from 'grommet';
 import Button from 'grommet/components/Button';
 
 export const UserEntry = ({
@@ -9,10 +9,11 @@ export const UserEntry = ({
   surname,
   role,
   address,
-  deleteAction, //TODO: aggiungere onClick a TableRow per far partire action che mostra layer con + info
+  deleteAction, // TODO: aggiungere onClick a TableRow per far
+  // partire action che mostra layer con + info
 }) => (
   <TableRow>
-    <td>{index}</td>  
+    <td>{index}</td>
     <td>{name}</td>
     <td>{surname}</td>
     <td>{role}</td>
@@ -31,30 +32,42 @@ UserEntry.propTypes = {
 };
 
 const UsersList = ({ size, userEntry, deleteAction }) => (
-  <Box classname = 'PanelBox'
-      direction = 'column'
-      margin = 'small'
-      separator = 'horizontal'>
-    <Heading align ='center'
-          tag = 'h2'>
+  <Box
+    classname="PanelBox"
+    direction="column"
+    margin="small"
+    separator="horizontal"
+  >
+    <Heading
+      align="center"
+      tag="h2"
+    >
       Users list
     </Heading>
-    <Heading align ='left'
-          tag = 'h3'>
+    <Heading
+      align="left"
+      tag="h3"
+    >
       Filter users by serial number
     </Heading>
-    <Search inline={true}
+    <Search
+      inline
       fill={false}
-      size='medium'
-      placeHolder='Search: #'
-      dropAlign={{"right": "right"}} />
-    <Heading align ='left'
-          tag = 'h3'
-          margin = {{ vertical: 'medium' }}>
+      size="medium"
+      placeHolder="Search: #"
+      dropAlign={{ right: 'right' }}
+    />
+    <Heading
+      align="left"
+      tag="h3"
+      margin={{ vertical: 'medium' }}
+    >
       Users found: {size}
     </Heading>
-    <Table responsive
-          selectable = 'true'>
+    <Table
+      responsive
+      selectable="true"
+    >
       <thead>
         <tr>
           <th>#</th>
@@ -66,25 +79,32 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
         </tr>
       </thead>
       <tbody>
-      <TableRow>
-        <td>Prova</td>  
-        <td>Prova</td>
-        <td>Prova</td>
-        <td>Prova</td>
-        <td>Prova</td>
-        <td><Button primary
-                  onClick={() => deleteAction('fagf')}
-                  label = 'Delete'/></td>
-      </TableRow><TableRow>
-        <td>Prova</td>  
-        <td>Prova</td>
-        <td>Prova</td>
-        <td>Prova</td>
-        <td>Prova</td>
-        <td><Button primary
-                  onClick={() => deleteAction('fagf')}
-                  label = 'Delete'/></td>
-      </TableRow>
+        <TableRow>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td><Button
+            primary
+            onClick={() => deleteAction('fagf')}
+            label="Delete"
+          />
+          </td>
+        </TableRow>
+        <TableRow>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td>Prova</td>
+          <td><Button
+            primary
+            onClick={() => deleteAction('fagf')}
+            label="Delete"
+          />
+          </td>
+        </TableRow>
         {
           userEntry.map((element, index) => (
             <UserEntry

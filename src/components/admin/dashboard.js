@@ -4,8 +4,10 @@ import { Heading, Section } from 'grommet';
 
 const Dashboard = ({ Component }) => (
   <Section>
-    <Heading align = 'center'
-          tag = 'h1'>
+    <Heading
+      align="center"
+      tag="h1"
+    >
       Admin Dashboard
     </Heading>
     <Component />
