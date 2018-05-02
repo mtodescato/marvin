@@ -1,34 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Anchor } from 'grommet';
-import Menu from 'grommet/components/Menu';
+import { Anchor, Menu, Accordion, AccordionPanel } from 'grommet';
 
 export const entries = [
-  { entry: 'Home', subItems: [] },
-  { entry: 'Users', subItems: ['List Users', 'Add User'] },
-  { entry: 'Courses', subItems: ['List Study Courses', 'Add Study Course'] },
-  { entry: 'Academic Activities', subItems: ['Add Academic Activity', 'List  Academic Activities'] },
-  { entry: 'Academic Years', subItems: ['Add Academic Year', 'List Academic Years'] },
-  { entry: 'Degree Procedures', subItems: ['Doe', 'blue'] },
+  { entry: 'Home', subEntries: [] },
+  { entry: 'Users', subEntries: ['List Users', 'Add User'] },
+  { entry: 'Courses', subEntries: ['List Study Courses', 'Add Study Course'] },
+  { entry: 'Academic Activities', subEntries: ['Add Academic Activity', 'List  Academic Activities'] },
+  { entry: 'Academic Years', subEntries: ['Add Academic Year', 'List Academic Years'] },
+  { entry: 'Degree Procedures', subEntries: ['Doe', 'blue'] },
 ];
 
-let index = -1;
+
 
 const MenuEntries = ({ active = 0, action }) => (
-  entries.map(value => (
-    <Menu label={value.entry}>
-      {value.subItems.map((v) => {
-        index += 1;
-        return (
+  <Accordion>
+    {entries.map(value => (
+      <AccordionPanel heading={value.entry}>
+        {value.subEntries.map((v, i) => (
           <Anchor
-            className={index === active ? 'active' : ''}
-            onClick={() => action(index)}
+            className={i === active ? 'active' : ''}
+            onClick={() => action(i)}
           >
             {v}
-          </Anchor>);
-      })}
-    </Menu>
-  ))
+          </Anchor>))}
+
+      </AccordionPanel>
+
+  ))}
+  </Accordion>
 );
 
 MenuEntries.propTypes = {
@@ -40,3 +40,16 @@ MenuEntries.defaultProps = {
 };
 
 export default MenuEntries;
+
+/* <Menu label={value.entry}>
+      {value.subEntries.map((v) => {
+        index += 1;
+        return (
+          <Anchor
+            className={index === active ? 'active' : ''}
+            onClick={() => action(index)}
+          >
+            {v}
+          </Anchor>);
+      })}
+    </Menu> */
