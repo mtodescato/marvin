@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'grommet/components/Button';
 import TableRow from 'grommet/components/TableRow';
-import ConfirmationComponent from '../../components/student/ConfirmationComponent';
+import ConfirmationComponent from '../../components/student/confirmationApplication';
 
 class CourseEntry extends React.Component {
   constructor(props) {

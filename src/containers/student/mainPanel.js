@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dashboard from '../../components/student/dashboard';
 import Home from '../../containers/student/home';
-import ListStudyCourses from '../../containers/student/courses';
+import ListStudyCourses from '../../containers/student/listCourses';
 import Booklet from '../../containers/student/booklet';
 import ListAvaiableExams from '../../containers/student/listAvaiableExams';
 import ListPendingResults from '../../containers/student/listPendingResults';
