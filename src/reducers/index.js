@@ -13,7 +13,6 @@
 
 import { combineReducers } from 'redux';
 // import all reducers
-import FakeReducer from './fakeReducer';
 import BookletInfo from './bookletInfo';
 import AddUser from './addUser';
 
