@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
 import PropTypes from 'prop-types';
-import CourseEntry from './courseEntry';
+import CourseEntry from './coursesEntry';
 
 const CoursesListComponent = props => (
   <div>

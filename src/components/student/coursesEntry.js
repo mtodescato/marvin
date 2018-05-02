@@ -4,7 +4,7 @@ import Button from 'grommet/components/Button';
 import TableRow from 'grommet/components/TableRow';
 import ConfirmationComponent from '../../components/student/confirmationApplication';
 
-class CourseEntry extends React.Component {
+class CoursesEntry extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,7 @@ ConfirmationComponent.propTypes = {
   courseYear: PropTypes.string.isRequired,
 };
 
-CourseEntry.propTypes = {
+CoursesEntry.propTypes = {
   name: PropTypes.string.isRequired,
   president: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
@@ -54,4 +54,4 @@ CourseEntry.propTypes = {
   index: PropTypes.number.isRequired,
 };
 
-export default CourseEntry;
+export default CoursesEntry;
