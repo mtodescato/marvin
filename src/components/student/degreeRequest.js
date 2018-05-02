@@ -9,15 +9,18 @@ class DegreeRequest extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
+    this.handleChangeRelator = this.handleChangeRelator.bind(this);
 
     this.state = {
       title: 'undefined',
+      relator: 'undefined',
     };
   }
 
   onSubmit() {
     const request = {
       title: this.state.title,
+      relator: this.state.relator,
     };
     this.props.actions.createDegreeRequestRequest(request);
   }
@@ -25,6 +28,11 @@ class DegreeRequest extends React.Component {
   handleChangeTitle(e) {
     this.setState({ title: e.target.value });
   }
+
+  handleChangeRelator(selected) {
+    this.setState({ relator: document.getElementById(`prof_${selected}`).innerHTML });
+  }
+
   render() {
     if (this.props.requestAlreadyDone === false) {
       return (
@@ -50,13 +58,13 @@ class DegreeRequest extends React.Component {
               <FormField label="Seleziona il referente: ">
                 <t />
                 <div className="box">
-                  <List selectable>
-                    {this.props.relators.map(value => (
+                  <List selectable onSelect={this.handleChangeRelator}>
+                    {this.props.relators.map((value, index) => (
                       <ListItem
                         justify="between"
                         separator="top"
                       >
-                        <span>
+                        <span id={`prof_${index}`} >
                           {value.professore}
                         </span>
                         <span className="secondary">
