@@ -17,14 +17,12 @@ import * as addUser from './addUser';
 
 export default function* rootSaga() {
   yield all([
-    fork(fake.triggerAction),
     fork(bookletInfo.triggerAction),
     fork(addUser.triggerAction),
   ]);
 }
 
 export {
-  fake,
   bookletInfo,
   addUser,
 };
