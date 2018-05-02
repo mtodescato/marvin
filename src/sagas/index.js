@@ -11,7 +11,6 @@
  */
 
 import { fork, all } from 'redux-saga/effects';
-import * as fake from './fakeSaga';
 import * as bookletInfo from './bookletInfo';
 import * as addUser from './addUser';
 
