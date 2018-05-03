@@ -26,7 +26,7 @@ contract DegreeCourse {
         return intToTeaching[index];
     }
 
-    function getNumberOfTeaching() public view returns(uint) {
+    function getNumberOfTeachings() public view returns(uint) {
         return last;
     }
 }
