@@ -30,7 +30,7 @@ contract Exam {
     
     modifier onlyReferenceProf(address prof) {
         Teaching teach = Teaching(teaching);
-        address professor = teach.getTheachingProfessor();
+        address professor = teach.getReferenceProfessor();
         require(prof == professor);
         _;
     }
