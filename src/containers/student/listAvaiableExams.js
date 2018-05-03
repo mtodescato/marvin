@@ -18,10 +18,13 @@ export const exams = [{
 },
 ];
 
+const address = {};
+
+const subscribeToExam = {};
 
 const ListAvaiableExams = () => (
   <div>
-    <ListAvaiableExamsComponent exams={exams} />
+    <ListAvaiableExamsComponent exams={exams} address={address} subscribeToExam={subscribeToExam} />
   </div>
 );
 

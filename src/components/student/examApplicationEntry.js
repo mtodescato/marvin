@@ -30,6 +30,8 @@ class ExamApplicationEntry extends React.Component {
             setLayer={this.setLayer}
             name={this.props.name}
             date={this.props.date}
+            address={this.props.address}
+            subscribeToExam={this.props.subscribeToExam}
           />
              : null
           }
@@ -43,6 +45,8 @@ ExamApplicationEntry.propTypes = {
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   cfu: PropTypes.number.isRequired,
+  subscribeToExam: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default ExamApplicationEntry;

@@ -4,7 +4,7 @@ const initialState = {
     name: 'Giovanni',
     address: '0x0',
   },
-  type: 'undefined',
+  type: 'student',
 };
 
 const userReducer = (state = initialState, action) => {
