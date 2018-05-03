@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Anchor, Menu, Accordion, AccordionPanel } from 'grommet';
+import { Anchor, Menu, Accordion, AccordionPanel, Box } from 'grommet';
 
 export const entries = [
   { entry: 'Users', subEntries: ['List Users', 'Create User'] },
