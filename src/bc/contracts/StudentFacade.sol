@@ -92,16 +92,30 @@ contract StudentFacade {
         return ok;
     }
 
+    /**@dev Get the number of techings passed by the student.
+    *  @param student Address of the student.
+    *  @return uint The number of exams passed by the student.
+    */
     function getNumberOfTeachings(address student) public view returns(uint) {
         Student studentC = Student(student);
         return studentC.getNumberOfTeachings();
     }
 
+    /**@dev Get the teaching corrisponding to the index in the student contract.
+    *  @param index Index of the teaching.
+    *  @param student Address of the student contract.
+    *  @return address The address of the teaching indetified by the index.
+    */
     function getTeaching(uint index, address student) public view returns(address) {
         Student studentC = Student(student);
         return studentC.getTeaching(index);
     }
 
+    /**@dev Given a theaching return the exam who passed the teaching.
+    *  @param teaching Address of the teaching.
+    *  @param student Address of the student contract.
+    *  @return address Address of the exam contract.  
+    */
     function getExam(address teaching, address student) public view returns(address) {
         Student studentC = Student(student);
         return studentC.getExam(teaching);
