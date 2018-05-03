@@ -91,4 +91,19 @@ contract StudentFacade {
 
         return ok;
     }
+
+    function getNumberOfTeachings(address student) public view returns(uint) {
+        Student studentC = Student(student);
+        return studentC.getNumberOfTeachings();
+    }
+
+    function getTeaching(uint index, address student) public view returns(address) {
+        Student studentC = Student(student);
+        return studentC.getTeaching(index);
+    }
+
+    function getExam(address teaching, address student) public view returns(address) {
+        Student studentC = Student(student);
+        return studentC.getExam(teaching);
+    }
 }
