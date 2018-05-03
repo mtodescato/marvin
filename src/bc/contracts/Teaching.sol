@@ -49,8 +49,4 @@ contract Teaching {
     function getName() public view returns(bytes) {
         return name;
     }
-
-    function getTheachingProfessor() public view returns(address) {
-        return professor;
-    }
 }
