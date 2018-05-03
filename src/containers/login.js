@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import LoginButton from '../components/loginButton';
+import LoginComponent from '../components/login';
 import { loginUser } from '../actions/loginActions';
 
 const Login = props => (
-  <LoginButton
-    onLoginUserClick={props.onLoginUserClick}
-    type={props.type}
-  />
+  <div>
+    <LoginComponent
+      onLoginUserClick={props.onLoginUserClick}
+      type={props.type}
+    />
+  </div>
 );
 
 Login.propTypes = {

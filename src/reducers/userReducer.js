@@ -4,7 +4,7 @@ const initialState = {
     name: 'Giovanni',
     address: '0x0',
   },
-  type: 'student',
+  type: 'undefined',
 };
 
 const userReducer = (state = initialState, action) => {
@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
     case 'LOGIN_USER':
       return {
         ...state,
-        type: 'admin',
+        type: 'student',
       };
     default:
       return state;
