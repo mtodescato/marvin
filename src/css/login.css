@@ -1,0 +1,16 @@
+.loaded {
+    animation: ease fadein 3.5s;
+}
+@keyframes fadein {
+    from 
+    { 
+        opacity: 0;
+    }
+    to   
+    { 
+        opacity: 1;
+    }
+}
+.small{
+    font-size: 0.7em;
+}

@@ -12,7 +12,7 @@ const userReducer = (state = initialState, action) => {
     case 'LOGIN_USER':
       return {
         ...state,
-        type: 'admin',
+        type: 'student',
       };
     default:
       return state;

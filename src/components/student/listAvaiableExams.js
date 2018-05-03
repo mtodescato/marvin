@@ -22,6 +22,8 @@ const CoursesListComponent = props => (
             <ExamApplicationEntry
               index={index}
               {...element}
+              address={props.address}
+              subscribeToExam={props.subscribeToExam}
             />
           ))
         }
@@ -32,6 +34,8 @@ const CoursesListComponent = props => (
 
 CoursesListComponent.propTypes = {
   exams: PropTypes.arrayOf.isRequired,
+  subscribeToExam: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default CoursesListComponent;
