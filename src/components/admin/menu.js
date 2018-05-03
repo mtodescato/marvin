@@ -1,14 +1,16 @@
 import React from 'react';
-import { Menu as Sidebar, Header, Box } from 'grommet';
+import { Sidebar, Header, Box } from 'grommet';
 import MenuAdmin from '../../containers/admin/menuAdmin';
 
 const Menu = () => (
   <Sidebar
     fixed
-    pad="medium"
+    full="false"
+    margin={{ vertical: 'none' }}
+    pad={{ vertical: 'none', horizontal: 'small' }}
   >
     <Header>
-      Admin Menù
+        Admin Menù
     </Header>
     <Box
       flex="grow"

@@ -22,9 +22,9 @@ const mapStateToProps = (state) => {
     case 0:
       return { DashboardComponent: Home };
     case 1:
-      return { DashboardComponent: CreateUser };
-    case 2:
       return { DashboardComponent: ListUsers };
+    case 2:
+      return { DashboardComponent: CreateUser };
     case 3:
       return { DashboardComponent: CreateCourse };
     default:
