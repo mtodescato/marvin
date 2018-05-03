@@ -6,26 +6,28 @@ export default AsyncFlow({
     address: '0x0',
     isAvailable: false,
   },
-  actions: ['WEB3'],
+  actions: ['WEB_3_ADDRESS'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.WEB3_SUCCESS:
+      case types.WEB_3_ADDRESS_SUCCESS:
         return { ...state, address: action.payload.address, isAvailable: true };
+      case types.WEB_3_ADDRESS_FAILED:
+        return { ...state, isAvailable: false };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    web3Request: () => ({
-      type: types.WEB3_REQUEST,
+    web3AddressRequest: () => ({
+      type: types.WEB_3_ADDRESS_REQUEST,
     }),
-    web3Success: address => ({
-      type: types.WEB3_SUCCESS,
+    web3AddressSuccess: address => ({
+      type: types.WEB_3_ADDRESS_SUCCESS,
       payload: { address },
     }),
-    web3Failed: error => ({
-      type: types.WEB3_FAILED,
+    web3AddressFailed: error => ({
+      type: types.WEB_3_ADDRESS_FAILED,
       error: true,
       payload: { error },
     }),
