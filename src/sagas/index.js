@@ -13,16 +13,19 @@
 import { fork, all } from 'redux-saga/effects';
 import * as bookletInfo from './bookletInfo';
 import * as addUser from './addUser';
+import * as web3 from './web3';
 
 export default function* rootSaga() {
   yield all([
     fork(bookletInfo.triggerAction),
     fork(addUser.triggerAction),
+    fork(web3.triggerAction),
   ]);
 }
 
 export {
   bookletInfo,
   addUser,
+  web3,
 };
 

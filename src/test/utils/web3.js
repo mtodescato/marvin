@@ -11,12 +11,35 @@
 
 import FakeProvider from 'web3-fake-provider';
 
-// mock web3 given an address account
+export const createGlobalWindow = () => {
+  // init a void object if not present
+  global.window = global.window || {};
+};
+
+export const resetWeb3 = () => {
+  createGlobalWindow();
+  global.window.web3 = undefined;
+};
+
+// mock complete web3 given an address account
 export const mockWeb3 = (account) => {
+  resetWeb3();
+  // inject address only if account is present
+  if (account !== undefined) {
+    global.window.web3 = {
+      eth: { accounts: [account] },
+    };
+  }
+  // create currentProvider inside window
   global.window.web3 = {
-    eth: { accounts: [account] },
-    currentProvider: new FakeProvider(),
+    ...global.window.web3,
+    currentProvider: {
+      send: () => {},
+    },
   };
 };
 
-export default mockWeb3; // FIXME: remove this line when added another function
+// mock only current provider web3
+export const mockWeb3OnlyCurrentProvider = () => {
+  mockWeb3();
+};

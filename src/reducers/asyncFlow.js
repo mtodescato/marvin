@@ -33,7 +33,11 @@ export default ({ store, initialState, actions }) => DuckModule({
       case flowes.REQUEST:
         return { ...state, status: statuses.PENDING };
       case flowes.FAILED:
-        return { ...state, status: statuses.ERRORED };
+        return {
+          ...state,
+          status: statuses.ERRORED,
+          error: action.payload.error || statuses.ERRORED,
+        };
       case flowes.SUCCESS:
         return { ...state, status: statuses.RESOLVED };
       default:

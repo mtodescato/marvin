@@ -15,10 +15,12 @@ describe('global utils test suite', () => {
   it('#toCamelCase', () => {
     expect(Functions).to.have.property('toCamelCase');
     expect(Functions.toCamelCase('WORD_WORD')).to.equal('wordWord');
+    expect(Functions.toCamelCase('WORD_3_WORD')).to.equal('word3Word');
   });
   it('#toUpperCasse', () => {
     expect(Functions).to.have.property('toUpperCase');
     expect(Functions.toUpperCase('wordWord')).to.equal('WORD_WORD');
+    expect(Functions.toUpperCase('word3Word')).to.equal('WORD_3_WORD');
   });
   it('#throwError', () => {
     expect(Functions).to.have.property('throwError');

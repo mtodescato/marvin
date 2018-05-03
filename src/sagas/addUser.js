@@ -1,7 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { addUser } from '../reducers';
+import { AddUser } from '../reducers';
 import deployCall, { stubDeployCall } from './web3calls';
-
 
 let mockResult = {};
 let callWrapper = deployCall;
@@ -18,13 +17,13 @@ export function* runAction({ payload }) {
       args: [payload.user],
       mockResult,
     }));
-    yield put(addUser.creators.addUserSuccess());
+    yield put(AddUser.creators.addUserSuccess());
   } catch (e) {
-    yield put(addUser.creators.addUserFailed(e.message));
+    yield put(AddUser.creators.addUserFailed(e.message));
   }
 }
 
 export function* triggerAction() {
-  yield takeLatest(addUser.types.ADD_USER_REQUEST, runAction);
+  yield takeLatest(AddUser.types.ADD_USER_REQUEST, runAction);
 }
 

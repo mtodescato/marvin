@@ -1,10 +1,21 @@
-import { createStore } from 'redux';
+import { expectSaga } from 'redux-saga-test-plan';
+import { addUser as saga } from '../../sagas';
 import { AddUser } from '../../reducers';
 
 describe('AddUser saga test suite', () => {
-  const store = createStore(AddUser.reducer);
-  it('should set store to true when success action is dispatched', () => {
-    store.dispatch(AddUser.creators.addUserSuccess());
-    expect(store.getState()).to.have.property('userAdded', true);
+  const user = {};
+  const mock = user;
+  it('handles reducers when request is dispatched', () => {
+    console.log(saga);
+    saga.mockInjection(mock);
+    return expectSaga(saga.triggerAction)
+      .withReducer(AddUser.reducer)
+      .put(AddUser.creators.addUserSuccess())
+      .dispatch(AddUser.creators.addUserRequest(mock))
+      .hasFinalState({
+        userAdded: true,
+        status: 'RESOLVED',
+      })
+      .run();
   });
 });
