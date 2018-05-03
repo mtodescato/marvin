@@ -22,6 +22,8 @@ const CoursesListComponent = props => (
             <CourseEntry
               index={index}
               {...element}
+              subscribeToCourse={props.subscribeToCourse}
+              address={props.address}
             />
           ))
         }
@@ -32,6 +34,8 @@ const CoursesListComponent = props => (
 
 CoursesListComponent.propTypes = {
   coursesEntry: PropTypes.arrayOf.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default CoursesListComponent;

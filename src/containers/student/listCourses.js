@@ -19,15 +19,24 @@ export const coursesEntries = [{
 },
 ];
 
+const subscribeToCourse = {};
+
+const address = {};
 
 const CoursesList = () => (
   <div>
-    <CourseListComponent coursesEntry={coursesEntries} />
+    <CourseListComponent
+      coursesEntry={coursesEntries}
+      subscribeToCourse={subscribeToCourse}
+      address={address}
+    />
   </div>
 );
 
 CourseListComponent.propTypes = {
   courseEntry: PropTypes.arrayOf.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default CoursesList;

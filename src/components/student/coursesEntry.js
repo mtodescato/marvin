@@ -30,6 +30,8 @@ class CoursesEntry extends React.Component {
           <ConfirmationComponent
             setLayer={this.setLayer}
             courseName={this.props.name}
+            subscribeToCourse={this.props.subscribeToCourse}
+            address={this.props.address}
           />
              : null
           }
@@ -38,16 +40,13 @@ class CoursesEntry extends React.Component {
   }
 }
 
-ConfirmationComponent.propTypes = {
-  setLayer: PropTypes.func.isRequired,
-  courseName: PropTypes.string.isRequired,
-};
-
 CoursesEntry.propTypes = {
   name: PropTypes.string.isRequired,
   president: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default CoursesEntry;
