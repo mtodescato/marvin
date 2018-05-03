@@ -12,7 +12,7 @@ contract('Testing AdminFacade', () => {
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
 
-  it('Test insert and get user',async () => {
+  it('Test insert and get user', async () => {
     adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, gAddress, 0, { from: gAddress });
     ListUsersInstance.getUser.call('0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4').then(usr => User.at(usr))
       .then(usr => usr.getSerial())
