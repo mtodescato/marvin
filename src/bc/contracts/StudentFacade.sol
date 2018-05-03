@@ -71,27 +71,6 @@ contract StudentFacade {
         }
     }
 
-    /**@dev Check if a student has passed exams far all his teachings.
-    *  @param student Address of the student contract.
-    */
-    function checkExams(address student) private view returns(bool) {
-
-        Student std = Student(student);
-        address degreeA = std.getDegreeCourse();
-        DegreeCourse degree = DegreeCourse(degreeA);
-
-        uint n = degree.getNumberOfTeaching();
-        bool ok = true;
-
-
-        for (uint i=0; i < n && ok; i++) {
-            address t = degree.getTeaching(i);
-            ok = std.checkPassedTeaching(t);
-        }
-
-        return ok;
-    }
-
     /**@dev Get the number of techings passed by the student.
     *  @param student Address of the student.
     *  @return uint The number of exams passed by the student.
@@ -119,5 +98,26 @@ contract StudentFacade {
     function getExam(address teaching, address student) public view returns(address) {
         Student studentC = Student(student);
         return studentC.getExam(teaching);
+    }
+
+    /**@dev Check if a student has passed exams far all his teachings.
+    *  @param student Address of the student contract.
+    */
+    function checkExams(address student) private view returns(bool) {
+
+        Student std = Student(student);
+        address degreeA = std.getDegreeCourse();
+        DegreeCourse degree = DegreeCourse(degreeA);
+
+        uint n = degree.getNumberOfTeaching();
+        bool ok = true;
+
+
+        for (uint i=0; i < n && ok; i++) {
+            address t = degree.getTeaching(i);
+            ok = std.checkPassedTeaching(t);
+        }
+
+        return ok;
     }
 }

@@ -23,11 +23,11 @@ contract AcademicYear {
         return intToDegreeCourse[index];
     }
 
-    function getYear() public view returns(uint){
+    function getYear() public view returns(uint) {
         return year;
     }
 
-    function getNumberOfDC() public view returns(uint){
+    function getNumberOfDC() public view returns(uint) {
         return last;
     }
 
