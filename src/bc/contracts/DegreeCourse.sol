@@ -30,15 +30,15 @@ contract DegreeCourse {
         return last;
     }
 
-    function getDegreeCourseName() public view return(bytes) {
+    function getDegreeCourseName() public view returns(bytes) {
         return degreeCourseName;
     }
 
-    function getDegreeCoursePresident() public view return(bytes) {
+    function getDegreeCoursePresident() public view returns(bytes) {
         return degreeCoursePresident;
     }
 
-    function getDegreeCourseType() public view return(uint8) {
+    function getDegreeCourseType() public view returns(uint8) {
         return degreeCourseType;
     }
 }

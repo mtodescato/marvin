@@ -2,6 +2,7 @@ const ListUsers = artifacts.require('./ListUsers.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const User = artifacts.require('./User.sol');
 const AcademicYear = artifacts.require('./AcademicYear.sol');
+const DegreeCourse = artifacts.require('./DegreeCourse.sol');
 const gAddress = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
 
 
@@ -57,5 +58,13 @@ contract('Testing AdminFacade', () => {
   it('return a degree course', async () => {
     const degreeCourseAddress = adminFacadeInstance.getDegreeCourse(797, 0);
     assert.notEqual(degreeCourseAddress, '0x0000000000000000000000000000000000000000', 'address is not null');
+  });
+
+  it('create a teaching', async () => {
+    adminFacadeInstance.addUser('mario', 'bianchi', 'mrrss7585677584', 12624, '0xe0d040070bb6e3ebd2cb4cdd38d775397eaec7d4', 1);
+    const degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(797, 0);
+    adminFacadeInstance.addTeaching(degreeCourseAddress, '0xe0d040070bb6e3ebd2cb4cdd38d775397eaec7d4', 'maths');
+    const teaching = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
+    assert.notEqual(teaching, '0x0000000000000000000000000000000000000000', 'added teaching');
   });
 });
