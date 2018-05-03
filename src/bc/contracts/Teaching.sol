@@ -9,6 +9,18 @@ contract Teaching {
     uint private last = 0;
     address private professor;
     bytes private name;
+    
+    modifier onlyReferenceProf (address prof) {
+        require(professor == prof);
+        _;
+    }
+    
+    modifier onlyCorrectExam (address exam) {
+        Exam ex = Exam(exam);
+        address exTeaching = ex.getTeaching();
+        require(address(this) == exTeaching);
+        _;
+    }
 
     function Teaching(address _professor, bytes _name) public {
         professor = _professor;
@@ -38,21 +50,7 @@ contract Teaching {
         return name;
     }
 
-    modifier onlyReferenceProf (address prof) {
-        require(professor == prof);
-        _;
-    }
-
     function getTheachingProfessor() public view returns(address) {
         return professor;
     }
-
-    modifier onlyCorrectExam (address exam) {
-        Exam ex = Exam(exam);
-        address exTeaching = ex.getTeaching();
-        require(address(this) == exTeaching);
-        _;
-    }
-
-
 }
