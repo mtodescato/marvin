@@ -12,22 +12,29 @@ contract('Testing AdminFacade', () => {
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
 
-  it('Test insert and get user', async () => {
+  it('Test insert user', async () => {
     adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, gAddress, 0, { from: gAddress });
-    ListUsersInstance.getUser.call('0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4').then(usr => User.at(usr))
-      .then(usr => usr.getSerial())
-      .then(v => assert.equal(v.toNumber(), 12335, 'test inserting professor'));
-    ListUsersInstance.getUserInt.call(0).then(usr => User.at(usr))
-      .then(usr => usr.getSerial())
-      .then(v => assert.equal(v.toNumber(), 12335, 'test inserting professor'));
-    ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 1, 'added user'));
+    const userAddress = await ListUsersInstance.getUser.call('0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4');
+    const user = User.at(userAddress);
+    const serial = await user.getSerial();
+    assert.equal(serial.toNumber(), 12335, 'test get from address');
+    const numberOfUsers = await ListUsersInstance.getNumberOfUsers();
+    assert.equal(numberOfUsers.toNumber(), 1, 'added user');
+  });
+
+  it('getUser return equals getUserInt', async () => {
+    const addressFromGetUser = await ListUsersInstance.getUser.call('0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4');
+    const addressFromGetUserInt = await ListUsersInstance.getUserInt.call(0);
+    assert.equal(addressFromGetUser, addressFromGetUserInt, 'same address');
   });
 
   it('Test remove user', async () => {
     adminFacadeInstance.addUser('mario', 'rossi', 'mrrss7580297584', 12324, '0xe0d040070bb6e3ebd2cb4ccd38d773387eaec7d4', 0);
-    ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 2, 'added user'));
+    let numberOfUsers = await ListUsersInstance.getNumberOfUsers();
+    assert.equal(numberOfUsers.toNumber(), 2, 'added user');
     adminFacadeInstance.removeUser(gAddress);
-    ListUsersInstance.getNumberOfUsers().then(result => assert.equal(result.toNumber(), 1, 'removed user'));
+    numberOfUsers = await ListUsersInstance.getNumberOfUsers();
+    assert.equal(numberOfUsers.toNumber(), 1, 'removed user');
   });
 
   it('insert an academic year', async () => {
