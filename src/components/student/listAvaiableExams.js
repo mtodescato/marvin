@@ -12,7 +12,6 @@ const CoursesListComponent = props => (
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
-          <th>President</th>
           <th>CFU</th>
           <th>Action</th>
         </tr>

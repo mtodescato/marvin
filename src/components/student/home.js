@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Section, Heading } from 'grommet';
 
-const Home = () => (
+const HomeComponent = props => (
   <Section>
     <Heading>
       Dashboard Home
@@ -11,9 +12,19 @@ const Home = () => (
       </small>
     </Heading>
     <p>
-      Welcome Student
+      Welcome Student {props.user.name}
+    </p>
+    <p>
+    N. {props.user.matricola}
+    </p>
+    <p>
+      Address: {props.user.address}
     </p>
   </Section>
 );
 
-export default Home;
+HomeComponent.propTypes = {
+  user: PropTypes.arrayOf.isRequired,
+};
+
+export default HomeComponent;

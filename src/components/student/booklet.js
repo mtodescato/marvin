@@ -11,7 +11,7 @@ const BookletComponent = props => (
     <Table responsive>
       <thead>
         <tr>
-          <th>Year</th>
+          <th>Referent</th>
           <th>Name</th>
           <th>CFU</th>
           <th>State</th>

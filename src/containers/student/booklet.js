@@ -10,7 +10,7 @@ const user = {
 
 const exams = [
   {
-    anno: '1',
+    responsabile: 'Maietti',
     nome: 'Logica',
     cfu: '6',
     stato: true,
@@ -18,7 +18,7 @@ const exams = [
     data: '12/12/2012',
   },
   {
-    anno: '2',
+    responsabile: 'Goggiuolo',
     nome: 'Data Mining',
     cfu: '6',
     stato: true,
@@ -26,12 +26,12 @@ const exams = [
     data: '11/11/2011',
   },
   {
-    anno: '3',
+    responsabile: 'Tullio',
     nome: 'Swe',
     cfu: '20',
     stato: false,
-    voto: 'undefined',
-    data: 'undefined',
+    voto: '',
+    data: '',
   },
 ];
 

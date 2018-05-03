@@ -23,7 +23,6 @@ class ExamApplicationEntry extends React.Component {
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td>{this.props.date}</td>
-        <td>{this.props.president}</td>
         <td>{this.props.cfu}</td>
         <td><Button onClick={this.setLayer} label="Iscriviti" primary /></td>
         {this.state.showLayer ?
@@ -43,7 +42,6 @@ ExamApplicationEntry.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  president: PropTypes.string.isRequired,
   cfu: PropTypes.number.isRequired,
 };
 

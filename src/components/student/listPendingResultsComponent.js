@@ -12,7 +12,6 @@ const ListPendingResultsComponent = props => (
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
-          <th>President</th>
           <th>CFU</th>
           <th>Result</th>
           <th>Action</th>
@@ -20,10 +19,11 @@ const ListPendingResultsComponent = props => (
       </thead>
       <tbody>
         {
-          props.exams.map((element, index) => (
+          props.examsResults.map((element, index) => (
             <PendingResultEntry
               index={index}
               {...element}
+              manageVote={props.manageVote}
             />
           ))
         }
@@ -33,7 +33,8 @@ const ListPendingResultsComponent = props => (
 );
 
 ListPendingResultsComponent.propTypes = {
-  exams: PropTypes.arrayOf.isRequired,
+  examsResults: PropTypes.arrayOf.isRequired,
+  manageVote: PropTypes.func.isRequired,
 };
 
 export default ListPendingResultsComponent;

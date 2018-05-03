@@ -1,19 +1,14 @@
 import React from 'react';
-import { Section, Heading } from 'grommet';
+import HomeComponent from '../../components/student/home';
+
+const user = {
+  name: 'Giovanni',
+  matricola: '11200000',
+  address: '0x0',
+};
 
 const Home = () => (
-  <Section>
-    <Heading>
-      Dashboard Home
-      <br />
-      <small>
-        Student Zone
-      </small>
-    </Heading>
-    <p>
-      Welcome Student
-    </p>
-  </Section>
+  <HomeComponent user={user} />
 );
 
 export default Home;

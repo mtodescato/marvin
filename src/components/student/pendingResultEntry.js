@@ -28,7 +28,6 @@ class PendingResultEntry extends React.Component {
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td>{this.props.date}</td>
-        <td>{this.props.president}</td>
         <td>{this.props.cfu}</td>
         <td>{this.props.result}</td>
         <td>
@@ -43,6 +42,7 @@ class PendingResultEntry extends React.Component {
             name={this.props.name}
             date={this.props.date}
             result={this.props.result}
+            manageVote={this.props.manageVote}
           />
              : null
           }
@@ -53,11 +53,11 @@ class PendingResultEntry extends React.Component {
 
 PendingResultEntry.propTypes = {
   name: PropTypes.string.isRequired,
-  president: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   result: PropTypes.number.isRequired,
   index: PropTypes.number.isRequired,
   cfu: PropTypes.number.isRequired,
+  manageVote: PropTypes.func.isRequired,
 };
 
 export default PendingResultEntry;

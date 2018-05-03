@@ -18,7 +18,7 @@ const ConfirmationComponent = props => (
         <FormFields>
           <fieldset>
             <Paragraph>
-                Confermi l iscrizione al corso di laurea in {props.courseName} {props.courseYear} ?
+                Confermi l iscrizione al corso di laurea in {props.courseName} ?
             </Paragraph>
           </fieldset>
         </FormFields>
@@ -37,7 +37,6 @@ const ConfirmationComponent = props => (
 ConfirmationComponent.propTypes = {
   setLayer: PropTypes.func.isRequired,
   courseName: PropTypes.string.isRequired,
-  courseYear: PropTypes.string.isRequired,
 };
 
 export default ConfirmationComponent;

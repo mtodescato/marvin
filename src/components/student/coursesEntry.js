@@ -25,13 +25,11 @@ class CoursesEntry extends React.Component {
         <td>{this.props.name}</td>
         <td>{this.props.president}</td>
         <td>{this.props.type}</td>
-        <td>{this.props.year}</td>
         <td><Button onClick={this.setLayer} label="Iscriviti" primary /></td>
         {this.state.showLayer ?
           <ConfirmationComponent
             setLayer={this.setLayer}
             courseName={this.props.name}
-            courseYear={this.props.year}
           />
              : null
           }
@@ -43,14 +41,12 @@ class CoursesEntry extends React.Component {
 ConfirmationComponent.propTypes = {
   setLayer: PropTypes.func.isRequired,
   courseName: PropTypes.string.isRequired,
-  courseYear: PropTypes.string.isRequired,
 };
 
 CoursesEntry.propTypes = {
   name: PropTypes.string.isRequired,
   president: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  year: PropTypes.string.isRequired,
   index: PropTypes.number.isRequired,
 };
 
