@@ -10,19 +10,51 @@ class DegreeRequest extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
     this.handleChangeRelator = this.handleChangeRelator.bind(this);
+    this.handleValidation = this.handleValidation.bind(this);
 
     this.state = {
       title: 'undefined',
       relator: 'undefined',
+      errors: {
+        title: '',
+        relator: '',
+      },
     };
   }
 
-  onSubmit() {
+  onSubmit(event) {
     const request = {
       title: this.state.title,
       relator: this.state.relator,
     };
-    this.props.actions.createDegreeRequestRequest(request);
+    if (this.handleValidation()) {
+      this.props.actions.createDegreeRequestRequest(request);
+    } else {
+      event.preventDefault();
+    }
+  }
+
+  handleValidation() {
+    const errors = {};
+    let formIsValid = true;
+
+    // Title
+    if (this.state.title === 'undefined') {
+      formIsValid = false;
+      errors.title = 'Cannot be empty';
+    } else if (!this.state.title.match(/^[a-zA-Z]+$/)) {
+      formIsValid = false;
+      errors.title = 'Only letters';
+    }
+
+    // Relator
+    if (this.state.relator === 'undefined') {
+      formIsValid = false;
+      errors.relator = 'Select a relator';
+    }
+
+    this.setState({ errors });
+    return formIsValid;
   }
 
   handleChangeTitle(e) {
@@ -51,8 +83,8 @@ class DegreeRequest extends React.Component {
                   placeHolder="Titolo tesi"
                   onDOMChange={this.handleChangeTitle}
                 />
-
               </FormField>
+              <span style={{ color: 'red' }}>{this.state.errors.title}</span>
               <t />
 
               <FormField label="Seleziona il referente: ">
@@ -75,7 +107,7 @@ class DegreeRequest extends React.Component {
                   </List>
                 </div>
               </FormField>
-
+              <span style={{ color: 'red' }}>{this.state.errors.relator}</span>
 
             </fieldset>
           </FormFields>
