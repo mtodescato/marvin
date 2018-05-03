@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, TableRow, Table, Heading, Search } from 'grommet';
-import Button from 'grommet/components/Button';
+import { Box, TableRow, Table, Heading, Search, Button } from 'grommet';
 
 export const UserEntry = ({
   index,
