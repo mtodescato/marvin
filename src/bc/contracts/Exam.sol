@@ -27,6 +27,13 @@ contract Exam {
         require(studentToResult[student] != 0);
         _;
     }
+    
+    modifier onlyReferenceProf(address prof) {
+        Teaching teach = Teaching(teaching);
+        address professor = teach.getTheachingProfessor();
+        require(prof == professor);
+        _;
+    }
 
     function Exam(address teach, bytes _date) public {
         date = _date;
@@ -65,12 +72,4 @@ contract Exam {
         studentToInt[student] = last;
         last += 1;
     }
-
-    modifier onlyReferenceProf(address prof) {
-        Teaching teach = Teaching(teaching);
-        address professor = teach.getTheachingProfessor();
-        require(prof == professor);
-        _;
-    }
-
 }
