@@ -1,27 +1,33 @@
-import { put, takeLatest, call } from 'redux-saga/effects';
-import { web3 } from '../reducers';
-import deployCall, { stubDeployCall } from './web3calls';
+import { put, takeEvery, call } from 'redux-saga/effects';
+import Web3 from 'web3';
+import { Web3 as Web3Reducer } from '../reducers';
+import { getAccount } from './web3calls/deployed';
 
-let mockResult = {};
-let callWrapper = deployCall;
+export const undefinedMetamask = 'Mist/MetaMask\'s provider isn\'t be recognized, please use it before run marvin';
 
-export const mockInjection = (mock) => {
-  callWrapper = stubDeployCall;
-  mockResult = mock;
-};
+export const getWeb3 = () => new Promise((resolve, reject) => {
+  // Checking if Web3 has been injected by the browser (Mist/MetaMask)
+  let result;
+  if (typeof window.web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider.
+    result = new Web3(window.web3.currentProvider);
+    global.window.web3 = result;
+    resolve(result);
+  } else {
+    reject(Error(undefinedMetamask));
+  }
+});
 
 export function* runAction() {
   try {
-    const result = yield call(callWrapper, ({
-      contractFunction: 'web3',
-      mockResult,
-    }));
-    yield put(web3.creators.addUserSuccess(result));
+    yield call(getWeb3);
+    const address = getAccount();
+    yield put(Web3Reducer.creators.web3AddressSuccess(address));
   } catch (e) {
-    yield put(web3.creators.addUserFailed(e.message));
+    yield put(Web3Reducer.creators.web3AddressFailed(e.message)); // fail the promise getWeb3
   }
 }
 
 export function* triggerAction() {
-  yield takeLatest(web3.types.BOOKLET_INFO_REQUEST, runAction);
+  yield takeEvery(Web3Reducer.types.WEB_3_ADDRESS_REQUEST, runAction);
 }
