@@ -43,7 +43,7 @@ contract('Testing AdminFacade', () => {
     assert.notEqual(AcademicYearAddress, '0x0000000000000000000000000000000000000000', 'test address academic year');
   });
 
-  it('getAcademicYear retrun correct address', async () => {
+  it('add a degree course', async () => {
     adminFacadeInstance.addAcademicYear(797, { from: gAddress });
     const AcademicYearAddress = await adminFacadeInstance.getAcademicYear(797);
     const year797 = AcademicYear.at(AcademicYearAddress);
@@ -52,5 +52,10 @@ contract('Testing AdminFacade', () => {
     adminFacadeInstance.addDegreeCourse(797, 'computer science', 'Mario Rossi', 1);
     numberOfDC = await year797.getNumberOfDC.call();
     assert.equal(numberOfDC.toNumber(), 1, 'After insert');
+  });
+
+  it('return a degree course', async () => {
+    const degreeCourseAddress = adminFacadeInstance.getDegreeCourse(797, 0);
+    assert.notEqual(degreeCourseAddress, '0x0000000000000000000000000000000000000000', 'address is not null');
   });
 });
