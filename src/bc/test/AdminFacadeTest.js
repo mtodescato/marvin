@@ -2,7 +2,6 @@ const ListUsers = artifacts.require('./ListUsers.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const User = artifacts.require('./User.sol');
 const AcademicYear = artifacts.require('./AcademicYear.sol');
-const DegreeCourse = artifacts.require('./DegreeCourse.sol');
 const gAddress = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
 
 
