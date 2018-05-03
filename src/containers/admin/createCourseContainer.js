@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../actions/admin/createUserActions';
 import CreateCourse from '../../components/admin/dashboard/createCourse';
 
 const CreateCourseContainer = ({ state, actions }) => (
@@ -12,7 +11,7 @@ const CreateCourseContainer = ({ state, actions }) => (
 
 CreateCourseContainer.propTypes = {
   actions: PropTypes.shape({
-    addUserRequest: PropTypes.func.isRequired,
+    addCourseRequest: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
     isSuccess: PropTypes.bool.isRequired,
@@ -20,7 +19,7 @@ CreateCourseContainer.propTypes = {
   }).isRequired,
 };
 
-const mapStateToProps = state => ({
+/* const mapStateToProps = state => ({
   state: {
     isSuccess: state.addUserReducer.isSuccess,
     isFailed: state.addUserReducer.isFailed,
@@ -29,10 +28,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    addUserRequest: (user) => {
-      dispatch(actionTypes.addUserRequest(user));
+    addCourseRequest: (course) => {
+      dispatch(actionTypes.addCourseRequest(course));
     },
   },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateCourseContainer);
+*/
+export default CreateCourseContainer;

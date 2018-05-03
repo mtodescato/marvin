@@ -82,7 +82,7 @@ class CreateCourse extends React.Component {
   render() {
     return (
       <div>
-        {this.props.state.isSuccess === true && (
+        {/* this.props.state.isSuccess === true && (
           <Toast status="ok">
             <strong>Course created correctly</strong>
           </Toast>
@@ -91,7 +91,7 @@ class CreateCourse extends React.Component {
           <Toast status="critical">
             <strong>Course creation error: &quot;Transaction rejected&quot;</strong>
           </Toast>
-        )}
+        ) */}
         <Box
           classname="PanelBox"
           direction="column"
@@ -183,12 +183,10 @@ CreateCourse.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
+  /* state: PropTypes.shape({
     isSuccess: PropTypes.bool.isRequired,
     isFailed: PropTypes.bool.isRequired,
-  }).isRequired,
+  }).isRequired, */
 };
 
 export default CreateCourse;
-
-// onClick={this.onSubmit}
