@@ -33,8 +33,8 @@ contract ListUsers is Ownable {
         last += 1;
     }
 
-    function getUser(uint userN) public view returns( address ) {
-        require(intToUAddress[userN] != 0x0);
+    function getUserInt(uint userN) public view returns( address ) {
+        require(uAddressToUserInfo[intToUAddress[userN]].cAddress != 0x0);
         return uAddressToUserInfo[intToUAddress[userN]].cAddress;
     }
 
