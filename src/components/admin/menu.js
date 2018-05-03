@@ -12,7 +12,12 @@ const Menu = () => (
     <Header>
         Admin Menù
     </Header>
-    <MenuAdmin />
+    <Box
+      flex="grow"
+      justify="start"
+    >
+      <MenuAdmin />
+    </Box>
   </Sidebar>
 );
 

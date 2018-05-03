@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Anchor, Menu, Box, Accordion, AccordionPanel } from 'grommet';
+import { Anchor, Menu, Accordion, AccordionPanel } from 'grommet';
 
 export const entries = [
   { entry: 'Users', subEntries: ['List Users', 'Create User'] },
@@ -46,6 +46,9 @@ const MenuEntries = ({ active = 0, action }) => (
 
 MenuEntries.propTypes = {
   active: PropTypes.number,
+  action: PropTypes.shape({
+    createDegreeRequestRequest: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 MenuEntries.defaultProps = {
