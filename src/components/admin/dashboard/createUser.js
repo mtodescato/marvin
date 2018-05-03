@@ -17,7 +17,7 @@ import {
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 
-class AddUser extends React.Component {
+class CreateUser extends React.Component {
   constructor(props) {
     super(props);
 
@@ -180,7 +180,7 @@ class AddUser extends React.Component {
     );
   }
 }
-AddUser.propTypes = {
+CreateUser.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
@@ -190,4 +190,4 @@ AddUser.propTypes = {
   }).isRequired,
 };
 
-export default AddUser;
+export default CreateUser;

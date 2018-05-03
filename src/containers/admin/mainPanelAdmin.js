@@ -7,13 +7,13 @@ import ListUsers from './listUsersContainer';
 import CreateUser from './createUserContainer';
 import CreateCourse from './createCourseContainer';
 
-const MainPanel = ({ DashboardComponent }) => (
+const MainPanelAdmin = ({ DashboardComponent }) => (
   <div>
     <Dashboard Component={DashboardComponent} />
   </div>
 );
 
-MainPanel.propTypes = {
+MainPanelAdmin.propTypes = {
   DashboardComponent: PropTypes.func.isRequired,
 };
 
@@ -32,4 +32,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(MainPanel);
+export default connect(mapStateToProps)(MainPanelAdmin);

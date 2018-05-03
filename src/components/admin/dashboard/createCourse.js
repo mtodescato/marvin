@@ -25,22 +25,17 @@ class CreateCourse extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangePresident = this.handleChangePresident.bind(this);
-    this.handleChangeRole = this.handleChangeRole.bind(this);
+    this.handleChangeType = this.handleChangeType.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
 
     this.state = {
-      name: 'sdfsd',
+      name: '',
       president: '',
       type: 0,
-      roleString: 'Student',
+      typeString: 'Tree-year',
       showLayer: false,
     };
-  }
-
-  onConfirm() {
-    this.setLayer();
-    this.onSubmit();
   }
 
   onSubmit() {
@@ -66,21 +61,21 @@ class CreateCourse extends React.Component {
     this.setState({ president: e.target.value });
   }
 
-  handleChangeRole(e) {
-    let numberRole;
+  handleChangeType(e) {
+    let numberType;
     switch (e.option) {
-      case 'Triennale':
-        numberRole = 0;
+      case 'Tree-year':
+        numberType = 0;
         break;
-      case 'Magistrale':
-        numberRole = 1;
+      case 'Master':
+        numberType = 1;
         break;
       default:
-        numberRole = 0;
+        numberType = 0;
     }
     this.setState({
-      type: numberRole,
-      roleString: e.option,
+      type: numberType,
+      typeString: e.option,
     });
   }
 
@@ -150,16 +145,16 @@ class CreateCourse extends React.Component {
                   <TextInput
                     id="president"
                     name="President"
-                    placeHolder="Rossi"
+                    placeHolder="Tullio"
                     onDOMChange={this.handleChangePresident}
                   />
                 </FormField>
-                <FormField label="Type:">
+                <FormField label="Degree Type:">
                   <Select
                     id="type"
-                    options={['Triennale', 'Magistrale']}
-                    value={this.state.roleString}
-                    onChange={this.handleChangeRole}
+                    options={['Tree-year', 'Master']}
+                    value={this.state.typeString}
+                    onChange={this.handleChangeType}
                   />
                 </FormField>
               </FormFields>
@@ -171,9 +166,9 @@ class CreateCourse extends React.Component {
                 />
                 {this.state.showLayer ?
                   <CourseConfirmation
-                    onConfirm={this.onConfirm}
+                    setLayer={this.setLayer}
                     courseName={this.state.name}
-                    courseYear={this.props.year}
+                    coursePresident={this.state.president}
                   /> : null
                   }
               </Footer>
@@ -192,7 +187,6 @@ CreateCourse.propTypes = {
     isSuccess: PropTypes.bool.isRequired,
     isFailed: PropTypes.bool.isRequired,
   }).isRequired,
-  year: PropTypes.string.isRequired,
 };
 
 export default CreateCourse;

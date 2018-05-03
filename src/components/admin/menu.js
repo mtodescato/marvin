@@ -14,13 +14,8 @@ const Menu = () => (
       flex="grow"
       justify="start"
     >
-      <MenuGrommet
-        responsive
-        primary
-        inline
-      >
+     
         <MenuAdmin />
-      </MenuGrommet>
     </Box>
   </Sidebar>
 );
