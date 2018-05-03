@@ -63,8 +63,7 @@ contract  AdminFacade {
     *  @param _year Numer of the year to create.
     */
     function addAcademicYear( uint _year) public {
-        address newYear = address(new AcademicYear(_year));
-        yearsList.insertNewAcademicYears(_year, newYear);
+        yearsList.insertNewAcademicYears(_year, address(new AcademicYear(_year)));
     }
 
     /**@dev Get the address of the academic year.
@@ -72,7 +71,7 @@ contract  AdminFacade {
     *  @return address Address of the contract of the academic year.
     */
     function getAcademicYear( uint _year) public view returns(address) {
-        yearsList.getAcademicYear(_year);
+        return yearsList.getAcademicYear(_year);
     }
 
     /**@dev Create and add to the course list a new DegreeCourse.
