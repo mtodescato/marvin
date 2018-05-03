@@ -109,4 +109,14 @@ contract  AdminFacade {
         dCourse.addTeaching(address(newTeach));
     }
 
+    /**@dev Return a teaching given its degree course address and an index.
+    *  @param course Address of the degree course that owns the teaching.
+    *  @param index Index of the teaching in the degree course list.
+    *  @return address The address of the teaching.
+    */
+    function getTeaching(address course, uint index) public view returns(address) {
+        DegreeCourse dCourse = DegreeCourse(course);
+        return dCourse.getTeaching(index);
+    }
+
 }
