@@ -6,6 +6,7 @@ import Home from '../../components/admin/dashboard/home';
 import ListUsers from './listUsersContainer';
 import CreateUser from './createUserContainer';
 import CreateCourse from './createCourseContainer';
+import ListCourses from './listCoursesContainer';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
   <div>
@@ -26,6 +27,8 @@ const mapStateToProps = (state) => {
     case 2:
       return { DashboardComponent: CreateUser };
     case 3:
+      return { DashboardComponent: ListCourses };
+    case 4:
       return { DashboardComponent: CreateCourse };
     default:
       return { DashboardComponent: Home };
