@@ -18,12 +18,12 @@ describe('AsyncFlow test suite', () => {
     initialState: {},
   }).extend({
     creators: ({ types }) => ({
-      act1Request: () => ({ type: types.ACT1_REQUEST }),
-      act1Success: () => ({ type: types.ACT1_SUCCESS }),
-      act1Failed: () => ({ type: types.ACT1_FAILED }),
-      act2Request: () => ({ type: types.ACT1_REQUEST }),
-      act2Success: () => ({ type: types.ACT1_SUCCESS }),
-      act2Failed: () => ({ type: types.ACT1_FAILED }),
+      act1Request: () => ({ type: types.ACT1_REQUEST, payload: {} }),
+      act1Success: () => ({ type: types.ACT1_SUCCESS, payload: {} }),
+      act1Failed: () => ({ type: types.ACT1_FAILED, payload: { error: 'error' }, error: true }),
+      act2Request: () => ({ type: types.ACT1_REQUEST, payload: {} }),
+      act2Success: () => ({ type: types.ACT1_SUCCESS, payload: {} }),
+      act2Failed: () => ({ type: types.ACT1_FAILED, payload: { error: 'error' }, error: true }),
     }),
   });
   describe('check params to DuckModule are setted correctly', () => {
