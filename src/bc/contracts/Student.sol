@@ -12,9 +12,27 @@ contract Student is User {
     {}
 
     mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
+    mapping(uint => address) private intToTeaching;
+    uint private last = 0;
 
     function insertPassedExam (address teaching, address exam) public {
         teachingToExam[teaching] = exam;
+        intToTeaching[last] = teaching;
+        last += 1;
+    }
+
+    function getNumberOfTeachings() public view returns(uint) {
+        return last;
+    }
+
+    function getTeaching(uint index) public view returns(address) {
+        require(index < last);
+        return intToTeaching[index];
+    }
+
+    function getExam(address teaching) public view returns(address) {
+        require(teachingToExam[teaching] != 0x0);
+        return teachingToExam[teaching];
     }
 
     function checkPassedTeaching(address teaching) public view returns(bool) {
