@@ -17,7 +17,6 @@ describe('BookletInfo saga test suite', () => {
   const address = '0';
   const mock = { address };
   it('handles reducers when request is dispatched', () => {
-    console.log(saga);
     saga.mockInjection(mock);
     return expectSaga(saga.triggerAction)
       .withReducer(BookletInfo.reducer)
