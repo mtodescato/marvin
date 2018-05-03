@@ -1,5 +1,5 @@
 import React from 'react';
-import { Menu as MenuGrommet, Sidebar, Header, Box } from 'grommet';
+import { Menu as Sidebar, Header, Box } from 'grommet';
 import MenuAdmin from '../../containers/admin/menuAdmin';
 
 const Menu = () => (
@@ -14,8 +14,7 @@ const Menu = () => (
       flex="grow"
       justify="start"
     >
-     
-        <MenuAdmin />
+      <MenuAdmin />
     </Box>
   </Sidebar>
 );

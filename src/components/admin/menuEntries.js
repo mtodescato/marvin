@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Anchor, Menu, Accordion, AccordionPanel } from 'grommet';
+import { Anchor, Accordion, AccordionPanel } from 'grommet';
 
 export const entries = [
   { entry: 'Home', subEntries: [] },
@@ -10,7 +10,6 @@ export const entries = [
   { entry: 'Academic Years', subEntries: ['Add Academic Year', 'List Academic Years'] },
   { entry: 'Degree Procedures', subEntries: ['Doe', 'blue'] },
 ];
-
 
 
 const MenuEntries = ({ active = 0, action }) => (
@@ -33,6 +32,9 @@ const MenuEntries = ({ active = 0, action }) => (
 
 MenuEntries.propTypes = {
   active: PropTypes.number,
+  action: PropTypes.shape({
+    createDegreeRequestRequest: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 MenuEntries.defaultProps = {
