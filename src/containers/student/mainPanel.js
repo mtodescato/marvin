@@ -21,7 +21,7 @@ MainPanel.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  switch (state.menuEntriesReducer) {
+  switch (state['menu-entries'].id) {
     case 0:
       return { DashboardComponent: Home };
     case 1:

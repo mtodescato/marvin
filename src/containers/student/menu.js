@@ -1,27 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
-import * as actionTypes from '../../actions/menuEntriesActions';
+import { MenuEntries as MenuEntriesReducer } from '../../reducers';
 import MenuEntries from '../../components/student/menuEntries';
 
-const MenuStudent = ({ active, action }) => (
-  <MenuEntries active={active} action={action.changeActive} />
+const MenuStudent = ({ active, changeActive }) => (
+  <MenuEntries active={active} action={changeActive} />
 );
 
 MenuStudent.propTypes = {
   active: PropTypes.number.isRequired,
-  action: PropTypes.shape({
-    changeActive: PropTypes.func.isRequired,
-  }).isRequired,
+  changeActive: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  action: bindActionCreators(actionTypes, dispatch),
+  changeActive: newId => dispatch(MenuEntriesReducer.creators.changeActive(newId)),
 });
 
 const mapStateToProps = state => ({
-  active: state.menuEntriesReducer,
+  active: state['menu-entries'].id,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuStudent);

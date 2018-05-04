@@ -20,7 +20,7 @@ MainPanelAdmin.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  switch (state.menuEntriesReducer) {
+  switch (state['menu-entries']) {
     case 0:
       return { DashboardComponent: Home };
     case 1:

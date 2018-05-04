@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoginComponent from '../components/login';
-import { loginUser } from '../actions/loginActions';
+import { UserReducer } from './../reducers';
 
 const Login = props => (
   <div>
@@ -19,11 +19,11 @@ Login.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLoginUserClick: () => dispatch(loginUser()),
+  onLoginUserClick: () => dispatch(UserReducer.creators.loginUser()),
 });
 
 const mapStateToProps = state => ({
-  type: state.userReducer.type,
+  type: state['user-reducer'].type,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

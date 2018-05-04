@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import * as actionTypes from '../../actions/admin/createUserActions';
+import { AddUser } from '../../reducers';
 import CreateUser from '../../components/admin/dashboard/createUser';
 
 const CreateUserContainer = ({ state, actions }) => (
@@ -30,7 +30,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   actions: {
     addUserRequest: (user) => {
-      dispatch(actionTypes.addUserRequest(user));
+      dispatch(AddUser.creators.addUserRequest(user));
     },
   },
 });
