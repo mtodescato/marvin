@@ -6,12 +6,13 @@ notifications:
 
 language: node_js
 node_js:
-  - "6"
+  - "8"
 
 before_install:
 - sudo apt-get update
-- npm install -g truffle
+- npm install -g truffle@4.1.7
 - npm install -g solhint
+- npm install -g ganache-cli@6.0.3
 
 all_branches: true
 
@@ -20,7 +21,9 @@ script:
 - cd src/bc
 - solhint ./contracts/*
 - truffle compile
-- truffle test --network develop
+- ganache-cli -p 7545 -m velociraptor > artifacts.txt &
+- truffle test
+- pkill node
 - cd ../..
 - npm run lint
 - npm run test
