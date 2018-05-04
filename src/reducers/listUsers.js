@@ -1,28 +1,25 @@
 import DuckModule from './duckModule';
 
 export default DuckModule({
-  store: 'user-reducer',
-  types: ['LOGIN_USER'],
+  store: 'list-users',
   initialState: {
-    data: {
-      name: 'Giovanni',
-      address: '0x0',
-    },
-    type: 'student',
+    users: [],
+    size: 0,
   },
+  types: ['DELETE_ACTION', 'INITIALIZE'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.LOGIN_USER:
+      case types.DELETE_ACTION:
         return {
-          ...state,
-          type: 'student',
+          size: state.size - 1,
         };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    loginUser: () => ({ type: types.LOGIN_USER }),
+    deleteAction: () => ({ type: types.DELETE_ACTION }),
+    initialize: () => ({ type: types.INITIALIZE }),
   }),
 });
