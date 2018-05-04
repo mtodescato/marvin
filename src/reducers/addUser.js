@@ -3,14 +3,25 @@ import AsyncFlow from './asyncFlow';
 export default AsyncFlow({
   store: 'add-user',
   initialState: {
-    userAdded: false,
+    isSuccess: false,
+    isFailed: false,
   },
   actions: ['ADD_USER'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
       case types.ADD_USER_SUCCESS:
-        return { ...state, userAdded: true };
+        return {
+          ...state,
+          isSuccess: true,
+          isFailed: false,
+        };
+      case types.ADD_USER_FAILED:
+        return {
+          ...state,
+          isSuccess: false,
+          isFailed: true,
+        };
       default:
         return state;
     }
