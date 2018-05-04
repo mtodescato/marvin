@@ -1,7 +1,7 @@
 {
-  "name": "poc",
-  "version": "0.0.1",
-  "description": "proof of concept",
+  "name": "marvin",
+  "version": "1.0.0",
+  "description": "",
   "directories": {
     "test": "test"
   },
@@ -18,7 +18,7 @@
     "start-all": "npm-run-all -p watch-css ganache-script truffle-script start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "truffle-script": "cd ./src/truffle/ && truffle compile --all && truffle migrate --reset --network development",
+    "truffle-script": "cd ./src/truffle/ && truffle compile --all && truffle migrate --reset",
     "ganache-script": "./node_modules/.bin/ganache-cli -p 7545 -m velociraptor"
   },
   "babel": {
@@ -30,7 +30,10 @@
     ]
   },
   "author": "NOVEGroup",
-  "license": "BSD-3-Clause",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mtodescato/marvin/issues"
+  },
   "devDependencies": {
     "eslint": "^4.18.0",
     "eslint-config-airbnb": "^16.1.0",
