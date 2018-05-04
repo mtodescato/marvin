@@ -67,6 +67,11 @@ contract Exam {
         return teaching;
     }
 
+    function getStudentSubscribed(uint index) public view returns(address) {
+        require(index < last);
+        return intToStudent[index];
+    }
+
     function subscribe(address student) public {
         intToStudent[last] = student;
         studentToInt[student] = last;
