@@ -15,14 +15,23 @@ import { combineReducers } from 'redux';
 // import all reducers
 import BookletInfo from './bookletInfo';
 import AddUser from './addUser';
+import MenuEntries from './menuEntries';
+import UserReducer from './userReducer';
+import ListUsers from './listUsers';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
   [AddUser.store]: AddUser.reducer,
+  [MenuEntries.store]: MenuEntries.reducer,
+  [UserReducer.store]: UserReducer.reducer,
+  [ListUsers.store]: ListUsers.reducer,
 });
 
 // export all reducers
 export {
   BookletInfo,
   AddUser,
+  MenuEntries,
+  UserReducer,
+  ListUsers,
 };
