@@ -32,9 +32,9 @@ export default AsyncFlow({
       type: types.WEB_3_USER_INFO_REQUEST,
       payload: { address },
     }),
-    web3UserInfoSuccess: ({ data, type }) => ({
+    web3UserInfoSuccess: ({ data, userType }) => ({
       type: types.WEB_3_USER_INFO_SUCCESS,
-      payload: { data, type },
+      payload: { data, userType },
     }),
     web3UserInfoFailed: error => ({
       type: types.WEB_3_USER_INFO_FAILED,

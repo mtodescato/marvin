@@ -2,25 +2,24 @@ import { put, takeEvery, call } from 'redux-saga/effects';
 import { Web3UserInfo } from '../reducers';
 import { deployed, getAccount } from './web3calls';
 import ListUsers from '../bc/build/contracts/ListUsers.json';
-import AdminFacade from '../bc/build/contracts/AdminFacade.json'; // TODO: fake
-import User from '../bc/build/contracts/User.json';
+import AdminFacade from '../bc/build/contracts/AdminFacade.json';
 
-export const getUserInfo = address => new Promise((resolve, reject) => {
-  try {
-    deployed(ListUsers)
-      .then(inst => inst.getType.call(address))
-      .then((type) => {
-        resolve({
-          data: {
-            name: 'mario',
-            surname: 'rossi',
-            socialNumber: 'mrsrss7580297584',
-          },
-          type,
-        });
+export const getUserInfo = address => new Promise((resolve) => {
+  deployed(AdminFacade)
+    .then(inst => inst.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, address, 0, { from: getAccount() }));
+
+  deployed(ListUsers)
+    .then(inst => inst.getType.call(address))
+    .then((type) => {
+      resolve({
+        data: {
+          name: 'mario',
+          surname: 'rossi',
+          socialNumber: 'mrsrss7580297584',
+        },
+        userType: type,
       });
-
-  } catch (e) { reject(Error(e)); }
+    });
 });
 
 export function* runAction({ payload }) {
