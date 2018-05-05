@@ -26,7 +26,19 @@ contract DegreeCourse {
         return intToTeaching[index];
     }
 
-    function getNumberOfTeaching() public view returns(uint) {
+    function getNumberOfTeachings() public view returns(uint) {
         return last;
+    }
+
+    function getDegreeCourseName() public view returns(bytes) {
+        return degreeCourseName;
+    }
+
+    function getDegreeCoursePresident() public view returns(bytes) {
+        return degreeCoursePresident;
+    }
+
+    function getDegreeCourseType() public view returns(uint8) {
+        return degreeCourseType;
     }
 }

@@ -87,6 +87,17 @@ contract  AdminFacade {
         acYearObj.addDegreeCourse(dCourse);
     }
 
+    /**@dev Get a degree course from un academic year given an index.
+    *  @param academicYear Year of the academic calendar.
+    *  @param index Index of the degree course.
+    *  @return address The address of the degree course.
+    */
+    function getDegreeCourse(uint academicYear, uint index) public view returns(address) {
+        address acYear = yearsList.getAcademicYear(academicYear);
+        AcademicYear acYearObj = AcademicYear(acYear);
+        return acYearObj.getDegreeCourse(index);
+    }
+
     /**@dev Create and add a new teaching to the DegreeCourse.
     *  @param course Address of the DegreeCourse.
     *  @param refProfessor Address of the professor of the teching.
@@ -96,6 +107,16 @@ contract  AdminFacade {
         DegreeCourse dCourse = DegreeCourse(course);
         Teaching newTeach = new Teaching(refProfessor, name);
         dCourse.addTeaching(address(newTeach));
+    }
+
+    /**@dev Return a teaching given its degree course address and an index.
+    *  @param course Address of the degree course that owns the teaching.
+    *  @param index Index of the teaching in the degree course list.
+    *  @return address The address of the teaching.
+    */
+    function getTeaching(address course, uint index) public view returns(address) {
+        DegreeCourse dCourse = DegreeCourse(course);
+        return dCourse.getTeaching(index);
     }
 
 }
