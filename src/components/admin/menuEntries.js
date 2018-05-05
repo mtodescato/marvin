@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Anchor, Menu, Accordion, AccordionPanel, Box } from 'grommet';
+import HomeIcon from 'grommet/components/icons/base/Home';
 
 export const entries = [
   { entry: 'Users', subEntries: ['List Users', 'Create User'] },
@@ -18,6 +19,7 @@ const MenuEntries = ({ active = 0, action }) => (
       onClick={() => action(0)}
       responsive
       primary
+      icon={<HomeIcon />}
     >
       Home
     </Anchor>

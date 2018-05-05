@@ -8,7 +8,7 @@ export default DuckModule({
       name: 'Giovanni',
       address: '0x0',
     },
-    type: 'admin',
+    type: 'student',
   },
 }).extend({
   reducer: (state, action, { types }) => {

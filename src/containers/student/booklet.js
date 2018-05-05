@@ -1,42 +1,36 @@
+/*
+ * file: booklet.js
+ * version: 0.1
+ * type: react component
+ * authors: Giovanni Calore
+ * license: MIT License
+ * warnings: component for user Booklet information
+ * changes:
+ * * Giovanni Calore   | 2018/04/22 | file creation
+ */
+
+
 import React from 'react';
+import { connect } from 'react-redux';
+import { BookletInfo as BookletInfoReducer } from '../../reducers';
 import BookletComponent from '../../components/student/booklet';
 
-const user = {
-  name: 'Giovanni',
-  surname: 'Calore',
-  matricola: '1120000',
-  media: '30.00',
-};
-
-const exams = [
-  {
-    responsabile: 'Maietti',
-    nome: 'Logica',
-    cfu: '6',
-    stato: true,
-    voto: '30',
-    data: '12/12/2012',
-  },
-  {
-    responsabile: 'Goggiuolo',
-    nome: 'Data Mining',
-    cfu: '6',
-    stato: true,
-    voto: '30',
-    data: '11/11/2011',
-  },
-  {
-    responsabile: 'Tullio',
-    nome: 'Swe',
-    cfu: '20',
-    stato: false,
-    voto: '',
-    data: '',
-  },
-];
-
-const Booklet = () => (
-  <BookletComponent user={user} exams={exams} />
+const Booklet = props => (
+  <div>
+    <BookletComponent {...props} />
+    {}
+  </div>
 );
 
-export default Booklet;
+const mapDispatchToProps = dispatch => ({
+  bookletInfoRequest: address => dispatch(BookletInfoReducer.creators.bookletInfoRequest(address)),
+});
+
+const mapStateToProps = state => ({
+  // address: state['web.3'].address,
+  // status: state['web.3'].statusMetamask,
+  status: state['booklet-info'].statusMetamask,
+  booklet: state['booklet-info'].booklet,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Booklet);
