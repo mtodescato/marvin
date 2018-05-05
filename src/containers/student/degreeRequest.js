@@ -28,9 +28,15 @@ const relators = [
   },
 ];
 
+const createDegreeDemandRequest = {};
+
 const DegreeRequest = () => (
   <div>
-    <DegreeRequestComponent relators={relators} requestAlreadyDone={false} />
+    <DegreeRequestComponent
+      relators={relators}
+      requestAlreadyDone={false}
+      createDegreeDemandRequest={createDegreeDemandRequest}
+    />
   </div>
 );
 

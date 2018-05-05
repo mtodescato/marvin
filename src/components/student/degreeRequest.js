@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Button, Header, Heading, FormFields, Footer, FormField, TextInput, List, ListItem, Headline } from 'grommet';
+import { Form, Button, Header, Heading, FormFields, Footer, FormField, TextInput, Headline } from 'grommet';
 import PropTypes from 'prop-types';
 import '../../css/degreeRequest.css';
 
@@ -9,29 +9,72 @@ class DegreeRequest extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeTitle = this.handleChangeTitle.bind(this);
-    this.handleChangeRelator = this.handleChangeRelator.bind(this);
+    // this.handleChangeRelator = this.handleChangeRelator.bind(this);
+    this.handleValidation = this.handleValidation.bind(this);
 
     this.state = {
-      title: 'undefined',
-      relator: 'undefined',
+      title: '',
+      // relator: undefined,
+      // date: '',
+      errors: {
+        title: '',
+        relator: '',
+        date: '',
+      },
     };
   }
 
-  onSubmit() {
-    const request = {
-      title: this.state.title,
-      relator: this.state.relator,
-    };
-    this.props.actions.createDegreeRequestRequest(request);
+
+  onSubmit(e) {
+    if (this.handleValidation()) {
+      // this.props.createDegreeDemandRequest(this.props.address,...);
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  handleValidation() {
+    const errors = {};
+    let formIsValid = true;
+
+    // Title
+    if (this.state.title === '') {
+      formIsValid = false;
+      errors.title = 'Cannot be empty';
+    } else if (!this.state.title.match(/^[a-zA-Z]+$/)) {
+      formIsValid = false;
+      errors.title = 'Only letters';
+    }
+
+    this.setState({ errors });
+    return formIsValid;
   }
 
   handleChangeTitle(e) {
     this.setState({ title: e.target.value });
   }
 
-  handleChangeRelator(selected) {
+  /* handleChangeRelator(selected) {
     this.setState({ relator: document.getElementById(`prof_${selected}`).innerHTML });
   }
+  */
+  /*
+ <List selectable onSelect={this.handleChangeRelator}>
+                    {this.props.relators.map((value, index) => (
+                      <ListItem
+                        justify="between"
+                        separator="top"
+                      >
+                        <span id={`prof_${index}`} >
+                          {value.professore}
+                        </span>
+                        <span className="secondary">
+                          {value.ruolo}
+                        </span>
+                      </ListItem>
+                ))}
+                  </List>
+ */
 
   render() {
     if (this.props.requestAlreadyDone === false) {
@@ -53,27 +96,11 @@ class DegreeRequest extends React.Component {
                 />
 
               </FormField>
-              <t />
+              <span style={{ color: 'red' }}>{this.state.errors.title}</span>
 
               <FormField label="Seleziona il referente: ">
                 <t />
-                <div className="box">
-                  <List selectable onSelect={this.handleChangeRelator}>
-                    {this.props.relators.map((value, index) => (
-                      <ListItem
-                        justify="between"
-                        separator="top"
-                      >
-                        <span id={`prof_${index}`} >
-                          {value.professore}
-                        </span>
-                        <span className="secondary">
-                          {value.ruolo}
-                        </span>
-                      </ListItem>
-                ))}
-                  </List>
-                </div>
+                <div className="box" />
               </FormField>
 
 
@@ -99,11 +126,9 @@ class DegreeRequest extends React.Component {
 }
 
 DegreeRequest.propTypes = {
-  relators: PropTypes.arrayOf.isRequired,
+  // relators: PropTypes.arrayOf.isRequired,
   requestAlreadyDone: PropTypes.bool.isRequired,
-  actions: PropTypes.shape({
-    createDegreeRequestRequest: PropTypes.func.isRequired,
-  }).isRequired,
+  // createDegreeDemandRequest: PropTypes.func.isRequired,
 };
 
 
