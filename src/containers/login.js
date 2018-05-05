@@ -25,8 +25,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  type: 'undefined',
-  address: state['web-3'].address,
+  type: state['web-3-user-info'].type,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

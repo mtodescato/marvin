@@ -14,11 +14,7 @@ import contract from 'truffle-contract';
 export const undefinedWeb3Account = 'web3 is defined but accounts has wrong path under web3';
 
 // return metamask accounts
-export const getAccount = () => {
-  try {
-    return window.web3.eth.accounts[0];
-  } catch (e) { throw new Error(undefinedWeb3Account + e.message); }
-};
+export const getAccount = () => window.web3.eth.accounts[0]; // TODO: add try and catch
 
 // open the contractModule and return a promise with contractModule's instance
 // TODO: no tests has been provided for this function
