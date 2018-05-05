@@ -49,4 +49,10 @@ contract('Testing StudentFacade', () => {
     const usrAddressFromExam = await examInstance.getStudentSubscribed.call(0);
     assert.equal(studentContractAddress, usrAddressFromExam, 'not subscribed');
   });
+
+  it('can get the number of theaching', async () => {
+    const numberBefore = await studentFacadeInstance.getNumberOfTeachings
+      .call(studentContractAddress);
+    assert.equal(numberBefore.toNumber(), 0, 'no accepted marks');
+  });
 });
