@@ -1,5 +1,11 @@
 import AsyncFlow from './asyncFlow';
 
+const type = [
+  'student',
+  'professor',
+  'university',
+];
+
 export default AsyncFlow({
   store: 'web-3-user-info',
   initialState: {
@@ -15,8 +21,8 @@ export default AsyncFlow({
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.WEB_3_ADDRESS_SUCCESS:
-        return { ...state, data: action.payload.data, type: action.payload.type };
+      case types.WEB_3_USER_INFO_SUCCESS:
+        return { ...state, data: action.payload.data, type: type[action.payload.type] };
       default:
         return state;
     }

@@ -29,6 +29,7 @@ export default ({ store, initialState, actions }) => DuckModule({
   }),
 }).extend({
   reducer: (state, action, { flowes, statuses }) => {
+    if (action.type.split('/')[1] !== store) return state;
     switch (action.type.split('_').pop().trim()) { // WORD_WORD_WORDAA => WORDAA
       case flowes.REQUEST:
         return { ...state, status: statuses.PENDING };

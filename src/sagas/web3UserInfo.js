@@ -1,28 +1,25 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { Web3UserInfo } from '../reducers';
+import { deployed, getAccount } from './web3calls';
+import ListUsers from '../bc/build/contracts/ListUsers.json';
+import AdminFacade from '../bc/build/contracts/AdminFacade.json'; // TODO: fake
+import User from '../bc/build/contracts/User.json';
 
-const ListUsers = artifacts.require('./ListUsers.sol');
-const User = artifacts.require('./User.sol');
-
-export const getUserInfo = address => new Promise(async (resolve, reject) => {
+export const getUserInfo = address => new Promise((resolve, reject) => {
   try {
-    let ListUsersInstance;
-    ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
-    console.log(ListUsersInstance); // FIXIT:
-    const userAddress = await ListUsersInstance.getUser.call(address);
-    const type = await ListUsersInstance.getType.call(address);
-    const user = User.at(userAddress);
-    const name = await user.getName();
-    const surname = await user.getSurname();
-    const socialNumber = await user.getSocialNumber();
-    const serial = await user.getSerial();
-    const data = {
-      name,
-      surname,
-      socialNumber,
-      serial,
-    };
-    resolve({ data, type });
+    deployed(ListUsers)
+      .then(inst => inst.getType.call(address))
+      .then((type) => {
+        resolve({
+          data: {
+            name: 'mario',
+            surname: 'rossi',
+            socialNumber: 'mrsrss7580297584',
+          },
+          type,
+        });
+      });
+
   } catch (e) { reject(Error(e)); }
 });
 
