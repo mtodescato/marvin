@@ -1,7 +1,7 @@
 import AsyncFlow from './asyncFlow';
 
 export default AsyncFlow({
-  store: 'web3',
+  store: 'web-3',
   initialState: {
     address: '0x0',
     isAvailable: false,
