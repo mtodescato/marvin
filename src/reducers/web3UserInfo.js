@@ -7,6 +7,7 @@ export default AsyncFlow({
       name: '',
       surname: '',
       solcialNumber: '',
+      serial: '',
     },
     type: 'undefined',
   },
@@ -21,8 +22,9 @@ export default AsyncFlow({
     }
   },
   creators: ({ types }) => ({
-    web3UserInfoRequest: () => ({
+    web3UserInfoRequest: address => ({
       type: types.WEB_3_USER_INFO_REQUEST,
+      payload: { address },
     }),
     web3UserInfoSuccess: ({ data, type }) => ({
       type: types.WEB_3_USER_INFO_SUCCESS,
