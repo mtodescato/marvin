@@ -18,8 +18,8 @@
     "start-all": "npm-run-all -p watch-css ganache-script truffle-script start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "truffle-script": "cd ./src/truffle/ && truffle compile --all && truffle migrate --reset",
-    "ganache-script": "./node_modules/.bin/ganache-cli -p 7545 -m velociraptor"
+    "truffle-script": "cd ./src/bc/ && truffle compile --all && truffle migrate --reset",
+    "ganache-script": "ganache-cli -p 7545 -m velociraptor"
   },
   "babel": {
     "presets": [
