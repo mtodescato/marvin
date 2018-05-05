@@ -23,7 +23,7 @@ contract Exam {
         _;
     }
 
-    modifier onlyGivenVote(address student) {
+    modifier onlyGivenMark(address student) {
         require(studentToResult[student] != 0);
         _;
     }
@@ -50,7 +50,7 @@ contract Exam {
         last += 1;
     }
 
-    function manageVote(address student, bool mark) public onlyPassed(student) {
+    function manageMark(address student, bool mark) public onlyPassed(student) {
         acceptedMarks[student] = mark;
     }
 
@@ -59,7 +59,7 @@ contract Exam {
         return studentToResult[intToStudent[index]];
     }
 
-    function getMark(address student) public onlyGivenVote(student) view returns(uint8) {
+    function getMark(address student) public onlyGivenMark(student) view returns(uint8) {
         return studentToResult[student];
     }
 

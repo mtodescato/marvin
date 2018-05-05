@@ -61,9 +61,9 @@ contract StudentFacade {
     *  @param exam Address of the exam contract.
     *  @param mark accept or reject vote, 1 for accapted and 0 for reject.
     */
-    function manageVote(address student, address exam, bool mark) public {
+    function manageMark(address student, address exam, bool mark) public {
         Exam ex = Exam(exam);
-        ex.manageVote(student, mark);
+        ex.manageMark(student, mark);
         if (mark) {
             Student std = Student(student);
             std.insertPassedExam(ex.getTeaching(), exam);
