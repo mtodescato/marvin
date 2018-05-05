@@ -21,7 +21,7 @@ const MenuEntries = ({ active = 0, action }) => (
     >
       Home
     </Anchor>
-    {entries.map(value => (
+    {entries.map((value, index) => (
       <AccordionPanel heading={value.entry} pad="none">
         <Box pad={{ vertical: 'none', horizontal: 'small' }}>
           <Menu
@@ -31,8 +31,8 @@ const MenuEntries = ({ active = 0, action }) => (
           >
             {value.subEntries.map((v, i) => (
               <Anchor
-                className={i + 1 === active ? 'active' : ''}
-                onClick={() => action(i + 1)}
+                className={(2 * index) + i + 1 === active ? 'active' : ''}
+                onClick={() => action((2 * index) + i + 1)}
               >
                 {v}
               </Anchor>))}
