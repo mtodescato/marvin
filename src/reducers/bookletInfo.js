@@ -16,9 +16,8 @@ import AsyncFlow from './asyncFlow';
 export default AsyncFlow({
   store: 'booklet-info',
   initialState: {
-    statusMetamask: 'PENDING',
-    booklet: {},
-    booklet1: {
+    statusMetamask: 'RESOLVED',
+    booklet: {
       user: {
         name: 'Giovanni',
         surname: 'Calore',
