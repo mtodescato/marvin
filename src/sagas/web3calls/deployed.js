@@ -15,11 +15,9 @@ export const undefinedWeb3Account = 'web3 is defined but accounts has wrong path
 
 // return metamask accounts
 export const getAccount = () => {
-  const address = global.window.web3 && global.window.web3.eth ?
-    global.window.web3.eth.accounts[0]
-    : undefined;
-  if (address === undefined || address === null) throw new Error(undefinedWeb3Account);
-  return address;
+  try {
+    return window.web3.eth.accounts[0];
+  } catch (e) { throw new Error(undefinedWeb3Account + e.message); }
 };
 
 // open the contractModule and return a promise with contractModule's instance

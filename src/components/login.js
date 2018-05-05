@@ -31,6 +31,7 @@ const LoginComponent = props => (
         label="Login"
         icon={<LoginIcon />}
       />
+      <p>{props.address}</p>
     </Section>
     <Section
       pad="large"
@@ -49,6 +50,7 @@ const LoginComponent = props => (
 
 LoginComponent.propTypes = {
   type: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
   onLoginUserClick: PropTypes.func.isRequired,
 };
 
