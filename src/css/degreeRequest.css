@@ -1,0 +1,5 @@
+div.box
+{
+    max-height:16em;
+    overflow:auto;
+}
