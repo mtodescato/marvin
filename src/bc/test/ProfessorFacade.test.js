@@ -28,7 +28,7 @@ contract('Testing ProfessorFacade', () => {
     teaching = Teaching.at(teachingAddress);
   });
 
-  it('creates an exam', async () => {
+  it('TS0011 creates an exam', async () => {
     professorFacadeInstance.insertExam(teachingAddress, '15/5/2018', gAddress);
     const exam0 = await teaching.getExam.call(0);
     assert.notEqual(exam0, '0x0000000000000000000000000000000000000000', 'not added correctly');

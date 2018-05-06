@@ -37,20 +37,20 @@ contract('Testing StudentFacade', () => {
     exam = await teaching.getExam.call(0);
   });
 
-  it('get the right contract', async () => {
+  it('TS0008 get the right contract', async () => {
     studentContractAddress = await studentFacadeInstance.getUserContract.call({ from: '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4' });
     const userWithGetUser = await ListUsersInstance.getUser.call('0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4');
     assert.equal(studentContractAddress, userWithGetUser, 'address are equal');
   });
 
-  it('can subscribe to an exam', async () => {
+  it('TS0009 can subscribe to an exam', async () => {
     const examInstance = Exam.at(exam);
     studentFacadeInstance.subscribeToExam(studentContractAddress, exam);
     const usrAddressFromExam = await examInstance.getStudentSubscribed.call(0);
     assert.equal(studentContractAddress, usrAddressFromExam, 'not subscribed');
   });
 
-  it('can get the number of theaching', async () => {
+  it('TS0010 can get the number of theaching', async () => {
     const numberBefore = await studentFacadeInstance.getNumberOfTeachings
       .call(studentContractAddress);
     assert.equal(numberBefore.toNumber(), 0, 'no accepted marks');
