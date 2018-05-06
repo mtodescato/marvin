@@ -22,7 +22,7 @@ export default AsyncFlow({
   reducer: (state, action, { types }) => {
     switch (action.type) {
       case types.WEB_3_USER_INFO_SUCCESS:
-        return { ...state, data: action.payload.data, type: type[action.payload.type] };
+        return { ...state, data: action.payload.data, type: type[action.payload.userType] };
       default:
         return state;
     }

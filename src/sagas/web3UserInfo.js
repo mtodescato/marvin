@@ -1,23 +1,57 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { Web3UserInfo } from '../reducers';
-import { deployed, getAccount } from './web3calls';
+import { deployed } from './web3calls';
 import ListUsers from '../bc/build/contracts/ListUsers.json';
-import AdminFacade from '../bc/build/contracts/AdminFacade.json';
+import User from '../bc/build/contracts/User.json';
 
+// FIXIT: risolve la transazione prima ancora di aver ricevuto i dati
+// probabilmente da ricavare l'istanza di User come faccion con ListUsers
 export const getUserInfo = address => new Promise((resolve) => {
-  deployed(AdminFacade)
-    .then(inst => inst.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, address, 0, { from: getAccount() }));
-
   deployed(ListUsers)
-    .then(inst => inst.getType.call(address))
-    .then((type) => {
+    .then(async (ListUsersInstance) => {
+      const userType = await ListUsersInstance.getType.call(address);
+      const userAddress = await ListUsersInstance.getUser.call(address);
+      const user = window.web3.eth.contract(User.abi).at(userAddress);
+      let name;
+      user.getName((err, res) => {
+        if (!err) {
+          name = window.web3.toAscii(res);
+        } else {
+          throw new Error(err);
+        }
+      });
+      let surname;
+      await user.getName((err, res) => {
+        if (!err) {
+          surname = window.web3.toAscii(res);
+        } else {
+          throw new Error(err);
+        }
+      });
+      let socialNumber;
+      await user.getName((err, res) => {
+        if (!err) {
+          socialNumber = window.web3.toAscii(res);
+        } else {
+          throw new Error(err);
+        }
+      });
+      let serial;
+      await user.getName((err, res) => {
+        if (!err) {
+          serial = res;
+        } else {
+          throw new Error(err);
+        }
+      });
       resolve({
         data: {
-          name: 'mario',
-          surname: 'rossi',
-          socialNumber: 'mrsrss7580297584',
+          name,
+          surname,
+          socialNumber,
+          serial,
         },
-        userType: type,
+        userType: userType.c[0],
       });
     });
 });
