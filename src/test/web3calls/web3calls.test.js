@@ -1,14 +1,3 @@
-/*
- * file: web3calls.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/11 | file creation
- */
-
 // import deployCall from '../../sagas/web3calls/web3calls';
 import { stubDeployCall } from '../../sagas/web3calls/web3calls';
 

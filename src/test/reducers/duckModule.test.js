@@ -1,14 +1,3 @@
-/*
- * file: duckModule.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/12 | file creation
- */
-
 import DuckModule from '../../reducers/duckModule';
 
 describe('DuckModule test suite', () => {

@@ -1,14 +1,3 @@
-/*
- * file: bookletInfo.js
- * version: 0.1
- * type: javascript saga
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/28 | file creation
- */
-
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { BookletInfo } from '../reducers';
 import deployCall, { stubDeployCall } from './web3calls';

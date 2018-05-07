@@ -1,14 +1,3 @@
-/*
- * file: web3calls.js
- * version: 0.1
- * type: javascript module
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: web3calls entry point, use this function for contract calls
- * changes:
- * * Denis Mazzucato    | 2018/04/11 | file creation
- */
-
 import { deployed, getAccount } from './deployed';
 
 /* deployCall,
