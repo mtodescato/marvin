@@ -6,14 +6,12 @@ describe('AddUser saga test suite', () => {
   const user = {};
   const mock = user;
   it('handles reducers when request is dispatched', () => {
-    console.log(saga);
     saga.mockInjection(mock);
     return expectSaga(saga.triggerAction)
       .withReducer(AddUser.reducer)
       .put(AddUser.creators.addUserSuccess())
       .dispatch(AddUser.creators.addUserRequest(mock))
       .hasFinalState({
-        userAdded: true,
         status: 'RESOLVED',
       })
       .run();
