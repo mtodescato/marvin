@@ -57,4 +57,18 @@ describe('global utils test suite', () => {
     expect(reducedObj1).not.to.have.property('c');
     expect(reducedObj1).not.to.have.property('x');
   });
+
+  it('#validateAddress', () => {
+    const msg1 = '1';
+    expect(Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef57', msg1))
+      .equal('0x627306090abab3a6e1400e9345bc60c78a8bef57');
+    expect(() => Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef57a', msg1))
+      .to.throw(Error, msg1);
+    expect(() => Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef5'))
+      .to.throw(Error, 'Address must be valid');
+    expect(() => Functions.validateAddress('sx627306090abab3a6e1400e9345bc60c78a8bef57'))
+      .to.throw(Error, 'Address must be valid');
+    expect(() => Functions.validateAddress('02627306090abab3a6e1400e9345bc60c78a8bef57'))
+      .to.throw(Error, 'Address must be valid');
+  });
 });
