@@ -14,6 +14,7 @@ import AsyncFlow from '../../reducers/asyncFlow';
 
 describe('AsyncFlow test suite', () => {
   const obj = AsyncFlow({
+    store: 'async',
     actions: ['ACT1', 'ACT2'],
     initialState: {},
   }).extend({
