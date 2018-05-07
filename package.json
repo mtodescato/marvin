@@ -8,7 +8,9 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "test": "NODE_ENV=development nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js \"src/test/**/*.test.js\" --exit",
+    "custom-test": "NODE_ENV=development nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js",
     "test-windows": "set NODE_ENV=development&&nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js \"src/test/**/*.test.js\" --exit",
+    "custom-test-windows": "set NODE_ENV=development&&nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js",
     "reactscripts-test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
