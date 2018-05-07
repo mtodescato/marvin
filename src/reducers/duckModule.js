@@ -1,4 +1,4 @@
-Import Duck from 'extensible-duck';
+import Duck from 'extensible-duck';
 import { validator, reduce } from '../utils/global';
 
 const validateProps = props => validator().addValidator(init => ({
