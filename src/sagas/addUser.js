@@ -2,7 +2,6 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { AddUser } from '../reducers';
 import deployCall, { stubDeployCall } from './web3calls';
 
-
 let mockResult = {};
 let callWrapper = deployCall;
 
