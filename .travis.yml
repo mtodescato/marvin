@@ -8,6 +8,7 @@ language: node_js
 node_js:
   - "8"
 
+
 before_install:
 - sudo apt-get update
 - npm install -g truffle@4.1.7
