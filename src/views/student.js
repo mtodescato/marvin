@@ -2,11 +2,12 @@ import React from 'react';
 import { Section, Split, Box } from 'grommet';
 import Menu from '../components/student/MenuStudentComponent';
 import MainPanel from '../containers/student/MainPanel';
-import HeaderUniweb from '../containers/header';
+import MarvinHeader from '../containers/shared/MarvinHeader';
+import MarvinFooter from '../containers/shared/MarvinFooter';
 
 const Student = () => (
   <div className="Student">
-    <HeaderUniweb />
+    <MarvinHeader />
     <Section pad="none">
       <Split flex="right">
         <Box
@@ -21,6 +22,7 @@ const Student = () => (
         </Box>
       </Split>
     </Section>
+    <MarvinFooter />
   </div>
 );
 
