@@ -1,9 +1,9 @@
 import React from 'react';
 import { Header, Image, Box } from 'grommet';
-import uniwebLogo from '../images/unipd.png';
-import marvinLogo from '../images/marvin_logo.png';
+import uniwebLogo from '../../images/unipd.png';
+import marvinLogo from '../../images/marvin_logo.png';
 
-const HeaderComponent = () => (
+const MarvinHeader = () => (
   <div>
     <Header>
       <Box pad="small"><Image src={marvinLogo} size="small" /></Box>
@@ -12,4 +12,4 @@ const HeaderComponent = () => (
   </div>
 );
 
-export default HeaderComponent;
+export default MarvinHeader;
