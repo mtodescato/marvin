@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import CreateTeaching from '../../components/admin/dashboard/createCourse';
+import CreateTeaching from '../../components/admin/CreateCourseComponent';
 
 const CreateTeachingContainer = ({ state, actions }) => (
   <div>

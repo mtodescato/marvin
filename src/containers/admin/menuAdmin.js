@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import MenuEntries from '../../components/admin/menuEntries';
+import MenuEntries from '../../components/admin/MenuEntries';
 import { MenuEntries as MenuEntriesReducer } from '../../reducers';
 
 const MenuAdmin = ({ active, changeActive }) => (

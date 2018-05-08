@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import UsersListComponent from '../../components/admin/dashboard/listUsers';
+import UsersListComponent from '../../components/admin/ListUsersComponent';
 import { ListUsers } from '../../reducers';
 
 class UsersList extends React.Component {

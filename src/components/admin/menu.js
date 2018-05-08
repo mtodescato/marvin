@@ -1,6 +1,6 @@
 import React from 'react';
 import { Sidebar, Header, Box } from 'grommet';
-import MenuAdmin from '../../containers/admin/menuAdmin';
+import MenuAdmin from '../../containers/admin/MenuAdmin';
 
 const Menu = () => (
   <Sidebar

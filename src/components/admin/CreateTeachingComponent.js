@@ -16,7 +16,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import TeachingConfirmation from './teachingConfirmation';
+import TeachingConfirmation from './CreateTeachingConfirmation';
 
 /*
 const options = {[{

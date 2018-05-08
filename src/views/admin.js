@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
 import Menu from '../components/admin/menu';
-import MainPanel from '../containers/admin/mainPanelAdmin';
+import MainPanel from '../containers/admin/MainPanelAdmin';
 
 
 const Admin = () => (

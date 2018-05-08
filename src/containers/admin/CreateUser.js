@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AddUser } from '../../reducers';
-import CreateUser from '../../components/admin/dashboard/createUser';
+import CreateUser from '../../components/admin/CreateUserComponent';
 
 const CreateUserContainer = ({ state, actions }) => (
   <div>

@@ -16,7 +16,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import CourseConfirmation from './courseConfirmation';
+import CourseConfirmation from './CreateCourseConfirmation';
 
 class CreateCourse extends React.Component {
   constructor(props) {
