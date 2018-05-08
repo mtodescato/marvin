@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import CourseListComponent from '../../components/student/listCourses';
+import CourseListComponent from '../../components/student/ListStudyCoursesComponent';
 
 export const coursesEntries = [{
   name: 'Informatica',

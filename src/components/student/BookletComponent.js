@@ -2,7 +2,7 @@ import React from 'react';
 import Table from 'grommet/components/Table';
 import { Image, Section, Animate, Button } from 'grommet';
 import PropTypes from 'prop-types';
-import ExamEntry from './examEntry';
+import ExamEntry from './ExamEntry';
 import loading from '../../images/loading.gif';
 import notFound from '../../images/404.gif';
 

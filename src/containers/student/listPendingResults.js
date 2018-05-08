@@ -1,5 +1,5 @@
 import React from 'react';
-import ListPendingResultsComponent from '../../components/student/listPendingResultsComponent';
+import ListPendingResultsComponent from '../../components/student/ListPendingResultsComponent';
 
 export const examsResults = [{
   name: 'Swe',

@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
 import PropTypes from 'prop-types';
-import PendingResultEntry from './pendingResultEntry';
+import PendingResultEntry from './PendingResultEntry';
 
 const ListPendingResultsComponent = props => (
   <div>

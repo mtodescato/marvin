@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeComponent from '../../components/student/home';
+import HomeComponent from '../../components/student/HomeComponent';
 
 const user = {
   name: 'Giovanni',

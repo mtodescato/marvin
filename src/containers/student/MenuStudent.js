@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { MenuEntries as MenuEntriesReducer } from '../../reducers';
-import MenuEntries from '../../components/student/menuEntries';
+import MenuEntries from '../../components/student/MenuEntries';
 
 const MenuStudent = ({ active, changeActive }) => (
   <MenuEntries active={active} action={changeActive} />

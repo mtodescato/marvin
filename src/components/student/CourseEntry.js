@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'grommet/components/Button';
 import TableRow from 'grommet/components/TableRow';
-import ConfirmationComponent from '../../components/student/confirmationApplication';
+import ConfirmationComponent from '../../components/student/ConfirmationSubscribe';
 
 class CoursesEntry extends React.Component {
   constructor(props) {
@@ -10,6 +10,7 @@ class CoursesEntry extends React.Component {
     this.state = {
       showLayer: false,
     };
+
     this.setLayer = this.setLayer.bind(this);
   }
   setLayer() {

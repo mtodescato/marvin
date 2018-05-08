@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu as MenuGrommet, Sidebar, Header, Box } from 'grommet';
-import MenuStudent from '../../containers/student/menu';
+import MenuStudent from '../../containers/student/MenuStudent';
 
 const Menu = () => (
   <Sidebar

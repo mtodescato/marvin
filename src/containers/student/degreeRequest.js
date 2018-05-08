@@ -1,5 +1,5 @@
 import React from 'react';
-import DegreeRequestComponent from '../../components/student/degreeRequest';
+import DegreeRequestComponent from '../../components/student/DegreeRequestComponent';
 
 const relators = [
   {

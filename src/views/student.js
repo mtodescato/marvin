@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
-import Menu from '../components/student/menu';
-import MainPanel from '../containers/student/mainPanel';
+import Menu from '../components/student/MenuStudentComponent';
+import MainPanel from '../containers/student/MainPanel';
 import HeaderUniweb from '../containers/header';
 
 const Student = () => (

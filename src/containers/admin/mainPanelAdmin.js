@@ -5,7 +5,7 @@ import Dashboard from '../../components/admin/DashboardAdmin';
 import Home from '../../components/admin/HomeComponent';
 import ListUsers from './ListUsers';
 import CreateUser from './CreateUser';
-// import ListCourses from './listCoursesContainer';
+// import ListCourses from './ListCoursesContainer';
 import CreateCourse from './CreateCourse';
 import CreateTeaching from '../../components/admin/CreateTeachingComponent';
 

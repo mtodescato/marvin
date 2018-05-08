@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dashboard from '../../components/student/dashboard';
-import Home from '../../containers/student/home';
-import ListStudyCourses from '../../containers/student/listCourses';
-import Booklet from '../../containers/student/booklet';
-import ListAvaiableExams from '../../containers/student/listAvaiableExams';
-import ListPendingResults from '../../containers/student/listPendingResults';
-import CreateDegreeRequest from '../../containers/student/degreeRequest';
+import Dashboard from '../../components/student/Dashboard';
+import Home from '../../containers/student/Home';
+import ListStudyCourses from '../../containers/student/ListStudyCourses';
+import Booklet from '../../containers/student/Booklet';
+import ListAvaiableExams from '../../containers/student/ListAvaiableExams';
+import ListPendingResults from '../../containers/student/ListPendingResults';
+import CreateDegreeRequest from '../../containers/student/DegreeRequest';
 
 
 const MainPanel = ({ DashboardComponent }) => (

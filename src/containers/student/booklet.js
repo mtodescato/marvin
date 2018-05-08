@@ -1,5 +1,5 @@
 /*
- * file: booklet.js
+ * file: Booklet.js
  * version: 0.1
  * type: react component
  * authors: Giovanni Calore
@@ -13,7 +13,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { BookletInfo as BookletInfoReducer } from '../../reducers';
-import BookletComponent from '../../components/student/booklet';
+import BookletComponent from '../../components/student/BookletComponent';
 
 const Booklet = props => (
   <div>

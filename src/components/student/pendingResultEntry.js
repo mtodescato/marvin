@@ -4,7 +4,7 @@ import Button from 'grommet/components/Button';
 import TableRow from 'grommet/components/TableRow';
 import CheckMark from 'grommet/components/icons/base/Checkmark';
 import Close from 'grommet/components/icons/base/Close';
-import ConfirmationResultComponent from '../../components/student/confirmationResult';
+import ConfirmationResultComponent from '../../components/student/ConfirmationResult';
 
 class PendingResultEntry extends React.Component {
   constructor(props) {

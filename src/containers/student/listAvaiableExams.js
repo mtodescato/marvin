@@ -1,5 +1,5 @@
 import React from 'react';
-import ListAvaiableExamsComponent from '../../components/student/listAvaiableExams';
+import ListAvaiableExamsComponent from '../../components/student/ListAvaiableExamsComponent';
 
 export const exams = [{
   name: 'Swe',
