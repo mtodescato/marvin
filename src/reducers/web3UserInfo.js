@@ -3,7 +3,7 @@ import AsyncFlow from './asyncFlow';
 const type = [
   'student',
   'professor',
-  'university',
+  'admin',
 ];
 
 export default AsyncFlow({
