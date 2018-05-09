@@ -1,15 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Heading, Section } from 'grommet';
+import { Section } from 'grommet';
 
 const Dashboard = ({ Component }) => (
   <Section>
-    <Heading
-      align="center"
-      tag="h1"
-    >
-      Admin Dashboard
-    </Heading>
     <Component />
   </Section>
 );
