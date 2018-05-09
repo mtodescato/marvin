@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Layer, Form, Header, Heading, FormFields, Paragraph, Footer, Button } from 'grommet';
 
-class ConfirmationComponent extends React.Component {
+class ConfirmationExam extends React.Component {
   onSubmit() {
     this.props.subscribeToExam(this.props.address, this.props.name);
   }
@@ -40,7 +40,7 @@ class ConfirmationComponent extends React.Component {
   }
 }
 
-ConfirmationComponent.propTypes = {
+ConfirmationExam.propTypes = {
   setLayer: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
@@ -48,4 +48,4 @@ ConfirmationComponent.propTypes = {
   address: PropTypes.string.isRequired,
 };
 
-export default ConfirmationComponent;
+export default ConfirmationExam;

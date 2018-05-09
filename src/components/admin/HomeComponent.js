@@ -2,7 +2,7 @@ import React from 'react';
 import { Section, Accordion, AccordionPanel, Box, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 
-const Home = () => (
+const HomeComponent = () => (
   <Box
     classname="PanelBox"
     direction="column"
@@ -31,4 +31,4 @@ const Home = () => (
   </Box>
 );
 
-export default Home;
+export default HomeComponent;

@@ -18,7 +18,7 @@ import {
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseConfirmation from './CreateCourseConfirmation';
 
-class CreateCourse extends React.Component {
+class CreateCourseComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -179,7 +179,7 @@ class CreateCourse extends React.Component {
     );
   }
 }
-CreateCourse.propTypes = {
+CreateCourseComponent.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
@@ -189,4 +189,4 @@ CreateCourse.propTypes = {
   }).isRequired, */
 };
 
-export default CreateCourse;
+export default CreateCourseComponent;

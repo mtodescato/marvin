@@ -3,7 +3,7 @@ import Table from 'grommet/components/Table';
 import PropTypes from 'prop-types';
 import CourseEntry from './CourseEntry';
 
-const CoursesListComponent = props => (
+const ListStudyCoursesComponent = props => (
   <div>
     <h4> Courses avaiable</h4>
     <Table responsive>
@@ -32,10 +32,10 @@ const CoursesListComponent = props => (
   </div>
 );
 
-CoursesListComponent.propTypes = {
+ListStudyCoursesComponent.propTypes = {
   coursesEntry: PropTypes.arrayOf.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
 };
 
-export default CoursesListComponent;
+export default ListStudyCoursesComponent;

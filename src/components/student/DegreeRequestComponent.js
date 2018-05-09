@@ -3,7 +3,7 @@ import { Form, Button, Header, Heading, FormFields, Footer, FormField, TextInput
 import PropTypes from 'prop-types';
 import '../../css/degreeRequest.css';
 
-class DegreeRequest extends React.Component {
+class DegreeRequestComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -125,11 +125,11 @@ class DegreeRequest extends React.Component {
   }
 }
 
-DegreeRequest.propTypes = {
+DegreeRequestComponent.propTypes = {
   // relators: PropTypes.arrayOf.isRequired,
   requestAlreadyDone: PropTypes.bool.isRequired,
   // createDegreeDemandRequest: PropTypes.func.isRequired,
 };
 
 
-export default DegreeRequest;
+export default DegreeRequestComponent;

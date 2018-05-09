@@ -35,7 +35,7 @@ const options = {[{
 }]} */
 
 
-class CreateTeaching extends React.Component {
+class CreateTeachingComponent extends React.Component {
   constructor(props) {
     super(props);
 
@@ -171,7 +171,7 @@ class CreateTeaching extends React.Component {
     );
   }
 }
-CreateTeaching.propTypes = {
+CreateTeachingComponent.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
   }).isRequired,
@@ -181,4 +181,4 @@ CreateTeaching.propTypes = {
   }).isRequired, */
 };
 
-export default CreateTeaching;
+export default CreateTeachingComponent;

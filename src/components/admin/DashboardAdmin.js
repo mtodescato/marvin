@@ -2,14 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Section } from 'grommet';
 
-const Dashboard = ({ Component }) => (
+const DashboardAdmin = ({ Component }) => (
   <Section>
     <Component />
   </Section>
 );
 
-Dashboard.propTypes = {
+DashboardAdmin.propTypes = {
   Component: PropTypes.func.isRequired,
 };
 
-export default Dashboard;
+export default DashboardAdmin;

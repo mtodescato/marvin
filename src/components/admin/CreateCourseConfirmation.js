@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layer, Box, Header, Heading, Footer, Button } from 'grommet';
 
-const CourseConfirmationLayer = props => (
+const CreateCourseConfirmation = props => (
   <Layer
     closer
     align="center"
@@ -55,9 +55,9 @@ const CourseConfirmationLayer = props => (
   </Layer>
 );
 
-CourseConfirmationLayer.propTypes = {
+CreateCourseConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
   courseName: PropTypes.string.isRequired,
 };
 
-export default CourseConfirmationLayer;
+export default CreateCourseConfirmation;

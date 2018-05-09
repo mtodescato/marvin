@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Layer, Form, Header, Heading, FormFields, Paragraph, Footer, Button } from 'grommet';
 
-const ConfirmationResultComponent = props => (
+const ConfirmationResult = props => (
 
   <Layer
     closer
@@ -34,7 +34,7 @@ const ConfirmationResultComponent = props => (
   </Layer>
 );
 
-ConfirmationResultComponent.propTypes = {
+ConfirmationResult.propTypes = {
   setLayer: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
@@ -42,4 +42,4 @@ ConfirmationResultComponent.propTypes = {
   action: PropTypes.string.isRequired,
 };
 
-export default ConfirmationResultComponent;
+export default ConfirmationResult;

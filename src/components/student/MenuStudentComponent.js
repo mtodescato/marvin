@@ -2,7 +2,7 @@ import React from 'react';
 import { Menu as MenuGrommet, Sidebar, Header, Box } from 'grommet';
 import MenuStudent from '../../containers/student/MenuStudent';
 
-const Menu = () => (
+const MenuStudentComponent = () => (
   <Sidebar
     fixed
     pad="medium"
@@ -25,4 +25,4 @@ const Menu = () => (
   </Sidebar>
 );
 
-export default Menu;
+export default MenuStudentComponent;

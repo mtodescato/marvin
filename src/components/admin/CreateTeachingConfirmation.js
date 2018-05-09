@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Layer, Box, Header, Heading, Footer, Button } from 'grommet';
 
-const TeachingConfirmationLayer = props => (
+const CreateTeachingConfirmation = props => (
   <Layer
     closer
     align="center"
@@ -55,10 +55,10 @@ const TeachingConfirmationLayer = props => (
   </Layer>
 );
 
-TeachingConfirmationLayer.propTypes = {
+CreateTeachingConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
   teachingName: PropTypes.string.isRequired,
   teachingResponsible: PropTypes.string.isRequired,
 };
 
-export default TeachingConfirmationLayer;
+export default CreateTeachingConfirmation;
