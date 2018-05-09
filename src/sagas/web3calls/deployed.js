@@ -1,23 +1,17 @@
-import contract from 'truffle-contract';
+const contract = require('truffle-contract');
 
-export const undefinedWeb3Account = 'web3 is defined but accounts has wrong path under web3';
+export function getAccount() {
+  return window.web3.eth.accounts[0];
+}
 
-// return metamask accounts
-export const getAccount = () => {
-  const address = window.web3.eth.accounts[0];
-  if (address) return address;
-  throw new Error(undefinedWeb3Account);
-};
-
-const openContract = ({ contractModule, address, method }) => {
-  if (method !== 'at' && method !== 'deployed') throw new Error('undefined method');
-  const wrapper = contract(contractModule);
+export function deployed(Contract) {
+  const wrapper = contract(Contract);
   wrapper.setProvider(window.web3.currentProvider);
-  return method === 'at' ? wrapper[method](address) : wrapper[method]();
-};
+  return wrapper.deployed();
+}
 
-// open the contractModule and return a promise with contractModule's instance
-// TODO: no tests has been provided for this function
-export const deployed = contractModule => openContract({ contractModule, method: 'deployed' });
-
-export const at = (contractModule, address) => openContract({ contractModule, address, method: 'at' });
+export function at(Contract, address) {
+  const wrapper = contract(Contract);
+  wrapper.setProvider(window.web3.currentProvider);
+  return wrapper.at(address);
+}
