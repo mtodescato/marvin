@@ -12,7 +12,7 @@ export default AsyncFlow({
     data: {
       name: '',
       surname: '',
-      solcialNumber: '',
+      socialNumber: '',
       serial: '',
     },
     type: 'undefined',
