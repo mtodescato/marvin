@@ -1,6 +1,6 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
-import Menu from '../components/admin/menu';
+import MenuAdmin from '../containers/admin/MenuAdmin';
 import MainPanel from '../containers/admin/MainPanelAdmin';
 import MarvinHeader from '../containers/shared/MarvinHeader';
 import MarvinFooter from '../containers/shared/MarvinFooter';
@@ -8,16 +8,20 @@ import MarvinFooter from '../containers/shared/MarvinFooter';
 
 const Admin = () => (
   <div className="Admin">
-    <MarvinHeader />
+    <MarvinHeader title="Admin Dashboard" />
     <Box className="Admin">
       <Section pad="none">
-        <Split flex="right">
+        <Split
+          flex="right"
+          fixed="false"
+        >
           <Box
             colorIndex="light-2"
             justify="center"
             align="center"
+            separator="vertical"
           >
-            <Menu />
+            <MenuAdmin />
           </Box>
           <Box >
             <MainPanel />
