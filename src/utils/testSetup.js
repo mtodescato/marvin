@@ -41,5 +41,13 @@ global.mount = mount;
 global.render = render;
 global.toJson = toJson;
 
+global.window.web3 = {
+  eth: {
+    accounts: ['0x0'],
+  },
+  currentProvider: {},
+  provider: { send: {} },
+};
+
 // export enzyme/chai test enviroments
 export { expect, assert, chai, shallow, mount, render, toJson };

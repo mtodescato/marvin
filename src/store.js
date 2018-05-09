@@ -4,7 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import reducer from './reducers';
 import rootSaga from './sagas';
-import { addBasicUsers } from './sagas/web3calls/databasing';
+import addBasicUsers from './sagas/web3calls/databasing';
 
 const logger = createLogger();
 const sagaMiddleware = createSagaMiddleware();
