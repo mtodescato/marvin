@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Header, Heading, Image, Box } from 'grommet';
 import uniwebLogo from '../../images/unipd.png';
 import marvinLogo from '../../images/marvin_logo.png';
-import AccessibleIcon from 'grommet/components/icons/base/Accessible';
+// import AccessibleIcon from 'grommet/components/icons/base/Accessible';
 
 const MarvinHeader = props => (
   <Header
@@ -31,7 +31,6 @@ const MarvinHeader = props => (
         pad="small"
         justify="end"
       >
-        <AccessibleIcon stroke='#865CD6' />
         Logged as
       </Box>
     </Box>
