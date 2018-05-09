@@ -16,9 +16,7 @@ const Store = createStore(
 );
 
 // populate blockchain with fake user, exam, academicYear ...
-if (window.confirm('you want to populate blockchain?')) {
-  addBasicUsers();
-}
+addBasicUsers();
 
 sagaMiddleware.run(rootSaga);
 export default Store;
