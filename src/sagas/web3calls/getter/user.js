@@ -23,4 +23,10 @@ export const getUserInfo = async address => ({
   surname: await getUserSurname(address),
   socialNumber: await getUserSocialNumber(address),
   serial: await getUserSerial(address),
+  address,
+  role: await getUserType(address),
 });
+
+export const intToUserAddress = int => deployed(ListUsers).then(inst => inst.getUserInt.call(int));
+export const getUserInfoFromInt = async int => getUserInfo(await intToUserAddress(int));
+
