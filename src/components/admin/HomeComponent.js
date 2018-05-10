@@ -1,8 +1,9 @@
 import React from 'react';
-import { Section, Accordion, AccordionPanel, Box, Label } from 'grommet';
+import PropTypes from 'prop-types';
+import { Section, Box, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 
-const HomeComponent = () => (
+const HomeComponent = props => (
   <Box
     classname="PanelBox"
     direction="column"
@@ -23,12 +24,13 @@ const HomeComponent = () => (
     <Section>
       Welcome to your private area admin.
     </Section>
-    <Accordion>
-      <AccordionPanel heading="Personal Details" >
-        TODO
-      </AccordionPanel>
-    </Accordion>
+    {props.user.name}
   </Box>
 );
+
+HomeComponent.propTypes = {
+  user: PropTypes.arrayOf.isRequired,
+};
+
 
 export default HomeComponent;

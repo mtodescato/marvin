@@ -7,7 +7,7 @@ import { Web3 } from './../reducers';
 const Login = props => (
   <div>
     <LoginComponent
-      loginRequest={props.loginRequest}
+      loginRequest={props.onLoginUserClick}
       type={props.type}
       address={props.address}
     />
@@ -15,7 +15,7 @@ const Login = props => (
 );
 
 Login.propTypes = {
-  loginRequest: PropTypes.func.isRequired,
+  onLoginUserClick: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
 };

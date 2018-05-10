@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dashboard from '../../components/admin/DashboardAdmin';
-import Home from '../../components/admin/HomeComponent';
+import Home from './Home';
 import ListUsers from './ListUsers';
 import CreateUser from './CreateUser';
 import ListCourses from './ListCourses';
