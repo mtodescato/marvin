@@ -7,19 +7,19 @@ import { UserReducer } from './../reducers';
 const Login = props => (
   <div>
     <LoginComponent
-      onLoginUserClick={props.onLoginUserClick}
+      loginRequest={props.loginRequest}
       type={props.type}
     />
   </div>
 );
 
 Login.propTypes = {
-  onLoginUserClick: PropTypes.func.isRequired,
+  loginRequest: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLoginUserClick: () => dispatch(UserReducer.creators.loginUser()),
+  loginRequest: () => dispatch(UserReducer.creators.loginUser()),
 });
 
 const mapStateToProps = state => ({

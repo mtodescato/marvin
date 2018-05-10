@@ -26,7 +26,7 @@ const LoginComponent = props => (
 
       {props.type !== 'undefined' ? <RedirectComponent type={props.type} /> : null }
       <Button
-        onClick={() => props.onLoginUserClick()}
+        onClick={() => props.loginRequest()}
         primary
         label="Login"
         icon={<LoginIcon />}
@@ -49,7 +49,7 @@ const LoginComponent = props => (
 
 LoginComponent.propTypes = {
   type: PropTypes.string.isRequired,
-  onLoginUserClick: PropTypes.func.isRequired,
+  loginRequest: PropTypes.func.isRequired,
 };
 
 export default LoginComponent;
