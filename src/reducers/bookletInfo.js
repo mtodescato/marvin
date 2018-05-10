@@ -16,7 +16,7 @@ import AsyncFlow from './asyncFlow';
 export default AsyncFlow({
   store: 'booklet-info',
   initialState: {
-    statusMetamask: 'RESOLVED',
+    // statusMetamask: 'RESOLVED',
     booklet: {
       user: {
         name: 'Giovanni',
@@ -44,7 +44,7 @@ export default AsyncFlow({
         {
           responsabile: 'Tullio',
           nome: 'Swe',
-          cfu: '20',
+          cfu: '13',
           stato: false,
           voto: '',
           data: '',

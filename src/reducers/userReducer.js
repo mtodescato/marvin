@@ -8,7 +8,7 @@ export default DuckModule({
       name: 'Giovanni',
       address: '0x0',
     },
-    type: 'student',
+    type: 'undefined',
   },
 }).extend({
   reducer: (state, action, { types }) => {
@@ -16,7 +16,7 @@ export default DuckModule({
       case types.LOGIN_USER:
         return {
           ...state,
-          type: 'admin',
+          type: 'student',
         };
       default:
         return state;
