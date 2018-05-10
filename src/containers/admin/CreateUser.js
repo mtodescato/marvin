@@ -5,9 +5,7 @@ import { AddUser } from '../../reducers';
 import CreateUser from '../../components/admin/CreateUserComponent';
 
 const CreateUserContainer = ({ state, actions }) => (
-  <div>
-    <CreateUser state={state} actions={actions} />
-  </div>
+  <CreateUser state={state} actions={actions} />
 );
 
 CreateUserContainer.propTypes = {

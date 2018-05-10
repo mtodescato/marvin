@@ -4,9 +4,7 @@ import PropTypes from 'prop-types';
 import CreateCourse from '../../components/admin/CreateCourseComponent';
 
 const CreateCourseContainer = ({ state, actions }) => (
-  <div>
-    <CreateCourse state={state} actions={actions} />
-  </div>
+  <CreateCourse state={state} actions={actions} />
 );
 
 CreateCourseContainer.propTypes = {
