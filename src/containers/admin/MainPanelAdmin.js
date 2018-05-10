@@ -5,8 +5,9 @@ import Dashboard from '../../components/admin/DashboardAdmin';
 import Home from '../../components/admin/HomeComponent';
 import ListUsers from './ListUsers';
 import CreateUser from './CreateUser';
-// import ListCourses from './ListCoursesContainer';
+import ListCourses from './ListCourses';
 import CreateCourse from './CreateCourse';
+import ListTeachings from './ListTeachings';
 import CreateTeaching from '../../components/admin/CreateTeachingComponent';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
@@ -27,10 +28,12 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: ListUsers };
     case 2:
       return { DashboardComponent: CreateUser };
-    /* case 3:
-      return { DashboardComponent: ListCourses }; */
+    case 3:
+      return { DashboardComponent: ListCourses };
     case 4:
       return { DashboardComponent: CreateCourse };
+    case 5:
+      return { DashboardComponent: ListTeachings };
     case 6:
       return { DashboardComponent: CreateTeaching };
     default:
