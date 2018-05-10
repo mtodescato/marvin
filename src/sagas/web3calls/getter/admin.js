@@ -8,4 +8,7 @@ export const getSize = () => deployed(ListUsers)
 
 const createArray = size => Array(size).fill().map((i, index) => index);
 export const getUsers = size => createArray(size)
-  .reduce((accumulator, index) => accumulator.push(getUserInfoFromInt(index)), []);
+  .reduce(async (accumulator, index) => {
+    accumulator.push(await getUserInfoFromInt(index));
+    return accumulator;
+  }, []);
