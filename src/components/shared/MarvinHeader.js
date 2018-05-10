@@ -22,7 +22,7 @@ const MarvinHeader = props => (
       responsive={false}
     >
       <Heading
-        align="left"
+        align="center"
         tag="h1"
       >
         {props.title}

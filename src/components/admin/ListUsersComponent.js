@@ -17,7 +17,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
       Users list
     </Heading>
     <Heading
-      align="left"
+      align="center"
       tag="h3"
     >
       Filter users by serial number
@@ -30,7 +30,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
       dropAlign={{ right: 'right' }}
     />
     <Heading
-      align="left"
+      align="center"
       tag="h3"
       margin={{ vertical: 'medium' }}
     >
