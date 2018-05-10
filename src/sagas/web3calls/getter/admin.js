@@ -1,4 +1,4 @@
-import { deployed } from '../deployed';
+import { deployed, getAccount } from '../deployed';
 import { getUserInfoFromInt } from '.';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
@@ -16,3 +16,14 @@ export const getUsers = size => createArray(size)
 
 export const deleteUser = address => deployed(AdminFacade)
   .then(inst => inst.removeUser(address));
+
+export const addUser = user => deployed(AdminFacade)
+  .then(inst => inst.addUser(
+    user.name,
+    user.surname,
+    'codiceFiscale',
+    123332,
+    user.address,
+    user.role,
+    { from: getAccount() },
+  ));
