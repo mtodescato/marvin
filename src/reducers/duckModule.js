@@ -1,16 +1,3 @@
-/*
- * file: duckModule.js
- * version: 0.1
- * type: javascript module
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: base class for duck reducers, extend this for implements new reducers
- * * use DuckModule({}) instead of DuckModule()
- * changes:
- * * Denis Mazzucato    | 2018/04/12 | file creation
- * * Denis Mazzucato    | 2018/04/27 | addded validation func from utils package
- */
-
 import Duck from 'extensible-duck';
 import { validator, reduce } from '../utils/global';
 
