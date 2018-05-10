@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, TableRow, Table, Heading, Search, Button } from 'grommet';
+import { Box, Table, Heading, Search } from 'grommet';
 import UserEntry from './UserEntry';
 
 const UsersList = ({ size, userEntry, deleteAction }) => (
@@ -51,32 +51,6 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
         </tr>
       </thead>
       <tbody>
-        <TableRow>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td><Button
-            primary
-            onClick={() => deleteAction('fagf')}
-            label="Delete"
-          />
-          </td>
-        </TableRow>
-        <TableRow>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td><Button
-            primary
-            onClick={() => deleteAction('fagf')}
-            label="Delete"
-          />
-          </td>
-        </TableRow>
         {
           userEntry.map((element, index) => (
             <UserEntry
