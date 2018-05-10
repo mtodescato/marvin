@@ -1,6 +1,6 @@
-import DuckModule from './duckModule';
+import AsyncFlow from './asyncFlow';
 
-export default DuckModule({
+export default AsyncFlow({
   store: 'list-users',
   initialState: {
     users: [],
@@ -31,8 +31,8 @@ export default DuckModule({
       payload: { users, size },
     }),
     listUsersFailed: error => ({ type: types.LIST_USERS_FAILED, error: true, payload: { error } }),
-    deleteRequest: address => ({ type: types.LIST_USERS_REQUEST, payload: { address } }),
-    deleteSuccess: address => ({ type: types.LIST_USERS_SUCCESS, payload: { address } }),
-    deleteFailed: error => ({ type: types.LIST_USERS_FAILED, error: true, payload: { error } }),
+    deleteRequest: address => ({ type: types.DELETE_REQUEST, payload: { address } }),
+    deleteSuccess: address => ({ type: types.DELETE_SUCCESS, payload: { address } }),
+    deleteFailed: error => ({ type: types.DELETE_FAILED, error: true, payload: { error } }),
   }),
 });
