@@ -1,13 +1,3 @@
-/*
- * file: global.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/13 | file creation
- */
 
 import * as Functions from '../utils/global';
 
@@ -15,10 +5,12 @@ describe('global utils test suite', () => {
   it('#toCamelCase', () => {
     expect(Functions).to.have.property('toCamelCase');
     expect(Functions.toCamelCase('WORD_WORD')).to.equal('wordWord');
+    expect(Functions.toCamelCase('WORD_3_WORD')).to.equal('word3Word');
   });
   it('#toUpperCasse', () => {
     expect(Functions).to.have.property('toUpperCase');
     expect(Functions.toUpperCase('wordWord')).to.equal('WORD_WORD');
+    expect(Functions.toUpperCase('word3Word')).to.equal('WORD_3_WORD');
   });
   it('#throwError', () => {
     expect(Functions).to.have.property('throwError');
@@ -64,5 +56,19 @@ describe('global utils test suite', () => {
     expect(reducedObj1).not.to.have.property('b');
     expect(reducedObj1).not.to.have.property('c');
     expect(reducedObj1).not.to.have.property('x');
+  });
+
+  it('#validateAddress', () => {
+    const msg1 = '1';
+    expect(Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef57', msg1))
+      .equal('0x627306090abab3a6e1400e9345bc60c78a8bef57');
+    expect(() => Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef57a', msg1))
+      .to.throw(Error, msg1);
+    expect(() => Functions.validateAddress('0x627306090abab3a6e1400e9345bc60c78a8bef5'))
+      .to.throw(Error, 'Address must be valid');
+    expect(() => Functions.validateAddress('sx627306090abab3a6e1400e9345bc60c78a8bef57'))
+      .to.throw(Error, 'Address must be valid');
+    expect(() => Functions.validateAddress('02627306090abab3a6e1400e9345bc60c78a8bef57'))
+      .to.throw(Error, 'Address must be valid');
   });
 });

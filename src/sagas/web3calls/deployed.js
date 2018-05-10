@@ -1,23 +1,21 @@
-/*
- * file: deployed.js
- * version: 0.1
- * type: javascript module
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: utils for web3calls module, don't use outside web3calls
- * changes:
- * * Denis Mazzucato    | 2018/04/11 | file creation
- */
+const contract = require('truffle-contract');
 
-import contract from 'truffle-contract';
+export function getAccount() {
+  return window.web3.eth.accounts[0];
+}
 
-// return metamask accounts
-export const getAccount = () => window.web3.eth.accounts[0];
+export function getProvider() {
+  return window.web3.currentProvider;
+}
 
-// open the contractModule and return a promise with contractModule's instance
-// TODO: no tests has been provided for this function
-export const deployed = (contractModule) => {
-  const wrapper = contract(contractModule);
-  wrapper.setProvider(window.web3.currentProvider);
+export function deployed(Contract) {
+  const wrapper = contract(Contract);
+  wrapper.setProvider(getProvider());
   return wrapper.deployed();
-};
+}
+
+export function at(Contract, address) {
+  const wrapper = contract(Contract);
+  wrapper.setProvider(getProvider());
+  return wrapper.at(address);
+}

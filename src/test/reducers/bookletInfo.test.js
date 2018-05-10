@@ -1,14 +1,3 @@
-/*
- * file: bookletInfo.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/28 | file creation
- */
-
 import { createStore } from 'redux';
 import { BookletInfo } from '../../reducers';
 

@@ -2,30 +2,9 @@ import AsyncFlow from './asyncFlow';
 
 export default AsyncFlow({
   store: 'add-user',
-  initialState: {
-    isSuccess: false,
-    isFailed: false,
-  },
+  initialState: {},
   actions: ['ADD_USER'],
 }).extend({
-  reducer: (state, action, { types }) => {
-    switch (action.type) {
-      case types.ADD_USER_SUCCESS:
-        return {
-          ...state,
-          isSuccess: true,
-          isFailed: false,
-        };
-      case types.ADD_USER_FAILED:
-        return {
-          ...state,
-          isSuccess: false,
-          isFailed: true,
-        };
-      default:
-        return state;
-    }
-  },
   creators: ({ types }) => ({
     addUserRequest: user => ({
       type: types.ADD_USER_REQUEST,

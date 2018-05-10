@@ -1,17 +1,3 @@
-/*
- * file: global.js
- * version: 0.1
- * type: javascript module
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: global utils func
- * changes:
- * * Denis Mazzucato    | 2018/04/13 | file creation
- * * Denis Mazzucato    | 2018/04/24 | added toCamelCase and toUpperCase
- * * Denis Mazzucato    | 2018/04/26 | added validator
- * * Denis Mazzucato    | 2018/04/28 | added reduce
- */
-
 /* function that convert a string from UPPER_CASE to camelCase
  * example: WORD_WORD => wordWord
  */
@@ -79,3 +65,8 @@ export const reduce = (obj, params, defaultValue = {}) =>
     ...accumulator,
     [param]: obj[param] || defaultValue,
   }), {});
+
+export const validateAddress = (address, error = 'Address must be valid') => {
+  if (address && address.length === 42 && address[0] === '0' && address[1] === 'x') return address;
+  throw new Error(error);
+};

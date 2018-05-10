@@ -1,29 +1,19 @@
-/*
- * file: asyncFlow.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/28 | file creation
- */
-
 import { createStore } from 'redux';
 import AsyncFlow from '../../reducers/asyncFlow';
 
 describe('AsyncFlow test suite', () => {
   const obj = AsyncFlow({
+    store: 'async',
     actions: ['ACT1', 'ACT2'],
     initialState: {},
   }).extend({
     creators: ({ types }) => ({
-      act1Request: () => ({ type: types.ACT1_REQUEST }),
-      act1Success: () => ({ type: types.ACT1_SUCCESS }),
-      act1Failed: () => ({ type: types.ACT1_FAILED }),
-      act2Request: () => ({ type: types.ACT1_REQUEST }),
-      act2Success: () => ({ type: types.ACT1_SUCCESS }),
-      act2Failed: () => ({ type: types.ACT1_FAILED }),
+      act1Request: () => ({ type: types.ACT1_REQUEST, payload: {} }),
+      act1Success: () => ({ type: types.ACT1_SUCCESS, payload: {} }),
+      act1Failed: () => ({ type: types.ACT1_FAILED, payload: { error: 'error' }, error: true }),
+      act2Request: () => ({ type: types.ACT1_REQUEST, payload: {} }),
+      act2Success: () => ({ type: types.ACT1_SUCCESS, payload: {} }),
+      act2Failed: () => ({ type: types.ACT1_FAILED, payload: { error: 'error' }, error: true }),
     }),
   });
   describe('check params to DuckModule are setted correctly', () => {

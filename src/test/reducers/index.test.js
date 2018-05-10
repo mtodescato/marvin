@@ -1,18 +1,3 @@
-/*
- * file: index.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: all the implementations of DuckModule
- * * must have instance of this suite when the test script will exec
- * * if implementation don't have it check the error in src/reducers/index.js
- * changes:
- * * Denis Mazzucato    | 2018/04/13 | file creation
- * * Denis Mazzucato    | 2018/04/13 |
- * * * correct test that check the tracein creators for each actions
- */
-
 import { createStore } from 'redux';
 import { toCamelCase } from '../../utils/global';
 import combineReducers, * as Reducers from '../../reducers/';

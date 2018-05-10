@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LoginComponent from '../components/login';
-import { UserReducer } from './../reducers';
+import { Web3 } from './../reducers';
 
 const Login = props => (
   <div>
     <LoginComponent
       onLoginUserClick={props.onLoginUserClick}
       type={props.type}
+      address={props.address}
     />
   </div>
 );
@@ -16,14 +17,15 @@ const Login = props => (
 Login.propTypes = {
   onLoginUserClick: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
-  onLoginUserClick: () => dispatch(UserReducer.creators.loginUser()),
+  onLoginUserClick: () => dispatch(Web3.creators.web3AddressRequest()),
 });
 
 const mapStateToProps = state => ({
-  type: state['user-reducer'].type,
+  type: state['web-3-user-info'].type,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

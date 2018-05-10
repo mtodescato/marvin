@@ -1,28 +1,22 @@
-/*
- * file: index.js
- * version: 0.1
- * type: javascript index
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings: entry point for sagas's package,
- * * returns all sagas and the root sagas generator as default
- * changes:
- * * Denis Mazzucato    | 2018/04/13 | file creation
- */
-
 import { fork, all } from 'redux-saga/effects';
 import * as bookletInfo from './bookletInfo';
 import * as addUser from './addUser';
+import * as web3 from './web3';
+import * as web3UserInfo from './web3UserInfo';
 
 export default function* rootSaga() {
   yield all([
     fork(bookletInfo.triggerAction),
     fork(addUser.triggerAction),
+    fork(web3.triggerAction),
+    fork(web3UserInfo.triggerAction),
   ]);
 }
 
 export {
   bookletInfo,
   addUser,
+  web3,
+  web3UserInfo,
 };
 
