@@ -4,6 +4,7 @@ import * as addUser from './addUser';
 import * as web3 from './web3';
 import * as web3UserInfo from './web3UserInfo';
 import * as listUsers from './listUsers';
+import * as deleteUser from './deleteUser';
 
 export default function* rootSaga() {
   yield all([
@@ -12,6 +13,7 @@ export default function* rootSaga() {
     fork(web3.triggerAction),
     fork(web3UserInfo.triggerAction),
     fork(listUsers.triggerAction),
+    fork(deleteUser.triggerAction),
   ]);
 }
 
@@ -21,5 +23,6 @@ export {
   web3,
   web3UserInfo,
   listUsers,
+  deleteUser,
 };
 
