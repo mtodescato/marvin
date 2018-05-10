@@ -9,6 +9,7 @@ export default DuckModule({
       address: '0x0',
     },
     type: 'undefined',
+
   },
 }).extend({
   reducer: (state, action, { types }) => {
