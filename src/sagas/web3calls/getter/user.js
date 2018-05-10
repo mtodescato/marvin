@@ -24,7 +24,8 @@ const getUserInfoFromCAddress = async cAddress => ({
   address: cAddress,
 });
 
-export const getUserInfo = address => getUserContractAddress(address).then(cAddress => getUserInfoFromCAddress(cAddress));
+export const getUserInfo = address =>
+  getUserContractAddress(address).then(cAddress => getUserInfoFromCAddress(cAddress));
 
 export const intToUserAddress = int => deployed(ListUsers).then(inst => inst.getUserInt.call(int));
 export const getUserInfoFromInt = async int => getUserInfoFromCAddress(await intToUserAddress(int));
