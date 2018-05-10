@@ -1,4 +1,4 @@
-import { put, takeLast, call } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { ListUsers } from '../reducers';
 import { getSize, getUsers } from './web3calls/getter';
 
@@ -13,5 +13,5 @@ export function* runAction() {
 }
 
 export function* triggerAction() {
-  yield takeLast(ListUsers.types.LIST_USERS_REQUEST, runAction);
+  yield takeLatest(ListUsers.types.LIST_USERS_REQUEST, runAction);
 }
