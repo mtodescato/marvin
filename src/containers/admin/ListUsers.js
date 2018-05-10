@@ -34,8 +34,8 @@ UsersList.propTypes = {
 
 // basterebbe collegare solo initialize
 const mapDispatchToProps = dispatch => ({
-  deleteAction: (address) => { dispatch(ListUsers.creators.deleteUserRequest(address)); },
-  initialize: () => { dispatch(ListUsers.creators.initialize()); },
+  deleteAction: (address) => { dispatch(ListUsers.creators.deleteRequest(address)); },
+  initialize: () => { dispatch(ListUsers.creators.listUsersRequest()); },
 });
 
 const mapStateToProps = state => ({
