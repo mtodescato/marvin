@@ -5,15 +5,14 @@ import "./User.sol";
 contract Student is User {
 
     address private degreeCourse;
+    mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
+    mapping(uint => address) private intToTeaching;
+    uint private last = 0;
 
     function Student(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
     public
     User(_name, _surname, _socialNumber, _serial)
     {}
-
-    mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
-    mapping(uint => address) private intToTeaching;
-    uint private last = 0;
 
     function insertPassedExam (address teaching, address exam) public {
         teachingToExam[teaching] = exam;

@@ -109,7 +109,7 @@ contract StudentFacade {
         address degreeA = std.getDegreeCourse();
         DegreeCourse degree = DegreeCourse(degreeA);
 
-        uint n = degree.getNumberOfTeaching();
+        uint n = degree.getNumberOfTeachings();
         bool ok = true;
 
 

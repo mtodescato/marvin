@@ -20,10 +20,10 @@ contract FactoryMethod {
     {
         User newUser;
         if (_type == 0) {
-            newUser = new Professor(_name, _surname, _socialNumber, _serial);
+            newUser = new Student(_name, _surname, _socialNumber, _serial);
         }
         if (_type == 1) {
-            newUser = new Student(_name, _surname, _socialNumber, _serial);
+            newUser = new Professor(_name, _surname, _socialNumber, _serial);
         }
         if (_type == 2) {
             newUser = new Admin(_name, _surname, _socialNumber, _serial);
