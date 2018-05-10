@@ -6,20 +6,33 @@ export default DuckModule({
     users: [],
     size: 0,
   },
-  types: ['DELETE_ACTION', 'INITIALIZE'],
+  actions: ['LIST_USERS', 'DELETE'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.DELETE_ACTION:
+      case types.LIST_USERS_SUCCESS:
+        return {
+          size: action.payload.size,
+          users: action.payload.users,
+        };
+      case types.DELETE_SUCCESS:
         return {
           size: state.size - 1,
+          users: state.users.filter(item => item.address !== action.payload.address),
         };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    deleteAction: () => ({ type: types.DELETE_ACTION }),
-    initialize: () => ({ type: types.INITIALIZE }),
+    listUsersRequest: () => ({ type: types.LIST_USERS_REQUEST }),
+    listUsersSuccess: ({ users, size }) => ({
+      type: types.LIST_USERS_SUCCESS,
+      payload: { users, size },
+    }),
+    listUsersFailed: error => ({ type: types.LIST_USERS_FAILED, error: true, payload: { error } }),
+    deleteRequest: address => ({ type: types.LIST_USERS_REQUEST, payload: { address } }),
+    deleteSuccess: address => ({ type: types.LIST_USERS_SUCCESS, payload: { address } }),
+    deleteFailed: error => ({ type: types.LIST_USERS_FAILED, error: true, payload: { error } }),
   }),
 });
