@@ -2,6 +2,7 @@ import { deployed } from '../deployed';
 import { getUserInfoFromInt } from '.';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
+import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
 
 export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
@@ -12,3 +13,6 @@ export const getUsers = size => createArray(size)
     accumulator.push(await getUserInfoFromInt(index));
     return accumulator;
   }, []);
+
+export const deleteUser = address => deployed(AdminFacade)
+  .then(inst => inst.removeUser(address));
