@@ -52,7 +52,6 @@ LoginComponent.propTypes = {
   type: PropTypes.string.isRequired,
   loginRequest: PropTypes.func.isRequired,
   address: PropTypes.string.isRequired,
-  onLoginUserClick: PropTypes.func.isRequired,
 };
 
 export default LoginComponent;
