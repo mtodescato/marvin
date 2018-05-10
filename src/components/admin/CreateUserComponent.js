@@ -82,12 +82,12 @@ class CreateUserComponent extends React.Component {
   render() {
     return (
       <div>
-        {this.props.state.isSuccess === true && (
+        {this.props.state.status === 'RESOLVED' && (
           <Toast status="ok">
             <strong>User SignUp correctly</strong>
           </Toast>
         )}
-        {this.props.state.isFailed === true && (
+        {this.props.state.status === 'PENDING' && (
           <Toast status="critical">
             <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
           </Toast>
