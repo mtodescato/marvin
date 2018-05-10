@@ -11,13 +11,11 @@ class UsersList extends React.Component {
 
   render() {
     return (
-      <div>
-        <UsersListComponent
-          size={this.props.size}
-          userEntry={this.props.users}
-          deleteAction={this.props.deleteAction}
-        />
-      </div>
+      <UsersListComponent
+        size={this.props.size}
+        userEntry={this.props.users}
+        deleteAction={this.props.deleteAction}
+      />
     );
   }
 }

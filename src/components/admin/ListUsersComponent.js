@@ -1,34 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, TableRow, Table, Heading, Search, Button } from 'grommet';
-
-export const UserEntry = ({
-  index,
-  name,
-  surname,
-  role,
-  address,
-  deleteAction, // TODO: aggiungere onClick a TableRow per far
-  // partire action che mostra layer con + info
-}) => (
-  <TableRow>
-    <td>{index}</td>
-    <td>{name}</td>
-    <td>{surname}</td>
-    <td>{role}</td>
-    <td>{address}</td>
-    <td><Button primary onClick={() => deleteAction(address)}>Delete</Button></td>
-  </TableRow>
-);
-
-UserEntry.propTypes = {
-  index: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  surname: PropTypes.string.isRequired,
-  role: PropTypes.number.isRequired,
-  address: PropTypes.string.isRequired,
-  deleteAction: PropTypes.func.isRequired,
-};
+import UserEntry from './UserEntry';
 
 const UsersList = ({ size, userEntry, deleteAction }) => (
   <Box
