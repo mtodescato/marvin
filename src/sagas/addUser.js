@@ -4,7 +4,7 @@ import { addUser } from './web3calls/getter';
 
 export function* runAction({ payload }) {
   try {
-    yield call(addUser(payload.user));
+    yield call(addUser, payload.user);
     yield put(AddUser.creators.addUserSuccess());
   } catch (e) {
     yield put(AddUser.creators.addUserFailed(e.message));

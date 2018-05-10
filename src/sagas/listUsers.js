@@ -5,7 +5,7 @@ import { getSize, getUsers } from './web3calls/getter';
 export function* runAction() {
   try {
     const size = yield call(getSize);
-    const users = yield call(getUsers);
+    const users = yield call(getUsers, size);
     yield put(ListUsers.creators.listUsersSuccess({ users, size }));
   } catch (e) {
     yield put(ListUsers.creators.listUsersFailed(e.message)); // fail the promise getWeb3

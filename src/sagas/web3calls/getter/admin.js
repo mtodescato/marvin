@@ -8,11 +8,9 @@ export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
 
 const createArray = size => Array(size).fill().map((i, index) => index);
-export const getUsers = size => createArray(size)
-  .reduce(async (accumulator, index) => {
-    accumulator.push(await getUserInfoFromInt(index));
-    return accumulator;
-  }, []);
+export const getUsers = async size =>
+  Promise.all(createArray(size)
+    .map(index => getUserInfoFromInt(index)));
 
 export const deleteUser = address => deployed(AdminFacade)
   .then(inst => inst.removeUser(address));
