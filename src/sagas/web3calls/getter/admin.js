@@ -12,7 +12,7 @@ export const getUsers = async size =>
   Promise.all(createArray(size)
     .map(index => getUserInfoFromInt(index)));
 
-export const deleteUser = async address => deployed(AdminFacade)
+export const deleteUser = address => deployed(AdminFacade)
   .then(inst => inst.removeUser(address, { from: getAccount() }));
 
 export const addUser = user => deployed(AdminFacade)
