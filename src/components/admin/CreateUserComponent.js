@@ -186,8 +186,7 @@ CreateUserComponent.propTypes = {
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
+    status: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
