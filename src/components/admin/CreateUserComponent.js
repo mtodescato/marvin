@@ -87,7 +87,7 @@ class CreateUserComponent extends React.Component {
             <strong>User SignUp correctly</strong>
           </Toast>
         )}
-        {this.props.state.status === 'PENDING' && (
+        {this.props.state.status === 'ERRORED' && (
           <Toast status="critical">
             <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
           </Toast>
