@@ -60,7 +60,10 @@ contract ListUsers is Ownable {
     function removeUser(address uAddress) public {
         require(uAddressToUserInfo[uAddress].cAddress != address(0));
         uint pos = uAddressToUserInfo[uAddress].intPosition;
-        delete uAddressToUserInfo[uAddress];
+        //delete uAddressToUserInfo[uAddress];
+        uAddressToUserInfo[uAddress].cAddress = 0x0;
+        uAddressToUserInfo[uAddress].userType = 3;
+        //uAddressToUserInfo[uAddress].intPosition = 0;
         intToUAddress[pos] = intToUAddress[last-1];
         uAddressToUserInfo[intToUAddress[pos]].intPosition = pos;
         last -= 1;
