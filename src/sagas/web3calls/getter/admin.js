@@ -19,9 +19,24 @@ export const addUser = user => deployed(AdminFacade)
   .then(inst => inst.addUser(
     user.name,
     user.surname,
-    'codiceFiscale',
-    123332,
+    'codiceFiscale', // FIXIT:
+    123332, // FIXIT:
     user.address,
     user.role,
+    { from: getAccount() },
+  ));
+
+export const addCourse = course => deployed(AdminFacade)
+  .then(inst => inst.addDegreeCourse(
+    2018, // FIXIT:
+    course.name,
+    course.president,
+    course.type,
+    { from: getAccount() },
+  ));
+
+export const addAcademycYear = year => deployed(AdminFacade)
+  .then(inst => inst.addAcademycYear(
+    year,
     { from: getAccount() },
   ));
