@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ListUsersComponent from '../../components/admin/ListUsersComponent';
-import { ListUserReducer } from '../../reducers';
+import { ListUsers as ListUserReducer } from '../../reducers';
 
 class ListUsers extends React.Component {
   componentWillMount() {
