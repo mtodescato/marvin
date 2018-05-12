@@ -1,23 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Search } from 'grommet';
+import { Box, TableRow, Table, Heading, Search, Button, Label } from 'grommet';
+import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import UserEntry from './UserEntry';
 
-const UsersList = ({ size, userEntry, deleteAction }) => (
+const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
   <Box
     classname="PanelBox"
     direction="column"
     margin="small"
-    separator="horizontal"
+    separator="bottom"
   >
+    <Box
+      classname="PanelHeader"
+      direction="row"
+      justify="start"
+      align="center"
+      separator="bottom"
+    >
+      <FormNextLinkIcon />
+      <Label>
+        Manage Users
+      </Label>
+      <FormNextLinkIcon />
+      <Label>
+        List Users
+      </Label>
+    </Box>
     <Heading
       align="center"
       tag="h2"
     >
-      Users list
+        List Users
     </Heading>
     <Heading
-      align="left"
+      align="center"
       tag="h3"
     >
       Filter users by serial number
@@ -30,7 +47,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
       dropAlign={{ right: 'right' }}
     />
     <Heading
-      align="left"
+      align="center"
       tag="h3"
       margin={{ vertical: 'medium' }}
     >
@@ -52,7 +69,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
       </thead>
       <tbody>
         {
-          userEntry.map((element, index) => (
+          userEntries.map((element, index) => (
             <UserEntry
               key={[element.address]}
               index={index}
@@ -67,7 +84,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
 );
 
 UsersList.propTypes = {
-  userEntry: PropTypes.arrayOf(PropTypes.shape({
+  userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
     role: PropTypes.number.isRequired,
@@ -77,4 +94,4 @@ UsersList.propTypes = {
   deleteAction: PropTypes.func.isRequired,
 };
 
-export default UsersList;
+export default ListUsersComponent;

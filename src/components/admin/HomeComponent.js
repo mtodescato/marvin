@@ -24,7 +24,7 @@ const HomeComponent = props => (
     <Section>
       Welcome to your private area admin.
     </Section>
-    {props.user.name}
+    {props.user.name}{props.user.surname}{props.user.address}
   </Box>
 );
 
