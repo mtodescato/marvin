@@ -1,7 +1,6 @@
 import React from 'react';
-import { Footer, Image, Box, Menu, Anchor, Paragraph } from 'grommet';
+import { Footer, Box, Menu, Anchor, Paragraph } from 'grommet';
 // import uniwebLogo from '../../images/unipd.png';
-import marvinLogo from '../../images/marvin_logo.png';
 
 const MarvinFooter = () => (
   <Footer
@@ -13,11 +12,10 @@ const MarvinFooter = () => (
     <Box
       direction="row"
       align="center"
-      pad={{ horizontal: 'medium', between: 'medium', vertical: 'small' }}
+      pad={{ horizontal: 'medium', between: 'medium', vertical: 'xsmall' }}
     >
-      <Image src={marvinLogo} size="small" />
       <Paragraph margin="none">
-            ©2018 NOVE Group
+            ©2018 Marvin by NOVE Group
       </Paragraph>
       <Menu
         direction="row"
