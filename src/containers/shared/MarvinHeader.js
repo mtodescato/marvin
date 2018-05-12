@@ -5,7 +5,7 @@ import MarvinHeaderComponent from '../../components/shared/MarvinHeader';
 
 const MarvinHeader = ({ name, surname, title }) => (
   <div>
-    <MarvinHeaderComponent user={{name, surname }} title={title} />
+    <MarvinHeaderComponent user={{ name, surname }} title={title} />
   </div>
 );
 
