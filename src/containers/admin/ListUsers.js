@@ -1,26 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import UsersListComponent from '../../components/admin/ListUsersComponent';
-import { ListUsers } from '../../reducers';
+import ListUsersComponent from '../../components/admin/ListUsersComponent';
+import { UserReducers } from '../../reducers';
 
-class UsersList extends React.Component {
+class ListUsers extends React.Component {
   componentWillMount() {
     this.props.initialize();
   }
 
   render() {
     return (
-      <UsersListComponent
+      <ListUsersComponent
         size={this.props.size}
-        userEntry={this.props.users}
+        userEntries={this.props.users}
         deleteAction={this.props.deleteAction}
       />
     );
   }
 }
 
-UsersList.propTypes = {
+ListUsers.propTypes = {
   users: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
@@ -34,8 +34,8 @@ UsersList.propTypes = {
 
 // basterebbe collegare solo initialize
 const mapDispatchToProps = dispatch => ({
-  deleteAction: (address) => { dispatch(ListUsers.creators.deleteUserRequest(address)); },
-  initialize: () => { dispatch(ListUsers.creators.initialize()); },
+  deleteAction: (address) => { dispatch(UserReducers.creators.deleteUserRequest(address)); },
+  initialize: () => { dispatch(UserReducers.creators.initialize()); },
 });
 
 const mapStateToProps = state => ({
@@ -43,4 +43,4 @@ const mapStateToProps = state => ({
   size: state['list-users'].size,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersList);
+export default connect(mapStateToProps, mapDispatchToProps)(ListUsers);
