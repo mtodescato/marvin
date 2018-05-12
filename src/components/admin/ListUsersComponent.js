@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, TableRow, Table, Heading, Search, Button, Label } from 'grommet';
+import { Box, Table, Heading, Search, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import UserEntry from './UserEntry';
 
@@ -68,32 +68,6 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
         </tr>
       </thead>
       <tbody>
-        <TableRow>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td><Button
-            primary
-            onClick={() => deleteAction('fagf')}
-            label="Delete"
-          />
-          </td>
-        </TableRow>
-        <TableRow>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td>Prova</td>
-          <td><Button
-            primary
-            onClick={() => deleteAction('fagf')}
-            label="Delete"
-          />
-          </td>
-        </TableRow>
         {
           userEntries.map((element, index) => (
             <UserEntry
@@ -109,7 +83,7 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
   </Box>
 );
 
-UsersList.propTypes = {
+ListUsersComponent.propTypes = {
   userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,

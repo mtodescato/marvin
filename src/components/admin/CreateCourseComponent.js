@@ -6,7 +6,7 @@ import {
   Form,
   FormField,
   Button,
-  // Toast,
+  Toast,
   Header,
   Heading,
   FormFields,
@@ -44,7 +44,7 @@ class CreateCourseComponent extends React.Component {
       president: this.state.president,
       type: this.state.type,
     };
-    this.props.actions.addUserRequest(user);
+    this.props.actions.addCourseRequest(user);
   }
 
   setLayer() {
@@ -82,16 +82,16 @@ class CreateCourseComponent extends React.Component {
   render() {
     return (
       <div>
-        {/* this.props.state.isSuccess === true && (
+        { this.props.state.status === 'RESOLVED' && (
           <Toast status="ok">
             <strong>Course created correctly</strong>
           </Toast>
         )}
-        {this.props.state.isFailed === true && (
+        {this.props.state.status === 'ERRORED' && (
           <Toast status="critical">
             <strong>Course creation error: &quot;Transaction rejected&quot;</strong>
           </Toast>
-        ) */}
+        )}
         <Box
           className="PanelBox"
           direction="column"
@@ -162,7 +162,7 @@ class CreateCourseComponent extends React.Component {
                 <Button
                   label="Submit"
                   primary
-                  onClick={this.setLayer}
+                  onClick={this.onSubmit}
                 />
                 {this.state.showLayer ?
                   <CourseConfirmation
@@ -181,12 +181,11 @@ class CreateCourseComponent extends React.Component {
 }
 CreateCourseComponent.propTypes = {
   actions: PropTypes.shape({
-    addUserRequest: PropTypes.func.isRequired,
+    addCourseRequest: PropTypes.func.isRequired,
   }).isRequired,
-  /* state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired, */
+  state: PropTypes.shape({
+    status: PropTypes.bool.isRequired,
+  }).isRequired,
 };
 
 export default CreateCourseComponent;

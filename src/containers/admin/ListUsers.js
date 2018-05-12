@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ListUsersComponent from '../../components/admin/ListUsersComponent';
-import { UserReducers } from '../../reducers';
+import { ListUserReducer } from '../../reducers';
 
 class ListUsers extends React.Component {
   componentWillMount() {
@@ -34,8 +34,8 @@ ListUsers.propTypes = {
 
 // basterebbe collegare solo initialize
 const mapDispatchToProps = dispatch => ({
-  deleteAction: (address) => { dispatch(UserReducers.creators.deleteUserRequest(address)); },
-  initialize: () => { dispatch(UserReducers.creators.initialize()); },
+  deleteAction: (address) => { dispatch(ListUserReducer.creators.deleteRequest(address)); },
+  initialize: () => { dispatch(ListUserReducer.creators.listUsersRequest()); },
 });
 
 const mapStateToProps = state => ({

@@ -3,6 +3,10 @@ import * as bookletInfo from './bookletInfo';
 import * as addUser from './addUser';
 import * as web3 from './web3';
 import * as web3UserInfo from './web3UserInfo';
+import * as listUsers from './listUsers';
+import * as deleteUser from './deleteUser';
+import * as addCourse from './addCourse';
+import * as addAcademycYear from './addAcademycYear';
 
 export default function* rootSaga() {
   yield all([
@@ -10,6 +14,10 @@ export default function* rootSaga() {
     fork(addUser.triggerAction),
     fork(web3.triggerAction),
     fork(web3UserInfo.triggerAction),
+    fork(listUsers.triggerAction),
+    fork(deleteUser.triggerAction),
+    fork(addCourse.triggerAction),
+    fork(addAcademycYear.triggerAction),
   ]);
 }
 
@@ -18,5 +26,8 @@ export {
   addUser,
   web3,
   web3UserInfo,
+  listUsers,
+  deleteUser,
+  addCourse,
+  addAcademycYear,
 };
-
