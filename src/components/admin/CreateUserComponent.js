@@ -102,7 +102,7 @@ class CreateUserComponent extends React.Component {
             direction="row"
             justify="start"
             align="center"
-            separator="horizontal"
+            separator="bottom"
           >
             <FormNextLinkIcon />
             <Label>

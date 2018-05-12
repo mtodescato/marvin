@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Header, Heading, Image, Box } from 'grommet';
 import uniwebLogo from '../../images/unipd.png';
 import marvinLogo from '../../images/marvin_logo.png';
+import { userInfo } from 'os';
 // import AccessibleIcon from 'grommet/components/icons/base/Accessible';
 
 const MarvinHeader = props => (
@@ -31,7 +32,7 @@ const MarvinHeader = props => (
         pad="small"
         justify="end"
       >
-        Logged as
+        Logged as {props.user.name} {props.user.surname}
       </Box>
     </Box>
   </Header>
@@ -44,6 +45,7 @@ MarvinHeader.defaultProps = {
 
 MarvinHeader.propTypes = {
   title: PropTypes.string,
+  user: PropTypes.string.isRequired,
 };
 
 export default MarvinHeader;
