@@ -9,7 +9,7 @@ const CreateTeachingConfirmation = props => (
     onClose={props.setLayer}
   >
     <Box
-      classname="LayerBox"
+      className="LayerBox"
       direction="column"
       justify="center"
       align="center"
