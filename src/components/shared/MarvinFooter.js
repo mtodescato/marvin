@@ -12,7 +12,7 @@ const MarvinFooter = () => (
     <Box
       direction="row"
       align="center"
-      pad={{ horizontal: 'medium', between: 'medium', vertical: 'xsmall' }}
+      pad={{ horizontal: 'medium', between: 'medium', vertical: 'none' }}
     >
       <Paragraph margin="none">
             ©2018 Marvin by NOVE Group
