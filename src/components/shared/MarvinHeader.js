@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Header, Heading, Image, Box } from 'grommet';
+import AccessibleIcon from 'grommet/components/icons/base/Accessible';
 import uniwebLogo from '../../images/unipd.png';
 import marvinLogo from '../../images/marvin_logo.png';
-// import AccessibleIcon from 'grommet/components/icons/base/Accessible';
 
 const MarvinHeader = props => (
   <Header
@@ -21,19 +21,28 @@ const MarvinHeader = props => (
       direction="row"
       responsive={false}
     >
-      <Heading
-        align="center"
-        tag="h1"
-      >
-        {props.title}
-      </Heading>
-      <Box
-        pad="small"
-        justify="end"
-      >
-        Logged as {props.user.name} {props.user.surname}
-      </Box>
+      {props.title ?
+        <Heading
+          align="center"
+          tag="h1"
+        >
+          {props.title}
+        </Heading> : null
+      }
+
     </Box>
+    {props.user.name ?
+      <Box
+        direction="row"
+        pad={{ horizontal: 'small', between: 'small', vertical: 'none' }}
+        separator="vertical"
+      >
+        <AccessibleIcon colorIndex="ok" type="status" />
+        <Heading tag="h4" strong="true">
+          {props.user.name} {props.user.surname}
+        </Heading>
+      </Box> : null
+      }
   </Header>
 );
 
@@ -44,7 +53,10 @@ MarvinHeader.defaultProps = {
 
 MarvinHeader.propTypes = {
   title: PropTypes.string,
-  user: PropTypes.string.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default MarvinHeader;
