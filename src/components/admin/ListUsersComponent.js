@@ -6,13 +6,13 @@ import UserEntry from './UserEntry';
 
 const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
   <Box
-    classname="PanelBox"
+    className="PanelBox"
     direction="column"
     margin="small"
     separator="bottom"
   >
     <Box
-      classname="PanelHeader"
+      className="PanelHeader"
       direction="row"
       justify="start"
       align="center"
