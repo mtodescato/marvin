@@ -37,6 +37,11 @@ contract ListUsers is Ownable {
         require(uAddressToUserInfo[intToUAddress[userN]].cAddress != 0x0);
         return uAddressToUserInfo[intToUAddress[userN]].cAddress;
     }
+    
+    function getUserAddress(uint userN) public view returns( address ) {
+        require(intToUAddress[userN] != 0x0);
+        return intToUAddress[userN];
+    }
 
     function getUser(address userAdd) public view returns( address ) {
         require(uAddressToUserInfo[userAdd].cAddress != 0x0);

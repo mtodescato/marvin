@@ -1,14 +1,3 @@
-/*
- * file: index.test.js
- * version: 0.1
- * type: javascript test
- * authors: Denis Mazzucato
- * license: MIT License
- * warnings:
- * changes:
- * * Denis Mazzucato    | 2018/04/13 | file creation
- */
-
 import rootSaga, * as Sagas from '../../sagas/';
 
 describe('sagas general test suite', () => {

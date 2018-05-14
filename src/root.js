@@ -4,6 +4,25 @@ import { renderRoutes } from 'react-router-config';
 import { Grommet } from 'grommet';
 import { Provider } from 'react-redux';
 import Store from './store';
+import getWeb3 from './getWeb3';
+import Web3 from './reducers/web3';
+import addBasicUsers from './sagas/web3calls/databasing';
+
+let web3 = getWeb3.then((results) => {
+  web3 = results;
+});
+
+let account;
+export const accountInterval = setInterval(() => {
+  if (web3.eth && web3.eth.accounts[0] !== account) {
+    [account] = web3.eth.accounts;
+    //  updateInterface();
+    Store.dispatch(Web3.creators.web3AddressSuccess(account));
+  }
+}, 500);
+
+// populate blockchain with fake user, exam, academicYear ...
+addBasicUsers();
 
 const Root = ({ route }) => (
   <div className="App">

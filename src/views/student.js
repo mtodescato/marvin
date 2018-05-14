@@ -1,12 +1,13 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
-import Menu from '../components/student/menu';
-import MainPanel from '../containers/student/mainPanel';
-import HeaderUniweb from '../containers/header';
+import MenuStudent from '../components/student/MenuStudentComponent';
+import MainPanel from '../containers/student/MainPanel';
+import MarvinHeader from '../containers/shared/MarvinHeader';
+import MarvinFooter from '../containers/shared/MarvinFooter';
 
 const Student = () => (
   <div className="Student">
-    <HeaderUniweb />
+    <MarvinHeader title="Student Dashboard" />
     <Section pad="none">
       <Split flex="right">
         <Box
@@ -14,13 +15,14 @@ const Student = () => (
           justify="center"
           align="center"
         >
-          <Menu />
+          <MenuStudent />
         </Box>
         <Box >
           <MainPanel />
         </Box>
       </Split>
     </Section>
+    <MarvinFooter />
   </div>
 );
 

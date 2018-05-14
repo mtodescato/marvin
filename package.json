@@ -8,7 +8,9 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "test": "NODE_ENV=development nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js \"src/test/**/*.test.js\" --exit",
+    "custom-test": "NODE_ENV=development nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js",
     "test-windows": "set NODE_ENV=development&&nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js \"src/test/**/*.test.js\" --exit",
+    "custom-test-windows": "set NODE_ENV=development&&nyc mocha --require babel-core/register --require ignore-styles --require ./src/utils/testSetup.js",
     "reactscripts-test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "build-css": "node-sass-chokidar src/ -o src/",
@@ -18,8 +20,8 @@
     "start-all": "npm-run-all -p watch-css ganache-script truffle-script start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
-    "truffle-script": "cd ./src/truffle/ && truffle compile --all && truffle migrate --reset",
-    "ganache-script": "./node_modules/.bin/ganache-cli -p 7545 -m velociraptor"
+    "truffle-script": "cd ./src/bc/ && truffle migrate --reset --network development",
+    "ganache-script": "ganache-cli -p 7545 -m velociraptor"
   },
   "babel": {
     "presets": [
@@ -78,6 +80,7 @@
     "redux-saga-test-plan": "^3.6.0",
     "redux-saga-testing": "^1.0.5",
     "reselect": "^3.0.1",
+    "truffle": "^4.1.8",
     "truffle-contract": "^3.0.4",
     "web3": "^0.20.0",
     "web3-fake-provider": "^0.1.0"

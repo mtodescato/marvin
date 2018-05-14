@@ -1,26 +1,36 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
-import Menu from '../components/admin/menu';
-import MainPanel from '../containers/admin/mainPanelAdmin';
+import MenuAdmin from '../containers/admin/MenuAdmin';
+import MainPanel from '../containers/admin/MainPanelAdmin';
+import MarvinHeader from '../containers/shared/MarvinHeader';
+import MarvinFooter from '../containers/shared/MarvinFooter';
 
 
 const Admin = () => (
-  <Box className="Admin">
-    <Section pad="none">
-      <Split flex="right">
-        <Box
-          colorIndex="light-2"
-          justify="center"
-          align="center"
+  <div className="Admin">
+    <MarvinHeader title="Admin Dashboard" />
+    <Box className="Admin">
+      <Section pad="none">
+        <Split
+          flex="right"
+          fixed="true"
         >
-          <Menu />
-        </Box>
-        <Box >
-          <MainPanel />
-        </Box>
-      </Split>
-    </Section>
-  </Box>
+          <Box
+            colorIndex="light-2"
+            justify="center"
+            align="center"
+            separator="vertical"
+          >
+            <MenuAdmin />
+          </Box>
+          <Box>
+            <MainPanel />
+          </Box>
+        </Split>
+      </Section>
+    </Box>
+    <MarvinFooter />
+  </div>
 );
 
 export default Admin;
