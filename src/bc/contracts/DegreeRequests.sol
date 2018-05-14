@@ -5,7 +5,7 @@ contract DegreeRequests {
     mapping(address => DegreeRequest) private studentContractToRequest;
     mapping(uint => address) private intToSudent; // solo domande in attesa
     mapping(address => uint) private studentToInt; // solo domande in attesas
-    uint private last = 1; // ultimo usato
+    uint private last = 0; // ultimo usato
 
     struct DegreeRequest {
         bytes thesisTitle;
@@ -31,7 +31,7 @@ contract DegreeRequests {
 
     function manageRequest(int8 newState, uint request) public {
         require(newState == -1 || newState == 1);
-        require(request <= last);
+        require(request < last);
         address stdCont = intToSudent[request];
         studentContractToRequest[stdCont].requestState = newState;
         studentToInt[stdCont] = 0;
@@ -40,7 +40,7 @@ contract DegreeRequests {
     }
 
     function getDegreeRequest(uint index) public view returns( bytes, int8, bytes, address) {
-        require(index <= last);
+        require(index < last);
         address stdCont = intToSudent[index];
         DegreeRequest memory request = studentContractToRequest[stdCont];
         return ( request.thesisTitle, request.requestState, request.submmissionDate, request.professorContract);
