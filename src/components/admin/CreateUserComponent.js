@@ -84,7 +84,7 @@ class CreateUserComponent extends React.Component {
       <div>
         {this.props.state.status === 'RESOLVED' && (
           <Toast status="ok">
-            <strong>User SignUp correctly</strong>
+            <strong>User Signed Up correctly</strong>
           </Toast>
         )}
         {this.props.state.status === 'ERRORED' && (
@@ -96,6 +96,7 @@ class CreateUserComponent extends React.Component {
           className="PanelBox"
           direction="column"
           margin="small"
+          separator="bottom"
         >
           <Box
             className="PanelHeader"
@@ -113,26 +114,25 @@ class CreateUserComponent extends React.Component {
                 Create User
             </Label>
           </Box>
+
+          <Box className="titleBox" alignSelf="center" >
+            <Heading tag="h2" strong>
+              New user creation
+            </Heading>
+          </Box>
+
           <Box
-            className="PanelForm"
-            direction="row"
-            justify="center"
-            align="center"
+            className="formBox"
+            direction="column"
+            justify="start"
             separator="bottom"
+            pad={{ horizontal: 'medium' }}
           >
+            <Heading tag="h5" >
+              Submit the info of the new user.
+            </Heading>
             <Form>
-              <Header>
-                <Heading
-                  align="center"
-                  tag="h2"
-                >
-                    New user creation
-                </Heading>
-              </Header>
               <FormFields>
-                <Paragraph>
-                  Submit the info of the new user.
-                </Paragraph>
                 <FormField label="Name:">
                   <TextInput
                     id="name"
