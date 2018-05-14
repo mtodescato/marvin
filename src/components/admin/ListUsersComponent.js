@@ -27,32 +27,32 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
         List Users
       </Label>
     </Box>
-    <Heading
-      align="center"
-      tag="h2"
-    >
-        List Users
-    </Heading>
-    <Heading
-      align="center"
-      tag="h3"
-    >
-      Filter users by serial number
-    </Heading>
-    <Search
-      inline
-      fill={false}
+
+    <Box className="titleBox" alignSelf="center" >
+      <Heading tag="h2" strong>
+          List Users
+      </Heading>
+    </Box>
+
+    <Box
+      className="searchBox"
       size="medium"
-      placeHolder="Search: #"
-      dropAlign={{ right: 'right' }}
-    />
-    <Heading
-      align="center"
-      tag="h3"
-      margin={{ vertical: 'medium' }}
+      pad={{ horizontal: 'medium' }}
     >
-      Users found: {size}
-    </Heading>
+      <Heading tag="h4" >
+        Users found: {size}
+      </Heading>
+      <Heading tag="h5" >
+          Filter users by serial number :
+      </Heading>
+      <Search
+        inline
+        full="false"
+        size="small"
+        placeHolder="Search: #"
+      />
+    </Box>
+
     <Table
       responsive
       selectable="true"
