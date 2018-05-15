@@ -13,7 +13,7 @@ const Admin = () => (
       <Section pad="none">
         <Split
           flex="right"
-          fixed="true"
+          fixed
         >
           <Box
             colorIndex="light-2"
