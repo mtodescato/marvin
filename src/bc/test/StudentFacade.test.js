@@ -16,6 +16,7 @@ contract('Testing StudentFacade', () => {
   let teaching;
   let exam;
   let studentContractAddress;
+  let professorContract;
 
   ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
@@ -30,10 +31,11 @@ contract('Testing StudentFacade', () => {
     adminFacadeInstance.addAcademicYear(796);
     adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1);
     const degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
-    adminFacadeInstance.addTeaching(degreeCourseAddress, gAddress, 'maths');
+    professorContract = await ListUsersInstance.getUser.call(gAddress);
+    adminFacadeInstance.addTeaching(degreeCourseAddress, professorContract, 'maths');
     teachingAddress = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
     teaching = Teaching.at(teachingAddress);
-    professorFacadeInstance.insertExam(teachingAddress, '15/5/2018', gAddress);
+    professorFacadeInstance.insertExam(teachingAddress, '15/5/2018', professorContract);
     exam = await teaching.getExam.call(0);
   });
 
@@ -54,6 +56,14 @@ contract('Testing StudentFacade', () => {
     const numberBefore = await studentFacadeInstance.getNumberOfTeachings
       .call(studentContractAddress);
     assert.equal(numberBefore.toNumber(), 0, 'no accepted marks');
+  });
+
+  it('TS0013 can accept a mark', async () => {
+    await professorFacadeInstance.publishMark(exam, studentContractAddress, 27, professorContract);
+    await studentFacadeInstance.manageMark(studentContractAddress, exam, true);
+    const numberBefore = await studentFacadeInstance.getNumberOfTeachings
+      .call(studentContractAddress);
+    assert.equal(numberBefore.toNumber(), 1, 'accepted a mark');
   });
 
   /*
