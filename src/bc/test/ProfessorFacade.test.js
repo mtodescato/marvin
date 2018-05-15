@@ -39,7 +39,7 @@ contract('Testing ProfessorFacade', () => {
     assert.notEqual(exam0, '0x0000000000000000000000000000000000000000', 'not added correctly');
   });
 
-  it('TS0011 can publish a mark', async () => {
+  it('TS0012 can publish a mark', async () => {
     const studentContractAddress = await studentFacadeInstance.getUserContract.call({ from: '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4' });
     const exam = await teaching.getExam.call(0);
     studentFacadeInstance.subscribeToExam(studentContractAddress, exam);
