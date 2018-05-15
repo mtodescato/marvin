@@ -58,6 +58,12 @@ contract('Testing StudentFacade', () => {
 
   /*
   it('TS0010 can get the number of theaching', async () => {
+    const numberBefore = await studentFacadeInstance.getTeaching
+      .call(0, studentContractAddress);
+  });
+  */
+  /*
+  it('TSxxxx can get the number of theaching', async () => {
     const professorContract = await ListUsersInstance.getUser.call(gAddress);
     const studentContract = await ListUsersInstance
       .getUser.call('0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4');
