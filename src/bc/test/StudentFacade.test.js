@@ -55,4 +55,14 @@ contract('Testing StudentFacade', () => {
       .call(studentContractAddress);
     assert.equal(numberBefore.toNumber(), 0, 'no accepted marks');
   });
+
+  /*
+  it('TS0010 can get the number of theaching', async () => {
+    const professorContract = await ListUsersInstance.getUser.call(gAddress);
+    const studentContract = await ListUsersInstance
+      .getUser.call('0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4');
+    studentFacadeInstance
+      .createDegreeRequest(studentContract, 'test title', '27-1-2018', professorContract);
+  });
+  */
 });
