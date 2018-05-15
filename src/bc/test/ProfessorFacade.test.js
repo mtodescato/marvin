@@ -2,6 +2,7 @@ const ListUsers = artifacts.require('./ListUsers.sol');
 const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const Teaching = artifacts.require('./Teaching.sol');
+const Exam = artifacts.require('Exam.sol');
 const StudentFacade = artifacts.require('StudentFacade.sol');
 const gAddress = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
 
@@ -43,6 +44,11 @@ contract('Testing ProfessorFacade', () => {
     const studentContractAddress = await studentFacadeInstance.getUserContract.call({ from: '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4' });
     const exam = await teaching.getExam.call(0);
     studentFacadeInstance.subscribeToExam(studentContractAddress, exam);
+    const examInstance = await Exam.at(exam);
+    let examsNumber = await examInstance.getNumberOfMarks.call();
+    assert.notEqual(examsNumber.toNumber(), 0, 'no marks for the exam');
     await professorFacadeInstance.publishMark(exam, studentContractAddress, 27, professorContract);
+    examsNumber = await examInstance.getNumberOfMarks.call();
+    assert.notEqual(examsNumber.toNumber(), 1, 'one mark for the exam');
   });
 });

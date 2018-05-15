@@ -67,6 +67,10 @@ contract Exam {
         return teaching;
     }
 
+    function getNumberOfMarks() public view returns(uint) {
+        return last;
+    }
+
     function getStudentSubscribed(uint index) public view returns(address) {
         require(index < last);
         return intToStudent[index];
