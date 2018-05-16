@@ -55,7 +55,7 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
 
     <Table
       responsive
-      selectable="true"
+      selectable
     >
       <thead>
         <tr>
