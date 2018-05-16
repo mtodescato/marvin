@@ -66,12 +66,17 @@ contract('Testing StudentFacade', () => {
     assert.equal(numberBefore.toNumber(), 1, 'accepted a mark');
   });
 
-  /*
-  it('TS0010 can get the number of theaching', async () => {
-    const numberBefore = await studentFacadeInstance.getTeaching
+  it('TS0014 can get a teaching', async () => {
+    teachingAddress = await studentFacadeInstance.getTeaching
       .call(0, studentContractAddress);
+    assert.notEqual(teachingAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
   });
-  */
+
+  it('TS0015 can get an exam', async () => {
+    const examAddress = await studentFacadeInstance.getExam
+      .call(teachingAddress, studentContractAddress);
+    assert.notEqual(examAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
+  });
   /*
   it('TSxxxx can get the number of theaching', async () => {
     const professorContract = await ListUsersInstance.getUser.call(gAddress);
