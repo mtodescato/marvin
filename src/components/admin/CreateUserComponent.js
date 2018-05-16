@@ -16,6 +16,7 @@ import {
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { stringFormValidation, addressValidation } from '../formValidator';
+import CreateUserConfirmation from './CreateUserConfirmation';
 
 
 class CreateUserComponent extends React.Component {
@@ -31,6 +32,8 @@ class CreateUserComponent extends React.Component {
     this.handleChangeAddress = this.handleChangeAddress.bind(this);
     this.handleChangeRole = this.handleChangeRole.bind(this);
 
+    this.setLayer = this.setLayer.bind(this);
+
     this.state = {
       name: '',
       surname: '',
@@ -43,21 +46,30 @@ class CreateUserComponent extends React.Component {
         address: '',
         formIsValid: false,
       },
+      showLayer: false,
     };
   }
 
   onSubmit(e) {
     if (this.handleValidation()) {
+      this.setLayer();
+      /*
       const user = {
         name: this.state.name,
         surname: this.state.surname,
         address: this.state.address,
         role: this.state.role,
       };
-      this.props.actions.addUserRequest(user);
+      this.props.actions.addUserRequest(user); */
     } else {
       e.preventDefault();
     }
+  }
+
+  setLayer() {
+    this.setState({
+      showLayer: !this.state.showLayer,
+    });
   }
 
   handleValidation() {
@@ -258,15 +270,30 @@ class CreateUserComponent extends React.Component {
                   />
                 </FormField>
               </FormFields>
-              <Footer pad={{ vertical: 'medium' }}>
-                <Button
-                  label="Submit"
-                  type="submit"
-                  primary
-                  onClick={this.onSubmit}
-                />
-              </Footer>
             </Form>
+            <Footer pad={{ vertical: 'medium' }}>
+              <Button
+                label="Submit"
+                type="submit"
+                primary
+                onClick={this.onSubmit}
+              />
+              {!this.state.errors.formIsValid ?
+                  'no valid' : null
+                }
+              {this.state.showLayer ?
+                <CreateUserConfirmation
+                  setLayer={this.setLayer}
+                  userName={this.state.name}
+                  userSurname={this.state.surname}
+                  userAddress={this.state.address}
+                  userRole={this.state.role}
+                  addUserRequest={this.props.actions.addUserRequest}
+                  state={this.props.state}
+                />
+                      : null
+                    }
+            </Footer>
           </Box>
         </Box>
       </div>
@@ -279,7 +306,7 @@ CreateUserComponent.propTypes = {
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
-    status: PropTypes.bool.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
 };
 
