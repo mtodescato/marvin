@@ -17,7 +17,6 @@ const MenuEntries = ({ active = 0, action }) => (
     <Anchor
       className={active === 0 ? 'active' : ''}
       onClick={() => action(0)}
-      responsive
       primary
       icon={<HomeIcon />}
     >
