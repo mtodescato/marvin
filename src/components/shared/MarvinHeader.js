@@ -38,7 +38,7 @@ const MarvinHeader = props => (
         separator="vertical"
       >
         <AccessibleIcon colorIndex="ok" type="status" />
-        <Heading tag="h4" strong="true">
+        <Heading tag="h4" strong>
           {props.user.name} {props.user.surname}
         </Heading>
       </Box> : null
