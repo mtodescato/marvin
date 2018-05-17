@@ -26,6 +26,7 @@ class CreateCourseComponent extends React.Component {
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangePresident = this.handleChangePresident.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
+    this.handleChangeAcademicYear = this.handleChangeAcademicYear.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
 
@@ -34,6 +35,7 @@ class CreateCourseComponent extends React.Component {
       president: '',
       type: 0,
       typeString: 'Tree-year',
+      academicYear: 2018,
       showLayer: false,
     };
   }
@@ -43,6 +45,7 @@ class CreateCourseComponent extends React.Component {
       name: this.state.name,
       president: this.state.president,
       type: this.state.type,
+      academicYear: this.state.academicYear,
     };
     this.props.actions.addCourseRequest(user);
   }
@@ -59,6 +62,10 @@ class CreateCourseComponent extends React.Component {
 
   handleChangePresident(e) {
     this.setState({ president: e.target.value });
+  }
+
+  handleChangeAcademicYear(e) {
+    this.setState({ academicYear: Number(e.target.value) });
   }
 
   handleChangeType(e) {
@@ -137,7 +144,7 @@ class CreateCourseComponent extends React.Component {
                   <TextInput
                     id="name"
                     name="Name"
-                    placeHolder="Mario"
+                    placeHolder="Informatica"
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
@@ -145,7 +152,7 @@ class CreateCourseComponent extends React.Component {
                   <TextInput
                     id="president"
                     name="President"
-                    placeHolder="Tullio"
+                    placeHolder="Mario"
                     onDOMChange={this.handleChangePresident}
                   />
                 </FormField>
@@ -155,6 +162,14 @@ class CreateCourseComponent extends React.Component {
                     options={['Tree-year', 'Master']}
                     value={this.state.typeString}
                     onChange={this.handleChangeType}
+                  />
+                </FormField>
+                <FormField label="Academic Year:">
+                  <TextInput
+                    id="academicYear"
+                    name="Name"
+                    placeHolder="2018"
+                    onDOMChange={this.handleChangeAcademicYear}
                   />
                 </FormField>
               </FormFields>
