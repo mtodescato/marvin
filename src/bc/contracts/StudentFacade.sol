@@ -60,7 +60,7 @@ contract StudentFacade {
     *  @param student Address of the student contract.
     *  @param exam Address of the exam.
     */
-    function subscribeToExam(address student, address exam) public {
+    function subscribeToExam(address student, address exam) public studentUseHisContract(student){
         Exam ex = Exam(exam);
         ex.subscribe(student);
     }
