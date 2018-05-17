@@ -6,6 +6,8 @@ import Web3 from './web3';
 import Web3UserInfo from './web3UserInfo';
 import MenuEntries from './menuEntries';
 import ListUsers from './listUsers';
+import AddCourse from './addCourse';
+import AddAcademycYear from './addAcademycYear';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -14,6 +16,8 @@ export default combineReducers({
   [Web3UserInfo.store]: Web3UserInfo.reducer,
   [MenuEntries.store]: MenuEntries.reducer,
   [ListUsers.store]: ListUsers.reducer,
+  [AddCourse.store]: AddCourse.reducer,
+  [AddAcademycYear.store]: AddAcademycYear.reducer,
 });
 
 // export all reducers
@@ -24,4 +28,6 @@ export {
   Web3UserInfo,
   MenuEntries,
   ListUsers,
+  AddCourse,
+  AddAcademycYear,
 };

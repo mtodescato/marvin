@@ -82,12 +82,12 @@ class CreateUserComponent extends React.Component {
   render() {
     return (
       <div>
-        {this.props.state.isSuccess === true && (
+        {this.props.state.status === 'RESOLVED' && (
           <Toast status="ok">
             <strong>User SignUp correctly</strong>
           </Toast>
         )}
-        {this.props.state.isFailed === true && (
+        {this.props.state.status === 'ERRORED' && (
           <Toast status="critical">
             <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
           </Toast>
@@ -186,8 +186,7 @@ CreateUserComponent.propTypes = {
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
+    status: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
