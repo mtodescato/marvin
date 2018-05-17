@@ -20,8 +20,7 @@ CreateUserContainer.propTypes = {
 
 const mapStateToProps = state => ({
   state: {
-    isSuccess: state['add-user'].isSuccess,
-    isFailed: state['add-user'].isFailed,
+    status: state['add-user'].status,
   },
 });
 
