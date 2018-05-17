@@ -2,7 +2,8 @@ import Root from './root';
 import Home from './views/home';
 import Student from './views/student';
 import Admin from './views/admin';
-import { userIsAuthenticatedStudent, userIsAuthenticatedAdmin } from './utils/wrappers';
+import Professor from './views/professor';
+import { userIsAuthenticatedStudent, userIsAuthenticatedAdmin, userIsAuthenticatedProfessor } from './utils/wrappers';
 
 const routes = [
   {
@@ -20,6 +21,10 @@ const routes = [
       {
         path: '/admin',
         component: userIsAuthenticatedAdmin(Admin),
+      },
+      {
+        path: '/professor',
+        component: userIsAuthenticatedProfessor(Professor),
       },
     ],
   },
