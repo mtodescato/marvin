@@ -40,3 +40,7 @@ export const addAcademycYear = year => deployed(AdminFacade)
     year,
     { from: getAccount() },
   ));
+
+export const getNumberOfDC = year => deployed(AdminFacade)
+  .then(inst => inst.getNumberOfDC.call(year))
+  .then(n => n.toNumber());
