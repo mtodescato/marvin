@@ -17,6 +17,12 @@ contract  AdminFacade {
     DegreeRequests private degreeRequests;
     AcademicYearsList private yearsList;
 
+    /**@dev Check if the user requesting the action is an admin or the master admin.*/
+    modifier isAdmin() {
+        require(userList.getType(msg.sender) == 2 || userList.getMasterAdminAddress() == msg.sender);
+        _;
+    }
+
     /**@dev Constructor of AdminFacade
     *  @param _userlist Address of the contract ListUser containing all the users.
     *  @param _factory Address to the contrat of the factory method for the users.
@@ -39,7 +45,8 @@ contract  AdminFacade {
     *  @param _type Type of the user:0 for student, 1 for professor, 2 for admin.
     */
     function addUser(bytes _name, bytes _surname, bytes _socialNumber, uint _serialNumber, address _owner, uint8  _type)
-    public {
+    public 
+    {
         address newUser = factory.createUser(_name, _surname, _socialNumber, _serialNumber, _owner, _type);
         userList.addUser(newUser, _type, _owner);
     }
@@ -80,7 +87,9 @@ contract  AdminFacade {
     *  @param president Name of the course chief.
     *  @param typeDegree Type of the degree course.
     */
-    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint8 typeDegree) public {
+    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint8 typeDegree) 
+    public 
+    {
         DegreeCourse dCourse = new DegreeCourse(name, president, typeDegree);
         address acYear = yearsList.getAcademicYear(academicYear);
         AcademicYear acYearObj = AcademicYear(acYear);

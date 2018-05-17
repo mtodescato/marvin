@@ -19,6 +19,15 @@ contract StudentFacade {
         _;
     }
 
+    /**@dev Check if the user requesting an action involving a contract is the owner of the contract.
+    *  @param contractA Aderess of the contract involved in the operation.
+    */
+    modifier studentUseHisContract(address contractA) {
+        require(msg.sender == (Student(contractA)).getOwner()); 
+        _;
+    }
+
+
     /**@dev Constructor of SudentFacade.
     *  @param degreeRequestsAddress Address of degreeRequest contract containig the degree requests.
     *  @param userListAddress Address ot LisrUser contract containig users.
