@@ -7,25 +7,32 @@ import {
   FormField,
   Button,
   Toast,
-  Header,
   Heading,
   FormFields,
-  Paragraph,
   TextInput,
   Select,
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import Checkmark from 'grommet/components/icons/base/Checkmark';
+import { stringFormValidation, addressValidation } from '../formValidator';
+import CreateUserConfirmation from './CreateUserConfirmation';
+
 
 class CreateUserComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleValidation = this.handleValidation.bind(this);
+
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeSurname = this.handleChangeSurname.bind(this);
     this.handleChangeAddress = this.handleChangeAddress.bind(this);
     this.handleChangeRole = this.handleChangeRole.bind(this);
+
+    this.setLayer = this.setLayer.bind(this);
 
     this.state = {
       name: '',
@@ -33,50 +40,95 @@ class CreateUserComponent extends React.Component {
       address: '0x0',
       role: 0,
       roleString: 'Student',
+      errors: {
+        name: '',
+        surname: '',
+        address: '',
+        formIsValid: false,
+      },
+      showLayer: false,
     };
   }
 
-  onSubmit() {
-    const user = {
-      name: this.state.name,
-      surname: this.state.surname,
-      address: this.state.address,
-      role: this.state.role,
-    };
-    this.props.actions.addUserRequest(user);
+  onSubmit(e) {
+    if (this.handleValidation()) {
+      this.setLayer();
+      /*
+      const user = {
+        name: this.state.name,
+        surname: this.state.surname,
+        address: this.state.address,
+        role: this.state.role,
+      };
+      this.props.actions.addUserRequest(user); */
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  setLayer() {
+    this.setState({
+      showLayer: !this.state.showLayer,
+    });
+  }
+
+  handleValidation() {
+    const errors = Object.assign({}, this.state.errors);
+
+    if ((errors.name === 'isValid'
+          && errors.surname === 'isValid'
+          && errors.address === 'isValid')) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+
+    this.setState({ errors });
+    return this.state.errors.formIsValid;
   }
 
   handleChangeName(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.name = stringFormValidation(e.target.value);
+
     this.setState({ name: e.target.value });
+    this.setState({ errors });
   }
 
   handleChangeSurname(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.surname = stringFormValidation(e.target.value);
+
     this.setState({ surname: e.target.value });
+    this.setState({ errors });
   }
 
   handleChangeAddress(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.address = addressValidation(e.target.value);
     this.setState({ address: e.target.value });
+
+    // 0xD915Bb5FCf25ff607f852fA77822DFc757aBd9bA
+
+    this.setState({ errors });
   }
 
   handleChangeRole(e) {
-    let numberRole;
     switch (e.option) {
       case 'Student':
-        numberRole = 0;
+        this.setState({ role: '0' });
         break;
       case 'Professor':
-        numberRole = 1;
+        this.setState({ role: '1' });
         break;
       case 'University (admin)':
-        numberRole = 2;
+        this.setState({ role: '2' });
         break;
       default:
-        numberRole = 0;
+        this.setState({ role: '0' });
     }
-    this.setState({
-      role: numberRole,
-      roleString: e.option,
-    });
+    this.setState({ roleString: e.option });
   }
 
   render() {
@@ -84,7 +136,7 @@ class CreateUserComponent extends React.Component {
       <div>
         {this.props.state.status === 'RESOLVED' && (
           <Toast status="ok">
-            <strong>User SignUp correctly</strong>
+            <strong>User Signed Up correctly</strong>
           </Toast>
         )}
         {this.props.state.status === 'ERRORED' && (
@@ -93,16 +145,17 @@ class CreateUserComponent extends React.Component {
           </Toast>
         )}
         <Box
-          classname="PanelBox"
+          className="PanelBox"
           direction="column"
           margin="small"
+          separator="bottom"
         >
           <Box
-            classname="PanelHeader"
+            className="PanelHeader"
             direction="row"
             justify="start"
             align="center"
-            separator="horizontal"
+            separator="bottom"
           >
             <FormNextLinkIcon />
             <Label>
@@ -113,27 +166,43 @@ class CreateUserComponent extends React.Component {
                 Create User
             </Label>
           </Box>
+
+          <Box className="titleBox" alignSelf="center" >
+            <Heading tag="h2" strong>
+              New user creation
+            </Heading>
+          </Box>
+
           <Box
-            classname="PanelForm"
-            direction="row"
-            justify="center"
-            align="center"
+            className="formBox"
+            direction="column"
+            justify="start"
             separator="bottom"
+            pad={{ horizontal: 'medium' }}
           >
+            <Heading tag="h5" >
+              Submit the informations of the new user.
+            </Heading>
             <Form>
-              <Header>
-                <Heading
-                  align="center"
-                  tag="h2"
-                >
-                    New user creation
-                </Heading>
-              </Header>
               <FormFields>
-                <Paragraph>
-                  Submit the info of the new user.
-                </Paragraph>
-                <FormField label="Name:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Name:
+                    </Label>
+                    {this.state.errors.name !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.name}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.name === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="name"
                     name="Name"
@@ -141,7 +210,25 @@ class CreateUserComponent extends React.Component {
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
-                <FormField label="Surname:">
+
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Surname:
+                    </Label>
+                    {this.state.errors.surname !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.surname}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.surname === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="surname"
                     name="Surname"
@@ -149,7 +236,24 @@ class CreateUserComponent extends React.Component {
                     onDOMChange={this.handleChangeSurname}
                   />
                 </FormField>
-                <FormField label="Address:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Address:
+                    </Label>
+                    {this.state.errors.address !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.address}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.address === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="address"
                     name="Address"
@@ -166,14 +270,30 @@ class CreateUserComponent extends React.Component {
                   />
                 </FormField>
               </FormFields>
-              <Footer pad={{ vertical: 'medium' }}>
-                <Button
-                  label="Submit"
-                  primary
-                  onClick={this.onSubmit}
-                />
-              </Footer>
             </Form>
+            <Footer pad={{ vertical: 'medium' }}>
+              <Button
+                label="Submit"
+                type="submit"
+                primary
+                onClick={this.onSubmit}
+              />
+              {!this.state.errors.formIsValid ?
+                  'no valid' : null
+                }
+              {this.state.showLayer ?
+                <CreateUserConfirmation
+                  setLayer={this.setLayer}
+                  userName={this.state.name}
+                  userSurname={this.state.surname}
+                  userAddress={this.state.address}
+                  userRole={this.state.role}
+                  addUserRequest={this.props.actions.addUserRequest}
+                  state={this.props.state}
+                />
+                      : null
+                    }
+            </Footer>
           </Box>
         </Box>
       </div>
@@ -186,7 +306,7 @@ CreateUserComponent.propTypes = {
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
   state: PropTypes.shape({
-    status: PropTypes.bool.isRequired,
+    status: PropTypes.string.isRequired,
   }).isRequired,
 };
 

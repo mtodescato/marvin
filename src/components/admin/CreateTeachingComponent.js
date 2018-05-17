@@ -88,12 +88,12 @@ class CreateTeachingComponent extends React.Component {
           </Toast>
         ) */}
         <Box
-          classname="PanelBox"
+          className="PanelBox"
           direction="column"
           margin="small"
         >
           <Box
-            classname="PanelHeader"
+            className="PanelHeader"
             direction="row"
             justify="start"
             align="center"
@@ -109,7 +109,7 @@ class CreateTeachingComponent extends React.Component {
             </Label>
           </Box>
           <Box
-            classname="PanelForm"
+            className="PanelForm"
             direction="row"
             justify="center"
             align="center"

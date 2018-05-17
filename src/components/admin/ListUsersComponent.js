@@ -1,44 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Search } from 'grommet';
+import { Box, Table, Heading, Search, Label } from 'grommet';
+import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import UserEntry from './UserEntry';
 
-const UsersList = ({ size, userEntry, deleteAction }) => (
+const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
   <Box
-    classname="PanelBox"
+    className="PanelBox"
     direction="column"
     margin="small"
-    separator="horizontal"
+    separator="bottom"
   >
-    <Heading
+    <Box
+      className="PanelHeader"
+      direction="row"
+      justify="start"
       align="center"
-      tag="h2"
+      separator="bottom"
     >
-      Users list
-    </Heading>
-    <Heading
-      align="left"
-      tag="h3"
-    >
-      Filter users by serial number
-    </Heading>
-    <Search
-      inline
-      fill={false}
+      <FormNextLinkIcon />
+      <Label>
+        Manage Users
+      </Label>
+      <FormNextLinkIcon />
+      <Label>
+        List Users
+      </Label>
+    </Box>
+
+    <Box className="titleBox" alignSelf="center" >
+      <Heading tag="h2" strong>
+          List Users
+      </Heading>
+    </Box>
+
+    <Box
+      className="searchBox"
       size="medium"
-      placeHolder="Search: #"
-      dropAlign={{ right: 'right' }}
-    />
-    <Heading
-      align="left"
-      tag="h3"
-      margin={{ vertical: 'medium' }}
+      pad={{ horizontal: 'medium', vertical: 'small' }}
     >
-      Users found: {size}
-    </Heading>
+      <Heading tag="h4" >
+        Users found: {size}
+      </Heading>
+      <Heading tag="h5" >
+          Filter users by serial number :
+      </Heading>
+      <Search
+        inline
+        full="false"
+        size="small"
+        placeHolder="Search: #"
+      />
+    </Box>
+
     <Table
       responsive
-      selectable="true"
+      selectable
     >
       <thead>
         <tr>
@@ -52,7 +69,7 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
       </thead>
       <tbody>
         {
-          userEntry.map((element, index) => (
+          userEntries.map((element, index) => (
             <UserEntry
               key={[element.address]}
               index={index}
@@ -66,8 +83,8 @@ const UsersList = ({ size, userEntry, deleteAction }) => (
   </Box>
 );
 
-UsersList.propTypes = {
-  userEntry: PropTypes.arrayOf(PropTypes.shape({
+ListUsersComponent.propTypes = {
+  userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
     role: PropTypes.number.isRequired,
@@ -77,4 +94,4 @@ UsersList.propTypes = {
   deleteAction: PropTypes.func.isRequired,
 };
 
-export default UsersList;
+export default ListUsersComponent;
