@@ -37,7 +37,7 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
     <Box
       className="searchBox"
       size="medium"
-      pad={{ horizontal: 'medium' }}
+      pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
         Users found: {size}
