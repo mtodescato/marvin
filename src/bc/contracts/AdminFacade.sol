@@ -98,6 +98,16 @@ contract  AdminFacade {
         return acYearObj.getDegreeCourse(index);
     }
 
+    /**@dev Get the number of degree course in the specify academic year.
+    *  @param academicYear Year of the academic calendar.
+    *  @return address The uint that rappresent the cardinality of the academic year.
+    */
+    function getNumberOfDC(uint academicYear) public view return(uint) {
+        address acYear = yearsList.getAcademicYear(academicYear);
+        AcademicYear acYearObj = AcademicYear(acYear);
+        return acYearObj.getNumberOfDC();
+    }
+
     /**@dev Create and add a new teaching to the DegreeCourse.
     *  @param course Address of the DegreeCourse.
     *  @param refProfessor Address of the professor of the teching.
