@@ -32,16 +32,16 @@ contract('Testing StudentFacade', () => {
   StudentFacade.deployed().then((inst) => { studentFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
 
-/*
+
   it('sets up for testing StudentFacade', async () => {
-    adminFacadeInstance.addUser('mario', 'rossi', 'mrrss75802975', 12324, address1, 1);
-    adminFacadeInstance.addUser('giovanni', 'storti', 'gvnstr75402584', 11424, address0, 0);
-    adminFacadeInstance.addUser('mario', 'bianchi', 'mrbnc75802975', 12326, address2, 0);
-    adminFacadeInstance.addAcademicYear(796);
-    adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1);
+    adminFacadeInstance.addUser('mario', 'rossi', 'mrrss75802975', 12324, address1, 1, { from: address0 });
+    adminFacadeInstance.addUser('giovanni', 'storti', 'gvnstr75402584', 11424, address0, 0, { from: address0 });
+    adminFacadeInstance.addUser('mario', 'bianchi', 'mrbnc75802975', 12326, address2, 0, { from: address0 });
+    adminFacadeInstance.addAcademicYear(796, { from: address0 });
+    adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1, { from: address0 });
     const degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
     professorContract = await ListUsersInstance.getUser.call(address1);
-    adminFacadeInstance.addTeaching(degreeCourseAddress, professorContract, 'maths', { from: address1 });
+    adminFacadeInstance.addTeaching(degreeCourseAddress, professorContract, 'maths', { from: address0 });
     teachinaddress1 = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
     teaching = Teaching.at(teachinaddress1);
     professorFacadeInstance.insertExam(teachinaddress1, '15/5/2018', professorContract, { from: address1 });
