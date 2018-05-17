@@ -35,19 +35,21 @@ contract('Testing ProfessorFacade', () => {
   });
 
   it('TS0011 creates an exam', async () => {
-    await professorFacadeInstance.insertExam(teachingAddress, '15/5/2018', professorContract);
+    await professorFacadeInstance.insertExam(teachingAddress, '15/5/2018', professorContract, { from: gAddress });
     const exam0 = await teaching.getExam.call(0);
     assert.notEqual(exam0, '0x0000000000000000000000000000000000000000', 'not added correctly');
   });
 
   it('TS0012 can publish a mark', async () => {
-    const studentContractAddress = await studentFacadeInstance.getUserContract.call({ from: '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4' });
+    const studentContractAddress = await studentFacadeInstance
+      .getUserContract.call({ from: '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4' });
     const exam = await teaching.getExam.call(0);
     studentFacadeInstance.subscribeToExam(studentContractAddress, exam);
     const examInstance = await Exam.at(exam);
     let examsNumber = await examInstance.getNumberOfMarks.call();
     assert.notEqual(examsNumber.toNumber(), 0, 'no marks for the exam');
-    await professorFacadeInstance.publishMark(exam, studentContractAddress, 27, professorContract);
+    await professorFacadeInstance
+      .publishMark(exam, studentContractAddress, 27, professorContract, { from: gAddress });
     examsNumber = await examInstance.getNumberOfMarks.call();
     assert.notEqual(examsNumber.toNumber(), 1, 'one mark for the exam');
   });

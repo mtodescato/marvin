@@ -31,6 +31,10 @@ contract ListUsers is Ownable {
         masterAdmin = msg.sender;
     }
 
+    function getMasterAdminAddress() public view returns(address) {
+        return masterAdmin;
+    }
+
     function addUser(address _usrAddress, uint8 _type, address _userAccount)
     public
     onlyOwner()

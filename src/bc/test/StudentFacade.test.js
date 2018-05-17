@@ -23,7 +23,7 @@ contract('Testing StudentFacade', () => {
   StudentFacade.deployed().then((inst) => { studentFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
 
-
+/*
   it('sets up for testing StudentFacade', async () => {
     adminFacadeInstance.addUser('mario', 'rossi', 'mrrss75802975', 12324, gAddress, 1);
     adminFacadeInstance.addUser('giovanni', 'storti', 'gvnstr75402584', 11424, '0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4', 0);

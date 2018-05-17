@@ -22,7 +22,7 @@ contract  ProfessorFacade {
     */
     function insertExam(address teaching, bytes date, address professor) 
     public  
-    // professorUseHisContract(professor)
+    professorUseHisContract(professor)
     {
         Exam newExam = new Exam(teaching, date);
         Teaching teach = Teaching(teaching);
@@ -37,7 +37,7 @@ contract  ProfessorFacade {
     */
     function publishMark(address exam, address student, uint8 mark, address sender)
     public 
-    // professorUseHisContract(sender)
+    professorUseHisContract(sender)
     {
         Exam ex = Exam(exam);
         ex.setMark(student, mark, sender);
