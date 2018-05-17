@@ -70,7 +70,7 @@ contract StudentFacade {
     *  @param exam Address of the exam contract.
     *  @param mark accept or reject vote, 1 for accapted and 0 for reject.
     */
-    function manageMark(address student, address exam, bool mark) public {
+    function manageMark(address student, address exam, bool mark) public studentUseHisContract(student) {
         Exam ex = Exam(exam);
         ex.manageMark(student, mark);
         if (mark) {

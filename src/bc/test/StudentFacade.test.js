@@ -70,7 +70,7 @@ contract('Testing StudentFacade', () => {
   it('TS0013 can accept a mark', async () => {
     await professorFacadeInstance
       .publishMark(exam, studentContractAddress, 27, professorContract, { from: address1 });
-    await studentFacadeInstance.manageMark(studentContractAddress, exam, true);
+    await studentFacadeInstance.manageMark(studentContractAddress, exam, true, { from: address0 });
     const numberBefore = await studentFacadeInstance.getNumberOfTeachings
       .call(studentContractAddress);
     assert.equal(numberBefore.toNumber(), 1, 'accepted a mark');
