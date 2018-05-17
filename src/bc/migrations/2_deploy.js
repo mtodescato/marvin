@@ -18,4 +18,10 @@ module.exports = (deployer) => {
     deployer.deploy(AdminFacade, ListUsers.address, factoryA, DegreeRequestsA, AcademicYearsListA);
     return deployer.deploy(StudentFacade, DegreeRequestsA, ListUsers.address);
   });
+
+  deployer.then(async () => {
+    const AdminFacadeInstance = await AdminFacade.deployed().then(instance => instance);
+    const ListUsersInstance = await ListUsers.deployed();
+    await ListUsersInstance.transfertOwnernship(AdminFacadeInstance.address);
+  });
 };
