@@ -82,6 +82,7 @@
     "reselect": "^3.0.1",
     "truffle": "^4.1.8",
     "truffle-contract": "^3.0.4",
+    "truffle-hdwallet-provider": "0.0.3",
     "web3": "^0.20.0",
     "web3-fake-provider": "^0.1.0"
   }
