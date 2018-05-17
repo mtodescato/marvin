@@ -37,13 +37,13 @@ const ListCoursesComponent = props => (
     <Box
       className="searchBox"
       size="medium"
-      pad={{ horizontal: 'medium' }}
+      pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
       Courses found: {/* size */}
       </Heading>
       <Heading tag="h5" >
-        Filter users by serial number :
+        Filter courses by ID:
       </Heading>
       <Search
         inline
