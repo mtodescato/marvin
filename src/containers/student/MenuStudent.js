@@ -1,11 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Sidebar, Header, Box } from 'grommet';
 import PropTypes from 'prop-types';
 import { MenuEntries as MenuEntriesReducer } from '../../reducers';
-import MenuEntries from '../../components/student/MenuEntries';
+import MenuEntries from '../../components/shared/MenuEntries';
+import { menuEntriesStudent } from '../../components/menuEntries';
 
 const MenuStudent = ({ active, changeActive }) => (
-  <MenuEntries active={active} action={changeActive} />
+  <Sidebar
+    fixed
+    full="false"
+    margin={{ vertical: 'none' }}
+    pad={{ vertical: 'none', horizontal: 'small' }}
+  >
+    <Header>
+        Student Menù
+    </Header>
+    <Box
+      flex="grow"
+      justify="start"
+    >
+      <MenuEntries
+        entries={menuEntriesStudent}
+        active={active}
+        action={changeActive}
+      />
+    </Box>
+  </Sidebar>
 );
 
 MenuStudent.propTypes = {
