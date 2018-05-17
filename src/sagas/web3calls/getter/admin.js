@@ -12,6 +12,13 @@ export const getUsers = async size =>
   Promise.all(createArray(size)
     .map(index => getUserInfoFromInt(index)));
 
+export const getStudents = size => getUsers(size)
+  .then(users => users.filter(user => user.role === 0));
+export const getAdmins = size => getUsers(size)
+  .then(users => users.filter(user => user.role === 2));
+export const getProfessors = size => getUsers(size)
+  .then(users => users.filter(user => user.role === 1));
+
 export const deleteUser = address => deployed(AdminFacade)
   .then(inst => inst.removeUser(address, { from: getAccount() }));
 
@@ -28,7 +35,7 @@ export const addUser = user => deployed(AdminFacade)
 
 export const addCourse = course => deployed(AdminFacade)
   .then(inst => inst.addDegreeCourse(
-    2018, // FIXIT:
+    course.academicYear,
     course.name,
     course.president,
     course.type,
