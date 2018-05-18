@@ -4,6 +4,7 @@ import { getUserInfoFromInt } from '.';
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
 import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
+import { numberToCourseType } from '../../../utils/global';
 
 export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
@@ -48,10 +49,11 @@ export const getNumberOfDC = year => deployed(AdminFacade)
 
 export const getDegreeCourse = (year, index) => deployed(AdminFacade)
   .then(inst => inst.getDegreeCourse.call(year, index))
-  .then(dAddress => at(DegreeCourse, dAddress))
-  .then(async course => ({
+  .then(dAddress => ({ course: at(DegreeCourse, dAddress), dAddress }))
+  .then(async ({ course, dAddress }) => ({
+    ID: dAddress,
     name: (await course.getDegreeCourseName.call()).toAscii(),
     president: (await course.getDegreeCourseName.call()).toAscii(),
-    type: (await course.getDegreeCourseType.call()).toNumber(),
+    courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
   }));
 
