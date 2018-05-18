@@ -5,6 +5,7 @@ export default AsyncFlow({
   initialState: {
     courses: [],
     size: 0,
+    year: 2018,
   },
   actions: ['LIST_STUDY_COURSES'],
 }).extend({
@@ -15,12 +16,20 @@ export default AsyncFlow({
           size: action.payload.size,
           courses: action.payload.courses,
         };
+      case types.LIST_STUDY_COURSES_REQUEST:
+        return {
+          ...state,
+          year: action.payload.year,
+        };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    listStudyCoursesRequest: () => ({ type: types.LIST_STUDY_COURSES_REQUEST }),
+    listStudyCoursesRequest: year => ({
+      type: types.LIST_STUDY_COURSES_REQUEST,
+      payload: { year },
+    }),
     listStudyCoursesSuccess: ({ courses, size }) => ({
       type: types.LIST_STUDY_COURSES_SUCCESS,
       payload: { courses, size },
