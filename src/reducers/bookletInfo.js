@@ -29,7 +29,7 @@ export default AsyncFlow({
           data: '11/11/2011',
         },
         {
-          responsabile: 'Tullio',
+          responsabile: 'Mario',
           nome: 'Swe',
           cfu: '13',
           stato: false,

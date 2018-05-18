@@ -1,10 +1,11 @@
 import { deployed, at, getAccount } from '../deployed';
+import { numberToCourseType } from '../../../utils/global';
 import { getUserInfoFromInt } from '.';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
 import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
-import { numberToCourseType } from '../../../utils/global';
+import Teaching from '../../../bc/build/contracts/Teaching.json';
 
 export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
@@ -64,3 +65,30 @@ export const getDegreeCourse = ({ year, i }) => deployed(AdminFacade)
     courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
   }));
 
+export const getDegreeCourses = ({ year, size }) =>
+  Promise.all(createArray(size)
+    .map(index => getDegreeCourse({ year, i: index })));
+
+export const addTeaching = teaching => deployed(AdminFacade)
+  .then(inst => inst.addTeaching(
+    teaching.course,
+    teaching.responsible,
+    teaching.name,
+    { from: getAccount() },
+  ));
+
+export const getNumberOfTeachings = course => at(DegreeCourse, course)
+  .then(inst => inst.getNumberOfTeachings.call())
+  .then(Number);
+
+export const getTeaching = (course, index) => at(DegreeCourse, course)
+  .then(inst => inst.getTeaching.call(index))
+  .then(teachingAddress => at(Teaching, teachingAddress))
+  .then(async teaching => ({
+    name: window.web3.toAscii(await teaching.getName.call()),
+    responsible: await teaching.getReferenceProfessor.call(),
+  }));
+
+export const getTeachings = async ({ course, size }) =>
+  Promise.all(createArray(size)
+    .map(index => getTeaching(course, index)));

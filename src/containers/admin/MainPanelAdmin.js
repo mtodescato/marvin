@@ -8,7 +8,7 @@ import CreateUser from './CreateUser';
 import ListCourses from './ListCourses';
 import CreateCourse from './CreateCourse';
 import ListTeachings from './ListTeachings';
-import CreateTeaching from '../../components/admin/CreateTeachingComponent';
+import CreateTeaching from './CreateTeaching';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
   <div>

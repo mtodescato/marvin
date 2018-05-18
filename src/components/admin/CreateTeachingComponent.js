@@ -16,7 +16,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import TeachingConfirmation from './CreateTeachingConfirmation';
+// import TeachingConfirmation from './CreateTeachingConfirmation';
 
 /*
 const options = {[{
@@ -41,13 +41,17 @@ class CreateTeachingComponent extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCourse = this.handleChangeCourse.bind(this);
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
 
     this.state = {
       name: '',
+      course: '',
+      courseRef: '',
       responsible: '',
+      responsibleRef: '',
       showLayer: false,
     };
   }
@@ -55,7 +59,8 @@ class CreateTeachingComponent extends React.Component {
   onSubmit() {
     const teaching = {
       name: this.state.name,
-      responsible: this.state.responsible,
+      responsible: this.state.responsibleRef,
+      course: this.state.courseRef,
     };
     this.props.actions.addTeachingRequest(teaching);
   }
@@ -70,8 +75,12 @@ class CreateTeachingComponent extends React.Component {
     this.setState({ name: e.target.value });
   }
 
+  handleChangeCourse(e) {
+    this.setState({ course: e.value.label, courseRef: e.value.value });
+  }
+
   handleChangeResponsible(e) {
-    this.setState({ responsible: e.target.value });
+    this.setState({ responsible: e.value.label, responsibleRef: e.value.value });
   }
 
   render() {
@@ -140,29 +149,41 @@ class CreateTeachingComponent extends React.Component {
                   <Select
                     id="responsible"
                     name="Responsible"
-                    placeHolder="Tullio"
+                    placeHolder="Responsible"
                     multiple={false}
                     // onSearch={this.handleChangeResponsible}
-                    options={['two', 'three']}
+                    options={this.props.professors}
                     value={this.state.responsible}
                     onChange={this.handleChangeResponsible}
                   />
                 </FormField>
-
+                <FormField label="Course:">
+                  <Select
+                    id="course"
+                    name="Course"
+                    placeHolder="Course"
+                    multiple={false}
+                    // onSearch={this.handleChangeResponsible}
+                    options={this.props.courses}
+                    value={this.state.course}
+                    onChange={this.handleChangeCourse}
+                  />
+                </FormField>
               </FormFields>
               <Footer pad={{ vertical: 'small' }}>
                 <Button
                   label="Submit"
                   primary
-                  onClick={this.setLayer}
+                  onClick={this.onSubmit}
+                  // onClick={this.setLayer}
                 />
-                {this.state.showLayer ?
+                {/* {this.state.showLayer ?
                   <TeachingConfirmation
                     setLayer={this.setLayer}
                     teachingName={this.state.name}
                     teachingResponsible={this.state.responsible}
                   /> : null
-                  }
+                  } */}
               </Footer>
             </Form>
           </Box>
@@ -174,11 +195,16 @@ class CreateTeachingComponent extends React.Component {
 CreateTeachingComponent.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
+    initialize: PropTypes.func.isRequired,
   }).isRequired,
-  /* state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired, */
+  professors: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  courses: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CreateTeachingComponent;
