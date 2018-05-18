@@ -56,6 +56,7 @@ class CreateCourseComponent extends React.Component {
       name: this.state.name,
       president: this.state.president,
       type: this.state.type,
+      academicYear: this.state.academicYear,
     };
     this.props.actions.addCourseRequest(course); */
     } else {
@@ -94,6 +95,10 @@ class CreateCourseComponent extends React.Component {
 
   handleChangePresident(e) {
     this.setState({ president: e.option });
+  }
+
+  handleChangeAcademicYear(e) {
+    this.setState({ academicYear: Number(e.target.value) });
   }
 
   handleChangeType(e) {
