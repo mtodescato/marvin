@@ -31,7 +31,7 @@ contract StudentFacade {
     *  @param degreeRequestsAddress Address of degreeRequest contract containig the degree requests.
     *  @param userListAddress Address ot LisrUser contract containig users.
     */
-    function StudentFacade(address degreeRequestsAddress, address userListAddress) public {
+    constructor(address degreeRequestsAddress, address userListAddress) public {
         degreeRequests = DegreeRequests(degreeRequestsAddress);
         userList = ListUsers(userListAddress);
     }

@@ -31,7 +31,7 @@ contract DegreeRequests {
         _;
     }
 
-    function DegreeRequests() public {
+    constructor() public {
         adminFacade = msg.sender;
     }
 

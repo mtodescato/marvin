@@ -9,7 +9,7 @@ contract Student is User {
     mapping(uint => address) private intToTeaching;
     uint private last = 0;
 
-    function Student(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
+    constructor(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
     public
     User(_name, _surname, _socialNumber, _serial)
     {}

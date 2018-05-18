@@ -9,7 +9,7 @@ contract AcademicYear is Ownable {
     uint private last = 0;
     uint private year;
 
-    function AcademicYear(uint _year) public {
+    constructor(uint _year) public {
         year = _year;
     }
 

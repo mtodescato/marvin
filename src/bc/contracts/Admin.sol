@@ -3,7 +3,7 @@ import "./User.sol";
 
 
 contract Admin is User {
-    function Admin(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
+    constructor(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
     public
     User(_name, _surname, _socialNumber, _serial)
     {}

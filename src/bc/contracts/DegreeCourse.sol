@@ -10,7 +10,7 @@ contract DegreeCourse is Ownable {
     bytes private degreeCoursePresident;
     uint8 private degreeCourseType;
 
-    function DegreeCourse(bytes _degreeCourseName, bytes _degreeCoursePresident, uint8 _degreeCourseType) public {
+    constructor(bytes _degreeCourseName, bytes _degreeCoursePresident, uint8 _degreeCourseType) public {
         degreeCourseName = _degreeCourseName;
         degreeCoursePresident = _degreeCoursePresident;
         degreeCourseType = _degreeCourseType;

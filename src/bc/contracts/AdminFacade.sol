@@ -29,7 +29,7 @@ contract  AdminFacade {
     *  @param _degreeRequests Address to the DegreeRequest contract containig the list of the degree requests.
     *  @param _yearsList Address of the list of the Academic years.
     */
-    function AdminFacade(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
+    constructor(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
         userList = ListUsers(_userlist);
         factory = FactoryMethod(_factory);
         degreeRequests = DegreeRequests(_degreeRequests);

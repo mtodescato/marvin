@@ -27,7 +27,7 @@ contract ListUsers is Ownable {
         _;
     }
 
-    function ListUsers() public {
+    constructor() public {
         masterAdmin = msg.sender;
     }
 

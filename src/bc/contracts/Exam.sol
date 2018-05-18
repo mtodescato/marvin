@@ -35,7 +35,7 @@ contract Exam {
         _;
     }
 
-    function Exam(address teach, bytes _date) public {
+    constructor(address teach, bytes _date) public {
         date = _date;
         teaching = teach;
     }

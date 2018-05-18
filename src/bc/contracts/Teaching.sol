@@ -22,7 +22,7 @@ contract Teaching {
         _;
     }
 
-    function Teaching(address _professor, bytes _name) public {
+    constructor(address _professor, bytes _name) public {
         professor = _professor;
         name = _name;
     }
