@@ -3,6 +3,7 @@ const AdminFacade = artifacts.require('./AdminFacade.sol');
 const Teaching = artifacts.require('./Teaching.sol');
 const ListUsers = artifacts.require('./ListUsers.sol');
 const StudentFacade = artifacts.require('StudentFacade.sol');
+const Student = artifacts.require('./Student.sol');
 const Exam = artifacts.require('./Exam.sol');
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
 const address1 = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
@@ -26,6 +27,7 @@ contract('Testing StudentFacade', () => {
   let exam;
   let studentContractAddress;
   let professorContract;
+  let degreeCourseAddress;
 
   ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
@@ -39,7 +41,7 @@ contract('Testing StudentFacade', () => {
     adminFacadeInstance.addUser('mario', 'bianchi', 'mrbnc75802975', 12326, address2, 0, { from: address0 });
     adminFacadeInstance.addAcademicYear(796, { from: address0 });
     adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1, { from: address0 });
-    const degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
+    degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
     professorContract = await ListUsersInstance.getUser.call(address1);
     adminFacadeInstance.addTeaching(degreeCourseAddress, professorContract, 'maths', { from: address0 });
     teachinaddress1 = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
@@ -74,6 +76,8 @@ contract('Testing StudentFacade', () => {
     const numberBefore = await studentFacadeInstance.getNumberOfTeachings
       .call(studentContractAddress);
     assert.equal(numberBefore.toNumber(), 1, 'accepted a mark');
+    const passed = await (Student.at(studentContractAddress)).checkPassedTeaching(teachinaddress1);
+    assert.equal(passed, true, 'passed the teaching');
   });
 
   it('TS0014 can get a teaching', async () => {
@@ -88,7 +92,8 @@ contract('Testing StudentFacade', () => {
     assert.notEqual(examAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
   });
 
-  it('TS0016 can create a degree request', async () => {
+  it('TS0017 can create a degree request', async () => {
+    await (Student.at(studentContractAddress)).setDegreeCourse(degreeCourseAddress);
     const studentContract = await ListUsersInstance
       .getUser.call(address0);
     await studentFacadeInstance

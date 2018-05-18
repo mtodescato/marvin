@@ -50,7 +50,7 @@ contract StudentFacade {
     function createDegreeRequest(address student, bytes thesisTitle, bytes submissionDate, address professor)
     public
     studentUseHisContract(student)
-    //onlyReadyStudent(student)
+    onlyReadyStudent(student)
     {
         require(userList.getType(professor) == 1);
         degreeRequests.addRequest(student, thesisTitle, submissionDate, professor);
@@ -121,12 +121,12 @@ contract StudentFacade {
         uint n = degree.getNumberOfTeachings();
         bool ok = true;
 
-
+        
         for (uint i=0; i < n && ok; i++) {
             address t = degree.getTeaching(i);
             ok = std.checkPassedTeaching(t);
         }
-
+        
         return ok;
     }
 }
