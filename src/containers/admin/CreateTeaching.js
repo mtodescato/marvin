@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 // import { connect } from 'react-redux';
-import CreateTeaching from '../../components/admin/CreateCourseComponent';
+import CreateTeaching from '../../components/admin/CreateTeachingComponent';
 
 const CreateTeachingContainer = ({ state, actions }) => (
   <CreateTeaching state={state} actions={actions} />
@@ -17,21 +17,26 @@ CreateTeachingContainer.propTypes = {
   }).isRequired,
 };
 
-/* const mapStateToProps = state => ({
-  state: {
-    isSuccess: state.addUserReducer.isSuccess,
-    isFailed: state.addUserReducer.isFailed,
-  },
-});
-
+CreateTeaching.propTypes = {
+  actions: PropTypes.shape({
+    addTeachingRequest: PropTypes.func.isRequired,
+  }).isRequired,
+  state: PropTypes.shape({
+    isSuccess: PropTypes.bool.isRequired,
+    isFailed: PropTypes.bool.isRequired,
+  }).isRequired,
+};
+/*
 const mapDispatchToProps = dispatch => ({
   actions: {
-    addCourseRequest: (teaching) => {
-      dispatch(actionTypes.addCourseRequest(teaching));
+    addTeachingRequest: (teaching) => {
+      dispatch(AddTeaching.creators.addTeachingRequest(teaching));
     },
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTeachingContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTeaching);
+
 */
-export default CreateTeachingContainer;
+
+export default CreateTeaching;
