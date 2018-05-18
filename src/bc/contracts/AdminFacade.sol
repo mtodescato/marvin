@@ -102,7 +102,7 @@ contract  AdminFacade {
     *  @param academicYear Year of the academic calendar.
     *  @return address The uint that rappresent the cardinality of the academic year.
     */
-    function getNumberOfDC(uint academicYear) public view return(uint) {
+    function getNumberOfDC(uint academicYear) public view returns(uint) {
         address acYear = yearsList.getAcademicYear(academicYear);
         AcademicYear acYearObj = AcademicYear(acYear);
         return acYearObj.getNumberOfDC();
