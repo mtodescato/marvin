@@ -92,7 +92,7 @@ contract('Testing StudentFacade', () => {
     assert.notEqual(examAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
   });
 
-  it('TS0017 can create a degree request', async () => {
+  it('TS0016 can create a degree request', async () => {
     await (Student.at(studentContractAddress)).setDegreeCourse(degreeCourseAddress);
     const studentContract = await ListUsersInstance
       .getUser.call(address0);
