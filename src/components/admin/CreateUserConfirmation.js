@@ -18,6 +18,7 @@ class CreateUserConfirmation extends React.Component {
     };
 
     this.props.addUserRequest(user);
+    this.props.setLayer();
   }
   render() {
     return (
