@@ -7,22 +7,25 @@ import {
   FormField,
   Button,
   Toast,
-  Header,
   Heading,
   FormFields,
-  Paragraph,
   TextInput,
   Select,
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import CourseConfirmation from './CreateCourseConfirmation';
+import Checkmark from 'grommet/components/icons/base/Checkmark';
+import { stringFormValidation } from '../formValidator';
+import CreateCourseConfirmation from './CreateCourseConfirmation';
 
 class CreateCourseComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleValidation = this.handleValidation.bind(this);
+
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangePresident = this.handleChangePresident.bind(this);
     this.handleChangeType = this.handleChangeType.bind(this);
@@ -36,18 +39,25 @@ class CreateCourseComponent extends React.Component {
       type: 0,
       typeString: 'Tree-year',
       academicYear: 2018,
+      errors: {
+        name: '',
+        president: '',
+        type: '',
+        formIsValid: false,
+      },
       showLayer: false,
     };
   }
 
-  onSubmit() {
-    const user = {
+  onSubmit(e) {
+    e.preventDefault();
+    const course = {
       name: this.state.name,
       president: this.state.president,
       type: this.state.type,
       academicYear: this.state.academicYear,
     };
-    this.props.actions.addCourseRequest(user);
+    this.props.actions.addCourseRequest(course);
   }
 
   setLayer() {
@@ -56,8 +66,35 @@ class CreateCourseComponent extends React.Component {
     });
   }
 
+  handleValidation() {
+    const errors = Object.assign({}, this.state.errors);
+
+    if ((errors.name === 'isValid'
+    /* && errors.president === 'isValid'
+  && errors.type === 'isValid' */)) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+
+    this.setState({ errors });
+    return this.state.errors.formIsValid;
+  }
+
+
   handleChangeName(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.name = stringFormValidation(e.target.value);
+
     this.setState({ name: e.target.value });
+    this.setState({ errors });
+  }
+
+  handleChangeType(e) {
+    if (e.target.value === 'Master') {
+      this.setState({ type: 1 });
+    } else {
+      this.setState({ type: 0 });
+    }
   }
 
   handleChangePresident(e) {
@@ -66,24 +103,6 @@ class CreateCourseComponent extends React.Component {
 
   handleChangeAcademicYear(e) {
     this.setState({ academicYear: Number(e.target.value) });
-  }
-
-  handleChangeType(e) {
-    let numberType;
-    switch (e.option) {
-      case 'Tree-year':
-        numberType = 0;
-        break;
-      case 'Master':
-        numberType = 1;
-        break;
-      default:
-        numberType = 0;
-    }
-    this.setState({
-      type: numberType,
-      typeString: e.option,
-    });
   }
 
   render() {
@@ -103,7 +122,9 @@ class CreateCourseComponent extends React.Component {
           className="PanelBox"
           direction="column"
           margin="small"
+          separator="bottom"
         >
+
           <Box
             className="PanelHeader"
             direction="row"
@@ -120,27 +141,43 @@ class CreateCourseComponent extends React.Component {
                 Create Course
             </Label>
           </Box>
+
+          <Box className="titleBox" alignSelf="center" >
+            <Heading tag="h2" strong>
+            New course creation
+            </Heading>
+          </Box>
+
           <Box
-            className="PanelForm"
-            direction="row"
-            justify="center"
-            align="center"
+            className="formBox"
+            direction="column"
+            justify="start"
             separator="bottom"
+            pad={{ horizontal: 'medium' }}
           >
+            <Heading tag="h5" >
+              Submit the informations of the new course.
+            </Heading>
             <Form>
-              <Header>
-                <Heading
-                  align="center"
-                  tag="h2"
-                >
-                    New course creation
-                </Heading>
-              </Header>
               <FormFields>
-                <Paragraph>
-                  Submit the info of the new course.
-                </Paragraph>
-                <FormField label="Name:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Name:
+                    </Label>
+                    {this.state.errors.name !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.name}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.name === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="name"
                     name="Name"
@@ -148,11 +185,28 @@ class CreateCourseComponent extends React.Component {
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
-                <FormField label="President:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                        President:
+                    </Label>
+                    {this.state.errors.name !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.president}</span>
+                      </Label> : null
+                      }
+                    {this.state.errors.president === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                      }
+                  </Box>
                   <TextInput
                     id="president"
                     name="President"
-                    placeHolder="Mario"
+                    placeHolder="Massimo Marchiori"
                     onDOMChange={this.handleChangePresident}
                   />
                 </FormField>
@@ -173,21 +227,26 @@ class CreateCourseComponent extends React.Component {
                   />
                 </FormField>
               </FormFields>
-              <Footer pad={{ vertical: 'small' }}>
-                <Button
-                  label="Submit"
-                  primary
-                  onClick={this.onSubmit}
-                />
-                {this.state.showLayer ?
-                  <CourseConfirmation
-                    setLayer={this.setLayer}
-                    courseName={this.state.name}
-                    coursePresident={this.state.president}
-                  /> : null
-                  }
-              </Footer>
             </Form>
+
+            <Footer pad={{ vertical: 'medium' }}>
+              <Button
+                label="Submit"
+                primary
+                onClick={this.onSubmit}
+              />
+              {this.state.showLayer ?
+                <CreateCourseConfirmation
+                  setLayer={this.setLayer}
+                  courseName={this.state.name}
+                  coursePresident={this.state.president}
+                  courseType={this.state.type}
+                  courseYear={this.state.academicYear}
+                  addCourseRequest={this.props.actions.addCourseRequest}
+                  state={this.props.state}
+                /> : null
+                  }
+            </Footer>
           </Box>
         </Box>
       </div>

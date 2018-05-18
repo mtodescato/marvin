@@ -12,6 +12,7 @@ class ListTeachingsContainer extends React.Component {
     return (
       <ListTeachingsComponent
         teachings={this.props.teachings}
+        size={this.props.size}
       />
     );
   }
@@ -23,11 +24,13 @@ ListTeachingsContainer.propTypes = {
     responsible: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
   })).isRequired,
+  size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   teachings: state['list-teachings'].teachings,
+  size: state['list-teachings'].size,
 });
 
 const mapDispatchToProps = dispatch => ({

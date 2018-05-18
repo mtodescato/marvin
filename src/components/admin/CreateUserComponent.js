@@ -271,10 +271,10 @@ class CreateUserComponent extends React.Component {
                 </FormField>
               </FormFields>
             </Form>
+
             <Footer pad={{ vertical: 'medium' }}>
               <Button
                 label="Submit"
-                type="submit"
                 primary
                 onClick={this.onSubmit}
               />

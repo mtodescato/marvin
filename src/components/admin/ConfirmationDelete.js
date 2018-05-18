@@ -34,10 +34,18 @@ class ConfirmationDelete extends React.Component {
                 Delete user confirmation
             </Heading>
           </Header>
-          <Paragraph margin="small" align="center">
-                Are you sure you want to delete the user?
-          </Paragraph>
-          <Box pad={{ vertical: 'small', horizontal: 'none' }}>
+
+          <Box
+            justify="center"
+            size={{ width: { max: 'medium' } }}
+            pad={{ vertical: 'small', horizontal: 'small' }}
+          >
+            <Paragraph margin="none" align="center">
+                  Are you sure you want to send the transaction to delete the user?
+            </Paragraph>
+          </Box>
+
+          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
             <List >
               <ListItem
                 justify="between"
@@ -93,6 +101,7 @@ class ConfirmationDelete extends React.Component {
               </ListItem>
             </List>
           </Box>
+
           <Footer
             justify="center"
             align="center"

@@ -8,6 +8,7 @@ import CreateUser from './CreateUser';
 import ListCourses from './ListCourses';
 import CreateCourse from './CreateCourse';
 import ListTeachings from './ListTeachings';
+import CreateYear from '../../components/admin/CreateYearComponent';
 import CreateTeaching from './CreateTeaching';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
@@ -36,6 +37,8 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: ListTeachings };
     case 6:
       return { DashboardComponent: CreateTeaching };
+    case 8:
+      return { DashboardComponent: CreateYear };
     default:
       return { DashboardComponent: Home };
   }

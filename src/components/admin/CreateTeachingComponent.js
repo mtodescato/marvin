@@ -7,16 +7,16 @@ import {
   FormField,
   Button,
   // Toast,
-  Header,
   Heading,
   FormFields,
-  Paragraph,
   TextInput,
-  Select,
   Footer,
+  Select,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 // import TeachingConfirmation from './CreateTeachingConfirmation';
+import Checkmark from 'grommet/components/icons/base/Checkmark';
+import { stringFormValidation } from '../formValidator';
 
 /*
 const options = {[{
@@ -40,6 +40,9 @@ class CreateTeachingComponent extends React.Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleValidation = this.handleValidation.bind(this);
+
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeCourse = this.handleChangeCourse.bind(this);
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this);
@@ -52,11 +55,18 @@ class CreateTeachingComponent extends React.Component {
       courseRef: '',
       responsible: '',
       responsibleRef: '',
+      errors: {
+        name: '',
+        course: '',
+        responsible: '',
+        formIsValid: false,
+      },
       showLayer: false,
     };
   }
 
-  onSubmit() {
+  onSubmit(e) {
+    e.preventDefault();
     const teaching = {
       name: this.state.name,
       responsible: this.state.responsibleRef,
@@ -71,8 +81,29 @@ class CreateTeachingComponent extends React.Component {
     });
   }
 
+
+  handleValidation() {
+    const errors = Object.assign({}, this.state.errors);
+    /*
+    if ((errors.name === 'isValid'
+          && errors.surname === 'isValid'
+          && errors.address === 'isValid')) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+    */
+    errors.formIsValid = true;
+
+    this.setState({ errors });
+    return this.state.errors.formIsValid;
+  }
+
   handleChangeName(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.name = stringFormValidation(e.target.value);
+
     this.setState({ name: e.target.value });
+    this.setState({ errors });
   }
 
   handleChangeCourse(e) {
@@ -100,13 +131,14 @@ class CreateTeachingComponent extends React.Component {
           className="PanelBox"
           direction="column"
           margin="small"
+          separator="bottom"
         >
           <Box
             className="PanelHeader"
             direction="row"
             justify="start"
             align="center"
-            separator="horizontal"
+            separator="bottom"
           >
             <FormNextLinkIcon />
             <Label>
@@ -117,31 +149,47 @@ class CreateTeachingComponent extends React.Component {
                 Create Teaching
             </Label>
           </Box>
+
+          <Box className="titleBox" alignSelf="center" >
+            <Heading tag="h2" strong>
+              New teaching creation
+            </Heading>
+          </Box>
+
           <Box
-            className="PanelForm"
-            direction="row"
-            justify="center"
-            align="center"
+            className="formBox"
+            direction="column"
+            justify="start"
             separator="bottom"
+            pad={{ horizontal: 'medium' }}
           >
+            <Heading tag="h5" >
+              Submit the informations of the new teaching.
+            </Heading>
             <Form>
-              <Header>
-                <Heading
-                  align="center"
-                  tag="h2"
-                >
-                    New teaching creation
-                </Heading>
-              </Header>
               <FormFields>
-                <Paragraph>
-                  Submit the info of the new teaching.
-                </Paragraph>
-                <FormField label="Name:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Name:
+                    </Label>
+                    {this.state.errors.name !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.name}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.name === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="name"
                     name="Name"
-                    placeHolder="Mario"
+                    placeHolder="Basi di dati"
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
@@ -186,6 +234,7 @@ class CreateTeachingComponent extends React.Component {
                   } */}
               </Footer>
             </Form>
+
           </Box>
         </Box>
       </div>
@@ -195,7 +244,6 @@ class CreateTeachingComponent extends React.Component {
 CreateTeachingComponent.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
-    initialize: PropTypes.func.isRequired,
   }).isRequired,
   professors: PropTypes.shape({
     value: PropTypes.string.isRequired,

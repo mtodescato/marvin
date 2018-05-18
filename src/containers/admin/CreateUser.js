@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AddUser } from '../../reducers';
-import CreateUser from '../../components/admin/CreateUserComponent';
+import CreateUserComponent from '../../components/admin/CreateUserComponent';
 
-const CreateUserContainer = ({ state, actions }) => (
-  <CreateUser state={state} actions={actions} />
+const CreateUser = ({ state, actions }) => (
+  <CreateUserComponent state={state} actions={actions} />
 );
 
-CreateUserContainer.propTypes = {
+CreateUser.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
@@ -32,4 +32,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateUserContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateUser);
