@@ -11,7 +11,7 @@ node_js:
 before_install:
 - sudo apt-get update
 - npm install -g truffle@4.1.7
-- npm install -g solhint
+- npm install -g solhint@1.2.1
 - npm install -g ganache-cli@6.0.3
 
 all_branches: true
