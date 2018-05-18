@@ -1,37 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-import CreateTeaching from '../../components/admin/CreateCourseComponent';
+import { connect } from 'react-redux';
+import CreateTeaching from '../../components/admin/CreateTeachingComponent';
+import { ListProfessors } from '../../reducers';
 
-const CreateTeachingContainer = ({ state, actions }) => (
-  <CreateTeaching state={state} actions={actions} />
-);
+class CreateTeachingContainer extends React.Component {
+  componentWillMount() {
+    this.props.actions.initialize();
+  }
+  render() {
+    return (
+      <CreateTeaching professors={this.props.professors} actions={this.props.actions} />
+    );
+  }
+}
 
 CreateTeachingContainer.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
+  professors: PropTypes.shape({
     isSuccess: PropTypes.bool.isRequired,
     isFailed: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
-/* const mapStateToProps = state => ({
-  state: {
-    isSuccess: state.addUserReducer.isSuccess,
-    isFailed: state.addUserReducer.isFailed,
-  },
+const mapStateToProps = state => ({
+  professors: state['list-professors'].professors.map(professor => ({
+    value: professor.address,
+    label: `${professor.name} ${professor.surname}`,
+  })),
 });
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    addCourseRequest: (teaching) => {
-      dispatch(actionTypes.addCourseRequest(teaching));
-    },
+    initialize: () => { dispatch(ListProfessors.creators.listProfessorsRequest()); },
   },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTeachingContainer);
-*/
-export default CreateTeachingContainer;

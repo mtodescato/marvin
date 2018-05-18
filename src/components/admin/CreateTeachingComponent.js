@@ -41,12 +41,14 @@ class CreateTeachingComponent extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChangeName = this.handleChangeName.bind(this);
+    this.handleChangeCourse = this.handleChangeCourse.bind(this);
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
 
     this.state = {
       name: '',
+      course: '',
       responsible: '',
       showLayer: false,
     };
@@ -56,6 +58,7 @@ class CreateTeachingComponent extends React.Component {
     const teaching = {
       name: this.state.name,
       responsible: this.state.responsible,
+      course: this.state.course,
     };
     this.props.actions.addTeachingRequest(teaching);
   }
@@ -68,6 +71,10 @@ class CreateTeachingComponent extends React.Component {
 
   handleChangeName(e) {
     this.setState({ name: e.target.value });
+  }
+
+  handleChangeCourse(e) {
+    this.setState({ course: e.target.value });
   }
 
   handleChangeResponsible(e) {
@@ -140,15 +147,26 @@ class CreateTeachingComponent extends React.Component {
                   <Select
                     id="responsible"
                     name="Responsible"
-                    placeHolder="Tullio"
+                    placeHolder="Mario"
                     multiple={false}
                     // onSearch={this.handleChangeResponsible}
-                    options={['two', 'three']}
+                    options={this.props.professors}
                     value={this.state.responsible}
                     onChange={this.handleChangeResponsible}
                   />
                 </FormField>
-
+                <FormField label="Course:">
+                  <Select
+                    id="course"
+                    name="Course"
+                    placeHolder="Mario"
+                    multiple={false}
+                    // onSearch={this.handleChangeResponsible}
+                    options={['two', 'three']}
+                    value={this.state.responsible}
+                    onChange={this.handleChangeCourse}
+                  />
+                </FormField>
               </FormFields>
               <Footer pad={{ vertical: 'small' }}>
                 <Button
