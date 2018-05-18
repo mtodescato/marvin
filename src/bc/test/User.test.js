@@ -29,6 +29,22 @@ contract('Testing User', () => {
   });
 
   it('can get user name', async () => {
-    await userInstance.getName.call();
+    const name = await userInstance.getName.call();
+    assert.equal(web3.toAscii(name), 'mario', 'name returns correctly');
+  });
+
+  it('can get user surname', async () => {
+    const surname = await userInstance.getSurname.call();
+    assert.equal(web3.toAscii(surname), 'rossi', 'surname returns correctly');
+  });
+
+  it('can get user social number', async () => {
+    const socialNumber = await userInstance.getSocialNumber.call();
+    assert.equal(web3.toAscii(socialNumber), 'mrrss75802975', 'social number returns correctly');
+  });
+
+  it('can get user serial', async () => {
+    const serial = await userInstance.getSerial.call();
+    assert.equal(serial.toNumber(), 12324, 'serial returns correctly');
   });
 });
