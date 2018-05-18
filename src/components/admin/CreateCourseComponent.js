@@ -50,18 +50,14 @@ class CreateCourseComponent extends React.Component {
   }
 
   onSubmit(e) {
-    if (this.handleValidation()) {
-      this.setLayer();
-    /* const course = {
+    e.preventDefault();
+    const course = {
       name: this.state.name,
       president: this.state.president,
       type: this.state.type,
       academicYear: this.state.academicYear,
     };
-    this.props.actions.addCourseRequest(course); */
-    } else {
-      e.preventDefault();
-    }
+    this.props.actions.addCourseRequest(course);
   }
 
   setLayer() {
@@ -93,8 +89,16 @@ class CreateCourseComponent extends React.Component {
     this.setState({ errors });
   }
 
+  handleChangeType(e) {
+    if (e.target.value === 'Master') {
+      this.setState({ type: 1 });
+    } else {
+      this.setState({ type: 0 });
+    }
+  }
+
   handleChangePresident(e) {
-    this.setState({ president: e.option });
+    this.setState({ president: e.target.value });
   }
 
   handleChangeAcademicYear(e) {

@@ -4,7 +4,7 @@ import { Box, Table, Heading, Search, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import TeachingEntry from './TeachingEntry';
 
-const ListTeachingsComponent = ({ size, teachingsEntries }) => (
+const ListTeachingsComponent = ({ size, teachings }) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -67,7 +67,7 @@ const ListTeachingsComponent = ({ size, teachingsEntries }) => (
       </thead>
       <tbody>
         {
-          teachingsEntries.map((element, index) => (
+          teachings.map((element, index) => (
             <TeachingEntry
               key={[element.address]}
               index={index}
@@ -81,7 +81,7 @@ const ListTeachingsComponent = ({ size, teachingsEntries }) => (
 );
 
 ListTeachingsComponent.propTypes = {
-  teachingsEntries: PropTypes.arrayOf(PropTypes.shape({
+  teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
