@@ -17,7 +17,10 @@ contract  AcademicYearsList is Ownable {
         _;
     }
 
-    function insertNewAcademicYears( uint year, address academicYear) public onlyNewYear(year) {
+    function insertNewAcademicYears( uint year, address academicYear) 
+    public 
+    onlyNewYear(year) 
+    onlyOwner() {
         yearToAcademicYear[year] = academicYear;
     }
 
