@@ -8,7 +8,7 @@ import CreateUser from './CreateUser';
 import ListCourses from './ListCourses';
 import CreateCourse from './CreateCourse';
 import ListTeachings from './ListTeachings';
-import CreateYear from '../../components/admin/CreateYearComponent';
+import CreateYear from './CreateYear';
 import CreateTeaching from './CreateTeaching';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (

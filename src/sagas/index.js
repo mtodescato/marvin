@@ -6,7 +6,7 @@ import * as web3UserInfo from './web3UserInfo';
 import * as listUsers from './listUsers';
 import * as deleteUser from './deleteUser';
 import * as addCourse from './addCourse';
-import * as addAcademycYear from './addAcademycYear';
+import * as addAcademicYear from './addAcademicYear';
 import * as listProfessors from './listProfessors';
 import * as listStudyCourses from './listStudyCourses';
 import * as addTeaching from './addTeaching';
@@ -21,7 +21,7 @@ export default function* rootSaga() {
     fork(listUsers.triggerAction),
     fork(deleteUser.triggerAction),
     fork(addCourse.triggerAction),
-    fork(addAcademycYear.triggerAction),
+    fork(addAcademicYear.triggerAction),
     fork(listProfessors.triggerAction),
     fork(listStudyCourses.triggerAction),
     fork(addTeaching.triggerAction),
@@ -37,7 +37,7 @@ export {
   listUsers,
   deleteUser,
   addCourse,
-  addAcademycYear,
+  addAcademicYear,
   listProfessors,
   listStudyCourses,
   addTeaching,

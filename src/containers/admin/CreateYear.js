@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
-// import { AddYear } from '../../reducers';
+import { connect } from 'react-redux';
+import { AddAcademicYear } from '../../reducers';
 import CreateYearComponent from '../../components/admin/CreateYearComponent';
 
 const CreateYear = ({ state, actions }) => (
@@ -17,24 +17,14 @@ CreateYear.propTypes = {
     isFailed: PropTypes.bool.isRequired,
   }).isRequired,
 };
-/*
-const mapStateToProps = state => ({
-  state: {
-    status: state['add-year'].status,
-  },
-});
 
 const mapDispatchToProps = dispatch => ({
   actions: {
     addYearRequest: (year) => {
-      dispatch(AddYear.creators.addYearRequest(year));
+      dispatch(AddAcademicYear.creators.addAcademicYearRequest(year));
     },
   },
 });
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateYear);
-
-*/
-
-export default CreateYear;
+export default connect(null, mapDispatchToProps)(CreateYear);

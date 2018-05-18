@@ -44,7 +44,7 @@ class CreateYearComponent extends React.Component {
     if (this.handleValidation()) {
       this.setLayer();
 
-      // this.props.actions.addYearRequest(year);
+      // this.props.actions.addYearRequest(this.state.year);
     } else {
       e.preventDefault();
     }
@@ -175,7 +175,7 @@ class CreateYearComponent extends React.Component {
                 <CreateYearConfirmation
                   setLayer={this.setLayer}
                   year={this.state.year}
-                  // addYearRequest={this.props.actions.addYearRequest}
+                  addYearRequest={() => this.props.actions.addYearRequest(this.state.year)}
                   state={this.props.state}
                 />
                       : null
@@ -189,9 +189,9 @@ class CreateYearComponent extends React.Component {
 }
 
 CreateYearComponent.propTypes = {
-  /* actions: PropTypes.shape({
+  actions: PropTypes.shape({
     addYearRequest: PropTypes.func.isRequired,
-  }).isRequired, */
+  }).isRequired,
   state: PropTypes.shape({
     status: PropTypes.string.isRequired,
   }).isRequired,
