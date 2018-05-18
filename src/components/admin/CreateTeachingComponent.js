@@ -16,7 +16,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import TeachingConfirmation from './CreateTeachingConfirmation';
+// import TeachingConfirmation from './CreateTeachingConfirmation';
 
 /*
 const options = {[{
@@ -195,11 +195,16 @@ class CreateTeachingComponent extends React.Component {
 CreateTeachingComponent.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
+    initialize: PropTypes.func.isRequired,
   }).isRequired,
-  /* state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired, */
+  professors: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  courses: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 export default CreateTeachingComponent;

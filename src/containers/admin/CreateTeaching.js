@@ -22,10 +22,15 @@ class CreateTeachingContainer extends React.Component {
 CreateTeachingContainer.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
+    initialize: PropTypes.func.isRequired,
   }).isRequired,
   professors: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  courses: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
 };
 
