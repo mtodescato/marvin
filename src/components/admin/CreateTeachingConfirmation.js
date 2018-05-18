@@ -10,7 +10,7 @@ class CreateTeachingConfirmation extends React.Component {
   }
 
   onSubmit() {
-    /* 
+    /*
     const teaching = {
       course: this.props.teachingCourse,
       responsible: this.props.teachingResponsible,
