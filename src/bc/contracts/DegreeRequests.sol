@@ -5,18 +5,46 @@ contract DegreeRequests {
     mapping(address => DegreeRequest) private studentContractToRequest;
     mapping(uint => address) private intToSudent; // solo domande in attesa
     mapping(address => uint) private studentToInt; // solo domande in attesas
-    uint private last = 0; // ultimo usato
+    uint private last = 0; // first free slot
+    address private adminFacade;
+    address private studentFacade;
 
     struct DegreeRequest {
         bytes thesisTitle;
-        int8 requestState; // in attesa = 0 accettato = 1  o rifiutata = -1
+        int8 requestState; // in pending = 0 acceppted = 1  o rejected = -1
         bytes submmissionDate;
         address professorContract;
+    }
+
+    function DegreeRequests() public {
+        adminFacade = msg.sender;
+    }
+
+    modifier onlyAdmin() {
+        require(msg.sender == adminFacade);
+        _;
+    }
+
+    modifier onlyStudent() {
+        require(msg.sender == studentFacade);
+        _;
+    }
+
+    function transfertOwnernship (address newAdmin, address newStudent) public onlyAdmin() {
+        if (newAdmin != address(0) && newStudent != address(0)) {
+            adminFacade = newAdmin;
+            studentFacade = newStudent;
+        }
     }
 
     modifier onlyNewRequest(address studentContract) {
         require(studentToInt[studentContract] == 0);
         _;
+    }
+
+    function DegreeRequests(address _adminFacade, address _studentFacade) {
+        adminFacade = _adminFacade;
+        studentFacade = _studentFacade;
     }
 
     function addRequest(address studentContract, bytes thesisTitle, bytes submmissionDate, address professorContract)
