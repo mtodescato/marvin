@@ -10,6 +10,7 @@ import AddCourse from './addCourse';
 import AddAcademycYear from './addAcademycYear';
 import ListProfessors from './listProfessors';
 import ListStudyCourses from './listStudyCourses';
+import AddTeaching from './addTeaching';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -22,6 +23,7 @@ export default combineReducers({
   [AddAcademycYear.store]: AddAcademycYear.reducer,
   [ListProfessors.store]: ListProfessors.reducer,
   [ListStudyCourses.store]: ListStudyCourses.reducer,
+  [AddTeaching.store]: AddTeaching.reducer,
 });
 
 // export all reducers
@@ -36,4 +38,5 @@ export {
   AddAcademycYear,
   ListProfessors,
   ListStudyCourses,
+  AddTeaching,
 };

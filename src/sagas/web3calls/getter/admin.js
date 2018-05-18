@@ -64,3 +64,10 @@ export const getDegreeCourse = ({ year, i }) => deployed(AdminFacade)
     courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
   }));
 
+export const addTeaching = teaching => deployed(AdminFacade)
+  .then(inst => inst.addTeaching(
+    teaching.course,
+    teaching.responsible,
+    teaching.name,
+    { from: getAccount() },
+  ));
