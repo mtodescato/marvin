@@ -47,13 +47,13 @@ export const getNumberOfDC = year => deployed(AdminFacade)
   .then(inst => inst.getNumberOfDC.call(year))
   .then(n => n.toNumber());
 
-export const getDegreeCourse = (year, index) => deployed(AdminFacade)
-  .then(inst => inst.getDegreeCourse.call(year, index))
+export const getDegreeCourse = ({ year, i }) => deployed(AdminFacade)
+  .then(inst => inst.getDegreeCourse.call(year, i))
   .then(dAddress => ({ course: at(DegreeCourse, dAddress), dAddress }))
   .then(async ({ course, dAddress }) => ({
     ID: dAddress,
-    name: (await course.getDegreeCourseName.call()).toAscii(),
-    president: (await course.getDegreeCourseName.call()).toAscii(),
+    name: window.web3.toAscii(await course.getDegreeCourseName.call()),
+    president: window.web3.toAscii(await course.getDegreeCoursePresident.call()),
     courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
   }));
 
