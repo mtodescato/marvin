@@ -7,16 +7,19 @@ const DegreeRequests = artifacts.require('./DegreeRequests.sol');
 const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
 
 module.exports = (deployer) => {
-  deployer.deploy(FactoryMethod);
   deployer.deploy(DegreeRequests);
   deployer.deploy(AcademicYearsList);
   deployer.deploy(ProfessorFacade);
-  deployer.deploy(ListUsers).then(() => {
-    const factoryA = FactoryMethod.deployed().then(instance => instance.address);
-    const DegreeRequestsA = DegreeRequests.deployed().then(instance => instance.address);
-    const AcademicYearsListA = AcademicYearsList.deployed().then(instance => instance.address);
-    deployer.deploy(AdminFacade, ListUsers.address, factoryA, DegreeRequestsA, AcademicYearsListA);
-    return deployer.deploy(StudentFacade, DegreeRequestsA, ListUsers.address);
+  deployer.deploy(ListUsers).then(async () => {
+    const DegreeRequestsA = await DegreeRequests.deployed().then(instance => instance.address);
+    const AcademicYearsListA = await AcademicYearsList
+      .deployed().then(instance => instance.address);
+    await deployer.deploy(StudentFacade, DegreeRequestsA, ListUsers.address);
+    const studentFacadeAddress = await StudentFacade.deployed().then(instance => instance.address);
+    await deployer.deploy(FactoryMethod, studentFacadeAddress);
+    const factoryA = await FactoryMethod.deployed().then(instance => instance.address);
+    await deployer
+      .deploy(AdminFacade, ListUsers.address, factoryA, DegreeRequestsA, AcademicYearsListA);
   });
 
   deployer.then(async () => {

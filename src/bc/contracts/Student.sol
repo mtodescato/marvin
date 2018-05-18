@@ -8,16 +8,29 @@ contract Student is User {
     mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
     mapping(uint => address) private intToTeaching;
     uint private last = 0;
+    address studentFacade;
+    
+    modifier isOwnerOrFacade() {
+        if ((msg.sender != this.getOwner()) && (msg.sender != studentFacade)) revert();
+        _;
+    }
 
-    constructor(bytes _name, bytes _surname, bytes _socialNumber, uint _serial)
+    constructor(bytes _name, bytes _surname, bytes _socialNumber, uint _serial, address _studentFacade)
     public
     User(_name, _surname, _socialNumber, _serial)
-    {}
+    {
+        studentFacade = _studentFacade;
+    }
 
-    function insertPassedExam (address teaching, address exam) public {
+    function insertPassedExam (address teaching, address exam, bool mark) 
+    public 
+    isOwnerOrFacade()
+    {
+        if(mark == true) { 
         teachingToExam[teaching] = exam;
         intToTeaching[last] = teaching;
         last += 1;
+        }
     }
 
     function getNumberOfTeachings() public view returns(uint) {
@@ -43,7 +56,10 @@ contract Student is User {
         return degreeCourse;
     }
 
-    function setDegreeCourse(address degreeC) public {
+    function setDegreeCourse(address degreeC) 
+    public
+    isOwnerOrFacade() 
+    {
         degreeCourse = degreeC;
     }
 }

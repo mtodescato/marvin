@@ -73,11 +73,8 @@ contract StudentFacade {
     function manageMark(address student, address exam, bool mark) public studentUseHisContract(student) {
         Exam ex = Exam(exam);
         ex.manageMark(student, mark);
-        if (mark) {
-            Student std = Student(student);
-            std.insertPassedExam(ex.getTeaching(), exam);
-
-        }
+        Student std = Student(student);
+        std.insertPassedExam(ex.getTeaching(), exam, mark);
     }
 
     /**@dev Get the number of techings passed by the student.
