@@ -13,7 +13,7 @@ contract AcademicYear is Ownable {
         year = _year;
     }
 
-    function addDegreeCourse(address degreeCourse) public {
+    function addDegreeCourse(address degreeCourse) public onlyOwner() {
         degreeCourseToInt[degreeCourse] = last;
         intToDegreeCourse[last] = degreeCourse;
         last += 1;

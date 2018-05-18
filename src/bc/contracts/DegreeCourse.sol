@@ -15,7 +15,7 @@ contract DegreeCourse is Ownable {
         degreeCourseType = _degreeCourseType;
     }
 
-    function addTeaching(address teaching) public {
+    function addTeaching(address teaching) public onlyOwner() {
         teachingToInt[teaching] = last;
         intToTeaching[last] = teaching;
         last += 1;
