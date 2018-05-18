@@ -2,15 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import CreateTeaching from '../../components/admin/CreateTeachingComponent';
-import { ListProfessors } from '../../reducers';
+import { ListProfessors, ListStudyCourses, AddTeaching } from '../../reducers';
 
 class CreateTeachingContainer extends React.Component {
   componentWillMount() {
-    this.props.actions.initialize();
+    this.props.actions.initialize(2018);
   }
   render() {
     return (
-      <CreateTeaching professors={this.props.professors} actions={this.props.actions} />
+      <CreateTeaching
+        professors={this.props.professors}
+        courses={this.props.courses}
+        actions={this.props.actions}
+      />
     );
   }
 }
@@ -30,11 +34,21 @@ const mapStateToProps = state => ({
     value: professor.address,
     label: `${professor.name} ${professor.surname}`,
   })),
+  courses: state['list-study-courses'].courses.map(course => ({
+    value: course.ID,
+    label: `${course.name} - ${course.president}`,
+  })),
 });
 
 const mapDispatchToProps = dispatch => ({
   actions: {
-    initialize: () => { dispatch(ListProfessors.creators.listProfessorsRequest()); },
+    initialize: (year) => {
+      dispatch(ListProfessors.creators.listProfessorsRequest());
+      dispatch(ListStudyCourses.creators.listStudyCoursesRequest(year));
+    },
+    addTeachingRequest: (teaching) => {
+      dispatch(AddTeaching.creators.addTeachingRequest(teaching));
+    },
   },
 });
 

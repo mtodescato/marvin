@@ -49,7 +49,9 @@ class CreateTeachingComponent extends React.Component {
     this.state = {
       name: '',
       course: '',
+      courseRef: '',
       responsible: '',
+      responsibleRef: '',
       showLayer: false,
     };
   }
@@ -57,8 +59,8 @@ class CreateTeachingComponent extends React.Component {
   onSubmit() {
     const teaching = {
       name: this.state.name,
-      responsible: this.state.responsible,
-      course: this.state.course,
+      responsible: this.state.responsibleRef,
+      course: this.state.courseRef,
     };
     this.props.actions.addTeachingRequest(teaching);
   }
@@ -74,11 +76,11 @@ class CreateTeachingComponent extends React.Component {
   }
 
   handleChangeCourse(e) {
-    this.setState({ course: e.target.value });
+    this.setState({ course: e.value.label, courseRef: e.value.value });
   }
 
   handleChangeResponsible(e) {
-    this.setState({ responsible: e.target.value });
+    this.setState({ responsible: e.value.label, responsibleRef: e.value.value });
   }
 
   render() {
@@ -147,7 +149,7 @@ class CreateTeachingComponent extends React.Component {
                   <Select
                     id="responsible"
                     name="Responsible"
-                    placeHolder="Mario"
+                    placeHolder="Responsible"
                     multiple={false}
                     // onSearch={this.handleChangeResponsible}
                     options={this.props.professors}
@@ -159,11 +161,11 @@ class CreateTeachingComponent extends React.Component {
                   <Select
                     id="course"
                     name="Course"
-                    placeHolder="Mario"
+                    placeHolder="Course"
                     multiple={false}
                     // onSearch={this.handleChangeResponsible}
-                    options={['two', 'three']}
-                    value={this.state.responsible}
+                    options={this.props.courses}
+                    value={this.state.course}
                     onChange={this.handleChangeCourse}
                   />
                 </FormField>
@@ -172,15 +174,16 @@ class CreateTeachingComponent extends React.Component {
                 <Button
                   label="Submit"
                   primary
-                  onClick={this.setLayer}
+                  onClick={this.onSubmit}
+                  // onClick={this.setLayer}
                 />
-                {this.state.showLayer ?
+                {/* {this.state.showLayer ?
                   <TeachingConfirmation
                     setLayer={this.setLayer}
                     teachingName={this.state.name}
                     teachingResponsible={this.state.responsible}
                   /> : null
-                  }
+                  } */}
               </Footer>
             </Form>
           </Box>
