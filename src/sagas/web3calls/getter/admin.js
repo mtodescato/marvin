@@ -45,8 +45,8 @@ export const addCourse = course => deployed(AdminFacade)
     { from: getAccount() },
   ));
 
-export const addAcademycYear = year => deployed(AdminFacade)
-  .then(inst => inst.addAcademycYear(
+export const addAcademicYear = year => deployed(AdminFacade)
+  .then(inst => inst.addAcademicYear(
     year,
     { from: getAccount() },
   ));
