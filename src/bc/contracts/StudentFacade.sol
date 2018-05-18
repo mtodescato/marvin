@@ -50,7 +50,7 @@ contract StudentFacade {
     function createDegreeRequest(address student, bytes thesisTitle, bytes submissionDate, address professor)
     public
     studentUseHisContract(student)
-    onlyReadyStudent(student)
+    //onlyReadyStudent(student)
     {
         require(userList.getType(professor) == 1);
         degreeRequests.addRequest(student, thesisTitle, submissionDate, professor);

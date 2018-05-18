@@ -87,12 +87,11 @@ contract('Testing StudentFacade', () => {
       .call(teachinaddress1, studentContractAddress);
     assert.notEqual(examAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
   });
-  /*
-  it('TSxxxx can get the number of theaching', async () => {
-    const professorContract = await ListUsersInstance.getUser.call(address1);
+
+  it('TS0016 can create a degree request', async () => {
     const studentContract = await ListUsersInstance
-      .getUser.call('0xe0d040077bb6e4e5d2cb4ccd38d763387eaec7d4');
-    studentFacadeInstance
-      .createDegreeRequest(studentContract, 'test title', '27-1-2018', professorContract);
-  }); */
+      .getUser.call(address0);
+    await studentFacadeInstance
+      .createDegreeRequest(studentContract, 'test title', '27-1-2018', address1);
+  });
 });
