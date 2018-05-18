@@ -101,24 +101,6 @@ class CreateCourseComponent extends React.Component {
     this.setState({ academicYear: Number(e.target.value) });
   }
 
-  handleChangeType(e) {
-    switch (e.option) {
-      case 'Tree-year':
-        this.setState({ type: '0' });
-        break;
-      case 'Master':
-        this.setState({ type: '1' });
-        break;
-      default:
-        this.setState({ type: '0' });
-    }
-    this.setState({ typeString: e.option });
-  }
-
-  handleChangeAcademicYear(e) {
-    this.setState({ academicYear: Number(e.target.value) });
-  }
-
   render() {
     return (
       <div>
