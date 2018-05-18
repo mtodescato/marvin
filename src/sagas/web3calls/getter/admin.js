@@ -1,8 +1,10 @@
-import { deployed, getAccount } from '../deployed';
+import { deployed, at, getAccount } from '../deployed';
 import { getUserInfoFromInt } from '.';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
+import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
+import { numberToCourseType } from '../../../utils/global';
 
 export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
@@ -47,3 +49,18 @@ export const addAcademycYear = year => deployed(AdminFacade)
     year,
     { from: getAccount() },
   ));
+
+export const getNumberOfDC = year => deployed(AdminFacade)
+  .then(inst => inst.getNumberOfDC.call(year))
+  .then(n => n.toNumber());
+
+export const getDegreeCourse = ({ year, i }) => deployed(AdminFacade)
+  .then(inst => inst.getDegreeCourse.call(year, i))
+  .then(dAddress => ({ course: at(DegreeCourse, dAddress), dAddress }))
+  .then(async ({ course, dAddress }) => ({
+    ID: dAddress,
+    name: window.web3.toAscii(await course.getDegreeCourseName.call()),
+    president: window.web3.toAscii(await course.getDegreeCoursePresident.call()),
+    courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
+  }));
+
