@@ -38,7 +38,7 @@ class CreateCourseConfirmation extends React.Component {
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
           >
             <Heading tag="h3" strong>
-                Create user confirmation
+                Create course confirmation
             </Heading>
           </Header>
 
