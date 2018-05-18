@@ -28,6 +28,7 @@ contract('Testing StudentFacade', () => {
   let studentContractAddress;
   let professorContract;
   let degreeCourseAddress;
+  let studentContract;
 
   ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
@@ -92,10 +93,13 @@ contract('Testing StudentFacade', () => {
     assert.notEqual(examAddress, '0x0000000000000000000000000000000000000000', 'not returned a teaching address');
   });
 
-  it('TS0016 can create a degree request', async () => {
+  it('TS0016 can choose a degree course', async () => {
+    studentContract = await ListUsersInstance.getUser.call(address0);
+    await studentFacadeInstance.setDegreeCourse(degreeCourseAddress, studentContract);
+  });
+
+  it('TS0017 can create a degree request', async () => {
     await (Student.at(studentContractAddress)).setDegreeCourse(degreeCourseAddress);
-    const studentContract = await ListUsersInstance
-      .getUser.call(address0);
     await studentFacadeInstance
       .createDegreeRequest(studentContract, 'test title', '27-1-2018', address1);
   });

@@ -106,6 +106,14 @@ contract StudentFacade {
         return studentC.getExam(teaching);
     }
 
+    function setDegreeCourse(address degreeC, address student) 
+    public
+    studentUseHisContract(student)
+    {
+        Student studentC = Student(student);
+        studentC.setDegreeCourse(degreeC);
+    }
+
     /**@dev Check if a student has passed exams far all his teachings.
     *  @param student Address of the student contract.
     */
