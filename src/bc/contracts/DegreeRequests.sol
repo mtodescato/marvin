@@ -16,11 +16,7 @@ contract DegreeRequests {
         address professorContract;
     }
 
-    function DegreeRequests() public {
-        adminFacade = msg.sender;
-    }
-
-    modifier onlyAdmin() {
+        modifier onlyAdmin() {
         require(msg.sender == adminFacade);
         _;
     }
@@ -30,6 +26,15 @@ contract DegreeRequests {
         _;
     }
 
+    modifier onlyNewRequest(address studentContract) {
+        require(studentToInt[studentContract] == 0);
+        _;
+    }
+
+    function DegreeRequests() public {
+        adminFacade = msg.sender;
+    }
+
     function changeOwners(address newAdmin, address newStudent) public onlyAdmin() {
         if (newAdmin != address(0) && newStudent != address(0)) {
             adminFacade = newAdmin;
@@ -37,13 +42,9 @@ contract DegreeRequests {
         }
     }
 
-    modifier onlyNewRequest(address studentContract) {
-        require(studentToInt[studentContract] == 0);
-        _;
-    }
-
     function addRequest(address studentContract, bytes thesisTitle, bytes submmissionDate, address professorContract)
     public
+    onlyStudent()
     onlyNewRequest(studentContract)
     {
         studentContractToRequest[studentContract] = DegreeRequest(thesisTitle, 0, submmissionDate, professorContract);
@@ -52,7 +53,7 @@ contract DegreeRequests {
         intToSudent[last] = studentContract;
     }
 
-    function manageRequest(int8 newState, uint request) public {
+    function manageRequest(int8 newState, uint request) public onlyAdmin() {
         require(newState == -1 || newState == 1);
         require(request < last);
         address stdCont = intToSudent[request];
