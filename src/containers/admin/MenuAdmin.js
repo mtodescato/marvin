@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { Sidebar, Header, Box } from 'grommet';
 import MenuEntries from '../../components/admin/MenuEntries';
 import { MenuEntries as MenuEntriesReducer } from '../../reducers';
+import { menuEntriesAdmin } from '../../components/menuEntries';
 
 const MenuAdmin = ({ active, changeActive }) => (
   <Sidebar
@@ -19,7 +20,11 @@ const MenuAdmin = ({ active, changeActive }) => (
       flex="grow"
       justify="start"
     >
-      <MenuEntries active={active} action={changeActive} />
+      <MenuEntries
+        entries={menuEntriesAdmin}
+        active={active}
+        action={changeActive}
+      />
 
     </Box>
   </Sidebar>
