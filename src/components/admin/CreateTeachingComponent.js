@@ -13,25 +13,7 @@ import {
   Footer,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-import Checkmark from 'grommet/components/icons/base/Checkmark';
-import { stringFormValidation } from '../formValidator';
-import CreateTeachingConfirmation from './CreateTeachingConfirmation';
-
-/*
-const options = {[{
-  value: 'first',
-  sub: 'alpha',
-  label: <Box
-    direction="row"
-    justify="between"
-  >   <span>     first   </span>   <span className="secondary">     alpha   </span>
-         </Box>,
-}, {
-  value: 'second',
-  sub: 'beta',
-  label: <Box direction="row" justify="between">   <span>     second
-  </span>   <span className="secondary">     beta   </span> </Box>,
-}]} */
+// import TeachingConfirmation from './CreateTeachingConfirmation';
 
 
 class CreateTeachingComponent extends React.Component {
@@ -40,7 +22,7 @@ class CreateTeachingComponent extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
 
-    this.handleValidation = this.handleValidation.bind(this);
+    // this.handleValidation = this.handleValidation.bind(this);
 
     this.handleChangeName = this.handleChangeName.bind(this);
     this.handleChangeCourse = this.handleChangeCourse.bind(this);
@@ -51,30 +33,26 @@ class CreateTeachingComponent extends React.Component {
     this.state = {
       name: '',
       course: '',
-      responsible: '',
       errors: {
         name: '',
         course: '',
         responsible: '',
         formIsValid: false,
       },
+      courseRef: '',
+      responsible: '',
+      responsibleRef: '',
       showLayer: false,
     };
   }
 
   onSubmit(e) {
-    if (this.handleValidation()) {
-      this.setLayer();
-    } else {
-      e.preventDefault();
-    }
-    /*
     const teaching = {
       name: this.state.name,
-      course: this.state.course,
-      responsible: this.state.responsible,
+      responsible: this.state.responsibleRef,
+      course: this.state.courseRef,
     };
-    this.props.actions.addTeachingRequest(teaching); */
+    this.props.actions.addTeachingRequest(teaching);
   }
 
   setLayer() {
@@ -84,20 +62,20 @@ class CreateTeachingComponent extends React.Component {
   }
 
 
-  handleValidation() {
+  /* handleValidation() {
     const errors = Object.assign({}, this.state.errors);
-    /*
+    
     if ((errors.name === 'isValid'
           && errors.surname === 'isValid'
           && errors.address === 'isValid')) {
       errors.formIsValid = true;
     } else errors.formIsValid = false;
-    */
+    
     errors.formIsValid = true;
 
     this.setState({ errors });
     return this.state.errors.formIsValid;
-  }
+  } */
 
   handleChangeName(e) {
     const errors = Object.assign({}, this.state.errors);
@@ -112,8 +90,12 @@ class CreateTeachingComponent extends React.Component {
     this.setState({ name: e.target.value });
   }
 
+  handleChangeCourse(e) {
+    this.setState({ course: e.value.label, courseRef: e.value.value });
+  }
+
   handleChangeResponsible(e) {
-    this.setState({ responsible: e.target.value });
+    this.setState({ responsible: e.value.label, responsibleRef: e.value.value });
   }
 
   render() {
@@ -195,7 +177,7 @@ class CreateTeachingComponent extends React.Component {
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
-
+                { /*
                 <FormField>
                   <Box
                     direction="row"
@@ -246,12 +228,49 @@ class CreateTeachingComponent extends React.Component {
                     name="Name"
                     placeHolder="Basi di dati"
                     onDOMChange={this.handleChangeResponsible}
+                */ }
+                <FormField label="Responsible:">
+                  <Select
+                    id="responsible"
+                    name="Responsible"
+                    placeHolder="Responsible"
+                    multiple={false}
+                    // onSearch={this.handleChangeResponsible}
+                    options={this.props.professors}
+                    value={this.state.responsible}
+                    onChange={this.handleChangeResponsible}
                   />
                 </FormField>
-
+                <FormField label="Course:">
+                  <Select
+                    id="course"
+                    name="Course"
+                    placeHolder="Course"
+                    multiple={false}
+                    // onSearch={this.handleChangeResponsible}
+                    options={this.props.courses}
+                    value={this.state.course}
+                    onChange={this.handleChangeCourse}
+                  />
+                </FormField>
               </FormFields>
+              <Footer pad={{ vertical: 'small' }}>
+                <Button
+                  label="Submit"
+                  primary
+                  onClick={this.onSubmit}
+                  // onClick={this.setLayer}
+                />
+                {/* {this.state.showLayer ?
+                  <TeachingConfirmation
+                    setLayer={this.setLayer}
+                    teachingName={this.state.name}
+                    teachingResponsible={this.state.responsible}
+                  /> : null
+                  } */}
+              </Footer>
             </Form>
-
+            { /*
             <Footer pad={{ vertical: 'medium' }}>
               <Button
                 label="Submit"
@@ -273,6 +292,7 @@ class CreateTeachingComponent extends React.Component {
                       : null
                     }
             </Footer>
+            */ }
           </Box>
         </Box>
       </div>
@@ -280,11 +300,17 @@ class CreateTeachingComponent extends React.Component {
   }
 }
 CreateTeachingComponent.propTypes = {
-  /* actions: PropTypes.shape({
+  actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
-  }).isRequired, */
-  state: PropTypes.shape({
-    status: PropTypes.string.isRequired,
+    initialize: PropTypes.func.isRequired,
+  }).isRequired,
+  professors: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  courses: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
 };
 

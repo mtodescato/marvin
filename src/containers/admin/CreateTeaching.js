@@ -1,42 +1,60 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import CreateTeaching from '../../components/admin/CreateTeachingComponent';
+import { ListProfessors, ListStudyCourses, AddTeaching } from '../../reducers';
 
-const CreateTeachingContainer = ({ state, actions }) => (
-  <CreateTeaching state={state} actions={actions} />
-);
+class CreateTeachingContainer extends React.Component {
+  componentWillMount() {
+    this.props.actions.initialize(2018);
+  }
+  render() {
+    return (
+      <CreateTeaching
+        professors={this.props.professors}
+        courses={this.props.courses}
+        actions={this.props.actions}
+      />
+    );
+  }
+}
 
 CreateTeachingContainer.propTypes = {
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
+    initialize: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
+  professors: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+  }).isRequired,
+  courses: PropTypes.shape({
+    value: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
   }).isRequired,
 };
 
-CreateTeaching.propTypes = {
-  actions: PropTypes.shape({
-    addTeachingRequest: PropTypes.func.isRequired,
-  }).isRequired,
-  state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired,
-};
-/*
+const mapStateToProps = state => ({
+  professors: state['list-professors'].professors.map(professor => ({
+    value: professor.address,
+    label: `${professor.name} ${professor.surname}`,
+  })),
+  courses: state['list-study-courses'].courses.map(course => ({
+    value: course.ID,
+    label: `${course.name} - ${course.president}`,
+  })),
+});
+
 const mapDispatchToProps = dispatch => ({
   actions: {
+    initialize: (year) => {
+      dispatch(ListProfessors.creators.listProfessorsRequest());
+      dispatch(ListStudyCourses.creators.listStudyCoursesRequest(year));
+    },
     addTeachingRequest: (teaching) => {
       dispatch(AddTeaching.creators.addTeachingRequest(teaching));
     },
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateTeaching);
-
-*/
-
-export default CreateTeaching;
+export default connect(mapStateToProps, mapDispatchToProps)(CreateTeachingContainer);

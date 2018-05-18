@@ -4,7 +4,7 @@ import CourseListComponent from '../../components/student/ListStudyCoursesCompon
 
 export const coursesEntries = [{
   name: 'Informatica',
-  president: 'Tullio',
+  president: 'Mario',
   type: 'Triennale',
 },
 {

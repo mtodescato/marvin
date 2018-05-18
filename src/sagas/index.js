@@ -7,7 +7,10 @@ import * as listUsers from './listUsers';
 import * as deleteUser from './deleteUser';
 import * as addCourse from './addCourse';
 import * as addAcademycYear from './addAcademycYear';
+import * as listProfessors from './listProfessors';
 import * as listStudyCourses from './listStudyCourses';
+import * as addTeaching from './addTeaching';
+import * as listTeachings from './listTeachings';
 
 export default function* rootSaga() {
   yield all([
@@ -19,7 +22,10 @@ export default function* rootSaga() {
     fork(deleteUser.triggerAction),
     fork(addCourse.triggerAction),
     fork(addAcademycYear.triggerAction),
+    fork(listProfessors.triggerAction),
     fork(listStudyCourses.triggerAction),
+    fork(addTeaching.triggerAction),
+    fork(listTeachings.triggerAction),
   ]);
 }
 
@@ -32,5 +38,8 @@ export {
   deleteUser,
   addCourse,
   addAcademycYear,
+  listProfessors,
   listStudyCourses,
+  addTeaching,
+  listTeachings,
 };

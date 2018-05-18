@@ -8,7 +8,10 @@ import MenuEntries from './menuEntries';
 import ListUsers from './listUsers';
 import AddCourse from './addCourse';
 import AddAcademycYear from './addAcademycYear';
+import ListProfessors from './listProfessors';
 import ListStudyCourses from './listStudyCourses';
+import AddTeaching from './addTeaching';
+import ListTeachings from './listTeachings';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -19,7 +22,10 @@ export default combineReducers({
   [ListUsers.store]: ListUsers.reducer,
   [AddCourse.store]: AddCourse.reducer,
   [AddAcademycYear.store]: AddAcademycYear.reducer,
+  [ListProfessors.store]: ListProfessors.reducer,
   [ListStudyCourses.store]: ListStudyCourses.reducer,
+  [AddTeaching.store]: AddTeaching.reducer,
+  [ListTeachings.store]: ListTeachings.reducer,
 });
 
 // export all reducers
@@ -32,5 +38,8 @@ export {
   ListUsers,
   AddCourse,
   AddAcademycYear,
+  ListProfessors,
   ListStudyCourses,
+  AddTeaching,
+  ListTeachings,
 };
