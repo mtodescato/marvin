@@ -30,7 +30,7 @@ contract DegreeRequests {
         _;
     }
 
-    function transfertOwnernship (address newAdmin, address newStudent) public onlyAdmin() {
+    function changeOwners(address newAdmin, address newStudent) public onlyAdmin() {
         if (newAdmin != address(0) && newStudent != address(0)) {
             adminFacade = newAdmin;
             studentFacade = newStudent;
@@ -40,11 +40,6 @@ contract DegreeRequests {
     modifier onlyNewRequest(address studentContract) {
         require(studentToInt[studentContract] == 0);
         _;
-    }
-
-    function DegreeRequests(address _adminFacade, address _studentFacade) {
-        adminFacade = _adminFacade;
-        studentFacade = _studentFacade;
     }
 
     function addRequest(address studentContract, bytes thesisTitle, bytes submmissionDate, address professorContract)
