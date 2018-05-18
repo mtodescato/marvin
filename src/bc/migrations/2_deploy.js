@@ -23,5 +23,7 @@ module.exports = (deployer) => {
     const AdminFacadeInstance = await AdminFacade.deployed().then(instance => instance);
     const ListUsersInstance = await ListUsers.deployed();
     await ListUsersInstance.transfertOwnernship(AdminFacadeInstance.address);
+    const AcademicYearsListInstance = await AcademicYearsList.deployed().then(instance => instance);
+    AcademicYearsListInstance.transfertOwnernship(AdminFacadeInstance.address);
   });
 };
