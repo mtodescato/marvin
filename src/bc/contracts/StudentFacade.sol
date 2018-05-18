@@ -27,7 +27,6 @@ contract StudentFacade {
         _;
     }
 
-
     /**@dev Constructor of SudentFacade.
     *  @param degreeRequestsAddress Address of degreeRequest contract containig the degree requests.
     *  @param userListAddress Address ot LisrUser contract containig users.
@@ -60,7 +59,7 @@ contract StudentFacade {
     *  @param student Address of the student contract.
     *  @param exam Address of the exam.
     */
-    function subscribeToExam(address student, address exam) public studentUseHisContract(student){
+    function subscribeToExam(address student, address exam) public studentUseHisContract(student) {
         Exam ex = Exam(exam);
         ex.subscribe(student);
     }

@@ -16,7 +16,7 @@ contract DegreeRequests {
         address professorContract;
     }
 
-        modifier onlyAdmin() {
+    modifier onlyAdmin() {
         require(msg.sender == adminFacade);
         _;
     }

@@ -19,7 +19,7 @@ contract  AdminFacade {
 
     /**@dev Check if the user requesting the action is an admin or the master admin.*/
     modifier isAdmin() {
-        if(msg.sender != userList.getMasterAdminAddress() && userList.getType(msg.sender) != 2) revert();
+        if (msg.sender != userList.getMasterAdminAddress() && userList.getType(msg.sender) != 2) revert();
         _;
     }
 
