@@ -1,7 +1,8 @@
 pragma solidity 0.4.23;
+import "./Ownable.sol";
 
 
-contract AcademicYear {
+contract AcademicYear is Ownable {
 
     mapping(uint => address) private intToDegreeCourse;
     mapping(address => uint) private degreeCourseToInt;

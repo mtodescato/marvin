@@ -1,7 +1,7 @@
 pragma solidity 0.4.23;
+import "./Ownable.sol";
 
-
-contract DegreeCourse {
+contract DegreeCourse is Ownable {
     mapping(uint => address) private intToTeaching;
     mapping(address => uint) private teachingToInt;
     uint private last = 0;

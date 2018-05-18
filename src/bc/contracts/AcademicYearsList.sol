@@ -1,8 +1,9 @@
 pragma solidity 0.4.23;
 import "./AcademicYear.sol";
+import "./Ownable.sol";
 
 
-contract  AcademicYearsList {
+contract  AcademicYearsList is Ownable {
 
     mapping ( uint => address ) private yearToAcademicYear;
 

@@ -3,7 +3,6 @@ import "./User.sol";
 import "./Professor.sol";
 import "./Student.sol";
 import "./Admin.sol";
-import "./Ownable.sol";
 
 
 contract FactoryMethod {
