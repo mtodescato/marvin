@@ -12,8 +12,9 @@ export default AsyncFlow({
     switch (action.type) {
       case types.LIST_PROFESSORS_SUCCESS:
         return {
+          ...state,
           size: action.payload.size,
-          users: action.payload.users,
+          professors: action.payload.professors,
         };
       default:
         return state;
