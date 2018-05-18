@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 // import { ListTeachings } from '../../reducers';
 import ListTeachingsComponent from '../../components/professor/ListTeachingsComponent';
 
@@ -50,9 +50,9 @@ ListTeachingsContainer.propTypes = {
     name: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
-  })).isRequired, */
+  })).isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired,
+  initialize: PropTypes.func.isRequired, */
 };
 
 const mapStateToProps = state => ({
