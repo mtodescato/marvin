@@ -21,16 +21,17 @@ export const teachings = [{
 },
 ];
 
-const ListTeachingsContainer = () => (
+const ListTeachings = () => (
   <ListTeachingsComponent
         // teachings={this.props.teachings}
     teachings={teachings}
+    // size={this.props.size}
     size={3}
   />
 );
 
 /*
-class ListTeachingsContainer extends React.Component {
+class ListTeachings extends React.Component {
   componentWillMount() {
     this.props.initialize(2018);
   }
@@ -45,7 +46,7 @@ class ListTeachingsContainer extends React.Component {
   }
 } */
 
-ListTeachingsContainer.propTypes = {
+ListTeachings.propTypes = {
   /* teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
@@ -66,4 +67,4 @@ const mapDispatchToProps = dispatch => ({
   },
 }); */
 
-export default connect(mapStateToProps, null)(ListTeachingsContainer);
+export default connect(mapStateToProps, null)(ListTeachings);
