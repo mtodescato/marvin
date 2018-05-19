@@ -43,13 +43,17 @@ const ListCoursesComponent = props => (
       Courses found: {/* size */}
       </Heading>
       <Heading tag="h5" >
-        Filter courses by ID:
+        Filter courses by Academic Year:
       </Heading>
       <Search
         inline
         full="false"
         size="small"
-        placeHolder="Search: #"
+        placeHolder="2018"
+        onDOMChange={(e) => {
+          e.preventDefault();
+          props.initialize(e.target.value);
+        }}
       />
     </Box>
 
