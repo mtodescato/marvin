@@ -112,11 +112,13 @@ contract  AdminFacade {
     /**@dev Create and add a new teaching to the DegreeCourse.
     *  @param course Address of the DegreeCourse.
     *  @param refProfessor Address of the professor of the teching.
-    *  @param name Name of the teaching
+    *  @param name Name of the teaching.
+    *  @param professorFacade Address of the professor facade contract needed for acces control.
     */
-    function addTeaching(address course, address refProfessor, bytes name) public isAdmin() {
+    function addTeaching(address course, address refProfessor, bytes name, address professorFacade) public isAdmin() {
         DegreeCourse dCourse = DegreeCourse(course);
         Teaching newTeach = new Teaching(refProfessor, name);
+        newTeach.transfertOwnernship (professorFacade);
         dCourse.addTeaching(address(newTeach));
     }
 

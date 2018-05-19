@@ -1,6 +1,7 @@
 const ListUsers = artifacts.require('./ListUsers.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const User = artifacts.require('./User.sol');
+const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
 const AcademicYear = artifacts.require('./AcademicYear.sol');
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
 const address1 = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
@@ -17,9 +18,11 @@ const address4 = '0xd59ce5657009c7bc357317fa05a7df3b77585485';
 contract('Testing AdminFacade', () => {
   let adminFacadeInstance;
   let ListUsersInstance;
+  let professorFacadeInstance;
 
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
+  ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
 
   it('TS0001: Test insert user', async () => {
     await adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 12335, address1, 2, { from: address0 });
@@ -71,7 +74,7 @@ contract('Testing AdminFacade', () => {
 
   it('TS0007 create a teaching', async () => {
     const degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(797, 0);
-    adminFacadeInstance.addTeaching(degreeCourseAddress, address4, 'maths');
+    adminFacadeInstance.addTeaching(degreeCourseAddress, address4, 'maths', professorFacadeInstance.address);
     const teaching = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
     assert.notEqual(teaching, '0x0000000000000000000000000000000000000000', 'added teaching');
   });

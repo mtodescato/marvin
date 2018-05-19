@@ -44,7 +44,8 @@ contract('Testing StudentFacade', () => {
     adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1, { from: address0 });
     degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
     professorContract = await ListUsersInstance.getUser.call(address1);
-    adminFacadeInstance.addTeaching(degreeCourseAddress, professorContract, 'maths', { from: address0 });
+    adminFacadeInstance
+      .addTeaching(degreeCourseAddress, professorContract, 'maths', professorFacadeInstance.address, { from: address0 });
     teachinaddress1 = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
     teaching = Teaching.at(teachinaddress1);
     professorFacadeInstance.insertExam(teachinaddress1, '15/5/2018', professorContract, { from: address1 });
