@@ -88,6 +88,7 @@ const ListCoursesComponent = props => (
 ListCoursesComponent.propTypes = {
   coursesEntries: PropTypes.arrayOf.isRequired,
   address: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
 };
 
 export default ListCoursesComponent;

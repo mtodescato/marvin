@@ -88,6 +88,7 @@ ListTeachingsComponent.propTypes = {
     responsible: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
+  initialize: PropTypes.func.isRequired,
 };
 
 export default ListTeachingsComponent;
