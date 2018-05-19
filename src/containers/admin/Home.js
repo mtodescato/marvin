@@ -1,14 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import HomeComponent from '../../components/admin/HomeComponent';
+import HomeComponent from '../../components/shared/HomeComponent';
 
 const Home = ({
   name, surname, matricola, address,
 }) => (
-  <HomeComponent user={{
- name, surname, matricola, address,
-}}
+  <HomeComponent
+    user={{
+      name, surname, matricola, address,
+    }}
+    message="admin"
   />
 );
 
