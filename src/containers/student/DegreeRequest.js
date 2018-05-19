@@ -3,7 +3,7 @@ import DegreeRequestComponent from '../../components/student/DegreeRequestCompon
 
 const relators = [
   {
-    professore: 'Tullio',
+    professore: 'Mario',
     ruolo: 'Responsabile',
   },
   {
@@ -15,7 +15,7 @@ const relators = [
     ruolo: 'Progettista',
   },
   {
-    professore: 'Tullio',
+    professore: 'Mario',
     ruolo: 'Responsabile',
   },
   {

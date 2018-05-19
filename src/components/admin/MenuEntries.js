@@ -3,21 +3,11 @@ import PropTypes from 'prop-types';
 import { Anchor, Menu, Accordion, AccordionPanel, Box } from 'grommet';
 import HomeIcon from 'grommet/components/icons/base/Home';
 
-export const entries = [
-  { entry: 'Users', subEntries: ['List Users', 'Create User'] },
-  { entry: 'Courses', subEntries: ['List Study Courses', 'Create Study Course'] },
-  { entry: 'Academic Activities', subEntries: ['List  Academic Activities', 'Create Academic Activity'] },
-  { entry: 'Academic Years', subEntries: ['List Academic Years', 'Create Academic Year'] },
-  { entry: 'Degree Procedures', subEntries: ['Doe', 'blue'] },
-];
-
-
-const MenuEntries = ({ active = 0, action }) => (
+const MenuEntries = ({ active = 0, action, entries }) => (
   <Accordion>
     <Anchor
       className={active === 0 ? 'active' : ''}
       onClick={() => action(0)}
-      responsive
       primary
       icon={<HomeIcon />}
     >
@@ -48,6 +38,10 @@ const MenuEntries = ({ active = 0, action }) => (
 
 MenuEntries.propTypes = {
   active: PropTypes.number,
+  entries: PropTypes.arrayOf(PropTypes.oneOfType([
+    PropTypes.string.isRequired,
+    PropTypes.string.isRequired,
+  ])).isRequired,
   action: PropTypes.shape({
     createDegreeRequestRequest: PropTypes.func.isRequired,
   }).isRequired,

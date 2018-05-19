@@ -70,3 +70,15 @@ export const validateAddress = (address, error = 'Address must be valid') => {
   if (address && address.length === 42 && address[0] === '0' && address[1] === 'x') return address;
   throw new Error(error);
 };
+
+
+export const numberToCourseType = (number) => {
+  switch (number) {
+    case 0:
+      return 'Three-year';
+    case 1:
+      return 'Master';
+    default:
+      return 'Altro';
+  }
+};

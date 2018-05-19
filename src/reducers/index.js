@@ -7,7 +7,11 @@ import Web3UserInfo from './web3UserInfo';
 import MenuEntries from './menuEntries';
 import ListUsers from './listUsers';
 import AddCourse from './addCourse';
-import AddAcademycYear from './addAcademycYear';
+import AddAcademicYear from './addAcademicYear';
+import ListProfessors from './listProfessors';
+import ListStudyCourses from './listStudyCourses';
+import AddTeaching from './addTeaching';
+import ListTeachings from './listTeachings';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -17,7 +21,11 @@ export default combineReducers({
   [MenuEntries.store]: MenuEntries.reducer,
   [ListUsers.store]: ListUsers.reducer,
   [AddCourse.store]: AddCourse.reducer,
-  [AddAcademycYear.store]: AddAcademycYear.reducer,
+  [AddAcademicYear.store]: AddAcademicYear.reducer,
+  [ListProfessors.store]: ListProfessors.reducer,
+  [ListStudyCourses.store]: ListStudyCourses.reducer,
+  [AddTeaching.store]: AddTeaching.reducer,
+  [ListTeachings.store]: ListTeachings.reducer,
 });
 
 // export all reducers
@@ -29,5 +37,9 @@ export {
   MenuEntries,
   ListUsers,
   AddCourse,
-  AddAcademycYear,
+  AddAcademicYear,
+  ListProfessors,
+  ListStudyCourses,
+  AddTeaching,
+  ListTeachings,
 };

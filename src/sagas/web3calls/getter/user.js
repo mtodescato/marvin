@@ -26,11 +26,15 @@ const getUserInfoFromCAddress = async cAddress => ({
 
 export const getUserInfo = address => getUserContractAddress(address)
   .then(cAddress => getUserInfoFromCAddress(cAddress))
-  .then(async result => ({
-    ...result,
-    address,
-    type: await getUserType(address),
-  }));
+  .then(async (result) => {
+    const type = await getUserType(address);
+    return ({
+      ...result,
+      address,
+      type,
+      role: type,
+    });
+  });
 
 export const intToUserAddress = int => deployed(ListUsers)
   .then(inst => inst.getUserAddress.call(int));

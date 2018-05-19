@@ -1,33 +1,42 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import ListCoursesComponent from '../../components/admin/ListCoursesComponent';
+import { ListStudyCourses } from '../../reducers';
 
-export const courses = [{
-  ID: '43553',
-  name: 'Analisi',
-  president: 'Francescopaolo Montefalcone',
-  courseType: 'Three-year',
-},
-{
-  ID: '43553',
-  name: 'Analisi',
-  president: 'Francescopaolo Montefalcone',
-  courseType: 'Master',
-},
-{
-  ID: '43553',
-  name: 'Analisi',
-  president: 'Francescopaolo Montefalcone',
-  courseType: 'Three-year',
-},
-];
+class ListCourses extends React.Component {
+  componentWillMount() {
+    this.props.initialize(2018);
+  }
 
-const address = {};
+  render() {
+    return (
+      <ListCoursesComponent
+        size={this.props.size}
+        coursesEntries={this.props.courses}
+      />
+    );
+  }
+}
 
-const ListCourses = () => (
-  <ListCoursesComponent
-    courses={courses}
-    address={address}
-  />
-);
+ListCourses.propTypes = {
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    ID: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    president: PropTypes.string.isRequired,
+    courseType: PropTypes.string.isRequired,
+  })).isRequired,
+  size: PropTypes.number.isRequired,
+  initialize: PropTypes.func.isRequired,
+};
 
-export default ListCourses;
+const mapDispatchToProps = dispatch => ({
+  initialize: (year) => { dispatch(ListStudyCourses.creators.listStudyCoursesRequest(year)); },
+});
+
+const mapStateToProps = state => ({
+  courses: state['list-study-courses'].courses,
+  size: state['list-study-courses'].size,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ListCourses);

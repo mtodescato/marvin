@@ -1,6 +1,6 @@
 import React from 'react';
 import { Section, Split, Box } from 'grommet';
-import MenuStudent from '../components/student/MenuStudentComponent';
+import MenuStudent from '../containers/student/MenuStudent';
 import MainPanel from '../containers/student/MainPanel';
 import MarvinHeader from '../containers/shared/MarvinHeader';
 import MarvinFooter from '../containers/shared/MarvinFooter';
@@ -25,5 +25,4 @@ const Student = () => (
     <MarvinFooter />
   </div>
 );
-
 export default Student;

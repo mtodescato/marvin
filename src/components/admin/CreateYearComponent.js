@@ -1,0 +1,200 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {
+  Box,
+  Label,
+  Form,
+  FormField,
+  Button,
+  // Toast,
+  Heading,
+  FormFields,
+  TextInput,
+  Footer,
+} from 'grommet';
+import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import Checkmark from 'grommet/components/icons/base/Checkmark';
+// import { stringFormValidation } from '../formValidator';
+import CreateYearConfirmation from './CreateYearConfirmation';
+
+
+class CreateYearComponent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleValidation = this.handleValidation.bind(this);
+
+    this.handleChangeYear = this.handleChangeYear.bind(this);
+
+    this.setLayer = this.setLayer.bind(this);
+
+    this.state = {
+      year: '',
+      errors: {
+        year: '',
+        formIsValid: false,
+      },
+      showLayer: false,
+    };
+  }
+
+  onSubmit(e) {
+    if (this.handleValidation()) {
+      this.setLayer();
+
+      // this.props.actions.addYearRequest(this.state.year);
+    } else {
+      e.preventDefault();
+    }
+  }
+
+  setLayer() {
+    this.setState({
+      showLayer: !this.state.showLayer,
+    });
+  }
+
+  handleValidation() {
+    const errors = Object.assign({}, this.state.errors);
+    /*
+    if ((errors.year === 'isValid') {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+        // TODO
+    this.setState({ errors }); */
+
+    errors.formIsValid = true;
+    this.setState({ errors });
+
+    return this.state.errors.formIsValid;
+  }
+
+  handleChangeYear(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.year = 'isValid'; // TODO
+
+    this.setState({ year: e.target.value });
+    this.setState({ errors });
+  }
+
+  render() {
+    return (
+      <div>
+        { /* this.props.state.status === 'RESOLVED' && (
+          <Toast status="ok">
+            <strong>Year Signed Up correctly</strong>
+          </Toast>
+        ) */}
+        { /* this.props.state.status === 'ERRORED' && (
+          <Toast status="critical">
+            <strong>Year SignUp error: &quot;Transaction rejected&quot;</strong>
+          </Toast>
+        ) */ }
+        <Box
+          className="PanelBox"
+          direction="column"
+          margin="small"
+          separator="bottom"
+        >
+          <Box
+            className="PanelHeader"
+            direction="row"
+            justify="start"
+            align="center"
+            separator="bottom"
+          >
+            <FormNextLinkIcon />
+            <Label>
+                Manage Years
+            </Label>
+            <FormNextLinkIcon />
+            <Label>
+                Create Year
+            </Label>
+          </Box>
+
+          <Box className="titleBox" alignSelf="center" >
+            <Heading tag="h2" strong>
+              Academic year creation
+            </Heading>
+          </Box>
+
+          <Box
+            className="formBox"
+            direction="column"
+            justify="start"
+            separator="bottom"
+            pad={{ horizontal: 'medium' }}
+          >
+            <Heading tag="h5" >
+              Submit the informations of the new year.
+            </Heading>
+            <Form>
+              <FormFields>
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Year:
+                    </Label>
+                    {this.state.errors.year !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.year}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.year === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
+                  <TextInput
+                    id="year"
+                    name="Year"
+                    placeHolder="2018"
+                    onDOMChange={this.handleChangeYear}
+                  />
+                </FormField>
+              </FormFields>
+            </Form>
+
+            <Footer pad={{ vertical: 'medium' }}>
+              <Button
+                label="Submit"
+                primary
+                onClick={this.onSubmit}
+              />
+              {!this.state.errors.formIsValid ?
+                  'no valid' : null
+                }
+              {this.state.showLayer ?
+                <CreateYearConfirmation
+                  setLayer={this.setLayer}
+                  year={this.state.year}
+                  addYearRequest={() => this.props.actions.addYearRequest(this.state.year)}
+                  state={this.props.state}
+                />
+                      : null
+                    }
+            </Footer>
+          </Box>
+        </Box>
+      </div>
+    );
+  }
+}
+
+CreateYearComponent.propTypes = {
+  actions: PropTypes.shape({
+    addYearRequest: PropTypes.func.isRequired,
+  }).isRequired,
+  state: PropTypes.shape({
+    status: PropTypes.string.isRequired,
+  }).isRequired,
+};
+
+export default CreateYearComponent;
