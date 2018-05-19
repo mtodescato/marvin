@@ -118,7 +118,7 @@ contract  AdminFacade {
     function addTeaching(address course, address refProfessor, bytes name, address professorFacade) public isAdmin() {
         DegreeCourse dCourse = DegreeCourse(course);
         Teaching newTeach = new Teaching(refProfessor, name);
-        newTeach.transfertOwnernship (professorFacade);
+        newTeach.transfertOwnernship(professorFacade);
         dCourse.addTeaching(address(newTeach));
     }
 

@@ -8,7 +8,7 @@ contract Student is User {
     mapping(address => address) private teachingToExam; //solo se l'esame e' accettato
     mapping(uint => address) private intToTeaching;
     uint private last = 0;
-    address studentFacade;
+    address private studentFacade;
     
     modifier isOwnerOrFacade() {
         if ((msg.sender != this.getOwner()) && (msg.sender != studentFacade)) revert();
@@ -17,8 +17,7 @@ contract Student is User {
 
     constructor(bytes _name, bytes _surname, bytes _socialNumber, uint _serial, address _studentFacade)
     public
-    User(_name, _surname, _socialNumber, _serial)
-    {
+    User(_name, _surname, _socialNumber, _serial) {
         studentFacade = _studentFacade;
     }
 
@@ -26,10 +25,10 @@ contract Student is User {
     public 
     isOwnerOrFacade()
     {
-        if(mark == true) { 
-        teachingToExam[teaching] = exam;
-        intToTeaching[last] = teaching;
-        last += 1;
+        if (mark == true) { 
+            teachingToExam[teaching] = exam;
+            intToTeaching[last] = teaching;
+            last += 1;
         }
     }
 

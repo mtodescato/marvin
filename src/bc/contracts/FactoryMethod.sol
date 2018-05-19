@@ -7,7 +7,7 @@ import "./Admin.sol";
 
 contract FactoryMethod {
 
-    address studentFacade;
+    address private studentFacade;
 
     modifier validUserType(uint8 _type) {
         require(_type <= 2);
