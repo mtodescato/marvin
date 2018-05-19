@@ -1,7 +1,8 @@
 pragma solidity 0.4.23;
+import "./Ownable.sol";
 
 
-contract DegreeCourse {
+contract DegreeCourse is Ownable {
     mapping(uint => address) private intToTeaching;
     mapping(address => uint) private teachingToInt;
     uint private last = 0;
@@ -9,13 +10,13 @@ contract DegreeCourse {
     bytes private degreeCoursePresident;
     uint8 private degreeCourseType;
 
-    function DegreeCourse(bytes _degreeCourseName, bytes _degreeCoursePresident, uint8 _degreeCourseType) public {
+    constructor(bytes _degreeCourseName, bytes _degreeCoursePresident, uint8 _degreeCourseType) public {
         degreeCourseName = _degreeCourseName;
         degreeCoursePresident = _degreeCoursePresident;
         degreeCourseType = _degreeCourseType;
     }
 
-    function addTeaching(address teaching) public {
+    function addTeaching(address teaching) public onlyOwner() {
         teachingToInt[teaching] = last;
         intToTeaching[last] = teaching;
         last += 1;

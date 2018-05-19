@@ -1,6 +1,7 @@
 import { deployed, at, getAccount } from '../deployed';
 import { numberToCourseType } from '../../../utils/global';
 import { getUserInfoFromInt } from '.';
+import { professorFacadeAddress } from './contract';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
@@ -45,8 +46,8 @@ export const addCourse = course => deployed(AdminFacade)
     { from: getAccount() },
   ));
 
-export const addAcademycYear = year => deployed(AdminFacade)
-  .then(inst => inst.addAcademycYear(
+export const addAcademicYear = year => deployed(AdminFacade)
+  .then(inst => inst.addAcademicYear(
     year,
     { from: getAccount() },
   ));
@@ -70,12 +71,16 @@ export const getDegreeCourses = ({ year, size }) =>
     .map(index => getDegreeCourse({ year, i: index })));
 
 export const addTeaching = teaching => deployed(AdminFacade)
-  .then(inst => inst.addTeaching(
-    teaching.course,
-    teaching.responsible,
-    teaching.name,
-    { from: getAccount() },
-  ));
+  .then(async (inst) => {
+    const professorAddress = await professorFacadeAddress();
+    return inst.addTeaching(
+      teaching.course,
+      teaching.responsible,
+      teaching.name,
+      professorAddress,
+      { from: getAccount() },
+    );
+  });
 
 export const getNumberOfTeachings = course => at(DegreeCourse, course)
   .then(inst => inst.getNumberOfTeachings.call())

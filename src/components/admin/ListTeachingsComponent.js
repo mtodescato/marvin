@@ -4,7 +4,7 @@ import { Box, Table, Heading, Search, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import TeachingEntry from './TeachingEntry';
 
-const ListTeachingsComponent = ({ size, teachings }) => (
+const ListTeachingsComponent = ({ size, teachings, initialize }) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -43,13 +43,14 @@ const ListTeachingsComponent = ({ size, teachings }) => (
         Teachings found: {size}
       </Heading>
       <Heading tag="h5" >
-          Filter teachings by serial number :
+          Filter teachings by year :
       </Heading>
       <Search
         inline
         full="false"
         size="small"
-        placeHolder="Search: #"
+        placeHolder="2018"
+        onDOMChange={(e) => { initialize(e.target.value); }}
       />
     </Box>
 
@@ -87,6 +88,7 @@ ListTeachingsComponent.propTypes = {
     responsible: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
+  initialize: PropTypes.func.isRequired,
 };
 
 export default ListTeachingsComponent;

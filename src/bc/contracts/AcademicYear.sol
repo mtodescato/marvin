@@ -1,18 +1,19 @@
 pragma solidity 0.4.23;
+import "./Ownable.sol";
 
 
-contract AcademicYear {
+contract AcademicYear is Ownable {
 
     mapping(uint => address) private intToDegreeCourse;
     mapping(address => uint) private degreeCourseToInt;
     uint private last = 0;
     uint private year;
 
-    function AcademicYear(uint _year) public {
+    constructor(uint _year) public {
         year = _year;
     }
 
-    function addDegreeCourse(address degreeCourse) public {
+    function addDegreeCourse(address degreeCourse) public onlyOwner() {
         degreeCourseToInt[degreeCourse] = last;
         intToDegreeCourse[last] = degreeCourse;
         last += 1;

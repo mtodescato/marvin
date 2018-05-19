@@ -10,7 +10,7 @@ class CreateUserConfirmation extends React.Component {
   }
 
   onSubmit() {
-    // this.props.addYearRequest(this.props.year);
+    this.props.addYearRequest();
     this.props.setLayer();
   }
 
@@ -76,7 +76,7 @@ class CreateUserConfirmation extends React.Component {
 CreateUserConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
   year: PropTypes.number.isRequired,
-  // addYearRequest: PropTypes.func.isRequired,
+  addYearRequest: PropTypes.func.isRequired,
 };
 
 export default CreateUserConfirmation;

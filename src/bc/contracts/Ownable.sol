@@ -2,15 +2,19 @@ pragma solidity 0.4.23;
 
 
 contract Ownable {
-    address public owner;
+    address private owner;
 
-    function Ownable() public {
+    constructor() public {
         owner = msg.sender;
     }
 
     modifier onlyOwner() {
         require(msg.sender == owner);
         _;
+    }
+
+    function getOwner() public view returns(address) {
+        return owner;
     }
 
     function transfertOwnernship (address newOwner) public onlyOwner {

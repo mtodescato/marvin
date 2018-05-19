@@ -1,8 +1,9 @@
 pragma solidity 0.4.23;
 import "./AcademicYear.sol";
+import "./Ownable.sol";
 
 
-contract  AcademicYearsList {
+contract  AcademicYearsList is Ownable {
 
     mapping ( uint => address ) private yearToAcademicYear;
 
@@ -16,7 +17,10 @@ contract  AcademicYearsList {
         _;
     }
 
-    function insertNewAcademicYears( uint year, address academicYear) public onlyNewYear(year) {
+    function insertNewAcademicYears( uint year, address academicYear) 
+    public 
+    onlyNewYear(year) 
+    onlyOwner() {
         yearToAcademicYear[year] = academicYear;
     }
 

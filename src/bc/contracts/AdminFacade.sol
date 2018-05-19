@@ -17,13 +17,19 @@ contract  AdminFacade {
     DegreeRequests private degreeRequests;
     AcademicYearsList private yearsList;
 
+    /**@dev Check if the user requesting the action is an admin or the master admin.*/
+    modifier isAdmin() {
+        if (msg.sender != userList.getMasterAdminAddress() && userList.getType(msg.sender) != 2) revert();
+        _;
+    }
+
     /**@dev Constructor of AdminFacade
     *  @param _userlist Address of the contract ListUser containing all the users.
     *  @param _factory Address to the contrat of the factory method for the users.
     *  @param _degreeRequests Address to the DegreeRequest contract containig the list of the degree requests.
     *  @param _yearsList Address of the list of the Academic years.
     */
-    function AdminFacade(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
+    constructor(address _userlist, address _factory, address _degreeRequests, address _yearsList) public {
         userList = ListUsers(_userlist);
         factory = FactoryMethod(_factory);
         degreeRequests = DegreeRequests(_degreeRequests);
@@ -39,7 +45,9 @@ contract  AdminFacade {
     *  @param _type Type of the user:0 for student, 1 for professor, 2 for admin.
     */
     function addUser(bytes _name, bytes _surname, bytes _socialNumber, uint _serialNumber, address _owner, uint8  _type)
-    public {
+    public
+    isAdmin() 
+    {
         address newUser = factory.createUser(_name, _surname, _socialNumber, _serialNumber, _owner, _type);
         userList.addUser(newUser, _type, _owner);
     }
@@ -47,7 +55,7 @@ contract  AdminFacade {
     /**@dev remove an user form the userlist.
     *  @param accountAddress Address of the contract owner.
     */
-    function removeUser(address accountAddress) public {
+    function removeUser(address accountAddress) public isAdmin() {
         userList.removeUser(accountAddress);
     }
 
@@ -55,14 +63,14 @@ contract  AdminFacade {
     *  @param newState The new state for the request 1 for accepted or -1 for rejected.
     *  @param request index of the degree request.
     */
-    function mangeDegreeRequest(int8 newState, uint request) public {
+    function mangeDegreeRequest(int8 newState, uint request) public isAdmin() {
         degreeRequests.manageRequest(newState, request);
     }
 
     /**@dev create a new academic year and add it to the list of academic years.
     *  @param _year Numer of the year to create.
     */
-    function addAcademicYear( uint _year) public {
+    function addAcademicYear( uint _year) public isAdmin() {
         yearsList.insertNewAcademicYears(_year, address(new AcademicYear(_year)));
     }
 
@@ -80,7 +88,10 @@ contract  AdminFacade {
     *  @param president Name of the course chief.
     *  @param typeDegree Type of the degree course.
     */
-    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint8 typeDegree) public {
+    function addDegreeCourse( uint academicYear, bytes name, bytes president, uint8 typeDegree) 
+    public 
+    isAdmin()
+    {
         DegreeCourse dCourse = new DegreeCourse(name, president, typeDegree);
         address acYear = yearsList.getAcademicYear(academicYear);
         AcademicYear acYearObj = AcademicYear(acYear);
@@ -111,11 +122,13 @@ contract  AdminFacade {
     /**@dev Create and add a new teaching to the DegreeCourse.
     *  @param course Address of the DegreeCourse.
     *  @param refProfessor Address of the professor of the teching.
-    *  @param name Name of the teaching
+    *  @param name Name of the teaching.
+    *  @param professorFacade Address of the professor facade contract needed for acces control.
     */
-    function addTeaching(address course, address refProfessor, bytes name) public {
+    function addTeaching(address course, address refProfessor, bytes name, address professorFacade) public isAdmin() {
         DegreeCourse dCourse = DegreeCourse(course);
         Teaching newTeach = new Teaching(refProfessor, name);
+        newTeach.transfertOwnernship(professorFacade);
         dCourse.addTeaching(address(newTeach));
     }
 

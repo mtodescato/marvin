@@ -14,6 +14,7 @@ class ListCourses extends React.Component {
       <ListCoursesComponent
         size={this.props.size}
         coursesEntries={this.props.courses}
+        initialize={this.props.initialize}
       />
     );
   }
