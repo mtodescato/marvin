@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dashboard from '../../components/admin/DashboardAdmin';
+import Dashboard from '../../components/shared/Dashboard';
 import Home from './Home';
 import ListUsers from './ListUsers';
 import CreateUser from './CreateUser';
@@ -10,6 +10,7 @@ import CreateCourse from './CreateCourse';
 import ListTeachings from './ListTeachings';
 import CreateYear from '../../components/admin/CreateYearComponent';
 import CreateTeaching from './CreateTeaching';
+import DegreeProcedures from './DegreeProcedures';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
   <div>
@@ -39,6 +40,8 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: CreateTeaching };
     case 8:
       return { DashboardComponent: CreateYear };
+    case 9:
+      return { DashboardComponent: DegreeProcedures };
     default:
       return { DashboardComponent: Home };
   }

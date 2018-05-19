@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dashboard from '../../components/professor/Dashboard';
+import Dashboard from '../../components/shared/Dashboard';
 import Home from '../../containers/admin/Home';
 import ListTeachings from './ListTeachings'; /*
 import ListExams from './ListExams';
