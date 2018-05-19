@@ -58,10 +58,10 @@ contract('Testing ProfessorFacade', () => {
     studentFacadeInstance.subscribeToExam(studentContractAddress, exam, { from: address0 });
     const examInstance = await Exam.at(exam);
     let examsNumber = await examInstance.getNumberOfMarks.call();
-    assert.notEqual(examsNumber.toNumber(), 0, 'no marks for the exam');
+    assert.equal(examsNumber.toNumber(), 0, 'no marks for the exam');
     await professorFacadeInstance
       .publishMark(exam, studentContractAddress, 27, professorContract, { from: address1 });
     examsNumber = await examInstance.getNumberOfMarks.call();
-    assert.notEqual(examsNumber.toNumber(), 1, 'one mark for the exam');
+    assert.equal(examsNumber.toNumber(), 1, 'one mark for the exam');
   });
 });

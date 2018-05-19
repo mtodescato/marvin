@@ -10,6 +10,7 @@ contract Exam is Ownable {
     mapping(address => uint8) private studentToResult; // 0 quando il Mark non e' stato assegnato
     mapping(address => bool) private acceptedMarks;
     uint private last = 0;
+    uint private insertedMarks = 0;
     bytes private date;
     address private teaching;
     address private studentFacade;
@@ -56,7 +57,8 @@ contract Exam is Ownable {
     {
         intToStudent[last] = student;
         studentToResult[student] = mark;
-        last += 1;
+        insertedMarks += 1;
+        
     }
 
     function manageMark(address student, bool mark) 
@@ -80,8 +82,12 @@ contract Exam is Ownable {
         return teaching;
     }
 
-    function getNumberOfMarks() public view returns(uint) {
+    function getNumberOfStudents() public view returns(uint) {
         return last;
+    }
+
+    function getNumberOfMarks() public view returns(uint) {
+        return insertedMarks;
     }
 
     function getStudentSubscribed(uint index) public view returns(address) {
@@ -92,6 +98,7 @@ contract Exam is Ownable {
     function subscribe(address student) public onlyStudentFacade() {
         intToStudent[last] = student;
         studentToInt[student] = last;
+        studentToResult[student] = 0;
         last += 1;
     }
 }
