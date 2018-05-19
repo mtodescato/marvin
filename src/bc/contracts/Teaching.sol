@@ -1,8 +1,9 @@
 pragma solidity 0.4.23;
 import "./Exam.sol";
+import "./Ownable.sol";
 
 
-contract Teaching {
+contract Teaching is Ownable {
 
     mapping(address => uint) private examToInt;
     mapping(uint => address) private intToExam;
@@ -22,13 +23,14 @@ contract Teaching {
         _;
     }
 
-    function Teaching(address _professor, bytes _name) public {
+    constructor(address _professor, bytes _name) public {
         professor = _professor;
         name = _name;
     }
 
     function addExam(address exam, address sender)
     public
+    onlyOwner()
     onlyReferenceProf(sender)
     onlyCorrectExam(exam)
     {

@@ -8,7 +8,7 @@ contract User is Ownable {
     bytes private socialNumber;
     uint private serial; //matricola
 
-    function User( bytes _name, bytes _surname, bytes _socialNumber, uint _serial) public {
+    constructor( bytes _name, bytes _surname, bytes _socialNumber, uint _serial) public {
         name = _name;
         surname = _surname;
         socialNumber = _socialNumber;

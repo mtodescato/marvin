@@ -19,11 +19,19 @@ contract StudentFacade {
         _;
     }
 
+    /**@dev Check if the user requesting an action involving a contract is the owner of the contract.
+    *  @param contractA Aderess of the contract involved in the operation.
+    */
+    modifier studentUseHisContract(address contractA) {
+        require(msg.sender == (Student(contractA)).getOwner()); 
+        _;
+    }
+
     /**@dev Constructor of SudentFacade.
     *  @param degreeRequestsAddress Address of degreeRequest contract containig the degree requests.
     *  @param userListAddress Address ot LisrUser contract containig users.
     */
-    function StudentFacade(address degreeRequestsAddress, address userListAddress) public {
+    constructor(address degreeRequestsAddress, address userListAddress) public {
         degreeRequests = DegreeRequests(degreeRequestsAddress);
         userList = ListUsers(userListAddress);
     }
@@ -41,6 +49,7 @@ contract StudentFacade {
     */
     function createDegreeRequest(address student, bytes thesisTitle, bytes submissionDate, address professor)
     public
+    studentUseHisContract(student)
     onlyReadyStudent(student)
     {
         require(userList.getType(professor) == 1);
@@ -51,7 +60,7 @@ contract StudentFacade {
     *  @param student Address of the student contract.
     *  @param exam Address of the exam.
     */
-    function subscribeToExam(address student, address exam) public {
+    function subscribeToExam(address student, address exam) public studentUseHisContract(student) {
         Exam ex = Exam(exam);
         ex.subscribe(student);
     }
@@ -61,14 +70,11 @@ contract StudentFacade {
     *  @param exam Address of the exam contract.
     *  @param mark accept or reject vote, 1 for accapted and 0 for reject.
     */
-    function manageVote(address student, address exam, bool mark) public {
+    function manageMark(address student, address exam, bool mark) public studentUseHisContract(student) {
         Exam ex = Exam(exam);
-        ex.manageVote(student, mark);
-        if (mark) {
-            Student std = Student(student);
-            std.insertPassedExam(ex.getTeaching(), exam);
-
-        }
+        ex.manageMark(student, mark);
+        Student std = Student(student);
+        std.insertPassedExam(ex.getTeaching(), exam, mark);
     }
 
     /**@dev Get the number of techings passed by the student.
@@ -100,6 +106,14 @@ contract StudentFacade {
         return studentC.getExam(teaching);
     }
 
+    function setDegreeCourse(address degreeC, address student) 
+    public
+    studentUseHisContract(student)
+    {
+        Student studentC = Student(student);
+        studentC.setDegreeCourse(degreeC);
+    }
+
     /**@dev Check if a student has passed exams far all his teachings.
     *  @param student Address of the student contract.
     */
@@ -112,12 +126,12 @@ contract StudentFacade {
         uint n = degree.getNumberOfTeachings();
         bool ok = true;
 
-
+        
         for (uint i=0; i < n && ok; i++) {
             address t = degree.getTeaching(i);
             ok = std.checkPassedTeaching(t);
         }
-
+        
         return ok;
     }
 }

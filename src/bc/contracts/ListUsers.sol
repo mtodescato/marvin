@@ -15,17 +15,31 @@ contract ListUsers is Ownable {
 
     mapping(address => UserInfo) private uAddressToUserInfo;
     mapping(uint => address) private intToUAddress;
-    uint private last = 0; //il primo disponibile
+    uint private last = 0; //first free slot
 
-    function ListUsers() public {
+    modifier onlyNewUser(address student) {
+        require(uAddressToUserInfo[student].cAddress == 0x0);
+        _;
+    }
+
+    modifier onlyValidUser(address student) {
+        require(student != 0x0);
+        _;
+    }
+
+    constructor() public {
         masterAdmin = msg.sender;
+    }
+
+    function getMasterAdminAddress() public view returns(address) {
+        return masterAdmin;
     }
 
     function addUser(address _usrAddress, uint8 _type, address _userAccount)
     public
-      // onlyOwner
-      // onlyNewUser
-      // onlyValidUser
+    onlyOwner()
+    onlyNewUser(_usrAddress)
+    onlyValidUser(_usrAddress)
     {
         require(uAddressToUserInfo[_userAccount].cAddress == address(0));
         intToUAddress[last] = _userAccount;
@@ -57,7 +71,7 @@ contract ListUsers is Ownable {
         return uAddressToUserInfo[userAdd].userType;
     }
 
-    function removeUser(address uAddress) public {
+    function removeUser(address uAddress) public onlyOwner {
         require(uAddressToUserInfo[uAddress].cAddress != address(0));
         uint pos = uAddressToUserInfo[uAddress].intPosition;
         //delete uAddressToUserInfo[uAddress];

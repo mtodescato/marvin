@@ -1,16 +1,24 @@
 pragma solidity 0.4.23;
 import "./Teaching.sol";
+import "./Ownable.sol";
 
 
-contract Exam {
+contract Exam is Ownable {
 
     mapping(uint => address) private intToStudent;
     mapping(address => uint) private studentToInt;
     mapping(address => uint8) private studentToResult; // 0 quando il Mark non e' stato assegnato
     mapping(address => bool) private acceptedMarks;
     uint private last = 0;
+    uint private insertedMarks = 0;
     bytes private date;
     address private teaching;
+    address private studentFacade;
+
+    modifier onlyStudentFacade() {
+        require(msg.sender == studentFacade);
+        _;
+    }
 
     modifier onlyPassed(address student) {
         require(studentToResult[student] >= 18);
@@ -23,7 +31,7 @@ contract Exam {
         _;
     }
 
-    modifier onlyGivenVote(address student) {
+    modifier onlyGivenMark(address student) {
         require(studentToResult[student] != 0);
         _;
     }
@@ -35,22 +43,29 @@ contract Exam {
         _;
     }
 
-    function Exam(address teach, bytes _date) public {
+    constructor(address teach, bytes _date, address _studentFacade) public {
         date = _date;
         teaching = teach;
+        studentFacade = _studentFacade;
     }
 
     function setMark(address student, uint8 mark, address senderProfessor)
     public
+    onlyOwner()
     onlySubscribed(student)
     onlyReferenceProf(senderProfessor)
     {
         intToStudent[last] = student;
         studentToResult[student] = mark;
-        last += 1;
+        insertedMarks += 1;
+        
     }
 
-    function manageVote(address student, bool mark) public onlyPassed(student) {
+    function manageMark(address student, bool mark) 
+    public
+    onlyStudentFacade() 
+    onlyPassed(student) 
+    {
         acceptedMarks[student] = mark;
     }
 
@@ -59,7 +74,7 @@ contract Exam {
         return studentToResult[intToStudent[index]];
     }
 
-    function getMark(address student) public onlyGivenVote(student) view returns(uint8) {
+    function getMark(address student) public onlyGivenMark(student) view returns(uint8) {
         return studentToResult[student];
     }
 
@@ -67,14 +82,23 @@ contract Exam {
         return teaching;
     }
 
+    function getNumberOfStudents() public view returns(uint) {
+        return last;
+    }
+
+    function getNumberOfMarks() public view returns(uint) {
+        return insertedMarks;
+    }
+
     function getStudentSubscribed(uint index) public view returns(address) {
         require(index < last);
         return intToStudent[index];
     }
 
-    function subscribe(address student) public {
+    function subscribe(address student) public onlyStudentFacade() {
         intToStudent[last] = student;
         studentToInt[student] = last;
+        studentToResult[student] = 0;
         last += 1;
     }
 }
