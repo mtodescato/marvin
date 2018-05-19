@@ -1,8 +1,9 @@
 pragma solidity 0.4.23;
 import "./Teaching.sol";
+import "./Ownable.sol";
 
 
-contract Exam {
+contract Exam is Ownable {
 
     mapping(uint => address) private intToStudent;
     mapping(address => uint) private studentToInt;
@@ -11,6 +12,12 @@ contract Exam {
     uint private last = 0;
     bytes private date;
     address private teaching;
+    address private studentFacade;
+
+    modifier onlyStudentFacade() {
+        require(msg.sender == studentFacade);
+        _;
+    }
 
     modifier onlyPassed(address student) {
         require(studentToResult[student] >= 18);
@@ -35,13 +42,15 @@ contract Exam {
         _;
     }
 
-    constructor(address teach, bytes _date) public {
+    constructor(address teach, bytes _date, address _studentFacade) public {
         date = _date;
         teaching = teach;
+        studentFacade = _studentFacade;
     }
 
     function setMark(address student, uint8 mark, address senderProfessor)
     public
+    onlyOwner()
     onlySubscribed(student)
     onlyReferenceProf(senderProfessor)
     {
@@ -50,7 +59,11 @@ contract Exam {
         last += 1;
     }
 
-    function manageMark(address student, bool mark) public onlyPassed(student) {
+    function manageMark(address student, bool mark) 
+    public
+    onlyStudentFacade() 
+    onlyPassed(student) 
+    {
         acceptedMarks[student] = mark;
     }
 
@@ -76,7 +89,7 @@ contract Exam {
         return intToStudent[index];
     }
 
-    function subscribe(address student) public {
+    function subscribe(address student) public onlyStudentFacade() {
         intToStudent[last] = student;
         studentToInt[student] = last;
         last += 1;

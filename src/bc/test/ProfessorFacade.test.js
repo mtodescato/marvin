@@ -45,7 +45,8 @@ contract('Testing ProfessorFacade', () => {
   });
 
   it('TS0011 creates an exam', async () => {
-    await professorFacadeInstance.insertExam(teachinaddress1, '15/5/2018', professorContract, { from: address1 });
+    await professorFacadeInstance
+      .insertExam(teachinaddress1, '15/5/2018', professorContract, studentFacadeInstance.address, { from: address1 });
     const exam0 = await teaching.getExam.call(0);
     assert.notEqual(exam0, '0x0000000000000000000000000000000000000000', 'not added correctly');
   });

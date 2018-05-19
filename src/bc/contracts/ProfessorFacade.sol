@@ -20,11 +20,11 @@ contract  ProfessorFacade {
     *   @param date Date of the exam.
     *   @param professor Address of contract of the professor creating the exam. 
     */
-    function insertExam(address teaching, bytes date, address professor) 
+    function insertExam(address teaching, bytes date, address professor, address studentFacade) 
     public  
     professorUseHisContract(professor)
     {
-        Exam newExam = new Exam(teaching, date);
+        Exam newExam = new Exam(teaching, date, studentFacade);
         Teaching teach = Teaching(teaching);
         teach.addExam(address(newExam), professor);
     }

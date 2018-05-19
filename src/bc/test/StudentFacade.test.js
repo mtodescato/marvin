@@ -48,7 +48,8 @@ contract('Testing StudentFacade', () => {
       .addTeaching(degreeCourseAddress, professorContract, 'maths', professorFacadeInstance.address, { from: address0 });
     teachinaddress1 = await adminFacadeInstance.getTeaching.call(degreeCourseAddress, 0);
     teaching = Teaching.at(teachinaddress1);
-    professorFacadeInstance.insertExam(teachinaddress1, '15/5/2018', professorContract, { from: address1 });
+    professorFacadeInstance
+      .insertExam(teachinaddress1, '15/5/2018', professorContract, studentFacadeInstance.address, { from: address1 });
     exam = await teaching.getExam.call(0);
   });
 
