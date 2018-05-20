@@ -1,41 +1,85 @@
 import React from 'react';
-import Table from 'grommet/components/Table';
 import PropTypes from 'prop-types';
+import { Box, Table, Heading, Label } from 'grommet';
+import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import ExamApplicationEntry from './ExamApplicationEntry';
 
-const ListAvaiableExamsComponent = props => (
-  <div>
-    <h4> Exams avaiable</h4>
-    <Table responsive>
+// const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => (
+const ListAvaiableExamsComponent = ({ size, examsEntries }) => (
+  <Box
+    className="PanelBox"
+    direction="column"
+    margin="small"
+    separator="bottom"
+  >
+    <Box
+      className="PanelHeader"
+      direction="row"
+      justify="start"
+      align="center"
+      separator="bottom"
+    >
+      <FormNextLinkIcon />
+      <Label>
+        Booking Exams
+      </Label>
+    </Box>
+
+    <Box className="titleBox" alignSelf="center" >
+      <Heading tag="h2" strong>
+        Booking Exams
+      </Heading>
+    </Box>
+
+    <Box
+      className="searchBox"
+      size="medium"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+    >
+      <Heading tag="h4" >
+        Exams avaiable: {size}
+      </Heading>
+    </Box>
+
+    <Table
+      responsive
+      selectable
+    >
       <thead>
         <tr>
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
           <th>CFU</th>
-          <th>Action</th>
+          <th>Subscribe</th>
         </tr>
       </thead>
       <tbody>
         {
-          props.exams.map((element, index) => (
+          examsEntries.map((element, index) => (
             <ExamApplicationEntry
+              key={[element.address]}
               index={index}
               {...element}
-              address={props.address}
-              subscribeToExam={props.subscribeToExam}
+              // subscribeToExam={subscribeToExam}
             />
           ))
         }
       </tbody>
     </Table>
-  </div>
+  </Box>
 );
 
 ListAvaiableExamsComponent.propTypes = {
-  exams: PropTypes.arrayOf.isRequired,
-  subscribeToExam: PropTypes.func.isRequired,
-  address: PropTypes.string.isRequired,
+  examsEntries: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    role: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+  })).isRequired,
+  size: PropTypes.number.isRequired,
+  // subscribeToExam: PropTypes.func.isRequired,
 };
 
 export default ListAvaiableExamsComponent;
+
