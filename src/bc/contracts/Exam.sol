@@ -69,7 +69,7 @@ contract Exam is Ownable {
         acceptedMarks[student] = mark;
     }
 
-    function getMark(uint index) public view returns(uint8) {
+    function getMarkIndex(uint index) public view returns(uint8) {
         require(index < last);
         return studentToResult[intToStudent[index]];
     }
