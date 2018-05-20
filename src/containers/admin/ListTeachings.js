@@ -13,6 +13,7 @@ class ListTeachingsContainer extends React.Component {
       <ListTeachingsComponent
         teachings={this.props.teachings}
         size={this.props.size}
+        initialize={this.props.initialize}
       />
     );
   }

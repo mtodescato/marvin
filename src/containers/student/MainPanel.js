@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import Dashboard from '../../components/student/Dashboard';
+import Dashboard from '../../components/shared/Dashboard';
 import Home from '../../containers/student/Home';
 import ListStudyCourses from '../../containers/student/ListStudyCourses';
 import Booklet from '../../containers/student/Booklet';
