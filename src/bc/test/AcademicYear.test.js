@@ -4,7 +4,7 @@ const DegreeCourse = artifacts.require('./DegreeCourse.sol');
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
 
 
-contract('Testing AdminFacade', () => {
+contract('Testing AcademicYear', () => {
   let adminFacadeInstance;
   let AcademicYearInstance;
 
