@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 import "./Ownable.sol";
 
+
 /** @title User 
 *   @dev User is the base class for all'the users: Student, Professor and Admin
 */

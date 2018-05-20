@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 import "./User.sol";
 
+
 /** @title Admin*/
 contract Admin is User {
 
