@@ -1,9 +1,9 @@
 export const menuEntriesStudent = [
   'Booklet',
-  'Courses',
-  'Exams',
-  'Results',
-  'Degree',
+  'Booking exams',
+  'Exam results',
+  'Course application',
+  'Degree procedure',
 ];
 
 export const menuEntriesProfessor = [
@@ -11,7 +11,6 @@ export const menuEntriesProfessor = [
   'Etc',
   'Etc',
 ];
-
 
 export const menuEntriesAdmin = [
   { entry: 'Users', subEntries: ['List Users', 'Create User'] },

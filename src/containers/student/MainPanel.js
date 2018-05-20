@@ -27,11 +27,11 @@ const mapStateToProps = (state) => {
     case 1:
       return { DashboardComponent: Booklet };
     case 2:
-      return { DashboardComponent: ListStudyCourses };
-    case 3:
       return { DashboardComponent: ListAvaiableExams };
-    case 4:
+    case 3:
       return { DashboardComponent: ListPendingResults };
+    case 4:
+      return { DashboardComponent: ListStudyCourses };
     case 5:
       return { DashboardComponent: CreateDegreeRequest };
     default:
