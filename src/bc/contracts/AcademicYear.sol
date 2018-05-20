@@ -36,14 +36,14 @@ contract AcademicYear is Ownable {
     }
 
     /** @dev Get the number of the academic year.
-    *   @param uint return the academic year number.
+    *   @return uint return the academic year number.
     */
     function getYear() public view returns(uint) {
         return year;
     }
 
     /** @dev Get the number of the degree courses in the academic year.
-    *   @param uint number of the degree courses.
+    *   @return uint number of the degree courses.
     */
     function getNumberOfDC() public view returns(uint) {
         return last;
