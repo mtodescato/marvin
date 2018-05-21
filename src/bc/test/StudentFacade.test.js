@@ -2,7 +2,8 @@ const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const Teaching = artifacts.require('./Teaching.sol');
 const ListUsers = artifacts.require('./ListUsers.sol');
-const StudentFacade = artifacts.require('StudentFacade.sol');
+const StudentFacade = artifacts.require('./StudentFacade.sol');
+const DegreeRequests = artifacts.require('./DegreeRequests.sol');
 const Student = artifacts.require('./Student.sol');
 const Exam = artifacts.require('./Exam.sol');
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
@@ -29,11 +30,13 @@ contract('Testing StudentFacade', () => {
   let professorContract;
   let degreeCourseAddress;
   let studentContract;
+  let DegreeRequestsInstance;
 
   ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   StudentFacade.deployed().then((inst) => { studentFacadeInstance = inst; });
   ListUsers.deployed().then((inst) => { ListUsersInstance = inst; });
+  DegreeRequests.deployed().then((inst) => { DegreeRequestsInstance = inst; });
 
 
   it('sets up for testing StudentFacade', async () => {
@@ -104,5 +107,7 @@ contract('Testing StudentFacade', () => {
     await (Student.at(studentContractAddress)).setDegreeCourse(degreeCourseAddress);
     await studentFacadeInstance
       .createDegreeRequest(studentContract, 'test title', '27-1-2018', address1);
+    const pendingDegreeRequests = await DegreeRequestsInstance.pendingDegreeRequestNumber.call();
+    assert.equal(pendingDegreeRequests.toNumber(), 1, 'added degree request');
   });
 });

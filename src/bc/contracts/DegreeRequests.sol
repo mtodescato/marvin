@@ -3,8 +3,8 @@ pragma solidity 0.4.23;
 
 contract DegreeRequests {
     mapping(address => DegreeRequest) private studentContractToRequest;
-    mapping(uint => address) private intToSudent; // solo domande in attesa
-    mapping(address => uint) private studentToInt; // solo domande in attesas
+    mapping(uint => address) private intToSudent; 
+    mapping(address => uint) private studentToInt; 
     uint private last = 0; // first free slot
     address private adminFacade;
     address private studentFacade;
@@ -53,6 +53,10 @@ contract DegreeRequests {
         intToSudent[last] = studentContract;
     }
 
+    function pendingDegreeRequestNumber() public view returns(uint) {
+        return last;
+    }
+
     function manageRequest(int8 newState, uint request) public onlyAdmin() {
         require(newState == -1 || newState == 1);
         require(request < last);
@@ -63,7 +67,7 @@ contract DegreeRequests {
         last -= 1;
     }
 
-    function getDegreeRequest(uint index) public view returns( bytes, int8, bytes, address) {
+    function getDegreeRequestIndex(uint index) public view returns( bytes, int8, bytes, address) {
         require(index < last);
         address stdCont = intToSudent[index];
         DegreeRequest memory request = studentContractToRequest[stdCont];
