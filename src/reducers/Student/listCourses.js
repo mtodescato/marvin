@@ -6,6 +6,7 @@ export default AsyncFlow({
     activeCourseName: -1,
     courses: [],
     size: 0,
+    year: 2018,
   },
   actions: ['LIST_COURSES', 'SUBSCRIBE'],
 }).extend({
