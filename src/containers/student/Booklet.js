@@ -29,8 +29,8 @@ const mapDispatchToProps = dispatch => ({
 const mapStateToProps = state => ({
   // address: state['web.3'].address,
   // status: state['web.3'].statusMetamask,
-  status: state['booklet-info'].statusMetamask,
-  booklet: state['booklet-info'].booklet,
+  status: state['booklet-info-student'].status,
+  booklet: state['booklet-info-student'].booklet,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booklet);
