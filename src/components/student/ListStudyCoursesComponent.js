@@ -4,8 +4,12 @@ import { Box, Table, Heading, Search, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseEntry from './CourseEntry';
 
-// const ListStudyCoursesComponent = ({ size, coursesEntries, subscribeToCourse }) => (
-const ListStudyCoursesComponent = ({ size, coursesEntries }) => (
+const ListStudyCoursesComponent = ({
+  activeCourseName,
+  size,
+  coursesEntries,
+  subscribeToCourse,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -70,7 +74,8 @@ const ListStudyCoursesComponent = ({ size, coursesEntries }) => (
               key={[element.address]}
               index={index}
               {...element}
-              // subscribeToCourse={subscribeToCourse}
+              activeCourseName={activeCourseName}
+              subscribeToCourse={subscribeToCourse}
             />
           ))
         }
@@ -87,7 +92,8 @@ ListStudyCoursesComponent.propTypes = {
     address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
-  // subscribeToCourse: PropTypes.func.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
+  activeCourseName: PropTypes.string.isRequired,
 };
 
 export default ListStudyCoursesComponent;

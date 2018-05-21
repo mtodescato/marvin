@@ -16,8 +16,8 @@ class ListStudyCourses extends React.Component {
       <ListCoursesComponent
         size={this.props.size}
         coursesEntries={this.props.courses}
-        subscribeToCourse={this.props.subscribeToCourse}
-        activeCourse={this.props.activeCourse}
+        subscribeToCourse={this.props.subscribeRequest}
+        activeCourseName={this.props.activeCourseName}
       />
     );
   }
@@ -26,22 +26,23 @@ class ListStudyCourses extends React.Component {
 ListStudyCourses.propTypes = {
   courses: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  activeCourse: PropTypes.string.isRequired,
+  activeCourseName: PropTypes.string.isRequired,
   initialize: PropTypes.func.isRequired,
-  subscribeToCourse: PropTypes.func.isRequired,
+  subscribeRequest: PropTypes.func.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
   subscribeRequest: (address) => {
     dispatch(ListCourseReducer.creators.subscribeRequest(address));
   },
+
   initialize: (year) => { dispatch(ListCourseReducer.creators.listCoursesRequest(year)); },
 });
 
 const mapStateToProps = state => ({
   courses: state['list-courses-student'].courses,
   size: state['list-courses-student'].size,
-  activeCourse: state['list-courses-student'].activeCourseName,
+  activeCourseName: state['list-courses-student'].activeCourseName,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListStudyCourses);

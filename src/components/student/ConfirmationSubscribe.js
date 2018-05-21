@@ -10,7 +10,7 @@ class ConfirmationSubscribe extends React.Component {
   }
 
   onSubscribe() {
-    // this.props.subscribeToCourse(this.props.courseAddress);
+    this.props.subscribeToCourse(this.props.courseAddress);
     this.props.setLayer();
   }
 
@@ -120,8 +120,8 @@ ConfirmationSubscribe.propTypes = {
   courseName: PropTypes.string.isRequired,
   coursePresident: PropTypes.string.isRequired,
   courseType: PropTypes.number.isRequired,
-  // courseAddress: PropTypes.string.isRequired,
-  // subscribeToCourse: PropTypes.func.isRequired,
+  courseAddress: PropTypes.string.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
 };
 
 export default ConfirmationSubscribe;
