@@ -140,6 +140,7 @@ contract StudentFacade {
     */
     function getDegreeCourse(address student) 
     public
+    view
     studentUseHisContract(student)
     returns (address)
     {
