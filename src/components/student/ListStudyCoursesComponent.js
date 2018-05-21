@@ -9,6 +9,7 @@ const ListStudyCoursesComponent = ({
   size,
   coursesEntries,
   subscribeToCourse,
+  initialize,
 }) => (
   <Box
     className="PanelBox"
@@ -44,13 +45,14 @@ const ListStudyCoursesComponent = ({
         Courses found: {size}
       </Heading>
       <Heading tag="h5" >
-          Filter courses by serial number :
+          Filter courses by Academic Year :
       </Heading>
       <Search
         inline
         full="false"
         size="small"
-        placeHolder="Search: #"
+        placeHolder="2018"
+        onDOMChange={e => initialize(e.target.value)}
       />
     </Box>
 
@@ -94,6 +96,7 @@ ListStudyCoursesComponent.propTypes = {
   size: PropTypes.number.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
   activeCourseName: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
 };
 
 export default ListStudyCoursesComponent;

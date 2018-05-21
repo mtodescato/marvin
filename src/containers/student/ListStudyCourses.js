@@ -18,6 +18,7 @@ class ListStudyCourses extends React.Component {
         coursesEntries={this.props.courses}
         subscribeToCourse={this.props.subscribeRequest}
         activeCourseName={this.props.activeCourseName}
+        initialize={this.props.initialize}
       />
     );
   }
