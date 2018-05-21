@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-cfus';
+// import PropTypes from 'prop-types';
 import ListAvaiableExamsComponent from '../../components/student/ListAvaiableExamsComponent';
 // import { ListExam as ListExamReducer } from '../../reducers';
 
