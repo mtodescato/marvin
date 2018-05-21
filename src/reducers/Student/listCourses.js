@@ -3,7 +3,7 @@ import AsyncFlow from '../asyncFlow';
 export default AsyncFlow({
   store: 'list-courses-student',
   initialState: {
-    activeCourseName: -1,
+    activeCourseName: 'N/A',
     courses: [],
     size: 0,
     year: 2018,
@@ -14,11 +14,14 @@ export default AsyncFlow({
     switch (action.type) {
       case types.LIST_COURSES_SUCCESS:
         return {
+          ...state,
+          activeCourseName: action.payload.activeCourseName,
+          courses: action.payload.courses,
           size: action.payload.size,
-          theachings: action.payload.courses,
         };
       case types.SUBSCRIBE_SUCCESS:
         return {
+          ...state,
           activeCourseName: action.payload.activeCourseName,
         };
       default:
