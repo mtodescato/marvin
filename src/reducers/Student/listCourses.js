@@ -34,11 +34,11 @@ export default AsyncFlow({
     listCoursesFailed: error => (
       { type: types.LIST_USERS_FAILED, error: true, payload: { error } }
     ),
-    subscribeRequest: activeCourseName => (
-      { type: types.SUBSCRIBE_REQUEST, payload: { activeCourseName } }
+    subscribeRequest: indexCourseName => (
+      { type: types.SUBSCRIBE_REQUEST, payload: { indexCourseName } }
     ),
-    subscribeSuccess: activeCourseName => (
-      { type: types.SUBSCRIBE_SUCCESS, payload: { activeCourseName } }
+    subscribeSuccess: () => (
+      { type: types.SUBSCRIBE_SUCCESS }
     ),
     subscribeFailed: error => (
       { type: types.SUBSCRIBE_FAILED, error: true, payload: { error } }
