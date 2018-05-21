@@ -5,16 +5,12 @@ import Student from '../../../bc/build/contracts/Student.json';
 import { getUserContractAddress } from './contract';
 
 export const getActiveDegreeCourse = studentContract => at(Student, studentContract)
-  .then(inst => {
-    console.log(inst.address);
-    return inst.getDegreeCourse.call();
-  })
+  .then(inst => inst.getDegreeCourse.call())
   .then((degreeAdd) => {
-    console.log(degreeAdd);
-    if(Number(degreeAdd) === 0) return 'N/A'
+    if (Number(degreeAdd) === 0) return 'N/A';
     return at(DegreeCourse, degreeAdd)
-    .then(degree => degree.getDegreeCourseName.call())
-    .then(window.web3.toAscii);
+      .then(degree => degree.getDegreeCourseName.call())
+      .then(window.web3.toAscii);
   });
 
 // export const getActiveDegreeCourse = studentContract => deployed(StudentFacade)
