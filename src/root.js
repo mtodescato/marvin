@@ -15,8 +15,8 @@ let web3 = getWeb3.then((results) => {
 let account;
 export const accountInterval = setInterval(() => {
   if (web3.eth && web3.eth.accounts[0] !== account) {
+    if (account !== undefined) window.location.reload(); // non la prima volta
     [account] = web3.eth.accounts;
-    //  updateInterface();
     Store.dispatch(Web3.creators.web3AddressSuccess(account));
   }
 }, 500);
