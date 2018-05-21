@@ -1,5 +1,5 @@
 import { deployed, at, getAccount } from '../deployed';
-import { numberToCourseType } from '../../../utils/global';
+import { numberToCourseType, createArray } from '../../../utils/global';
 import { getUserInfoFromInt } from '.';
 import { professorFacadeAddress } from './contract';
 
@@ -11,7 +11,6 @@ import Teaching from '../../../bc/build/contracts/Teaching.json';
 export const getSize = () => deployed(ListUsers)
   .then(inst => inst.getNumberOfUsers.call()).then(Number);
 
-const createArray = size => Array(size).fill().map((i, index) => index);
 export const getUsers = async size =>
   Promise.all(createArray(size)
     .map(index => getUserInfoFromInt(index)));
