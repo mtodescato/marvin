@@ -1,16 +1,16 @@
 import { fork, all } from 'redux-saga/effects';
 import * as bookletInfo from './bookletInfo';
-import * as addUser from './addUser';
+import * as addUser from './Admin/addUser';
 import * as web3 from './web3';
 import * as web3UserInfo from './web3UserInfo';
-import * as listUsers from './listUsers';
-import * as deleteUser from './deleteUser';
-import * as addCourse from './addCourse';
-import * as addAcademicYear from './addAcademicYear';
-import * as listProfessors from './listProfessors';
-import * as listStudyCourses from './listStudyCourses';
-import * as addTeaching from './addTeaching';
-import * as listTeachings from './listTeachings';
+import * as listUsers from './Admin/listUsers';
+import * as deleteUser from './Admin/deleteUser';
+import * as addCourse from './Admin/addCourse';
+import * as addAcademicYear from './Admin/addAcademicYear';
+import * as listProfessors from './Admin/listProfessors';
+import * as listStudyCourses from './Admin/listStudyCourses';
+import * as addTeaching from './Admin/addTeaching';
+import * as listTeachings from './Admin/listTeachings';
 
 export default function* rootSaga() {
   yield all([
