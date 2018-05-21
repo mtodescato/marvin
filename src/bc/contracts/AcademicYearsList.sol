@@ -37,6 +37,7 @@ contract  AcademicYearsList is Ownable {
 
     /** @dev Get the address of an AcademicYear given an index.
     *   @param year index of the academicYear.
+    *   @return address AcademicYear contract address.
     */
     function getAcademicYear ( uint year ) public view onlyExistingYear(year) returns(address) {
         return yearToAcademicYear[year];
