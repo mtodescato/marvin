@@ -1,45 +1,128 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Layer, Form, Header, Heading, FormFields, Paragraph, Footer, Button } from 'grommet';
+import { Box, Layer, Header, Heading, Paragraph, Footer, Button, List, ListItem } from 'grommet';
 
-const ConfirmationResult = props => (
+class ConfirmationResult extends React.Component {
+  constructor(props) {
+    super(props);
 
-  <Layer
-    closer
-    onClose={() => props.setLayer('undefined')}
-  >
-    <Box pad="medium">
-      <Form>
-        <Header>
-          <Heading>
-            {props.action === 'a' ? 'Accettazione' : 'Rifiuto' }
-          </Heading>
-        </Header>
-        <FormFields>
-          <fieldset>
-            <Paragraph>
-              {props.action === 'a' ? 'Accetti' : 'Rifiuti' } il voto {props.result} di {props.name} in data {props.date}?
+    this.onConfirm = this.onConfirm.bind(this);
+  }
+
+  onConfirm() {
+    // this.props.manageVote(this.props.examAddress, this.props.decision);
+    this.props.setLayer();
+  }
+
+  render() {
+    return (
+      <Layer
+        closer
+        onClose={this.props.setLayer}
+        align="center"
+        flush
+      >
+        <Box
+          pad={{ vertical: 'small', horizontal: 'small' }}
+        >
+          <Header
+            colorIndex="light-2"
+            justify="center"
+            full="horizontal"
+            pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
+          >
+            <Heading tag="h3" strong>
+                Exam mark confirmation
+            </Heading>
+          </Header>
+
+          <Box
+            justify="center"
+            size={{ width: { max: 'medium' } }}
+            pad={{ vertical: 'small', horizontal: 'small' }}
+          >
+            <Paragraph margin="none" align="center">
+                  Are you sure you want to send the transaction to {this.props.decision ? 'accept' : 'reject'} this esam mark?
             </Paragraph>
-          </fieldset>
-        </FormFields>
-        <Footer pad={{ vertical: 'medium' }}>
-          <Button
-            label="Conferma"
-            type="submit"
-            primary
-          />
-        </Footer>
-      </Form>
-    </Box>
-  </Layer>
-);
+          </Box>
+
+          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+            <List >
+              <ListItem
+                justify="between"
+                separator="bottom"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                margin="none"
+              >
+                <Heading tag="h4" margin="none">
+                Date:
+                </Heading>
+                <Heading tag="h4" margin="none">
+                  {this.props.examDate}
+                </Heading>
+              </ListItem>
+              <ListItem
+                justify="between"
+                separator="bottom"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                margin="none"
+              >
+                <Heading tag="h4" margin="none">
+                Course name:
+                </Heading>
+                <Heading tag="h4" margin="none">
+                  {this.props.examName}
+                </Heading>
+              </ListItem>
+              <ListItem
+                justify="between"
+                separator="bottom"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                margin="none"
+              >
+                <Heading tag="h4" margin="none">
+                Vote:
+                </Heading>
+                <Heading tag="h4" margin="none">
+                  {this.props.examMark}
+                </Heading>
+              </ListItem>
+            </List>
+          </Box>
+
+          <Footer
+            justify="center"
+            align="center"
+            pad={{ horizontal: 'none', vertical: 'small', between: 'medium' }}
+            direction="row"
+          >
+            <Button
+              label="Confirm"
+              type="submit"
+              primary
+              onClick={this.onConfirm}
+            />
+            <Button
+              label="Cancel"
+              type="submit"
+              primary
+              onClick={this.props.setLayer}
+            />
+          </Footer>
+        </Box>
+      </Layer>
+    );
+  }
+}
 
 ConfirmationResult.propTypes = {
   setLayer: PropTypes.func.isRequired,
-  name: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
-  result: PropTypes.number.isRequired,
-  action: PropTypes.string.isRequired,
+  examName: PropTypes.string.isRequired,
+  examDate: PropTypes.string.isRequired,
+  examMark: PropTypes.number.isRequired,
+  // examAddress: PropTypes.string.isRequired,
+  decision: PropTypes.bool.isRequired,
+  // manageVote: PropTypes.func.isRequired,
 };
 
 export default ConfirmationResult;
