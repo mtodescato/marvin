@@ -141,8 +141,9 @@ contract StudentFacade {
     function getDegreeCourse(address student) 
     public
     studentUseHisContract(student)
+    returns (address)
     {
         Student studentC = Student(student);
-        studentC.getDegreeCourse();
+        return studentC.getDegreeCourse();
     }
 }
