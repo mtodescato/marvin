@@ -1,12 +1,11 @@
-import { deployed } from '../deployed';
-// import { numberToCourseType } from '../../../utils/global';
-
+import { deployed, getAccount } from '../deployed';
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
-// import Student from '../../../bc/build/contracts/Student.json';
+
 
 export const getActiveDegreeCourse = studentContract => deployed(StudentFacade)
   .then(inst => inst.getDegreeCourse.call(studentContract))
   .then(degreeAdd => degreeAdd.getDegreeCourseName.call())
   .then(window.web3.toAscii);
 
-export const forLint = 0;
+export const setActiveDegreeCourse = (studentContract, degreeAddress) => deployed(StudentFacade)
+  .then(inst => inst.setDegreeCourse(degreeAddress, studentContract, { from: getAccount() }));
