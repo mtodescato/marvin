@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 // import all reducers
 import BookletInfo from './bookletInfo';
-import AddUser from './addUser';
+import AddUser from './Admin/addUser';
 import Web3 from './web3';
 import Web3UserInfo from './web3UserInfo';
 import MenuEntries from './menuEntries';
-import ListUsers from './listUsers';
-import AddCourse from './addCourse';
-import AddAcademicYear from './addAcademicYear';
-import ListProfessors from './listProfessors';
-import ListStudyCourses from './listStudyCourses';
-import AddTeaching from './addTeaching';
-import ListTeachings from './listTeachings';
+import ListUsers from './Admin/listUsers';
+import AddCourse from './Admin/addCourse';
+import AddAcademicYear from './Admin/addAcademicYear';
+import ListProfessors from './Admin/listProfessors';
+import ListStudyCourses from './Admin/listStudyCourses';
+import AddTeaching from './Admin/addTeaching';
+import ListTeachings from './Admin/listTeachings';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,

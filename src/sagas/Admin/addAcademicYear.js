@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { AddAcademicYear } from '../reducers';
-import { addAcademicYear } from './web3calls/getter';
+import { AddAcademicYear } from '../../reducers';
+import { addAcademicYear } from '../web3calls/getter';
 
 export function* runAction({ payload }) {
   try {

@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { ListProfessors } from '../reducers';
-import { getSize, getProfessors } from './web3calls/getter';
+import { ListProfessors } from '../../reducers';
+import { getSize, getProfessors } from '../web3calls/getter';
 
 export function* runAction() {
   try {

@@ -19,7 +19,7 @@ const HomeComponent = props => (
     >
       <FormNextLinkIcon />
       <Label>
-        Admin home
+        Home
       </Label>
     </Box>
 
@@ -31,7 +31,7 @@ const HomeComponent = props => (
       separator="bottom"
     >
       <Section>
-        Welcome to your private area admin.
+        Welcome to your private area {props.message}.
       </Section>
 
       <Box direction="row" align="center">
@@ -45,6 +45,7 @@ const HomeComponent = props => (
         <Tile
           separator="top"
           align="start"
+          pad={{ horizontal: 'small' }}
         >
           <Heading
             tag="h4"
@@ -119,6 +120,7 @@ const HomeComponent = props => (
 
 HomeComponent.propTypes = {
   user: PropTypes.arrayOf.isRequired,
+  message: PropTypes.string.isRequired,
 };
 
 

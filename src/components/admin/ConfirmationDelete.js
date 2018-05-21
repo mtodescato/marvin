@@ -11,6 +11,7 @@ class ConfirmationDelete extends React.Component {
 
   onDelete() {
     this.props.deleteAction(this.props.userAddress);
+    this.props.setLayer();
   }
 
   render() {

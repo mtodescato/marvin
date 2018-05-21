@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { ListUsers } from '../reducers';
-import { deleteUser } from './web3calls/getter';
+import { ListUsers } from '../../reducers';
+import { deleteUser } from '../web3calls/getter';
 
 export function* runAction({ payload }) {
   try {

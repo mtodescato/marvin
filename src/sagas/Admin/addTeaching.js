@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { AddTeaching } from '../reducers';
-import { addTeaching } from './web3calls/getter';
+import { AddTeaching } from '../../reducers';
+import { addTeaching } from '../web3calls/getter';
 
 export function* runAction({ payload }) {
   try {
