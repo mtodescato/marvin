@@ -1,18 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'grommet/components/Button';
-import TableRow from 'grommet/components/TableRow';
-import ConfirmationComponent from '../../components/student/ConfirmationSubscribe';
+import { TableRow, Button } from 'grommet';
+import ConfirmationSubscribe from './ConfirmationSubscribe';
 
 class CourseEntry extends React.Component {
   constructor(props) {
     super(props);
+
+    this.setLayer = this.setLayer.bind(this);
+
     this.state = {
       showLayer: false,
     };
-
-    this.setLayer = this.setLayer.bind(this);
   }
+
   setLayer() {
     this.setState({
       showLayer: !this.state.showLayer,
@@ -26,28 +27,32 @@ class CourseEntry extends React.Component {
         <td>{this.props.name}</td>
         <td>{this.props.president}</td>
         <td>{this.props.type}</td>
-        <td><Button onClick={this.setLayer} label="Iscriviti" primary /></td>
+        <td>
+          <Button primary onClick={() => this.setLayer()}>Subscribe</Button>
+        </td>
         {this.state.showLayer ?
-          <ConfirmationComponent
+          <ConfirmationSubscribe
             setLayer={this.setLayer}
             courseName={this.props.name}
+            coursePresident={this.props.president}
+            courseType={this.props.type}
+            courseAddress={this.props.address}
             subscribeToCourse={this.props.subscribeToCourse}
-            address={this.props.address}
           />
-             : null
-          }
+                      : null
+                    }
       </TableRow>
     );
   }
 }
 
 CourseEntry.propTypes = {
+  index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   president: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  index: PropTypes.number.isRequired,
-  subscribeToCourse: PropTypes.func.isRequired,
+  type: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
+  subscribeToCourse: PropTypes.func.isRequired,
 };
 
 export default CourseEntry;
