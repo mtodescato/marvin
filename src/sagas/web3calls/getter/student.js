@@ -5,21 +5,21 @@ import { createArray } from '../../../utils/global';
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
 import { getUserContract } from './contract';
 
-export const getNumberOfTeachings = () => deployed(StudentFacade)
+export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
   .then(inst => inst.getNumberOfTeachings.call())
   .then(Number);
 
-export const getTeachingInfo = index => deployed(StudentFacade)
+const getTeachingInfo = index => deployed(StudentFacade)
   .then(async (inst) => {
     const cAddress = await getUserContract(getAccount());
     return inst.getTeaching.call(index, cAddress);
   });
 
-export const getTeachings = async size =>
+export const getStudentTeachings = async size =>
   Promise.all(createArray(size)
     .map(index => getTeachingInfo(index)));
 
-export const getAvarage = () => 18;
+const getAvarage = () => 18;
 
 export const getStudentInfo = async () =>
   getUserInfoFromCAddress(await getUserContract(getAccount()))
