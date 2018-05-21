@@ -1,4 +1,4 @@
-import AsyncFlow from './asyncFlow';
+import AsyncFlow from '../asyncFlow';
 
 export default AsyncFlow({
   store: 'list-users',
