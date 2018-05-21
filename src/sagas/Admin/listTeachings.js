@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { ListTeachings } from '../reducers';
-import { getNumberOfTeachings, getTeachings, getDegreeCourses, getNumberOfDC } from './web3calls/getter';
+import { ListTeachings } from '../../reducers';
+import { getNumberOfTeachings, getTeachings, getDegreeCourses, getNumberOfDC } from '../web3calls/getter';
 
 export function* runAction({ payload: { year } }) {
   try {
