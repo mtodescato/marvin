@@ -27,7 +27,7 @@ export default AsyncFlow({
   },
   creators: ({ types }) => ({
     listCoursesRequest: year => ({ type: types.LIST_COURSES_REQUEST, payload: { year } }),
-    listUsersSuccess: ({ courses, size, activeCourseName }) => ({
+    listCoursesSuccess: ({ courses, size, activeCourseName }) => ({
       type: types.LIST_COURSES_SUCCESS,
       payload: { courses, size, activeCourseName },
     }),
