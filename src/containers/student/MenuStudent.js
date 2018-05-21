@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Sidebar, Header, Box } from 'grommet';
+import { Sidebar, Box } from 'grommet';
 import PropTypes from 'prop-types';
 import { MenuEntries as MenuEntriesReducer } from '../../reducers';
 import MenuEntries from '../../components/shared/MenuEntries';
@@ -13,12 +13,10 @@ const MenuStudent = ({ active, changeActive }) => (
     margin={{ vertical: 'none' }}
     pad={{ vertical: 'none', horizontal: 'small' }}
   >
-    <Header>
-        Student Menù
-    </Header>
     <Box
       flex="grow"
       justify="start"
+      margin={{ vertical: 'small' }}
     >
       <MenuEntries
         entries={menuEntriesStudent}
