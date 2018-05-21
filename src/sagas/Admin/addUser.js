@@ -1,6 +1,6 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { AddUser } from '../reducers';
-import { addUser } from './web3calls/getter';
+import { AddUser } from '../../reducers';
+import { addUser } from '../web3calls/getter';
 
 export function* runAction({ payload }) {
   try {
