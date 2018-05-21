@@ -134,4 +134,15 @@ contract StudentFacade {
         
         return ok;
     }
+
+    /**@dev Return the degree course of a student .
+    *  @param student Address of the student contract.
+    */
+    function getDegreeCourse(address student) 
+    public
+    studentUseHisContract(student)
+    {
+        Student studentC = Student(student);
+        studentC.getDegreeCourse();
+    }
 }
