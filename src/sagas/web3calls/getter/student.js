@@ -1,5 +1,6 @@
 import { deployed, getAccount } from '../deployed';
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
+import { getUserContract } from './contract';
 
 
 export const getActiveDegreeCourse = studentContract => deployed(StudentFacade)
@@ -7,5 +8,8 @@ export const getActiveDegreeCourse = studentContract => deployed(StudentFacade)
   .then(degreeAdd => degreeAdd.getDegreeCourseName.call())
   .then(window.web3.toAscii);
 
-export const setActiveDegreeCourse = (studentContract, degreeAddress) => deployed(StudentFacade)
-  .then(inst => inst.setDegreeCourse(degreeAddress, studentContract, { from: getAccount() }));
+export const setActiveDegreeCourse = degreeAddress => deployed(StudentFacade)
+  .then(async (inst) => {
+    const stdC = await getUserContract(getAccount());
+    return inst.setDegreeCourse(degreeAddress, stdC, { from: getAccount() });
+  });
