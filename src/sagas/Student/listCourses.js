@@ -1,11 +1,11 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { ListCoursesStudent } from '../../reducers';
-import { getNumberOfDC, getDegreeCourse, getActiveDegreeCourse, getUserContract } from '../web3calls/getter';
+import { getNumberOfDC, getDegreeCourse, getActiveDegreeCourse, getUserContractAddress } from '../web3calls/getter';
 import { getAccount } from '../web3calls';
 
 export function* runAction(action) {
   try {
-    const studentCAddress = yield call(getUserContract, getAccount());
+    const studentCAddress = yield call(getUserContractAddress, getAccount());
     const activeCourseName = yield call(getActiveDegreeCourse, studentCAddress);
     const courses = [];
     const size = yield call(getNumberOfDC, action.payload.year);
