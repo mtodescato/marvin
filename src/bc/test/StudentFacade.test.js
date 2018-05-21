@@ -41,7 +41,7 @@ contract('Testing StudentFacade', () => {
     adminFacadeInstance.addUser('giovanni', 'storti', 'gvnstr75402584', 11424, address0, 0, { from: address0 });
     adminFacadeInstance.addUser('mario', 'bianchi', 'mrbnc75802975', 12326, address2, 0, { from: address0 });
     adminFacadeInstance.addUser('ugo', 'ciano', 'ugocin75802975', 12327, address3, 0, { from: address0 });
-    
+
     adminFacadeInstance.addAcademicYear(796, { from: address0 });
     adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1, { from: address0 });
     degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
