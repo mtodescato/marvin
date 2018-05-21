@@ -1,43 +1,15 @@
 import AsyncFlow from '../asyncFlow';
 
 export default AsyncFlow({
-  store: 'booklet-info',
+  store: 'booklet-info-student',
   initialState: {
-    // statusMetamask: 'RESOLVED',
-    booklet: {
-      user: {
-        name: 'Giovanni',
-        surname: 'Calore',
-        matricola: '1120000',
-        media: '30.00',
-      },
-      exams: [
-        {
-          responsabile: 'Maietti',
-          nome: 'Logica',
-          cfu: '6',
-          stato: true,
-          voto: '30',
-          data: '12/12/2012',
-        },
-        {
-          responsabile: 'Goggiuolo',
-          nome: 'Data Mining',
-          cfu: '6',
-          stato: true,
-          voto: '30',
-          data: '11/11/2011',
-        },
-        {
-          responsabile: 'Mario',
-          nome: 'Swe',
-          cfu: '13',
-          stato: false,
-          voto: '',
-          data: '',
-        },
-      ],
+    user: {
+      name: '',
+      surname: '',
+      matricola: '',
+      media: '',
     },
+    exams: [],
   },
   actions: ['BOOKLET_INFO'],
 }).extend({
