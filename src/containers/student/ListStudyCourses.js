@@ -8,7 +8,7 @@ import { ListCoursesStudent as ListCourseReducer } from '../../reducers';
 
 class ListStudyCourses extends React.Component {
   componentWillMount() {
-    this.props.initialize();
+    this.props.initialize(2018);
   }
 
   render() {
@@ -35,7 +35,7 @@ const mapDispatchToProps = dispatch => ({
   subscribeRequest: (address) => {
     dispatch(ListCourseReducer.creators.subscribeRequest(address));
   },
-  initialize: () => { dispatch(ListCourseReducer.creators.listCoursesRequest()); },
+  initialize: (year) => { dispatch(ListCourseReducer.creators.listCoursesRequest(year)); },
 });
 
 const mapStateToProps = state => ({
