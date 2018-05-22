@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 import "./User.sol";
 
+
 /** @title Student */
 contract Student is User {
 
