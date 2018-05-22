@@ -32,11 +32,17 @@ const ListExamComponent = ({ size, exams }) => (
 
     <Box
       className="infoBox"
-      size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
         Exams found: {size}
+      </Heading>
+
+      <Heading tag="h5" >
+        This page displays the list of the exams of the teachings of which you are the
+        reference professor.
+        In order to see and manage marks of the enrolled students click on the icon alongside
+        each exam entry.
       </Heading>
     </Box>
 

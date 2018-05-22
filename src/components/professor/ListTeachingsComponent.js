@@ -32,11 +32,15 @@ const ListTeachingsComponent = ({ size, teachings }) => (
 
     <Box
       className="infoBox"
-      size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
         Teachings found: {size}
+      </Heading>
+
+      <Heading tag="h5" >
+        This page displays the list of the teachings of which you are the reference professor.
+        In order to see the exams available click on the icon alongside each teaching entry.
       </Heading>
     </Box>
 
