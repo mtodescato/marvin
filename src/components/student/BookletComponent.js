@@ -61,7 +61,7 @@ class BookletComponent extends React.Component {
             align="center"
           >
             <Image src={notFound} size="large" />
-            <Button onClick={this.props.bookletInfoRequest()} label="Try again" />
+            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
           </Section>
         );
       default:
@@ -70,7 +70,7 @@ class BookletComponent extends React.Component {
             align="center"
           >
             <Image src={notFound} size="large" />
-            <Button onClick={this.props.bookletInfoRequest()} label="Try again" />
+            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
           </Section>
         );
     }

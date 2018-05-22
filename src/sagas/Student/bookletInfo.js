@@ -1,10 +1,13 @@
-import { put, takeLatest /* , call */ } from 'redux-saga/effects';
+import { put, takeLatest, call } from 'redux-saga/effects';
 import { BookletInfo } from '../../reducers';
-import {} from '../web3calls/getter';
+import { getStudentInfo } from '../web3calls/getter';
 
 export function* runAction() {
   try {
-    yield put(BookletInfo.creators.bookletInfoSuccess({}));
+    const user = yield call(getStudentInfo);
+    const exams = []; // yield call();
+    const booklet = { user, exams };
+    yield put(BookletInfo.creators.bookletInfoSuccess(booklet));
   } catch (e) {
     yield put(BookletInfo.creators.bookletInfoFailed(e.message)); // fail the promise getWeb3
   }
