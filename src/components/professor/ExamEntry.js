@@ -4,7 +4,7 @@ import TableRow from 'grommet/components/TableRow';
 
 const ExamEntry = props => (
   <TableRow>
-    <td>{props.index}</td>
+    <td>{props.index + 1}</td>
     <td>{props.serialNumber}</td>
     <td>{props.date}</td>
   </TableRow>

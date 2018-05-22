@@ -30,7 +30,7 @@ class StudentEntry extends React.Component {
   render() {
     return (
       <TableRow>
-        <td>{this.props.index}</td>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.socialNumber}</td>
         <td>{this.props.name}</td>
         <td>{this.props.surname}</td>
