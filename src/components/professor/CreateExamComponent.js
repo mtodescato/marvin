@@ -36,9 +36,8 @@ class CreateExamComponent extends React.Component {
       teachingName: '',
       teachingAddress: '',
       errors: {
-        name: '',
-        president: '',
-        type: '',
+        data: '',
+        teaching: '',
         formIsValid: false,
       },
       showLayer: false,
@@ -54,24 +53,26 @@ class CreateExamComponent extends React.Component {
       showLayer: !this.state.showLayer,
     });
   }
-  /*
+
   handleValidation() {
     const errors = Object.assign({}, this.state.errors);
 
-    if ((errors.name === 'isValid'
-    && errors.president === 'isValid'
-  && errors.type === 'isValid' )) {
+    if ((errors.data === 'isValid' && errors.teaching === 'isValid')) {
       errors.formIsValid = true;
     } else errors.formIsValid = false;
 
     this.setState({ errors });
     return this.state.errors.formIsValid;
   }
-  */
 
 
   handleChangeDate(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    // if (e !== '') errors.date = 'isValid';
+    errors.date = 'isValid';
     this.setState({ date: e });
+    this.setState({ errors });
   }
 
   handleChangeTeaching(e) {
@@ -110,10 +111,6 @@ class CreateExamComponent extends React.Component {
           >
             <FormNextLinkIcon />
             <Label>
-                Manage Exams
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
                 Create Exam
             </Label>
           </Box>
@@ -125,18 +122,43 @@ class CreateExamComponent extends React.Component {
           </Box>
 
           <Box
+            className="infoBox"
+            pad={{ horizontal: 'medium', vertical: 'small' }}
+          >
+            <Heading tag="h5" >
+              This page allows you to create exams of the teachings of which you are the reference
+              professor. In order to send the transaction to complete the creation operation you
+              must fill all the fields below with the exam informations.
+            </Heading>
+          </Box>
+
+          <Box
             className="formBox"
             direction="column"
             justify="start"
             separator="bottom"
             pad={{ horizontal: 'medium' }}
           >
-            <Heading tag="h5" >
-              Submit the informations of the new exam.
-            </Heading>
             <Form>
               <FormFields>
-                <FormField label="Teaching:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Teaching:
+                    </Label>
+                    {this.state.errors.teaching !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.teaching}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.teaching === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <Select
                     id="teaching"
                     name="Teaching"
@@ -180,7 +202,7 @@ class CreateExamComponent extends React.Component {
               <Button
                 label="Submit"
                 primary
-                onClick={this.onSubmit}
+                onClick={this.state.errors.formIsValid ? this.onSubmit : null}
               />
               {this.state.showLayer ?
                 <CreateExamConfirmation
