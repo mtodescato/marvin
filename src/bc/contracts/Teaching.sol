@@ -13,7 +13,7 @@ contract Teaching is Ownable {
     bytes private name;
     
     /** @dev Check if the transaction sender is the refernce professor.
-    *   @param professor address of the professor contract.
+    *   @param prof address of the professor contract.
     */
     modifier onlyReferenceProf (address prof) {
         require(professor == prof);
