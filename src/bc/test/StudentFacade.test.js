@@ -8,7 +8,7 @@ const Exam = artifacts.require('./Exam.sol');
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
 const address1 = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
 const address2 = '0xea6d486f25bb15045051ed4e9c63d9781dcf9c87';
-// const address3 = '0x095163ece9b776e8c87a1c8949731d18272199c9';
+const address3 = '0x095163ece9b776e8c87a1c8949731d18272199c9';
 // const address4 = '0xd59ce5657009c7bc357317fa05a7df3b77585485';
 // const address5 = '0x4c3408f13b6bdd5ab0b2af10afc9985dd84553a9';
 // const address6 = '0xbb1c5ecd6182f7b1095e5281d0105bbcb589238d';
@@ -40,6 +40,8 @@ contract('Testing StudentFacade', () => {
     adminFacadeInstance.addUser('mario', 'rossi', 'mrrss75802975', 12324, address1, 1, { from: address0 });
     adminFacadeInstance.addUser('giovanni', 'storti', 'gvnstr75402584', 11424, address0, 0, { from: address0 });
     adminFacadeInstance.addUser('mario', 'bianchi', 'mrbnc75802975', 12326, address2, 0, { from: address0 });
+    adminFacadeInstance.addUser('ugo', 'ciano', 'ugocin75802975', 12327, address3, 0, { from: address0 });
+
     adminFacadeInstance.addAcademicYear(796, { from: address0 });
     adminFacadeInstance.addDegreeCourse(796, 'computer science', 'Mario Rossi', 1, { from: address0 });
     degreeCourseAddress = await adminFacadeInstance.getDegreeCourse(796, 0);
@@ -104,5 +106,18 @@ contract('Testing StudentFacade', () => {
     await (Student.at(studentContractAddress)).setDegreeCourse(degreeCourseAddress);
     await studentFacadeInstance
       .createDegreeRequest(studentContract, 'test title', '27-1-2018', address1);
+  });
+
+  it('TS0018 can get the active degree course, when exist', async () => {
+    studentContract = await ListUsersInstance.getUser.call(address0);
+    await studentFacadeInstance.setDegreeCourse(degreeCourseAddress, studentContract);
+    const activeAddress = await studentFacadeInstance.getDegreeCourse(studentContract);
+    assert.equal(activeAddress, degreeCourseAddress, 'the address match');
+  });
+
+  it('TS0019 can get the active degree course, when not exist ', async () => {
+    studentContract = await ListUsersInstance.getUser.call(address3);
+    const activeAddressStd = await Student.at(studentContract).getDegreeCourse();
+    assert.equal('0x0000000000000000000000000000000000000000', activeAddressStd, 'the address match');
   });
 });
