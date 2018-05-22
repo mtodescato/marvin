@@ -39,14 +39,14 @@ export const getStudentExams = async () => {
   //     }))));
 };
 
-const getAvarage = () => 18;
+const getAverage = () => 18;
 
 export const getStudentInfo = async () =>
   getUserInfoFromCAddress(await studentContractAddress())
     .then(async result => ({
       ...result,
       matricola: result.serial,
-      media: await getAvarage(),
+      media: await getAverage(),
     }));
 
 export const getActiveDegreeCourse = studentContract => at(Student, studentContract)
