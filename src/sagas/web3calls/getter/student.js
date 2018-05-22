@@ -6,17 +6,16 @@ import { getUserContractAddress } from './contract';
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
 import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
 import Student from '../../../bc/build/contracts/Student.json';
-import Exam from '../../../bc/build/contracts/Exam.json';
+// import Exam from '../../../bc/build/contracts/Exam.json';
+
+const studentContractAddress = () => getUserContractAddress(getAccount());
 
 export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
-  .then(inst => inst.getNumberOfTeachings.call())
+  .then(async inst => inst.getNumberOfTeachings.call(await studentContractAddress()))
   .then(Number);
 
 const getTeachingInfo = index => deployed(StudentFacade)
-  .then(async (inst) => {
-    const cAddress = await getUserContractAddress.call(getAccount());
-    return inst.getTeaching.call(index, cAddress);
-  });
+  .then(async inst => inst.getTeaching.call(index, await studentContractAddress()));
 
 export const getStudentTeachings = async size =>
   Promise.all(createArray(size)
@@ -25,24 +24,25 @@ export const getStudentTeachings = async size =>
 export const getStudentExams = async () => {
   const size = await getStudentNumberOfTeachings();
   const teachings = await getStudentTeachings(size);
-  const studentContractAddress = await getUserContractAddress(getAccount());
-  teachings.forEach(teaching => deployed(StudentFacade)
-    .then(inst => inst.getExam.call(teaching, studentContractAddress))
-    .then(examAddress => at(Exam, examAddress)
-      .then(async exam => ({
-        voto: String(await exam.getMark()),
-        responsabile: 'Responsabile',
-        nome: 'Nome Esame',
-        cfu: '0',
-        stato: 'passato',
-        data: 'date',
-      }))));
+
+  return teachings;
+  // return teachings.map(teaching => deployed(StudentFacade)
+  //   .then(inst => inst.getExam.call(teaching, studentContractAddress()))
+  //   .then(examAddress => at(Exam, examAddress)
+  //     .then(async exam => ({
+  //       voto: String(await exam.getMark.call(studentContractAddress())),
+  //       responsabile: 'Responsabile',
+  //       nome: 'Nome Esame',
+  //       cfu: '0',
+  //       stato: 'passato',
+  //       data: 'date',
+  //     }))));
 };
 
 const getAvarage = () => 18;
 
 export const getStudentInfo = async () =>
-  getUserInfoFromCAddress(await getUserContractAddress(getAccount()))
+  getUserInfoFromCAddress(await studentContractAddress())
     .then(async result => ({
       ...result,
       matricola: result.serial,
@@ -60,6 +60,6 @@ export const getActiveDegreeCourse = studentContract => at(Student, studentContr
 
 export const setActiveDegreeCourse = degreeAddress => deployed(StudentFacade)
   .then(async (inst) => {
-    const stdC = await getUserContractAddress(getAccount());
+    const stdC = await studentContractAddress();
     return inst.setDegreeCourse(degreeAddress, stdC, { from: getAccount() });
   });
