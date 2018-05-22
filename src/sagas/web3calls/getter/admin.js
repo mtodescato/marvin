@@ -64,6 +64,7 @@ export const getDegreeCourse = ({ year, i }) => deployed(AdminFacade)
     name: window.web3.toAscii(await course.getDegreeCourseName.call()),
     president: window.web3.toAscii(await course.getDegreeCoursePresident.call()),
     courseType: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
+    type: numberToCourseType((await course.getDegreeCourseType.call()).toNumber()),
   }));
 
 export const getDegreeCourses = ({ year, size }) =>

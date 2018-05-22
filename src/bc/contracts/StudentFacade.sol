@@ -118,6 +118,19 @@ contract StudentFacade {
         studentC.setDegreeCourse(degreeC);
     }
 
+    /**@dev Return the degree course of a student .
+    *  @param student Address of the student contract.
+    */
+    function getDegreeCourse(address student) 
+    public
+    view
+    studentUseHisContract(student)
+    returns (address)
+    {
+        Student studentC = Student(student);
+        return studentC.getDegreeCourse();
+    }
+
     /**@dev Check if a student has passed exams far all his teachings.
     *  @param student Address of the student contract.
     *  @return bool the student has passed the exams for the degree request.

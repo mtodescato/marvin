@@ -28,7 +28,9 @@ class CourseEntry extends React.Component {
         <td>{this.props.president}</td>
         <td>{this.props.type}</td>
         <td>
-          <Button primary onClick={() => this.setLayer()}>Subscribe</Button>
+          {this.props.activeCourseName === this.props.name ? 'Subscribed' : (
+            <Button primary onClick={() => this.setLayer()}>Subscribe</Button>
+          )}
         </td>
         {this.state.showLayer ?
           <ConfirmationSubscribe
@@ -36,7 +38,7 @@ class CourseEntry extends React.Component {
             courseName={this.props.name}
             coursePresident={this.props.president}
             courseType={this.props.type}
-            courseAddress={this.props.address}
+            courseAddress={this.props.ID}
             subscribeToCourse={this.props.subscribeToCourse}
           />
                       : null
@@ -51,8 +53,9 @@ CourseEntry.propTypes = {
   name: PropTypes.string.isRequired,
   president: PropTypes.string.isRequired,
   type: PropTypes.number.isRequired,
-  address: PropTypes.string.isRequired,
+  ID: PropTypes.string.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
+  activeCourseName: PropTypes.string.isRequired,
 };
 
 export default CourseEntry;

@@ -1,33 +1,14 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import ListCoursesComponent from '../../components/student/ListStudyCoursesComponent';
-// import { ListCourse as ListCourseReducer } from '../../reducers';
+import { ListCoursesStudent as ListCourseReducer } from '../../reducers';
 
-export const coursesEntries = [{
-  name: 'Informatica',
-  president: 'Mario',
-  type: 'Triennale',
-  address: 'addressaddressaddressaddressaddressaddressaddress',
-},
-{
-  name: 'Matematica',
-  president: 'Montefalcone',
-  type: 'Triennale',
-  address: 'addressaddressaddressaddressaddressaddressaddress',
-},
-{
-  name: 'Biologia',
-  president: 'Gaggi',
-  type: 'Master',
-  address: 'addressaddressaddressaddressaddressaddressaddress',
-},
-];
-/*
+
 class ListStudyCourses extends React.Component {
   componentWillMount() {
-    this.props.initialize();
+    this.props.initialize(2018);
   }
 
   render() {
@@ -35,43 +16,34 @@ class ListStudyCourses extends React.Component {
       <ListCoursesComponent
         size={this.props.size}
         coursesEntries={this.props.courses}
-        subscribeToCourse={this.props.subscribeToCourse}
+        subscribeToCourse={this.props.subscribeRequest}
+        activeCourseName={this.props.activeCourseName}
+        initialize={this.props.initialize}
       />
     );
   }
-} */
+}
 
-const ListStudyCourses = () => (
-  <ListCoursesComponent
-    size={3}
-    coursesEntries={coursesEntries}
-  />
-);
-
-ListStudyCourses.propTypes = { /*
-  courses: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    president: PropTypes.string.isRequired,
-    type: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired,
+ListStudyCourses.propTypes = {
+  courses: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
+  activeCourseName: PropTypes.string.isRequired,
   initialize: PropTypes.func.isRequired,
-  subscribeToCourse: PropTypes.func.isRequired, */
+  subscribeRequest: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = () => ({
-/* const mapDispatchToProps = dispatch => ({
-  subscribeToCourse: (address) => {
+const mapDispatchToProps = dispatch => ({
+  subscribeRequest: (address) => {
     dispatch(ListCourseReducer.creators.subscribeRequest(address));
-},
-  initialize: () => { dispatch(ListCourseReducer.creators.listCoursesRequest()); }, */
+  },
+
+  initialize: (year) => { dispatch(ListCourseReducer.creators.listCoursesRequest(year)); },
 });
 
-const mapStateToProps = () => ({
-/* const mapStateToProps = state => ({
-  courses: state['list-student-courses'].courses,
-  size: state['list-student-courses'].size, */
+const mapStateToProps = state => ({
+  courses: state['list-courses-student'].courses,
+  size: state['list-courses-student'].size,
+  activeCourseName: state['list-courses-student'].activeCourseName,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListStudyCourses);
