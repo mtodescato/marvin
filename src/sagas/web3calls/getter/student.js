@@ -6,6 +6,7 @@ import { getUserContractAddress } from './contract';
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
 import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
 import Student from '../../../bc/build/contracts/Student.json';
+import Exam from '../../../bc/build/contracts/Exam.json';
 
 export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
   .then(inst => inst.getNumberOfTeachings.call())
@@ -13,13 +14,30 @@ export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
 
 const getTeachingInfo = index => deployed(StudentFacade)
   .then(async (inst) => {
-    const cAddress = await getUserContractAddress(getAccount());
+    const cAddress = await getUserContractAddress.call(getAccount());
     return inst.getTeaching.call(index, cAddress);
   });
 
 export const getStudentTeachings = async size =>
   Promise.all(createArray(size)
     .map(index => getTeachingInfo(index)));
+
+export const getStudentExams = async () => {
+  const size = await getStudentNumberOfTeachings();
+  const teachings = await getStudentTeachings(size);
+  const studentContractAddress = await getUserContractAddress(getAccount());
+  teachings.forEach(teaching => deployed(StudentFacade)
+    .then(inst => inst.getExam.call(teaching, studentContractAddress))
+    .then(examAddress => at(Exam, examAddress)
+      .then(async exam => ({
+        voto: String(await exam.getMark()),
+        responsabile: 'Responsabile',
+        nome: 'Nome Esame',
+        cfu: '0',
+        stato: 'passato',
+        data: 'date',
+      }))));
+};
 
 const getAvarage = () => 18;
 
