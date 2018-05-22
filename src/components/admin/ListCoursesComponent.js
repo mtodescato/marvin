@@ -77,6 +77,7 @@ const ListCoursesComponent = props => (
               index={index}
               {...element}
               address={props.address}
+              activeCourseName={props.activeCourseName}
             />
           ))
         }
@@ -86,6 +87,7 @@ const ListCoursesComponent = props => (
 );
 
 ListCoursesComponent.propTypes = {
+  activeCourseName: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf.isRequired,
   address: PropTypes.string.isRequired,
   initialize: PropTypes.func.isRequired,
