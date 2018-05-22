@@ -47,7 +47,7 @@ contract ListUsers is Ownable {
     }
 
     /** @dev Add a user to the mapping.
-    *   @param _usrAddess address of the user contract.
+    *   @param _usrAddress address of the user contract.
     *   @param _type type of the user.
     *   @param _userAccount address of the user wallet.
     */
