@@ -21,7 +21,8 @@
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "truffle-script": "cd ./src/bc/ && truffle migrate --reset --network development",
-    "ganache-script": "ganache-cli -p 7545 -m velociraptor"
+    "ganache-script": "ganache-cli -p 7545 -m velociraptor",
+    "databasing-script": "cd ./src/bc/ && sh databasing.sh"
   },
   "babel": {
     "presets": [

@@ -13,16 +13,16 @@ const address8 = '0x8422fd812f503ea73df496b884b007cb0b39ae7e';
 const address9 = '0x98b8a8c987ab6037ff014178e7ee05a7605d38f3';
 
 AdminFacade.deployed().then((adminFacadeInstance) => {
-  adminFacadeInstance.addUser('simone1', 'ballarin', 'bllsmn7580297584', 123335, address0, 0, { from: address0 });
-  adminFacadeInstance.addUser('simone2', 'ballarin', 'bllsmn7580297584', 123355, address1, 0, { from: address0 });
-  adminFacadeInstance.addUser('simone3', 'ballarin', 'bllsmn7580297584', 123315, address2, 0, { from: address0 });
+  adminFacadeInstance.addUser('owner', 'ballarin', 'bllsmn7580297584', 123335, address0, 2, { from: address0 });
+  adminFacadeInstance.addUser('simone2', 'ballarin', 'bllsmn7580297584', 123355, address1, 2, { from: address0 });
+  adminFacadeInstance.addUser('simone3', 'ballarin', 'bllsmn7580297584', 123315, address2, 2, { from: address0 });
   adminFacadeInstance.addUser('simone4', 'ballarin', 'bllsmn7580297584', 1233365, address3, 1, { from: address0 });
   adminFacadeInstance.addUser('simone5', 'ballarin', 'bllsmn7580297584', 123385, address4, 1, { from: address0 });
   adminFacadeInstance.addUser('simone6', 'ballarin', 'bllsmn7580297584', 123335, address5, 1, { from: address0 });
-  adminFacadeInstance.addUser('simone7', 'ballarin', 'bllsmn7580297584', 123385, address6, 2, { from: address0 });
-  adminFacadeInstance.addUser('simone8', 'ballarin', 'bllsmn7580297584', 123345, address7, 2, { from: address0 });
-  adminFacadeInstance.addUser('simone9', 'ballarin', 'bllsmn7580297584', 123305, address8, 2, { from: address0 });
-  adminFacadeInstance.addUser('simone10', 'ballarin', 'bllsmn7580297584', 1233135, address9, 2, { from: address0 });
+  adminFacadeInstance.addUser('simone7', 'ballarin', 'bllsmn7580297584', 123385, address6, 0, { from: address0 });
+  adminFacadeInstance.addUser('simone8', 'ballarin', 'bllsmn7580297584', 123345, address7, 0, { from: address0 });
+  adminFacadeInstance.addUser('simone9', 'ballarin', 'bllsmn7580297584', 123305, address8, 0, { from: address0 });
+  adminFacadeInstance.addUser('simone10', 'ballarin', 'bllsmn7580297584', 1233135, address9, 0, { from: address0 });
   adminFacadeInstance.addAcademicYear(2012, { from: address0 });
   for (let y = 2000; y <= 2018; y += 1) {
     adminFacadeInstance.addAcademicYear(Number(y), { from: address0 });
