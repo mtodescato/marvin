@@ -1,6 +1,7 @@
 pragma solidity 0.4.23;
 
 
+/** @title DegreeRequests*/
 contract DegreeRequests {
     mapping(address => DegreeRequest) private studentContractToRequest;
     mapping(uint => address) private intToSudent; 
@@ -48,9 +49,9 @@ contract DegreeRequests {
     onlyNewRequest(studentContract)
     {
         studentContractToRequest[studentContract] = DegreeRequest(thesisTitle, 0, submmissionDate, professorContract);
-        last += 1;
         studentToInt[studentContract] = last;
         intToSudent[last] = studentContract;
+        last += 1;
     }
 
     function pendingDegreeRequestNumber() public view returns(uint) {
