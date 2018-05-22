@@ -16,15 +16,18 @@ export default AsyncFlow({
   reducer: (state, action, { types }) => {
     switch (action.type) {
       case types.BOOKLET_INFO_SUCCESS:
-        return { ...state, booklet: action.payload.booklet };
+        return {
+          ...state,
+          user: action.payload.booklet.user,
+          exams: action.payload.booklet.exams,
+        };
       default:
         return state;
     }
   },
   creators: ({ types }) => ({
-    bookletInfoRequest: address => ({
+    bookletInfoRequest: () => ({
       type: types.BOOKLET_INFO_REQUEST,
-      payload: { address },
     }),
     bookletInfoSuccess: booklet => ({
       type: types.BOOKLET_INFO_SUCCESS,
