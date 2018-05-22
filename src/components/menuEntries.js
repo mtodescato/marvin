@@ -9,7 +9,7 @@ export const menuEntriesStudent = [
 export const menuEntriesProfessor = [
   'List Teachings',
   'Manage Exams',
-  'Etc',
+  'Create Exam',
 ];
 
 export const menuEntriesAdmin = [
