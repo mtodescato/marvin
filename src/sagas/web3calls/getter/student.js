@@ -25,7 +25,7 @@ export const getStudentExams = async () => {
   const size = await getStudentNumberOfTeachings();
   const teachings = await getStudentTeachings(size);
 
-  return teachings;
+  return teachings; // TODO: fix when professor can add exams
   // return teachings.map(teaching => deployed(StudentFacade)
   //   .then(inst => inst.getExam.call(teaching, studentContractAddress()))
   //   .then(examAddress => at(Exam, examAddress)
