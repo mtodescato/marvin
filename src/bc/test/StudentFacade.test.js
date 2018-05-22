@@ -113,14 +113,14 @@ contract('Testing StudentFacade', () => {
     assert.equal(pendingDegreeRequests.toNumber(), 1, 'added degree request');
   });
 
-  it('TS0018 can get the active degree course, when exist', async () => {
+  it('TS0035 can get the active degree course, when exist', async () => {
     studentContract = await ListUsersInstance.getUser.call(address0);
     await studentFacadeInstance.setDegreeCourse(degreeCourseAddress, studentContract);
     const activeAddress = await studentFacadeInstance.getDegreeCourse(studentContract);
     assert.equal(activeAddress, degreeCourseAddress, 'the address match');
   });
 
-  it('TS0019 can get the active degree course, when not exist ', async () => {
+  it('TS0036 can get the active degree course, when not exist ', async () => {
     studentContract = await ListUsersInstance.getUser.call(address3);
     const activeAddressStd = await Student.at(studentContract).getDegreeCourse();
     assert.equal('0x0000000000000000000000000000000000000000', activeAddressStd, 'the address match');
