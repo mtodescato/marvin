@@ -34,8 +34,10 @@
 npm run dbasing
 ```
 
+>if you exec as first will create 43 transactions
+
 ### Effects
-this script create:
+this script add:
 - 10 users
   - 3 owners, (address 0, 1, 2)
   - 3 professors, (address 3, 4, 5)
