@@ -13,7 +13,6 @@ class StudentEntry extends React.Component {
     this.setLayer = this.setLayer.bind(this);
 
     this.handleChangeMark = this.handleChangeMark.bind(this);
-    this.handleValidation = this.handleValidation.bind(this);
 
     this.state = {
       mark: 0,
@@ -29,17 +28,6 @@ class StudentEntry extends React.Component {
     this.setState({
       showLayer: !this.state.showLayer,
     });
-  }
-
-  handleValidation(errors) {
-    const newLocal = this.state.errors.formIsValid;
-    let formIsValid = newLocal;
-
-    if ((errors.mark === 'isValid')) {
-      formIsValid = true;
-      return formIsValid;
-    }
-    return false;
   }
 
   handleChangeMark(e) {
