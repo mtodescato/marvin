@@ -26,3 +26,27 @@
 7. 27bcba724edba5c6b28fc91a54c37a656ed55595552bd94892f9599143742b5f
 8. 46234019703d576b433db67e0f5d727c96cb75abbd980ee04e06ec8b43275ae6
 9. 6aad2b6d1d76006edbcde45d8ba89490826ea9319bc846eaea5b0ea53c006d51 
+
+# Databasing
+
+### Exec databasing
+```
+npm run dbasing
+```
+
+>if you exec as first will create 47 transactions
+
+### Effects
+this script add:
+- 10 users
+  - 3 owners, (address 0, 1, 2)
+  - 3 professors, (address 3, 4, 5)
+  - 4 students, (address 6, 7, 8, 9)
+- academicYear 2018
+- 8 degreeCourses
+  - 4 'three-years'
+  - 4 'master'
+- 2 teachings, assigned to address 3 and 4 for the first degreeCourse called 'Informatica'
+- 2 exams, one exam for each teachings
+- address 6 subscribed to each exams
+- address 7 subscribed to each exams, get marks and accept

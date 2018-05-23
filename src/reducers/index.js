@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 // import all reducers
-import BookletInfo from './bookletInfo';
+import BookletInfo from './Student/bookletInfo';
 import AddUser from './Admin/addUser';
 import Web3 from './web3';
 import Web3UserInfo from './web3UserInfo';

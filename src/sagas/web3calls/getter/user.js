@@ -16,7 +16,7 @@ const getUserSerial = address => getUserSpecificInfo(address, 'getSerial').then(
 export const getUserType = address => // real address
   deployed(ListUsers).then(inst => inst.getType.call(validateAddress(address))).then(Number);
 
-const getUserInfoFromCAddress = async cAddress => ({
+export const getUserInfoFromCAddress = async cAddress => ({
   name: await getUserName(cAddress),
   surname: await getUserSurname(cAddress),
   socialNumber: await getUserSocialNumber(cAddress),

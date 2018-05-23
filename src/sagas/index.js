@@ -1,5 +1,5 @@
 import { fork, all } from 'redux-saga/effects';
-import * as bookletInfo from './bookletInfo';
+import * as bookletInfo from './Student/bookletInfo';
 import * as addUser from './Admin/addUser';
 import * as web3 from './web3';
 import * as web3UserInfo from './web3UserInfo';

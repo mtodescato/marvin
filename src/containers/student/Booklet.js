@@ -12,25 +12,41 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { BookletInfo as BookletInfoReducer } from '../../reducers';
 import BookletComponent from '../../components/student/BookletComponent';
 
-const Booklet = props => (
+const Booklet = ({
+  status,
+  user,
+  bookletInfoRequest,
+  exams,
+}) => (
   <div>
-    <BookletComponent {...props} />
-    {}
+    <BookletComponent
+      bookletInfoRequest={bookletInfoRequest}
+      status={status}
+      user={user}
+      exams={exams}
+    />
   </div>
 );
 
+Booklet.propTypes = {
+  status: PropTypes.string.isRequired,
+  user: PropTypes.arrayOf().isRequired,
+  exams: PropTypes.arrayOf().isRequired,
+  bookletInfoRequest: PropTypes.func.isRequired,
+};
+
 const mapDispatchToProps = dispatch => ({
-  bookletInfoRequest: address => dispatch(BookletInfoReducer.creators.bookletInfoRequest(address)),
+  bookletInfoRequest: () => dispatch(BookletInfoReducer.creators.bookletInfoRequest()),
 });
 
 const mapStateToProps = state => ({
-  // address: state['web.3'].address,
-  // status: state['web.3'].statusMetamask,
-  status: state['booklet-info'].statusMetamask,
-  booklet: state['booklet-info'].booklet,
+  status: state['booklet-info-student'].status,
+  user: state['booklet-info-student'].user,
+  exams: state['booklet-info-student'].exams,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booklet);
