@@ -14,7 +14,7 @@ export function* runAction(action) {
       courses.push(course);
     }
     yield put(ListCoursesStudent.creators.listCoursesSuccess({
-      activeCourseName,
+      activeCourseName: activeCourseName.name,
       courses,
       size,
     }));

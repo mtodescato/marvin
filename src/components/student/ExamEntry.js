@@ -7,8 +7,7 @@ const ExamEntry = props => (
   <TableRow>
     <td>{props.responsabile}</td>
     <td>{props.nome}</td>
-    <td>{props.cfu}</td>
-    <td>{props.stato ? 'passed' : 'pending'}</td>
+    <td>{props.stato}</td>
     <td>{props.voto}</td>
     <td>{props.data}</td>
   </TableRow>
@@ -17,8 +16,7 @@ const ExamEntry = props => (
 ExamEntry.propTypes = {
   nome: PropTypes.string.isRequired,
   responsabile: PropTypes.string.isRequired,
-  cfu: PropTypes.string.isRequired,
-  stato: PropTypes.bool.isRequired,
+  stato: PropTypes.string.isRequired,
   voto: PropTypes.number.isRequired,
   data: PropTypes.string.isRequired,
 };

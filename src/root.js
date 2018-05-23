@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import Store from './store';
 import getWeb3 from './getWeb3';
 import Web3 from './reducers/web3';
-import addBasicUsers from './sagas/web3calls/databasing';
 
 let web3 = getWeb3.then((results) => {
   web3 = results;
@@ -20,9 +19,6 @@ export const accountInterval = setInterval(() => {
     Store.dispatch(Web3.creators.web3AddressSuccess(account));
   }
 }, 500);
-
-// populate blockchain with fake user, exam, academicYear ...
-addBasicUsers();
 
 const Root = ({ route }) => (
   <div className="App">
