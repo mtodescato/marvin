@@ -12,19 +12,13 @@ const ListStudentsComponent = ({ size, examsResults, examAddress }) => (
     separator="bottom"
   >
 
-    <Box className="titleBox" alignSelf="center" >
-      <Heading tag="h2" strong>
-        Exams Results
-      </Heading>
-    </Box>
-
     <Box
       className="searchBox"
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
-        Pending results: {size}
+        Enrolled students: {size}
       </Heading>
     </Box>
 
@@ -46,6 +40,7 @@ const ListStudentsComponent = ({ size, examsResults, examAddress }) => (
         {
           examsResults.map((element, index) => (
             <StudentEntry
+              key={[element.address]}
               index={index}
               {...element}
               examAddress={examAddress}

@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableRow, Button, Form, FormField, FormFields, TextInput } from 'grommet';
-// import CheckMark from 'grommet/components/icons/base/Checkmark';
+import { TableRow, Button, Form, FormField, FormFields, TextInput, Box } from 'grommet';
+import Checkmark from 'grommet/components/icons/base/Checkmark';
+import Close from 'grommet/components/icons/base/Close';
+import { markValidation } from '../formValidator';
 import ConfirmationPublishMark from './ConfirmationPublishMark';
 
 class StudentEntry extends React.Component {
@@ -9,10 +11,15 @@ class StudentEntry extends React.Component {
     super(props);
 
     this.setLayer = this.setLayer.bind(this);
+
     this.handleChangeMark = this.handleChangeMark.bind(this);
 
     this.state = {
-      mark: false,
+      mark: 0,
+      errors: {
+        mark: '',
+        formIsValid: false,
+      },
       showLayer: false,
     };
   }
@@ -24,32 +31,56 @@ class StudentEntry extends React.Component {
   }
 
   handleChangeMark(e) {
-    this.setState({ mark: e.target.value });
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.mark = markValidation(e.target.value);
+
+    if ((errors.mark === 'isValid')) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+
+    this.setState({
+      mark: parseInt(e.target.value, 10),
+      errors,
+    });
   }
 
   render() {
     return (
       <TableRow>
-        <td>{this.props.index}</td>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.socialNumber}</td>
         <td>{this.props.name}</td>
         <td>{this.props.surname}</td>
         <td>
           <Form>
             <FormFields>
-              <FormField>
-                <TextInput
-                  id="mark"
-                  name="Mark"
-                  placeHolder="18"
-                  onDOMChange={this.handleChangeMark}
-                />
-              </FormField>
+              <Box
+                direction="row"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                size="medium"
+                margin="none"
+              >
+                <FormField>
+                  <TextInput
+                    id="mark"
+                    name="Mark"
+                    placeholder="18"
+                    onDOMChange={this.handleChangeMark}
+                  />
+                </FormField>
+                {this.state.errors.mark !== 'isValid' && this.state.errors.mark !== '' ?
+                  <Close colorIndex="critical" /> : null
+                    }
+                {this.state.errors.mark === 'isValid' ?
+                  <Checkmark colorIndex="ok" /> : null
+                    }
+              </Box>
             </FormFields>
           </Form>
         </td>
         <td>
-          <Button primary onClick={() => this.setLayer()} label="Publish" />
+          <Button primary onClick={this.state.errors.formIsValid ? () => this.setLayer() : null} label="Publish" />
         </td>
         {this.state.showLayer ?
           <ConfirmationPublishMark

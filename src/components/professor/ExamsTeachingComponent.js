@@ -19,30 +19,34 @@ const ExamsTeachingComponent = ({ size, exams }) => (
         Exams found: {size}
       </Heading>
     </Box>
-
-    <Table
-      responsive
-      selectable
+    <Box
+      className="tableBox"
+      size="large"
     >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Serial Number</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          exams.map((element, index) => (
-            <ExamEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+      <Table
+        responsive
+        selectable
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Serial Number</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            exams.map((element, index) => (
+              <ExamEntry
+                key={[element.address]}
+                index={index}
+                {...element}
+              />
+            ))
+          }
+        </tbody>
+      </Table>
+    </Box>
   </Box>
 );
 
