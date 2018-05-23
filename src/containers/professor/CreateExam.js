@@ -8,7 +8,7 @@ import CreateExamComponent from '../../components/professor/CreateExamComponent'
 
 const teachingsEntries = [{
   value: 'Basi di dati',
-  address: 'al847582834598758pha',
+  address: 'al847582834r598758pha',
   label: <Box direction="row" justify="between" ><span> first </span> <span className="secondary"> 0x1B23075E7D9fa21cAdB1aF0bF624d80DFDF084d3   </span> </Box>,
 },
 {
