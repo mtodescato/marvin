@@ -51,19 +51,9 @@ class CreateUserComponent extends React.Component {
   }
 
   onSubmit(e) {
-    if (this.handleValidation()) {
+    if (this.state.errors.formIsValid) {
       this.setLayer();
-      /*
-      const user = {
-        name: this.state.name,
-        surname: this.state.surname,
-        address: this.state.address,
-        role: this.state.role,
-      };
-      this.props.actions.addUserRequest(user); */
-    } else {
-      e.preventDefault();
-    }
+    } else e.preventDefault();
   }
 
   setLayer() {
@@ -72,46 +62,54 @@ class CreateUserComponent extends React.Component {
     });
   }
 
-  handleValidation() {
-    const errors = Object.assign({}, this.state.errors);
+  handleValidation(errors) {
+    const newLocal = this.state.errors.formIsValid;
+    let formIsValid = newLocal;
 
     if ((errors.name === 'isValid'
-          && errors.surname === 'isValid'
-          && errors.address === 'isValid')) {
-      errors.formIsValid = true;
-    } else errors.formIsValid = false;
-
-    this.setState({ errors });
-    return this.state.errors.formIsValid;
+    && errors.surname === 'isValid'
+    && errors.address === 'isValid')) {
+      formIsValid = true;
+      return formIsValid;
+    }
+    return false;
   }
 
   handleChangeName(e) {
     const errors = Object.assign({}, this.state.errors);
 
     errors.name = stringFormValidation(e.target.value);
+    errors.formIsValid = this.handleValidation(errors);
 
-    this.setState({ name: e.target.value });
-    this.setState({ errors });
+    this.setState({
+      name: e.target.value,
+      errors,
+    });
   }
 
   handleChangeSurname(e) {
     const errors = Object.assign({}, this.state.errors);
 
     errors.surname = stringFormValidation(e.target.value);
+    errors.formIsValid = this.handleValidation(errors);
 
-    this.setState({ surname: e.target.value });
-    this.setState({ errors });
+    this.setState({
+      surname: e.target.value,
+      errors,
+    });
   }
+
 
   handleChangeAddress(e) {
     const errors = Object.assign({}, this.state.errors);
 
     errors.address = addressValidation(e.target.value);
-    this.setState({ address: e.target.value });
+    errors.formIsValid = this.handleValidation(errors);
 
-    // 0xD915Bb5FCf25ff607f852fA77822DFc757aBd9bA
-
-    this.setState({ errors });
+    this.setState({
+      address: e.target.value,
+      errors,
+    });
   }
 
   handleChangeRole(e) {
@@ -284,11 +282,8 @@ class CreateUserComponent extends React.Component {
               <Button
                 label="Submit"
                 primary
-                onClick={this.onSubmit}
+                onClick={this.state.errors.formIsValid ? this.onSubmit : null}
               />
-              {!this.state.errors.formIsValid ?
-                  'no valid' : null
-                }
               {this.state.showLayer ?
                 <CreateUserConfirmation
                   setLayer={this.setLayer}
