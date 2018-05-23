@@ -1,43 +1,60 @@
 import { deployed, getAccount, at } from '../deployed';
-import { getUserInfoFromCAddress } from '.';
-import { createArray } from '../../../utils/global';
+import { getUserInfoFromCAddress, getNumberOfTeachings, getTeachings, getCourseNameFromAddress } from '.';
+// import { createArray } from '../../../utils/global';
 import { getUserContractAddress } from './contract';
 
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
-import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
+// import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
 import Student from '../../../bc/build/contracts/Student.json';
 // import Exam from '../../../bc/build/contracts/Exam.json';
+// import Teaching from '../../../bc/build/contracts/Teaching.json';
 
 const studentContractAddress = () => getUserContractAddress(getAccount());
 
-export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
-  .then(async inst => inst.getNumberOfTeachings.call(await studentContractAddress()))
-  .then(Number);
+export const getActiveDegreeCourse = studentContract => at(Student, studentContract)
+  .then(inst => inst.getDegreeCourse.call())
+  .then(getCourseNameFromAddress);
 
-const getTeachingInfo = index => deployed(StudentFacade)
-  .then(async inst => inst.getTeaching.call(index, await studentContractAddress()));
+export const setActiveDegreeCourse = degreeAddress => deployed(StudentFacade)
+  .then(async (inst) => {
+    const stdC = await studentContractAddress();
+    return inst.setDegreeCourse(degreeAddress, stdC, { from: getAccount() });
+  });
 
-export const getStudentTeachings = async size =>
-  Promise.all(createArray(size)
-    .map(index => getTeachingInfo(index)));
 
-export const getStudentExams = async () => {
-  const size = await getStudentNumberOfTeachings();
-  const teachings = await getStudentTeachings(size);
+// export const getStudentNumberOfTeachings = () => deployed(StudentFacade)
+//   .then(async (inst) => {
+//     const studentAddress = await studentContractAddress();
+//     return inst.getNumberOfTeachings.call(studentAddress);
+//   }).then(Number);
 
-  return teachings; // TODO: fix when professor can add exams
-  // return teachings.map(teaching => deployed(StudentFacade)
-  //   .then(inst => inst.getExam.call(teaching, studentContractAddress()))
-  //   .then(examAddress => at(Exam, examAddress)
-  //     .then(async exam => ({
-  //       voto: String(await exam.getMark.call(studentContractAddress())),
-  //       responsabile: 'Responsabile',
-  //       nome: 'Nome Esame',
-  //       cfu: '0',
-  //       stato: 'passato',
-  //       data: 'date',
-  //     }))));
+// const getStudentTeachingInfo = index => deployed(StudentFacade)
+//   .then(inst => inst.getTeaching.call(index, studentContractAddress()))
+//   .then(teachingAddress => at(Teaching, teachingAddress))
+//   .then(async teaching => ({
+//     address: teaching.address,
+//     nome: await teaching.getName.call(),
+//     responsabile: await teaching.getReferenceProfessor.call(),
+//     exam: await teaching.getExam.call(0),
+//     stato: 'subscribed',
+//   }));
+
+// export const getStudentTeachings = async size =>
+//   Promise.all(createArray(size)
+//     .map(index => getStudentTeachingInfo(index)));
+
+const addExamProperties = teaching => teaching;
+
+export const getStudentTeachings = async () => {
+  const course = await getActiveDegreeCourse(await studentContractAddress());
+  if (course.name === 'N/A') return [];
+  const size = await getNumberOfTeachings(course.address);
+  const teachings = await getTeachings({ course: course.address, size });
+  return teachings.map(addExamProperties);
 };
+
+export const getSubscribedExams = () => [];
+export const getPassedExams = () => [];
 
 const getAverage = () => 18;
 
@@ -48,18 +65,3 @@ export const getStudentInfo = async () =>
       matricola: result.serial,
       media: await getAverage(),
     }));
-
-export const getActiveDegreeCourse = studentContract => at(Student, studentContract)
-  .then(inst => inst.getDegreeCourse.call())
-  .then((degreeAdd) => {
-    if (Number(degreeAdd) === 0) return 'N/A';
-    return at(DegreeCourse, degreeAdd)
-      .then(degree => degree.getDegreeCourseName.call())
-      .then(window.web3.toAscii);
-  });
-
-export const setActiveDegreeCourse = degreeAddress => deployed(StudentFacade)
-  .then(async (inst) => {
-    const stdC = await studentContractAddress();
-    return inst.setDegreeCourse(degreeAddress, stdC, { from: getAccount() });
-  });
