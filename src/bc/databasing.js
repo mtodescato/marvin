@@ -1,5 +1,11 @@
+/* eslint no-loop-func: "off" */
+
 const AdminFacade = artifacts.require('./AdminFacade.sol');
 const ProfessorFacade = artifacts.require('./ProfessorFacade.sol');
+const ListUsers = artifacts.require('./ListUsers.sol');
+const StudentFacade = artifacts.require('./StudentFacade.sol');
+const Teaching = artifacts.require('./Teaching.sol');
+// const Exam = artifacts.require('./Exam.sol');
 
 const address0 = '0xd915bb5fcf25ff607f852fa77822dfc757abd9ba';
 const address1 = '0xe0d040070bb9e3ebd2cb4ccd37d773387eaec7d4';
@@ -12,6 +18,16 @@ const address7 = '0x1b23075e7d9fa21cadb1af0bf624d80dfdf084d3';
 const address8 = '0x8422fd812f503ea73df496b884b007cb0b39ae7e';
 const address9 = '0x98b8a8c987ab6037ff014178e7ee05a7605d38f3';
 
+/* added:
+ * 10 users:
+ * * 3 owners
+ * * 3 professors
+ * * 4 students
+ * 19 academicYears, from 2000 to 2018
+ * 8*19 degreeCourses, 8 degreeCourses for each academicYears
+ * 2*8*19 teachings, 2 teachings for each degreeCourses
+ * 2*8*19 exams, 1 exam for each teachings
+ */
 AdminFacade.deployed().then((adminFacadeInstance) => {
   adminFacadeInstance.addUser('owner', 'ballarin', 'bllsmn7580297584', 123335, address0, 2, { from: address0 });
   adminFacadeInstance.addUser('simone2', 'ballarin', 'bllsmn7580297584', 123355, address1, 2, { from: address0 });
@@ -37,10 +53,40 @@ AdminFacade.deployed().then((adminFacadeInstance) => {
 
     for (let i = 0; i < 8; i += 1) {
       const infAdd = adminFacadeInstance.getDegreeCourse(Number(y), Number(i));
+      const professorContract1 = ListUsers.getUser(address3);
+      const professorContract2 = ListUsers.getUser(address4);
       ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
         adminFacadeInstance.addTeaching(await infAdd, address3, 'Inglese B2', professorFacadeInstance.address, { from: address0 });
         adminFacadeInstance.addTeaching(await infAdd, address4, 'Stage', professorFacadeInstance.address, { from: address0 });
+        StudentFacade.deployed().then(async (studentFacadeInstance) => {
+          const teachingAdd1 = adminFacadeInstance.getTeaching(await infAdd, 0);
+          professorFacadeInstance.insertExam(await teachingAdd1, '15/5/2018', await professorContract1, studentFacadeInstance.address, { from: address3 });
+          const teachingAdd2 = adminFacadeInstance.getTeaching(await infAdd, 1);
+          professorFacadeInstance.insertExam(await teachingAdd2, '15/5/2018', await professorContract2, studentFacadeInstance.address, { from: address4 });
+        });
       });
     }
   }
+});
+
+/* added:
+ * first student have subscribe 2 exams
+ * second student have subscribe 2 exams and passed all of them
+ */
+StudentFacade.deployed().then(async (studentFacadeInstance) => {
+  AdminFacade.deployed().then(async (adminFacadeInstance) => {
+    const degreeCoursesAdd = adminFacadeInstance.getDegreeCourse(2018, 0);
+    const teachingAdd1 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 0);
+    const teachingAdd2 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 1);
+    const teaching1 = Teaching.at(await teachingAdd1);
+    const teaching2 = Teaching.at(await teachingAdd2);
+    const examAdd1 = (await teaching1).getExam(0);
+    const examAdd2 = (await teaching2).getExam(0);
+    const studentAdd1 = ListUsers.getUser(address6);
+    studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd1, { from: address6 });
+    studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd2, { from: address6 });
+    const studentAdd2 = ListUsers.getUser(address7);
+    studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd1, { from: address7 });
+    studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd2, { from: address7 });
+  });
 });
