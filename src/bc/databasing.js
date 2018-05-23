@@ -40,33 +40,33 @@ AdminFacade.deployed().then((adminFacadeInstance) => {
   adminFacadeInstance.addUser('simone9', 'ballarin', 'bllsmn7580297584', 123305, address8, 0, { from: address0 });
   adminFacadeInstance.addUser('simone10', 'ballarin', 'bllsmn7580297584', 1233135, address9, 0, { from: address0 });
   adminFacadeInstance.addAcademicYear(2012, { from: address0 });
-  for (let y = 2000; y <= 2018; y += 1) {
-    adminFacadeInstance.addAcademicYear(Number(y), { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Informatica', 'Ranzato Franzo', 0, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Matematica', 'Ranzato Franzo', 0, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Data Science', 'Ranzato Franzo', 0, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Filosofia', 'Ranzato Franzo', 0, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Informatica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Matematica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Data Science Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-    adminFacadeInstance.addDegreeCourse(Number(y), 'Filosofia Magistrale', 'Ranzato Franzo', 1, { from: address0 });
+  const y = 2018;
+  adminFacadeInstance.addAcademicYear(y, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Informatica', 'Ranzato Franzo', 0, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Matematica', 'Ranzato Franzo', 0, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Data Science', 'Ranzato Franzo', 0, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Filosofia', 'Ranzato Franzo', 0, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Informatica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Matematica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Data Science Magistrale', 'Ranzato Franzo', 1, { from: address0 });
+  adminFacadeInstance.addDegreeCourse(y, 'Filosofia Magistrale', 'Ranzato Franzo', 1, { from: address0 });
 
-    for (let i = 0; i < 8; i += 1) {
-      const infAdd = adminFacadeInstance.getDegreeCourse(Number(y), Number(i));
-      const professorContract1 = ListUsers.getUser(address3);
-      const professorContract2 = ListUsers.getUser(address4);
-      ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
-        adminFacadeInstance.addTeaching(await infAdd, address3, 'Inglese B2', professorFacadeInstance.address, { from: address0 });
-        adminFacadeInstance.addTeaching(await infAdd, address4, 'Stage', professorFacadeInstance.address, { from: address0 });
-        StudentFacade.deployed().then(async (studentFacadeInstance) => {
-          const teachingAdd1 = adminFacadeInstance.getTeaching(await infAdd, 0);
-          professorFacadeInstance.insertExam(await teachingAdd1, '15/5/2018', await professorContract1, studentFacadeInstance.address, { from: address3 });
-          const teachingAdd2 = adminFacadeInstance.getTeaching(await infAdd, 1);
-          professorFacadeInstance.insertExam(await teachingAdd2, '15/5/2018', await professorContract2, studentFacadeInstance.address, { from: address4 });
-        });
+  const i = 0; // Informatica
+  const infAdd = adminFacadeInstance.getDegreeCourse(y, i);
+  ListUsers.deployed().then(async (listUsersInstance) => {
+    const professorContract1 = listUsersInstance.getUser(address3);
+    const professorContract2 = listUsersInstance.getUser(address4);
+    ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
+      adminFacadeInstance.addTeaching(await infAdd, await professorContract1, 'Inglese B2', professorFacadeInstance.address, { from: address0 });
+      adminFacadeInstance.addTeaching(await infAdd, await professorContract2, 'Stage', professorFacadeInstance.address, { from: address0 });
+      StudentFacade.deployed().then(async (studentFacadeInstance) => {
+        const teachingAdd1 = adminFacadeInstance.getTeaching(await infAdd, 0);
+        professorFacadeInstance.insertExam(await teachingAdd1, '15/5/2018', await professorContract1, studentFacadeInstance.address, { from: address3 });
+        const teachingAdd2 = adminFacadeInstance.getTeaching(await infAdd, 1);
+        professorFacadeInstance.insertExam(await teachingAdd2, '15/5/2018', await professorContract2, studentFacadeInstance.address, { from: address4 });
       });
-    }
-  }
+    });
+  });
 });
 
 /* added:
@@ -75,18 +75,20 @@ AdminFacade.deployed().then((adminFacadeInstance) => {
  */
 StudentFacade.deployed().then(async (studentFacadeInstance) => {
   AdminFacade.deployed().then(async (adminFacadeInstance) => {
-    const degreeCoursesAdd = adminFacadeInstance.getDegreeCourse(2018, 0);
-    const teachingAdd1 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 0);
-    const teachingAdd2 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 1);
-    const teaching1 = Teaching.at(await teachingAdd1);
-    const teaching2 = Teaching.at(await teachingAdd2);
-    const examAdd1 = (await teaching1).getExam(0);
-    const examAdd2 = (await teaching2).getExam(0);
-    const studentAdd1 = ListUsers.getUser(address6);
-    studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd1, { from: address6 });
-    studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd2, { from: address6 });
-    const studentAdd2 = ListUsers.getUser(address7);
-    studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd1, { from: address7 });
-    studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd2, { from: address7 });
+    ListUsers.deployed().then(async (listUsersInstance) => {
+      const degreeCoursesAdd = adminFacadeInstance.getDegreeCourse(2018, 0);
+      const teachingAdd1 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 0);
+      const teachingAdd2 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 1);
+      const teaching1 = Teaching.at(await teachingAdd1);
+      const teaching2 = Teaching.at(await teachingAdd2);
+      const examAdd1 = (await teaching1).getExam(0);
+      const examAdd2 = (await teaching2).getExam(0);
+      const studentAdd1 = listUsersInstance.getUser(address6);
+      studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd1, { from: address6 });
+      studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd2, { from: address6 });
+      const studentAdd2 = listUsersInstance.getUser(address7);
+      studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd1, { from: address7 });
+      studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd2, { from: address7 });
+    });
   });
 });
