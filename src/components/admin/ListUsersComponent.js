@@ -35,6 +35,17 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
     </Box>
 
     <Box
+      className="infoBox"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+    >
+      <Heading tag="h5" >
+        This page displays the list of the users registered in the system.
+        In order to manage the users you can filter them by their unique address
+        or based on their role.
+      </Heading>
+    </Box>
+
+    <Box
       className="searchBox"
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}

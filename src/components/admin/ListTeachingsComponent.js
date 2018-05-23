@@ -35,6 +35,16 @@ const ListTeachingsComponent = ({ size, teachings, initialize }) => (
     </Box>
 
     <Box
+      className="infoBox"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+    >
+      <Heading tag="h5" >
+        This page displays the list of the teachings in the system.
+        In order to see a specific teaching details you can filter them by academic year.
+      </Heading>
+    </Box>
+
+    <Box
       className="searchBox"
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
@@ -43,7 +53,7 @@ const ListTeachingsComponent = ({ size, teachings, initialize }) => (
         Teachings found: {size}
       </Heading>
       <Heading tag="h5" >
-          Filter teachings by year :
+        Filter teachings by year:
       </Heading>
       <Search
         inline
