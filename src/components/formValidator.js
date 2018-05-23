@@ -83,3 +83,21 @@ export function markValidation(mark) {
   }
   return 'isValid';
 }
+
+/**
+ * Checks if the given string is a year between 1999 and 2050
+ *
+ * @method yearValidation
+ * @param {String} year
+ * @return {String}
+*/
+
+export function yearValidation(year) {
+  if (year.length !== 4) {
+    return 'only values between 1999 and 2050';
+  } else
+  if (!year.match(/^(1999|20[0-4][0-9]|2050)+$/)) {
+    return 'only values between 1999 and 2050';
+  }
+  return 'isValid';
+}
