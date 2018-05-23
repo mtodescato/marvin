@@ -121,6 +121,13 @@ contract Exam is Ownable {
         return teaching;
     }
 
+    /** @dev Get the date of the exam.
+    *   @return date of the exam.
+    */
+    function getDate() public view returns(bytes) {
+        return date;
+    }
+
     /** @dev Get the number of students subscribed to the exam.
     *   @return uint number of the students.  
     */
