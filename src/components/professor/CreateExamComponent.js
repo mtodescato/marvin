@@ -15,7 +15,7 @@ import {
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-// import { stringFormValidation } from '../formValidator';
+import { dateTimeValidation, selectValidation } from '../formValidator';
 import CreateExamConfirmation from './CreateExamConfirmation';
 
 class CreateExamComponent extends React.Component {
@@ -24,7 +24,7 @@ class CreateExamComponent extends React.Component {
 
     this.onSubmit = this.onSubmit.bind(this);
 
-    // this.handleValidation = this.handleValidation.bind(this);
+    this.handleValidation = this.handleValidation.bind(this);
 
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleChangeTeaching = this.handleChangeTeaching.bind(this);
@@ -36,7 +36,7 @@ class CreateExamComponent extends React.Component {
       teachingName: '',
       teachingAddress: '',
       errors: {
-        data: '',
+        date: '',
         teaching: '',
         formIsValid: false,
       },
@@ -54,31 +54,40 @@ class CreateExamComponent extends React.Component {
     });
   }
 
-  handleValidation() {
-    const errors = Object.assign({}, this.state.errors);
+  handleValidation(errors) {
+    const newLocal = this.state.errors.formIsValid;
+    let formIsValid = newLocal;
 
-    if ((errors.data === 'isValid' && errors.teaching === 'isValid')) {
-      errors.formIsValid = true;
-    } else errors.formIsValid = false;
-
-    this.setState({ errors });
-    return this.state.errors.formIsValid;
+    if ((errors.date === 'isValid' && errors.teaching === 'isValid')) {
+      formIsValid = true;
+      return formIsValid;
+    }
+    return false;
   }
 
 
   handleChangeDate(e) {
     const errors = Object.assign({}, this.state.errors);
 
-    // if (e !== '') errors.date = 'isValid';
-    errors.date = 'isValid';
-    this.setState({ date: e });
-    this.setState({ errors });
+    errors.date = dateTimeValidation(e);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      date: e,
+      errors,
+    });
   }
 
   handleChangeTeaching(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.teaching = selectValidation(e.option.value);
+    errors.formIsValid = this.handleValidation(errors);
+
     this.setState({
       teachingName: e.option.value,
       teachingAddress: e.option.address,
+      errors,
     });
   }
 
@@ -178,19 +187,19 @@ class CreateExamComponent extends React.Component {
                     <Label size="small">
                       Data:
                     </Label>
-                    {this.state.errors.data !== 'isValid' ?
+                    {this.state.errors.date !== 'isValid' ?
                       <Label size="small">
-                        <span style={{ color: 'red' }}>{this.state.errors.data}</span>
+                        <span style={{ color: 'red' }}>{this.state.errors.date}</span>
                       </Label> : null
                     }
-                    {this.state.errors.data === 'isValid' ?
+                    {this.state.errors.date === 'isValid' ?
                       <Checkmark colorIndex="ok" /> : null
                     }
                   </Box>
                   <DateTime
                     id="date"
                     name="Date"
-                    format="DD/MM/YYYY H:mm"
+                    format="DD/MM/YYYY HH:mm"
                     value={this.state.date}
                     onChange={this.handleChangeDate}
                   />
