@@ -90,6 +90,7 @@ export const getTeaching = (course, index) => at(DegreeCourse, course)
   .then(inst => inst.getTeaching.call(index))
   .then(teachingAddress => at(Teaching, teachingAddress))
   .then(async teaching => ({
+    address: teaching.address,
     name: window.web3.toAscii(await teaching.getName.call()),
     responsible: await teaching.getReferenceProfessor.call(),
   }));
