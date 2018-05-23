@@ -14,7 +14,7 @@ import {
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-// import { stringFormValidation } from '../formValidator';
+import { yearValidation } from '../formValidator';
 import CreateYearConfirmation from './CreateYearConfirmation';
 
 
@@ -23,8 +23,6 @@ class CreateYearComponent extends React.Component {
     super(props);
 
     this.onSubmit = this.onSubmit.bind(this);
-
-    this.handleValidation = this.handleValidation.bind(this);
 
     this.handleChangeYear = this.handleChangeYear.bind(this);
 
@@ -41,13 +39,9 @@ class CreateYearComponent extends React.Component {
   }
 
   onSubmit(e) {
-    if (this.handleValidation()) {
+    if (this.state.errors.formIsValid) {
       this.setLayer();
-
-      // this.props.actions.addYearRequest(this.state.year);
-    } else {
-      e.preventDefault();
-    }
+    } else e.preventDefault();
   }
 
   setLayer() {
@@ -56,28 +50,19 @@ class CreateYearComponent extends React.Component {
     });
   }
 
-  handleValidation() {
-    const errors = Object.assign({}, this.state.errors);
-    /*
-    if ((errors.year === 'isValid') {
-      errors.formIsValid = true;
-    } else errors.formIsValid = false;
-        // TODO
-    this.setState({ errors }); */
-
-    errors.formIsValid = true;
-    this.setState({ errors });
-
-    return this.state.errors.formIsValid;
-  }
-
   handleChangeYear(e) {
     const errors = Object.assign({}, this.state.errors);
 
-    errors.year = 'isValid'; // TODO
+    errors.year = yearValidation(e.target.value);
 
-    this.setState({ year: e.target.value });
-    this.setState({ errors });
+    if ((errors.year === 'isValid')) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+
+    this.setState({
+      year: e.target.value,
+      errors,
+    });
   }
 
   render() {
@@ -123,15 +108,23 @@ class CreateYearComponent extends React.Component {
           </Box>
 
           <Box
+            className="infoBox"
+            pad={{ horizontal: 'medium', vertical: 'small' }}
+          >
+            <Heading tag="h5" >
+              This page allows you to create and add a new academic year into the system.
+              In order to send the transaction to complete the creation operation you
+              must fill the field below with the year information.
+            </Heading>
+          </Box>
+
+          <Box
             className="formBox"
             direction="column"
             justify="start"
             separator="bottom"
             pad={{ horizontal: 'medium' }}
           >
-            <Heading tag="h5" >
-              Submit the informations of the new year.
-            </Heading>
             <Form>
               <FormFields>
                 <FormField>
@@ -166,11 +159,8 @@ class CreateYearComponent extends React.Component {
               <Button
                 label="Submit"
                 primary
-                onClick={this.onSubmit}
+                onClick={this.state.errors.formIsValid ? () => this.onSubmit() : null}
               />
-              {!this.state.errors.formIsValid ?
-                  'no valid' : null
-                }
               {this.state.showLayer ?
                 <CreateYearConfirmation
                   setLayer={this.setLayer}
