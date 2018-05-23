@@ -29,7 +29,6 @@ class BookletComponent extends React.Component {
                   <tr>
                     <th>Referent</th>
                     <th>Name</th>
-                    <th>CFU</th>
                     <th>State</th>
                     <th>Result</th>
                     <th>Date</th>
