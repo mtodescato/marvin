@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { TableRow, Button } from 'grommet';
+import { TableRow, Button, Paragraph } from 'grommet';
 import ConfirmationDelete from './ConfirmationDelete';
 
 class UserEntry extends React.Component {
@@ -23,11 +23,19 @@ class UserEntry extends React.Component {
   render() {
     return (
       <TableRow>
-        <td>{this.props.index}</td>
+        <td>{this.props.index + 1}</td>
         <td>{this.props.name}</td>
         <td>{this.props.surname}</td>
-        <td>{this.props.role}</td>
-        <td>{this.props.address}</td>
+        <td>
+          {this.props.role === 2 ? 'Admin' : null}
+          {this.props.role === 1 ? 'Professor' : null}
+          {this.props.role === 0 ? 'Student' : null}
+        </td>
+        <td>
+          <Paragraph size="medium" margin="none">
+            {this.props.address}
+          </Paragraph>
+        </td>
         <td><Button primary onClick={() => this.setLayer()}>Delete</Button></td>
         {this.state.showLayer ?
           <ConfirmationDelete
