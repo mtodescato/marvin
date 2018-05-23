@@ -8,17 +8,17 @@ export const exams = [{
   ID: '12345',
   name: 'Swe',
   date: '12/12/2018',
-  address: 'sdgfjskkldfa',
+  address: 'sdgfjfskkldfa',
 }, {
   ID: '35655',
   name: 'Swe',
   date: '12/12/2018',
-  address: 'sdgfjskkldfa',
+  address: 'sdgfjskkl3dfa',
 }, {
   ID: '45663',
   name: 'Swe',
   date: '12/12/2018',
-  address: 'sdgfjskkldfa',
+  address: 'sdgfj5skkldfa',
 },
 ];
 
