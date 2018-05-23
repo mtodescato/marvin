@@ -80,18 +80,20 @@ AdminFacade.deployed().then((adminFacadeInstance) => {
 StudentFacade.deployed().then(async (studentFacadeInstance) => {
   AdminFacade.deployed().then(async (adminFacadeInstance) => {
     ListUsers.deployed().then(async (listUsersInstance) => {
-      const degreeCoursesAdd = adminFacadeInstance.getDegreeCourse(2018, 0);
-      const teachingAdd1 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 0);
-      const teachingAdd2 = adminFacadeInstance.getTeaching(await degreeCoursesAdd, 1);
+      const degreeCourseAdd = adminFacadeInstance.getDegreeCourse(2018, 0);
+      const teachingAdd1 = adminFacadeInstance.getTeaching(await degreeCourseAdd, 0);
+      const teachingAdd2 = adminFacadeInstance.getTeaching(await degreeCourseAdd, 1);
       const teaching1 = Teaching.at(await teachingAdd1);
       const teaching2 = Teaching.at(await teachingAdd2);
       const examAdd1 = (await teaching1).getExam(0);
       const examAdd2 = (await teaching2).getExam(0);
       // subscribe student address6 and address7
       const studentAdd1 = listUsersInstance.getUser(address6);
+      const studentAdd2 = listUsersInstance.getUser(address7);
+      await studentFacadeInstance.setDegreeCourse(degreeCourseAdd, studentAdd1, { from: address6 });
+      await studentFacadeInstance.setDegreeCourse(degreeCourseAdd, studentAdd2, { from: address7 });
       studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd1, { from: address6 });
       studentFacadeInstance.subscribeToExam(await studentAdd1, await examAdd2, { from: address6 });
-      const studentAdd2 = listUsersInstance.getUser(address7);
       studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd1, { from: address7 });
       studentFacadeInstance.subscribeToExam(await studentAdd2, await examAdd2, { from: address7 });
       // getMark for student address7
