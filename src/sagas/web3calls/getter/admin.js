@@ -94,6 +94,15 @@ export const getTeaching = (course, index) => at(DegreeCourse, course)
     responsible: await teaching.getReferenceProfessor.call(),
   }));
 
-export const getTeachings = async ({ course, size }) =>
+export const getTeachings = ({ course, size }) =>
   Promise.all(createArray(size)
     .map(index => getTeaching(course, index)));
+
+export const getCourseNameFromAddress = (address) => {
+  if (Number(address) === 0) return 'N/A';
+  return at(DegreeCourse, address)
+    .then(async degree => ({
+      address,
+      name: window.web3.toAscii(await degree.getDegreeCourseName.call()),
+    }));
+};
