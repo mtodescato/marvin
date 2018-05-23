@@ -49,6 +49,7 @@ const ListExamComponent = ({ size, exams }) => (
     {
           exams.map((element, index) => (
             <ListExamEntry
+              key={[element.address]}
               index={index}
               {...element}
             />
