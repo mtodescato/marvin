@@ -8,8 +8,8 @@ export function* runAction({ payload }) {
   try {
     yield call(setActiveDegreeCourse, payload.courseAdd);
     const studentCAddress = yield call(getUserContractAddress, getAccount());
-    const courseName = yield call(getActiveDegreeCourse, studentCAddress);
-    yield put(ListCoursesStudent.creators.subscribeSuccess(courseName));
+    const course = yield call(getActiveDegreeCourse, studentCAddress);
+    yield put(ListCoursesStudent.creators.subscribeSuccess(course.name));
   } catch (e) {
     yield put(ListCoursesStudent.creators.subscribeFailed(e.message));
   }
