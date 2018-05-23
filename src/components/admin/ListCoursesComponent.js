@@ -64,10 +64,10 @@ const ListCoursesComponent = props => (
       <thead>
         <tr>
           <th>#</th>
-          <th>ID</th>
           <th>Name</th>
           <th>President</th>
           <th>Type</th>
+          <th>Address</th>
         </tr>
       </thead>
       <tbody>
