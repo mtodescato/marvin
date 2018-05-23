@@ -59,3 +59,27 @@ export function selectValidation(select) {
   }
   return 'isValid';
 }
+
+/**
+ * Checks if the given string is a valid mark
+ *
+ * @method markValidation
+ * @param {String} mark
+ * @return {String}
+*/
+
+export function markValidation(mark) {
+  if (mark === '') {
+    return 'Cannot be empty';
+  } else
+  if (mark.match(/^([0-9]){1}$/)) {
+    return 'isValid';
+  } else
+  if (!mark.match(/^([0-9]|[1-2][0-9]|30){2}$/)) {
+    return 'only numbers allowed';
+  }
+  if (Number(mark) > 30 || Number(mark) < 0) {
+    return 'mark must be between 0 and 30';
+  }
+  return 'isValid';
+}
