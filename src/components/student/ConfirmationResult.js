@@ -48,7 +48,7 @@ class ConfirmationResult extends React.Component {
             pad={{ vertical: 'small', horizontal: 'small' }}
           >
             <Paragraph margin="none" align="center">
-                  Are you sure you want to send the transaction to {this.props.decision ? 'accept' : 'reject'} this esam mark?
+                  Are you sure you want to send the transaction to manage this esam mark?
             </Paragraph>
           </Box>
 
@@ -127,7 +127,6 @@ ConfirmationResult.propTypes = {
   examDate: PropTypes.string.isRequired,
   examMark: PropTypes.number.isRequired,
   examAddress: PropTypes.string.isRequired,
-  decision: PropTypes.bool.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
 };
