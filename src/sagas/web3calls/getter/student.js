@@ -64,15 +64,11 @@ export const getStudentTeachings = async () => {
   }));
 };
 
-// FIXME: fix average function
-const getAverage = () => 18;
-
 export const getStudentInfo = async () =>
   getUserInfoFromCAddress(await studentContractAddress())
     .then(async result => ({
       ...result,
       matricola: result.serial,
-      media: await getAverage(),
     }));
 
 const isSubscribedToExam = (examAddress, index, stdC) => at(Exam, examAddress)
