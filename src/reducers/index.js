@@ -31,7 +31,7 @@ export default combineReducers({
   [ListTeachings.store]: ListTeachings.reducer,
   [ListCoursesStudent.store]: ListCoursesStudent.reducer,
   [ListBookingExams.store]: ListBookingExams.reducer,
-  [ListExamsResults.store]: ListExamsResults.reducer
+  [ListExamsResults.store]: ListExamsResults.reducer,
 });
 
 // export all reducers
