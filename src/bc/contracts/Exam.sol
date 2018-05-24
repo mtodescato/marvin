@@ -97,6 +97,14 @@ contract Exam is Ownable {
         acceptedMarks[student] = mark;
     }
 
+    /** @dev Get true if student has accepted the given marks
+    *   @param student address of the student contract
+    *   @return bool true if is accepted, false if is not accepted
+    */
+    function getMarkStatus(address student) public onlyPassed(student) view returns(bool) {
+        return acceptedMarks[student];
+    }
+
     /** @dev Get a mark given an index.
     *   @param index uint of the mark.
     *   @return uint8 result of the exam.  
