@@ -73,3 +73,6 @@ export const getStudentInfo = async () =>
       matricola: result.serial,
       media: await getAverage(),
     }));
+
+
+export const getSubscribedExams = () => [];
