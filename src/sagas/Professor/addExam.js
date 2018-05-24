@@ -4,7 +4,7 @@ import { addExam } from '../web3calls/getter';
 
 export function* runAction({ payload }) {
   try {
-    yield call(addExam, payload.user);
+    yield call(addExam, payload.exam);
     yield put(AddExam.creators.addExamSuccess());
   } catch (e) {
     yield put(AddExam.creators.addExamFailed(e.message));
