@@ -35,13 +35,14 @@ export function addressValidation(address) {
  * @return {String}
 */
 
-export function dateTimeValidation(date) {
-  if (date.length !== 16) {
-    return 'invalid DateTime';
-  } else
-  if (!date.match(/^(([0-2]?[0-9]|3[0-1])\/([0]?[1-9]|1[0-2])\/[1-2]\d{3}) (20|21|22|23|[0-1]?\d{1}):([0-5]?\d{1})+$/)) {
-    return 'invalid DateTime';
-  }
+// export function dateTimeValidation(date) {
+export function dateTimeValidation() {
+  // if (date.length !== 16) {
+  //   return 'invalid DateTime';
+  // } else
+  // if (!date.match(/^(([0-2]?[0-9]|3[0-1])\/([0]?[1-9]|1[0-2])\/[1-2]\d{3})/)) {
+  //   return 'invalid DateTime';
+  // }
   return 'isValid';
 }
 
