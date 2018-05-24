@@ -4,6 +4,7 @@ export default AsyncFlow({
   store: 'list-booking-exams-student',
   initialState: {
     exams: [],
+    size: 0,
   },
   actions: ['LIST_BOOKING_EXAMS', 'SUBSCRIBE'],
 }).extend({
@@ -12,7 +13,14 @@ export default AsyncFlow({
       case types.LIST_BOOKING_EXAMS_SUCCESS:
         return {
           ...state,
-          exams: action.payload.exams,
+          exams: action.payload.exams || [],
+          size: action.payload.size,
+        };
+      case types.SUBSCRIBE_SUCCESS:
+        return {
+          ...state,
+          exams: state.exams.filter(exam => exam.address !== action.payload.address),
+          size: state.size - 1,
         };
       default:
         return state;
@@ -22,9 +30,9 @@ export default AsyncFlow({
     listBookingExamsRequest: () => ({
       type: types.LIST_BOOKING_EXAMS_REQUEST,
     }),
-    listBookingExamsSuccess: exams => ({
+    listBookingExamsSuccess: ({ exams, size }) => ({
       type: types.LIST_BOOKING_EXAMS_SUCCESS,
-      payload: { exams },
+      payload: { exams, size },
     }),
     listBookingExamsFailed: error => ({
       type: types.LIST_BOOKING_EXAMS_FAILED,
@@ -35,8 +43,9 @@ export default AsyncFlow({
       type: types.SUBSCRIBE_REQUEST,
       payload: { address },
     }),
-    subscribeSuccess: () => ({
+    subscribeSuccess: address => ({
       type: types.SUBSCRIBE_SUCCESS,
+      payload: { address },
     }),
     subscribeFailed: error => ({
       type: types.SUBSCRIBE_FAILED,
