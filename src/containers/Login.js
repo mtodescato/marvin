@@ -9,7 +9,7 @@ const Login = props => (
     <LoginComponent
       loginRequest={props.onLoginUserClick}
       type={props.type}
-      address={props.address}
+      // address={props.address}
     />
   </div>
 );
@@ -17,7 +17,7 @@ const Login = props => (
 Login.propTypes = {
   onLoginUserClick: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
+  // address: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
