@@ -1,11 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Box } from 'grommet';
 import { AddAcademicYear } from '../../reducers';
 import CreateYearComponent from '../../components/admin/CreateYearComponent';
+import ListYears from '../../containers/admin/ListYears';
 
 const CreateYear = ({ state, actions }) => (
-  <CreateYearComponent state={state} actions={actions} />
+  <Box>
+    <CreateYearComponent state={state} actions={actions} />
+    <ListYears />
+  </Box>
 );
 
 CreateYear.propTypes = {
