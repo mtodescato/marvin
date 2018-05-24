@@ -47,7 +47,7 @@ const ListTeachingsComponent = ({ size, teachings }) => (
     {
           teachings.map((element, index) => (
             <TeachingEntry
-              // key={[element.address]}
+              key={[element.address]}
               index={index}
               {...element}
             />
@@ -61,6 +61,7 @@ ListTeachingsComponent.propTypes = {
     name: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
 };
