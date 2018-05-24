@@ -14,6 +14,7 @@ import * as listTeachings from './Admin/listTeachings';
 import * as listCoursesStudent from './Student/listCourses';
 import * as courseSubscribe from './Student/courseSubscribe';
 import * as listBookingExams from './Student/listBookingExams';
+import * as examSubscribe from './Student/examSubscribe';
 
 export default function* rootSaga() {
   yield all([
@@ -32,6 +33,7 @@ export default function* rootSaga() {
     fork(listCoursesStudent.triggerAction),
     fork(courseSubscribe.triggerAction),
     fork(listBookingExams.triggerAction),
+    fork(examSubscribe.triggerAction),
   ]);
 }
 
@@ -51,4 +53,5 @@ export {
   listCoursesStudent,
   courseSubscribe,
   listBookingExams,
+  examSubscribe,
 };
