@@ -9,7 +9,7 @@ const TeachingEntry = props => (
       pad="none"
       heading={`${props.index + 1}.  ${props.name} - ${props.course}`}
     >
-      <ExamsTeaching />
+      <ExamsTeaching teachingAddress={props.address} />
     </AccordionPanel>
   </Accordion>
 );
@@ -19,6 +19,7 @@ TeachingEntry.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   course: PropTypes.string.isRequired,
+  address: PropTypes.string.isRequired,
 };
 
 export default TeachingEntry;

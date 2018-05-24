@@ -9,11 +9,10 @@ const ListExamEntry = props => (
       pad="none"
       heading={`${props.index + 1}. ${props.ID} - ${props.name} - ${props.date}`}
     >
-      <ListStudents address={props.address} />
+      <ListStudents examAddress={props.address} />
     </AccordionPanel>
   </Accordion>
 );
-
 
 ListExamEntry.propTypes = {
   index: PropTypes.number.isRequired,

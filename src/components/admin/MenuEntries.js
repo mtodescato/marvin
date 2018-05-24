@@ -6,6 +6,7 @@ import HomeIcon from 'grommet/components/icons/base/Home';
 const MenuEntries = ({ active = 0, action, entries }) => (
   <Accordion>
     <Anchor
+      key="Home"
       className={active === 0 ? 'active' : ''}
       onClick={() => action(0)}
       primary
@@ -14,7 +15,11 @@ const MenuEntries = ({ active = 0, action, entries }) => (
       Home
     </Anchor>
     {entries.map((value, index) => (
-      <AccordionPanel heading={value.entry} pad="none">
+      <AccordionPanel
+        key={value.entry}
+        heading={value.entry}
+        pad="none"
+      >
         <Box pad={{ vertical: 'none', horizontal: 'small' }}>
           <Menu
             responsive
@@ -23,6 +28,7 @@ const MenuEntries = ({ active = 0, action, entries }) => (
           >
             {value.subEntries.map((v, i) => (
               <Anchor
+                key={[v]}
                 className={(2 * index) + i + 1 === active ? 'active' : ''}
                 onClick={() => action((2 * index) + i + 1)}
               >
@@ -42,9 +48,7 @@ MenuEntries.propTypes = {
     PropTypes.string.isRequired,
     PropTypes.string.isRequired,
   ])).isRequired,
-  action: PropTypes.shape({
-    createDegreeRequestRequest: PropTypes.func.isRequired,
-  }).isRequired,
+  action: PropTypes.func.isRequired,
 };
 
 MenuEntries.defaultProps = {

@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import ExamsTeachingComponent from '../../components/professor/ExamsTeachingComponent';
 
 export const exams = [{
-  serialNumber: '39A876',
+  address: '39A6789ghdkjsh876',
   date: '23/05/2018',
 },
 {
-  serialNumber: '39A876',
+  address: '39poiuytreA876',
   date: '23/05/2018',
 },
 {
-  serialNumber: '39A876',
+  address: '39Asfhdgjhfkj876',
   date: '23/05/2018',
 },
 ];
@@ -29,22 +29,22 @@ const ExamsTeaching = () => (
 /*
 class ExamsTeaching extends React.Component {
   componentWillMount() {
-    this.props.initialize(2018);
+    this.props.initialize();
   }
   render() {
     return (
-      <ListTeachingsComponent
-        // exams={this.props.exams}
-        exams={exams}
+      <ExamsTeachingComponent
         size={this.props.size}
+        exams={this.props.exams}
       />
     );
   }
 } */
 
 ExamsTeaching.propTypes = {
+  // teachingAddress: PropTypes.string.isRequired,
   /* exams: PropTypes.arrayOf(PropTypes.shape({
-    serialNumber: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
@@ -57,8 +57,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  initialize: (year) => {
-    dispatch(ListTeachings.creators.listTeachingsRequest(year));
+  initialize: (teachingAddress) => {
+    dispatch(ListExams.creators.listExamsRequest(teachingAddress));
   },
 });
 
