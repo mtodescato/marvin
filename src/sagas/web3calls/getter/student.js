@@ -87,7 +87,12 @@ export const getExamFromTeaching = teachingAdd => at(Teaching, teachingAdd)
     let mark = 'undefined';
     try {
       mark = Number(await exam.getMark.call(stdC));
-      markStatus = 'passed';
+      try {
+        const status = Boolean(await exam.getMarkStatus.call(stdC));
+        markStatus = status ? 'accepted' : 'rejected';
+      } catch (e) {
+        markStatus = 'published';
+      }
     } catch (e) {
       markStatus = isSubscribed ? 'subscribed' : 'pending';
     }
