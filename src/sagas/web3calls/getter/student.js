@@ -89,11 +89,13 @@ export const getExamFromTeaching = teachingAdd => at(Teaching, teachingAdd)
       mark = Number(await exam.getMark.call(stdC));
       markStatus = 'passed';
     } catch (e) {
-      markStatus = isSubscribed && 'subscribed';
+      markStatus = isSubscribed ? 'subscribed' : 'pending';
     }
     return {
+      teachingAddress: teachingAdd,
+      examAddress: examAdd,
       name: window.web3.toAscii(await teaching.getName.call()),
-      responsible: window.web3.toAscii(await teaching.getReferenceProfessor.call()),
+      responsible: await teaching.getReferenceProfessor.call(),
       date: window.web3.toAscii(await exam.getDate.call()),
       markStatus,
       mark,
@@ -109,6 +111,7 @@ export const getStudentTeachings = async () => {
   teachings = await Promise.all(teachings.map(teaching => getExamFromTeaching(teaching.address)));
   return teachings.map(item => ({
     ...item,
+    address: item.teachingAddress, // for retro-compatibility
     nome: item.name,
     responsabile: item.responsible,
     stato: item.markStatus,
