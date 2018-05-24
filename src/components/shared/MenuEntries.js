@@ -20,6 +20,7 @@ const MenuEntries = ({ active = 0, action, entries }) => (
 
     { entries.map((value, index) => (
       <Anchor
+        key={[value]}
         className={index + 1 === active ? 'active' : ''}
         onClick={() => action(index + 1)}
       >
@@ -33,9 +34,7 @@ const MenuEntries = ({ active = 0, action, entries }) => (
 MenuEntries.propTypes = {
   active: PropTypes.number,
   entries: PropTypes.arrayOf(PropTypes.string).isRequired,
-  action: PropTypes.shape({
-    createDegreeRequestRequest: PropTypes.func.isRequired,
-  }).isRequired,
+  action: PropTypes.func.isRequired,
 };
 
 MenuEntries.defaultProps = {
