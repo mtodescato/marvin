@@ -26,7 +26,6 @@ class ExamApplicationEntry extends React.Component {
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td>{this.props.date}</td>
-        <td>{this.props.cfu}</td>
         <td>
           <Button primary onClick={() => this.setLayer()}>Subscribe</Button>
         </td>
@@ -35,7 +34,6 @@ class ExamApplicationEntry extends React.Component {
             setLayer={this.setLayer}
             examName={this.props.name}
             examDate={this.props.date}
-            examCFU={this.props.cfu}
             examAddress={this.props.address}
             subscribeToExam={this.props.subscribeToExam}
           />
@@ -50,7 +48,6 @@ ExamApplicationEntry.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  cfu: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   subscribeToExam: PropTypes.func.isRequired,
 };

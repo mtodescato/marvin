@@ -4,7 +4,7 @@ import { createArray } from '../../../utils/global';
 import { getUserContractAddress } from './contract';
 
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
-// import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
+import Teaching from '../../../bc/build/contracts/Teaching.json';
 import Student from '../../../bc/build/contracts/Student.json';
 import Exam from '../../../bc/build/contracts/Exam.json';
 
@@ -59,11 +59,12 @@ export const getStudentTeachings = async () => {
     ...teaching,
     nome: teaching.name,
     responsabile: teaching.responsible,
-    stato: 'Pending',
-    data: 'To be Define',
+    stato: 'Pending', // FIXME: retrieve also when exam is defined but no subscribed
+    data: 'To be Define', // FIXME: retrieve also when exam is defined but no subscribed
   }));
 };
 
+// FIXME: fix average function
 const getAverage = () => 18;
 
 export const getStudentInfo = async () =>
@@ -73,3 +74,34 @@ export const getStudentInfo = async () =>
       matricola: result.serial,
       media: await getAverage(),
     }));
+
+const isSubscribedToExam = (examAddress, index, stdC) => at(Exam, examAddress)
+  .then(exam => exam.getStudentSubscribed.call(index))
+  .then(add => add === stdC);
+
+const isSubscribedToTeaching = async (teachingAddress, stdC) => {
+  const results = await at(Teaching, teachingAddress)
+    .then(teaching => teaching.getExam.call(0))
+    .then(examAdd => at(Exam, examAdd))
+    .then(async exam => ({ exam, size: await exam.getNumberOfStudents.call() }))
+    .then(({ exam, size }) => Promise.all(createArray(Number(size))
+      .map(index => isSubscribedToExam(exam.address, index, stdC))));
+  return Boolean(results.filter(i => i).length);
+};
+
+export const getSubscribedExams = async () => {
+  const teachings = await getStudentTeachings();
+  const stdC = await studentContractAddress();
+  const subscribeds = await Promise.all(createArray(teachings.length)
+    .map(index => isSubscribedToTeaching(teachings[index].address, stdC)));
+  return teachings
+    .filter((teaching, index) => subscribeds[index])
+    .map(teaching => teaching.address);
+};
+
+export const subscribeToExam = examAddress => deployed(StudentFacade)
+  .then(async (inst) => {
+    const stdC = await studentContractAddress();
+    const add = await at(Teaching, examAddress).then(teachingInst => teachingInst.getExam.call(0));
+    return inst.subscribeToExam(stdC, add, { from: getAccount() });
+  });

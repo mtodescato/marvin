@@ -4,8 +4,7 @@ import { Box, Table, Heading, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import ExamApplicationEntry from './ExamApplicationEntry';
 
-// const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => (
-const ListAvaiableExamsComponent = ({ size, examsEntries }) => (
+const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -50,7 +49,6 @@ const ListAvaiableExamsComponent = ({ size, examsEntries }) => (
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
-          <th>CFU</th>
           <th>Subscribe</th>
         </tr>
       </thead>
@@ -61,7 +59,7 @@ const ListAvaiableExamsComponent = ({ size, examsEntries }) => (
               key={[element.address]}
               index={index}
               {...element}
-              // subscribeToExam={subscribeToExam}
+              subscribeToExam={subscribeToExam}
             />
           ))
         }
@@ -71,14 +69,9 @@ const ListAvaiableExamsComponent = ({ size, examsEntries }) => (
 );
 
 ListAvaiableExamsComponent.propTypes = {
-  examsEntries: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    role: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired,
+  examsEntries: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  // subscribeToExam: PropTypes.func.isRequired,
+  subscribeToExam: PropTypes.func.isRequired,
 };
 
 export default ListAvaiableExamsComponent;
