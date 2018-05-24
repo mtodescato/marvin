@@ -5,7 +5,7 @@ import TableRow from 'grommet/components/TableRow';
 const YearEntry = props => (
   <TableRow>
     <td>{props.index + 1}</td>
-    <td>Academic Year {props.year}/{parseInt(props.year, 10) + 1}</td>
+    <td>Academic Year {props.year}/{props.year + 1}</td>
     <td>{props.address}</td>
   </TableRow>
 );

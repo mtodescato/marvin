@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import ListYearsComponent from '../../components/admin/ListYearsComponent';
 
 export const years = [{
-  year: '2019',
+  year: 2019,
   address: 'yfghjkfljglkajglkasjlkagag',
 },
 {
-  year: '2018',
+  year: 2018,
   address: 'oilsor894ujorijflkgjsoidfsd',
 },
 {
-  year: '2017',
+  year: 2017,
   address: 'pseoiytooudfuogioalkjfklgsd',
 },
 ];
