@@ -98,3 +98,9 @@ export const getSubscribedExams = async () => {
     .filter((teaching, index) => subscribeds[index])
     .map(teaching => teaching.address);
 };
+
+export const subscribeToExam = examAddress => deployed(StudentFacade)
+  .then(async (inst) => {
+    const stdC = await studentContractAddress();
+    return inst.subscribedToExam(stdC, examAddress);
+  });
