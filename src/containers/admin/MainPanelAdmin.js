@@ -38,7 +38,7 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: ListTeachings };
     case 6:
       return { DashboardComponent: CreateTeaching };
-    case 8:
+    case 7:
       return { DashboardComponent: CreateYear };
     case 9:
       return { DashboardComponent: DegreeProcedures };
