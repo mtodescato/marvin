@@ -134,3 +134,12 @@ export const getSubscribedExams = async () => {
     .filter((teaching, index) => subscribeds[index])
     .map(teaching => teaching.address);
 };
+
+export const manageMark = async (address, bool) => {
+  const stdC = await studentContractAddress();
+  return deployed(StudentFacade)
+    .then(inst => inst.manageMark(stdC, address, bool, { from: getAccount() }));
+};
+
+export const acceptMark = address => manageMark(address, true);
+export const rejectMark = address => manageMark(address, false);
