@@ -59,7 +59,7 @@ export const getStudentTeachings = async () => {
     ...teaching,
     nome: teaching.name,
     responsabile: teaching.responsible,
-    stato: 'Pending',
+    stato: 'Pending', // FIXME: retrieve also when exam is defined but no subscribed
     data: 'To be Define', // FIXME: retrieve also when exam is defined but no subscribed
   }));
 };
@@ -102,5 +102,6 @@ export const getSubscribedExams = async () => {
 export const subscribeToExam = examAddress => deployed(StudentFacade)
   .then(async (inst) => {
     const stdC = await studentContractAddress();
-    return inst.subscribedToExam(stdC, examAddress);
+    const add = await at(Teaching, examAddress).then(teachingInst => teachingInst.getExam.call(0));
+    return inst.subscribeToExam(stdC, add, { from: getAccount() });
   });
