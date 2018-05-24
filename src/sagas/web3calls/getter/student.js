@@ -60,7 +60,7 @@ export const getStudentTeachings = async () => {
     nome: teaching.name,
     responsabile: teaching.responsible,
     stato: 'Pending',
-    data: 'To be Define',
+    data: 'To be Define', // FIXME: retrieve also when exam is defined but no subscribed
   }));
 };
 
