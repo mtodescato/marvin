@@ -6,12 +6,13 @@ export function* runAction() {
   try {
     let exams = yield call(getStudentTeachings);
     const subscribedExams = yield call(getSubscribedExams);
-    console.log(subscribedExams);
     for (let i = 0; i < exams.length; i += 1) {
       exams = exams.filter(exam => subscribedExams.indexOf(exam.address) === -1);
     }
-    yield put(ListBookingExams.creators.listBookingExamsSuccess(exams
-      .map(exam => ({ ...exam, date: exam.data }))));
+    yield put(ListBookingExams.creators.listBookingExamsSuccess({
+      exams: exams.map(exam => ({ ...exam, date: exam.data })),
+      size: exams.length,
+    }));
   } catch (e) {
     yield put(ListBookingExams.creators.listBookingExamsFailed(e.message));
   }

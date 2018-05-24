@@ -5,8 +5,7 @@ import { subscribeToExam } from '../web3calls/getter';
 export function* runAction({ payload }) {
   try {
     yield call(subscribeToExam, payload.address);
-    yield put(ListBookingExams.creators.subscribeSuccess());
-    yield put(ListBookingExams.creators.listBookingExamsRequest());
+    yield put(ListBookingExams.creators.subscribeSuccess(payload.address));
   } catch (e) {
     yield put(ListBookingExams.creators.subscribeFailed(e.message));
   }
