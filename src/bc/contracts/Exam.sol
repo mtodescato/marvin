@@ -34,8 +34,8 @@ contract Exam is Ownable {
     /** @dev Check if the student has managed the mark
     *   @param student address of the student contract
     */
-    modifier onlyNotManaged(address student) {
-        require(managedMarks[student] == false);
+    modifier onlyManaged(address student) {
+        require(managedMarks[student] == true);
         _;
     }
 
@@ -113,8 +113,7 @@ contract Exam is Ownable {
     */
     function getMarkStatus(address student)
     public
-    onlyPassed(student)
-    onlyNotManaged(student)
+    onlyManaged(student)
     view
     returns(bool)
     {
