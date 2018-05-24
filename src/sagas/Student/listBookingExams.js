@@ -10,7 +10,8 @@ export function* runAction() {
     for (let i = 0; i < exams.length; i += 1) {
       exams = exams.filter(exam => subscribedExams.indexOf(exam.address) === -1);
     }
-    yield put(ListBookingExams.creators.listBookingExamsSuccess(exams));
+    yield put(ListBookingExams.creators.listBookingExamsSuccess(exams
+      .map(exam => ({ ...exam, date: exam.data }))));
   } catch (e) {
     yield put(ListBookingExams.creators.listBookingExamsFailed(e.message));
   }
