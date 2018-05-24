@@ -37,7 +37,7 @@ Booklet.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
-    matricola: PropTypes.number.isRequired,
+    matricola: PropTypes.string.isRequired,
   }).isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
     nome: PropTypes.string.isRequired,
