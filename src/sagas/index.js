@@ -13,6 +13,13 @@ import * as addTeaching from './Admin/addTeaching';
 import * as listTeachings from './Admin/listTeachings';
 import * as listCoursesStudent from './Student/listCourses';
 import * as courseSubscribe from './Student/courseSubscribe';
+import * as listBookingExams from './Student/listBookingExams';
+import * as examSubscribe from './Student/examSubscribe';
+import * as listExamsResults from './Student/listExamsResults';
+import * as acceptMark from './Student/acceptMark';
+import * as rejectMark from './Student/rejectMark';
+import * as addExam from './Professor/addExam';
+import * as listTeachingsProfessor from './Professor/listTeachings';
 
 export default function* rootSaga() {
   yield all([
@@ -30,6 +37,13 @@ export default function* rootSaga() {
     fork(listTeachings.triggerAction),
     fork(listCoursesStudent.triggerAction),
     fork(courseSubscribe.triggerAction),
+    fork(listBookingExams.triggerAction),
+    fork(examSubscribe.triggerAction),
+    fork(listExamsResults.triggerAction),
+    fork(acceptMark.triggerAction),
+    fork(rejectMark.triggerAction),
+    fork(addExam.triggerAction),
+    fork(listTeachingsProfessor.triggerAction),
   ]);
 }
 
@@ -48,4 +62,11 @@ export {
   listTeachings,
   listCoursesStudent,
   courseSubscribe,
+  listBookingExams,
+  examSubscribe,
+  listExamsResults,
+  acceptMark,
+  rejectMark,
+  addExam,
+  listTeachingsProfessor,
 };

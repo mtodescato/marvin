@@ -10,7 +10,7 @@ class ConfirmationExam extends React.Component {
   }
 
   onSubscribe() {
-    // this.props.subscribeToExam(this.props.examAddress);
+    this.props.subscribeToExam(this.props.examAddress);
     this.props.setLayer();
   }
 
@@ -74,19 +74,6 @@ class ConfirmationExam extends React.Component {
                   {this.props.examDate}
                 </Heading>
               </ListItem>
-              <ListItem
-                justify="between"
-                separator="bottom"
-                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-                margin="none"
-              >
-                <Heading tag="h4" margin="none">
-                CFU:
-                </Heading>
-                <Heading tag="h4" margin="none">
-                  {this.props.examCFU}
-                </Heading>
-              </ListItem>
             </List>
           </Box>
 
@@ -119,9 +106,8 @@ ConfirmationExam.propTypes = {
   setLayer: PropTypes.func.isRequired,
   examName: PropTypes.string.isRequired,
   examDate: PropTypes.string.isRequired,
-  examCFU: PropTypes.number.isRequired,
-  // courseAddress: PropTypes.string.isRequired,
-  // subscribeToExam: PropTypes.func.isRequired,
+  examAddress: PropTypes.string.isRequired,
+  subscribeToExam: PropTypes.func.isRequired,
 };
 
 export default ConfirmationExam;

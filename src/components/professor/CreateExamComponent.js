@@ -199,7 +199,7 @@ class CreateExamComponent extends React.Component {
                   <DateTime
                     id="date"
                     name="Date"
-                    format="DD/MM/YYYY HH:mm"
+                    format="DD/MM/YYYY"
                     value={this.state.date}
                     onChange={this.handleChangeDate}
                   />
@@ -219,7 +219,7 @@ class CreateExamComponent extends React.Component {
                   examDate={this.state.date}
                   teachingName={this.state.teachingName}
                   teachingAddress={this.state.teachingAddress}
-                  // addExamRequest={this.props.actions.addExamRequest}
+                  addExamRequest={this.props.actions.addExamRequest}
                   state={this.props.state}
                 /> : null
                   }
@@ -236,16 +236,9 @@ CreateExamComponent.propTypes = {
     address: PropTypes.string.isRequired,
     label: PropTypes.element.isRequired,
   })).isRequired,
-  /*
   actions: PropTypes.shape({
     addExamRequest: PropTypes.func.isRequired,
   }).isRequired,
-   teachingEntries: PropTypes.arrayOf(PropTypes.shape({
-    ID: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    cfu: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired, */
   state: PropTypes.shape({
     status: PropTypes.bool.isRequired,
   }).isRequired,

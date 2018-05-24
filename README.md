@@ -34,7 +34,7 @@
 npm run dbasing
 ```
 
->if you exec as first will create 47 transactions
+>if you exec as first will create 52 transactions
 
 ### Effects
 this script add:
@@ -49,4 +49,5 @@ this script add:
 - 2 teachings, assigned to address 3 and 4 for the first degreeCourse called 'Informatica'
 - 2 exams, one exam for each teachings
 - address 6 subscribed to each exams
-- address 7 subscribed to each exams, get marks and accept
+- address 7 subscribed to each exams, get marks(21, 22)
+- address 8 subscribed to each exams, get marks(25, 26) and accept
