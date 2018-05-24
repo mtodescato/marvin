@@ -20,22 +20,22 @@ contract('Testing User', () => {
     userInstance = User.at(userAddress);
   });
 
-  it('can get user name', async () => {
+  it('TS0030 can get user name', async () => {
     const name = await userInstance.getName.call();
     assert.equal(web3.toAscii(name), 'mario', 'name returns correctly');
   });
 
-  it('can get user surname', async () => {
+  it('TS0031 can get user surname', async () => {
     const surname = await userInstance.getSurname.call();
     assert.equal(web3.toAscii(surname), 'rossi', 'surname returns correctly');
   });
 
-  it('can get user social number', async () => {
+  it('TS0032 can get user social number', async () => {
     const socialNumber = await userInstance.getSocialNumber.call();
     assert.equal(web3.toAscii(socialNumber), 'mrrss75802975', 'social number returns correctly');
   });
 
-  it('can get user serial', async () => {
+  it('TS0033 can get user serial', async () => {
     const serial = await userInstance.getSerial.call();
     assert.equal(serial.toNumber(), 12324, 'serial returns correctly');
   });

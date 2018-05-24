@@ -12,7 +12,7 @@ contract('Testing DegreeCourse', () => {
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   ProfessorFacade.deployed().then((inst) => { professorFacadeInstance = inst; });
 
-  it('can add and get a Teaching', async () => {
+  it('TS0022 can add and get a Teaching', async () => {
     adminFacadeInstance.addUser('mario', 'rossi', 'mrrss7580297584', 12324, address1, 1);
     adminFacadeInstance.addAcademicYear(797, { from: address0 });
     adminFacadeInstance.addDegreeCourse(797, 'computer science', 'Mario Rossi', 1);
@@ -24,22 +24,22 @@ contract('Testing DegreeCourse', () => {
     assert.notEqual(teachingAddress, '0x0000000000000000000000000000000000000000', 'teaching not null');
   });
 
-  it('can get the number of teachings', async () => {
+  it('TS0023 can get the number of teachings', async () => {
     const numberOfTeachings = await degreeCourseInstance.getNumberOfTeachings.call();
     assert.equal(numberOfTeachings.toNumber(), 1, 'correct number of teachings');
   });
 
-  it('can get the degree course name', async () => {
+  it('TS0023 can get the degree course name', async () => {
     const degreeCourseName = await degreeCourseInstance.getDegreeCourseName.call();
     assert.equal(web3.toAscii(degreeCourseName), 'computer science', 'correct degree course name');
   });
 
-  it('can get the degree course president', async () => {
+  it('TS0024 can get the degree course president', async () => {
     const degreeCoursePresident = await degreeCourseInstance.getDegreeCoursePresident.call();
     assert.equal(web3.toAscii(degreeCoursePresident), 'Mario Rossi', 'correct degree course president');
   });
 
-  it('can get the degree course type', async () => {
+  it('TS0025 can get the degree course type', async () => {
     const type = await degreeCourseInstance.getDegreeCourseType.call();
     assert.equal(type.toNumber(), 1, 'correct degree type');
   });

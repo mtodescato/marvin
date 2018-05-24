@@ -10,7 +10,7 @@ contract('Testing AcademicYearsList', () => {
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
   AcademicYearsList.deployed().then((inst) => { AcademicYearsListInstance = inst; });
 
-  it('can insert an academic year and retrive it', async () => {
+  it('TS0021 can insert an academic year and retrive it', async () => {
     await adminFacadeInstance.addAcademicYear(796, { from: address0 });
     const academicYear = await AcademicYearsListInstance.getAcademicYear.call(796);
     const academicYearInstance = AcademicYear.at(academicYear);
