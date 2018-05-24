@@ -10,7 +10,7 @@ contract('Testing AcademicYear', () => {
 
   AdminFacade.deployed().then((inst) => { adminFacadeInstance = inst; });
 
-  it('can add and retrive a degree course', async () => {
+  it('TS0018 can add and retrive a degree course', async () => {
     adminFacadeInstance.addAcademicYear(797, { from: address0 });
     const AcademicYearAddress = await adminFacadeInstance.getAcademicYear(797);
     AcademicYearInstance = AcademicYear.at(AcademicYearAddress);
@@ -21,12 +21,12 @@ contract('Testing AcademicYear', () => {
     assert.equal(web3.toAscii(courseName), 'computer science', 'degree course is correct');
   });
 
-  it('can get the number of the academic year', async () => {
+  it('TS0019 can get the number of the academic year', async () => {
     const academicYear = await AcademicYearInstance.getYear.call();
     assert.equal(academicYear.toNumber(), 797, 'year is correct');
   });
 
-  it('can get the number of degree courses', async () => {
+  it('TS0020 can get the number of degree courses', async () => {
     const degreeCourseNumber = await AcademicYearInstance.getNumberOfDC.call();
     assert.equal(degreeCourseNumber.toNumber(), 1, 'year is correct');
   });
