@@ -54,7 +54,6 @@ const ListPendingResultsComponent = ({
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
-          <th>CFU</th>
           <th>Result</th>
           <th>Action</th>
         </tr>

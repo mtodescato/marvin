@@ -46,7 +46,6 @@ class PendingResultEntry extends React.Component {
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td>{this.props.date}</td>
-        <td>{this.props.cfu}</td>
         <td>{this.props.mark}</td>
         <td>
           <Button onClick={() => this.onAccept()} icon={<CheckMark />} primary />
