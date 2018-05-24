@@ -49,21 +49,6 @@ export const addExamToPassedTeaching = async (teaching) => {
       })));
 };
 
-export const getStudentTeachings = async () => {
-  const stdC = await studentContractAddress();
-  const course = await getActiveDegreeCourse(stdC);
-  if (course.name === 'N/A') return [];
-  const size = await getNumberOfTeachings(course.address);
-  const teachings = await getTeachings({ course: course.address, size });
-  return teachings.map(teaching => ({
-    ...teaching,
-    nome: teaching.name,
-    responsabile: teaching.responsible,
-    stato: 'Pending', // FIXME: retrieve also when exam is defined but no subscribed
-    data: 'To be Define', // FIXME: retrieve also when exam is defined but no subscribed
-  }));
-};
-
 export const getStudentInfo = async () =>
   getUserInfoFromCAddress(await studentContractAddress())
     .then(async result => ({
@@ -85,6 +70,53 @@ const isSubscribedToTeaching = async (teachingAddress, stdC) => {
   return Boolean(results.filter(i => i).length);
 };
 
+export const subscribeToExam = examAddress => deployed(StudentFacade)
+  .then(async (inst) => {
+    const stdC = await studentContractAddress();
+    const add = await at(Teaching, examAddress).then(teachingInst => teachingInst.getExam.call(0));
+    return inst.subscribeToExam(stdC, add, { from: getAccount() });
+  });
+
+export const getExamFromTeaching = teachingAdd => at(Teaching, teachingAdd)
+  .then(async (teaching) => {
+    const examAdd = await teaching.getExam.call(0);
+    const exam = await at(Exam, examAdd);
+    const stdC = await studentContractAddress();
+    const isSubscribed = await isSubscribedToTeaching(teaching.address, stdC);
+    let markStatus = 'pending';
+    let mark = 'undefined';
+    try {
+      mark = Number(await exam.getMark.call(stdC));
+      markStatus = 'passed';
+    } catch (e) {
+      markStatus = isSubscribed && 'subscribed';
+    }
+    return {
+      name: window.web3.toAscii(await teaching.getName.call()),
+      responsible: window.web3.toAscii(await teaching.getReferenceProfessor.call()),
+      date: window.web3.toAscii(await exam.getDate.call()),
+      markStatus,
+      mark,
+    };
+  });
+
+export const getStudentTeachings = async () => {
+  const stdC = await studentContractAddress();
+  const course = await getActiveDegreeCourse(stdC);
+  if (course.name === 'N/A') return [];
+  const size = await getNumberOfTeachings(course.address);
+  let teachings = await getTeachings({ course: course.address, size });
+  teachings = await Promise.all(teachings.map(teaching => getExamFromTeaching(teaching.address)));
+  return teachings.map(item => ({
+    ...item,
+    nome: item.name,
+    responsabile: item.responsible,
+    stato: item.markStatus,
+    data: item.date,
+    voto: item.mark,
+  }));
+};
+
 export const getSubscribedExams = async () => {
   const teachings = await getStudentTeachings();
   const stdC = await studentContractAddress();
@@ -94,10 +126,3 @@ export const getSubscribedExams = async () => {
     .filter((teaching, index) => subscribeds[index])
     .map(teaching => teaching.address);
 };
-
-export const subscribeToExam = examAddress => deployed(StudentFacade)
-  .then(async (inst) => {
-    const stdC = await studentContractAddress();
-    const add = await at(Teaching, examAddress).then(teachingInst => teachingInst.getExam.call(0));
-    return inst.subscribeToExam(stdC, add, { from: getAccount() });
-  });
