@@ -64,6 +64,7 @@ export const getStudentTeachings = async () => {
   }));
 };
 
+// FIXME: fix average function
 const getAverage = () => 18;
 
 export const getStudentInfo = async () =>
