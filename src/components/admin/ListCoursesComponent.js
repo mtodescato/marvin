@@ -35,12 +35,22 @@ const ListCoursesComponent = props => (
     </Box>
 
     <Box
+      className="infoBox"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+    >
+      <Heading tag="h5" >
+        This page displays the list of the courses in the system.
+        In order to see specific course details you can filter them by academic year.
+      </Heading>
+    </Box>
+
+    <Box
       className="searchBox"
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
       <Heading tag="h4" >
-      Courses found: {/* size */}
+        Courses found: {/* size */}
       </Heading>
       <Heading tag="h5" >
         Filter courses by Academic Year:
@@ -64,10 +74,10 @@ const ListCoursesComponent = props => (
       <thead>
         <tr>
           <th>#</th>
-          <th>ID</th>
           <th>Name</th>
           <th>President</th>
           <th>Type</th>
+          <th>Address</th>
         </tr>
       </thead>
       <tbody>

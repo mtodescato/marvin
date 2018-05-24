@@ -1,0 +1,61 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Box, Table, Heading } from 'grommet';
+import YearEntry from './YearEntry';
+
+const ListYearsComponent = ({ size, years }) => (
+  <Box
+    className="PanelBox"
+    direction="column"
+    margin={{ vertical: 'none', horizontal: 'large' }}
+    separator="bottom"
+  >
+    <Box
+      className="searchBox"
+      size="medium"
+      pad={{ horizontal: 'medium', vertical: 'small' }}
+    >
+      <Heading tag="h4" >
+        Academic Years found: {size}
+      </Heading>
+    </Box>
+    <Box
+      className="tableBox"
+      size="xlarge"
+    >
+      <Table
+        responsive
+        selectable
+      >
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Academic Year</th>
+            <th>Address</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            years.map((element, index) => (
+              <YearEntry
+                key={[element.address]}
+                index={index}
+                {...element}
+              />
+            ))
+          }
+        </tbody>
+      </Table>
+    </Box>
+  </Box>
+);
+
+ListYearsComponent.propTypes = {
+  years: PropTypes.arrayOf(PropTypes.shape({
+    year: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+  })).isRequired,
+  size: PropTypes.number.isRequired,
+};
+
+export default ListYearsComponent;

@@ -103,7 +103,9 @@ class CreateUserConfirmation extends React.Component {
                 Role:
                 </Heading>
                 <Heading tag="h4" margin="none">
-                  {this.props.userRole}
+                  {this.props.userRole === 2 ? 'Admin' : null}
+                  {this.props.userRole === 1 ? 'Professor' : null}
+                  {this.props.userRole === 0 ? 'Student' : null}
                 </Heading>
               </ListItem>
             </List>

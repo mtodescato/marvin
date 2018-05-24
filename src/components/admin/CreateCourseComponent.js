@@ -144,7 +144,18 @@ class CreateCourseComponent extends React.Component {
 
           <Box className="titleBox" alignSelf="center" >
             <Heading tag="h2" strong>
-            New course creation
+              New course creation
+            </Heading>
+          </Box>
+
+          <Box
+            className="infoBox"
+            pad={{ horizontal: 'medium', vertical: 'small' }}
+          >
+            <Heading tag="h5" >
+              This page allows you to create and add study courses into the system. In order to send
+              the transaction to complete the creation operation you
+              must fill all the fields below with the course informations.
             </Heading>
           </Box>
 
@@ -155,9 +166,6 @@ class CreateCourseComponent extends React.Component {
             separator="bottom"
             pad={{ horizontal: 'medium' }}
           >
-            <Heading tag="h5" >
-              Submit the informations of the new course.
-            </Heading>
             <Form>
               <FormFields>
                 <FormField>

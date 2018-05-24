@@ -1,14 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TableRow from 'grommet/components/TableRow';
+import { TableRow, Paragraph } from 'grommet';
 
 const CourseEntry = props => (
   <TableRow>
-    <td>{props.index}</td>
-    <td>{props.ID}</td>
+    <td>{props.index + 1}</td>
     <td>{props.name}</td>
     <td>{props.president}</td>
     <td>{props.courseType}</td>
+    <td>
+      <Paragraph size="medium" margin="none">
+        {props.ID}
+      </Paragraph>
+    </td>
   </TableRow>
 );
 
