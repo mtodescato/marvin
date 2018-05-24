@@ -1,65 +1,61 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Box } from 'grommet';
-// import { AddExam } from '../../reducers';
+import { AddExam, ListTeachingsProfessor } from '../../reducers';
 import CreateExamComponent from '../../components/professor/CreateExamComponent';
 
+class CreateExam extends React.Component {
+  componentWillMount() {
+    this.props.initialize(2018);
+  }
 
-const teachingsEntries = [{
-  value: 'Basi di dati',
-  address: 'al847582834r598758pha',
-  label: <Box direction="row" justify="between" ><span> first </span> <span className="secondary"> 0x1B23075E7D9fa21cAdB1aF0bF624d80DFDF084d3   </span> </Box>,
-},
-{
-  value: 'TecWeb',
-  address: 'al847582834598758pha',
-  label: <Box direction="row" justify="between" ><span> first </span> <span className="secondary"> 0x1B23075E7D9fa21cAdB1aF0bF624d80DFDF084d3   </span> </Box>,
-},
-];
-
-const CreateExam = ({ state, actions }) => (
-  <CreateExamComponent
-    state={state}
-    actions={actions}
-    teachingsEntries={teachingsEntries}
-  />
-);
+  render() {
+    return (
+      <CreateExamComponent
+        state={this.props.state}
+        actions={this.props.actions}
+        teachingsEntries={this.props.teachingsEntries}
+      />
+    );
+  }
+}
 
 CreateExam.propTypes = {
-  /* teachingsEntries: PropTypes.arrayOf(PropTypes.shape({
+  teachingsEntries: PropTypes.arrayOf(PropTypes.shape({
     value: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
     label: PropTypes.number.isRequired,
-  })).isRequired, */
+  })).isRequired,
   actions: PropTypes.shape({
     addExamRequest: PropTypes.func.isRequired,
   }).isRequired,
+  initialize: PropTypes.func.isRequired,
   state: PropTypes.shape({
     status: PropTypes.bool.isRequired,
   }).isRequired,
 };
 
-const mapStateToProps = () => ({ /*
 const mapStateToProps = state => ({
   state: {
-    status: state['add-exam'].status,
+    status: state['add-exam-professor'].status,
   },
-  teachingsEntries: state['list-teachings'].users,
-    // lista insegnamenti di cui è prof di riferimento
-  size: state['list-teachings'].size, */
+  teachingsEntries: state['list-teachings-professor'].teachings.map(teaching => ({
+    value: teaching.address,
+    address: teaching.address,
+    label: `${teaching.name}`,
+  })),
+  size: state['list-teachings-professor'].size,
 });
 
-const mapDispatchToProps = () => ({
-/*
 const mapDispatchToProps = dispatch => ({
-
   actions: {
     addExamRequest: (exam) => {
       dispatch(AddExam.creators.addExamRequest(exam));
     },
   },
-  initialize: () => { dispatch(ListTeachingsReducer.creators.ListTeachingsRequest()); }, */
+  initialize: (address) => {
+    dispatch(ListTeachingsProfessor.creators.listTeachingsRequest(address));
+  },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateExam);

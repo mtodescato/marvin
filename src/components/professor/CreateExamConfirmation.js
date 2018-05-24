@@ -10,12 +10,12 @@ class CreateExamConfirmation extends React.Component {
   }
 
   onSubmit() {
-    /* const exam = {
+    const exam = {
       teachingAddress: this.props.teachingAddress,
-      examDate: this.props.examType,
-    }; */
+      date: this.props.examDate,
+    };
 
-    // this.props.addExamRequest(exam);
+    this.props.addExamRequest(exam);
     this.props.setLayer();
   }
   render() {
@@ -110,8 +110,8 @@ CreateExamConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
   examDate: PropTypes.string.isRequired,
   teachingName: PropTypes.string.isRequired,
-  // teachingAddress: PropTypes.number.isRequired,
-  // addExamRequest: PropTypes.func.isRequired,
+  teachingAddress: PropTypes.number.isRequired,
+  addExamRequest: PropTypes.func.isRequired,
 };
 
 export default CreateExamConfirmation;
