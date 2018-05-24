@@ -61,7 +61,8 @@ class PendingResultEntry extends React.Component {
             examMark={this.props.mark}
             examAddress={this.props.address}
             decision={this.state.decision}
-            manageVote={this.props.manageVote}
+            accept={this.props.accept}
+            reject={this.props.reject}
           />
                       : null
                     }
@@ -77,7 +78,8 @@ PendingResultEntry.propTypes = {
   cfu: PropTypes.number.isRequired,
   mark: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
-  manageVote: PropTypes.func.isRequired,
+  accept: PropTypes.func.isRequired,
+  reject: PropTypes.func.isRequired,
 };
 
 export default PendingResultEntry;

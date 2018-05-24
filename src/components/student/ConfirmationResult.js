@@ -7,10 +7,16 @@ class ConfirmationResult extends React.Component {
     super(props);
 
     this.onConfirm = this.onConfirm.bind(this);
+    this.onReject = this.onReject.bind(this);
   }
 
   onConfirm() {
-    // this.props.manageVote(this.props.examAddress, this.props.decision);
+    this.props.accept(this.props.examAddress);
+    this.props.setLayer();
+  }
+
+  onReject() {
+    this.props.reject(this.props.examAddress);
     this.props.setLayer();
   }
 
@@ -103,10 +109,10 @@ class ConfirmationResult extends React.Component {
               onClick={this.onConfirm}
             />
             <Button
-              label="Cancel"
+              label="Reject"
               type="submit"
               primary
-              onClick={this.props.setLayer}
+              onClick={this.onReject}
             />
           </Footer>
         </Box>
@@ -120,9 +126,10 @@ ConfirmationResult.propTypes = {
   examName: PropTypes.string.isRequired,
   examDate: PropTypes.string.isRequired,
   examMark: PropTypes.number.isRequired,
-  // examAddress: PropTypes.string.isRequired,
+  examAddress: PropTypes.string.isRequired,
   decision: PropTypes.bool.isRequired,
-  // manageVote: PropTypes.func.isRequired,
+  accept: PropTypes.func.isRequired,
+  reject: PropTypes.func.isRequired,
 };
 
 export default ConfirmationResult;
