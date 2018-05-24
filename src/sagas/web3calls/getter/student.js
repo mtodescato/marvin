@@ -83,16 +83,18 @@ const isSubscribedToTeaching = async (teachingAddress, stdC) => {
   const results = await at(Teaching, teachingAddress)
     .then(teaching => teaching.getExam.call(0))
     .then(examAdd => at(Exam, examAdd))
-    .then(exam => ({ exam, size: exam.getNumberOfStudents.call() }))
-    .then(({ exam, size }) => createArray(size)
-      .map(index => isSubscribedToExam(exam.address, index, stdC)));
+    .then(async exam => ({ exam, size: await exam.getNumberOfStudents.call() }))
+    .then(({ exam, size }) => Promise.all(createArray(Number(size))
+      .map(index => isSubscribedToExam(exam.address, index, stdC))));
   return Boolean(results.filter(i => i).length);
 };
 
 export const getSubscribedExams = async () => {
   const teachings = await getStudentTeachings();
   const stdC = await studentContractAddress();
+  const subscribeds = await Promise.all(createArray(teachings.length)
+    .map(index => isSubscribedToTeaching(teachings[index].address, stdC)));
   return teachings
-    .filter(teaching => isSubscribedToTeaching(teaching.address, stdC))
+    .filter((teaching, index) => subscribeds[index])
     .map(teaching => teaching.address);
 };
