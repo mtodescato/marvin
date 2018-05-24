@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TableRow, Button } from 'grommet';
-import CheckMark from 'grommet/components/icons/base/Checkmark';
-import Close from 'grommet/components/icons/base/Close';
 import ConfirmationResult from './ConfirmationResult';
 
 class PendingResultEntry extends React.Component {
@@ -11,27 +9,9 @@ class PendingResultEntry extends React.Component {
 
     this.setLayer = this.setLayer.bind(this);
 
-    this.onAccept = this.onAccept.bind(this);
-    this.onReject = this.onReject.bind(this);
-
     this.state = {
-      decision: false,
       showLayer: false,
     };
-  }
-
-  onAccept() {
-    this.setState({
-      decision: true,
-    });
-    this.setLayer();
-  }
-
-  onReject() {
-    this.setState({
-      decision: false,
-    });
-    this.setLayer();
   }
 
   setLayer() {
@@ -46,12 +26,11 @@ class PendingResultEntry extends React.Component {
         <td>{this.props.index}</td>
         <td>{this.props.name}</td>
         <td>{this.props.date}</td>
-        <td>{this.props.cfu}</td>
         <td>{this.props.mark}</td>
         <td>
-          <Button onClick={() => this.onAccept()} icon={<CheckMark />} primary />
-          {' '}
-          <Button onClick={() => this.onReject()} icon={<Close />} primary />
+          <Button onClick={() => this.setLayer()} primary>
+            Manage
+          </Button>
         </td>
         {this.state.showLayer ?
           <ConfirmationResult
@@ -59,9 +38,9 @@ class PendingResultEntry extends React.Component {
             examName={this.props.name}
             examDate={this.props.date}
             examMark={this.props.mark}
-            examAddress={this.props.address}
-            decision={this.state.decision}
-            manageVote={this.props.manageVote}
+            examAddress={this.props.examAddress}
+            accept={this.props.accept}
+            reject={this.props.reject}
           />
                       : null
                     }
@@ -74,10 +53,10 @@ PendingResultEntry.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  cfu: PropTypes.number.isRequired,
   mark: PropTypes.number.isRequired,
-  address: PropTypes.string.isRequired,
-  manageVote: PropTypes.func.isRequired,
+  examAddress: PropTypes.string.isRequired,
+  accept: PropTypes.func.isRequired,
+  reject: PropTypes.func.isRequired,
 };
 
 export default PendingResultEntry;

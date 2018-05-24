@@ -4,8 +4,12 @@ import { Box, Table, Heading, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import PendingResultEntry from './PendingResultEntry';
 
-// const ListPendingResultsComponent = ({ size, examsResults, manageVote }) => (
-const ListPendingResultsComponent = ({ size, examsResults }) => (
+const ListPendingResultsComponent = ({
+  size,
+  examsResults,
+  accept,
+  reject,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -50,7 +54,6 @@ const ListPendingResultsComponent = ({ size, examsResults }) => (
           <th>#</th>
           <th>Name</th>
           <th>Date</th>
-          <th>CFU</th>
           <th>Result</th>
           <th>Action</th>
         </tr>
@@ -62,7 +65,8 @@ const ListPendingResultsComponent = ({ size, examsResults }) => (
               key={[element.address]}
               index={index}
               {...element}
-              // manageVote={manageVote}
+              accept={accept}
+              reject={reject}
             />
           ))
         }
@@ -72,15 +76,10 @@ const ListPendingResultsComponent = ({ size, examsResults }) => (
 );
 
 ListPendingResultsComponent.propTypes = {
-  examsResults: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    cfu: PropTypes.number.isRequired,
-    mark: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired,
+  examsResults: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  // manageVote: PropTypes.func.isRequired,
+  accept: PropTypes.func.isRequired,
+  reject: PropTypes.func.isRequired,
 };
 
 export default ListPendingResultsComponent;

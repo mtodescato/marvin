@@ -74,6 +74,7 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
   /* added:
   * first student have subscribe 2 exams
   * second student have subscribe 2 exams and passed all of them
+  * third student have subscribe 2 exams and passed all of them, accept the mark
   */
   await StudentFacade.deployed().then(async (studentFacadeInstance) => {
     ListUsers.deployed().then(async (listUsersInstance) => {
@@ -87,10 +88,13 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
       // subscribe student address6 and address7
       const studentAdd1 = await listUsersInstance.getUser(address6);
       const studentAdd2 = await listUsersInstance.getUser(address7);
+      const studentAdd3 = await listUsersInstance.getUser(address8);
       await studentFacadeInstance
         .setDegreeCourse(degreeCourseAdd, studentAdd1, { from: address6 });
       await studentFacadeInstance
         .setDegreeCourse(degreeCourseAdd, studentAdd2, { from: address7 });
+      await studentFacadeInstance
+        .setDegreeCourse(degreeCourseAdd, studentAdd3, { from: address8 });
       await studentFacadeInstance
         .subscribeToExam(await studentAdd1, await examAdd1, { from: address6 });
       await studentFacadeInstance
@@ -99,6 +103,10 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
         .subscribeToExam(await studentAdd2, await examAdd1, { from: address7 });
       await studentFacadeInstance
         .subscribeToExam(await studentAdd2, await examAdd2, { from: address7 });
+      await studentFacadeInstance
+        .subscribeToExam(await studentAdd3, await examAdd1, { from: address8 });
+      await studentFacadeInstance
+        .subscribeToExam(await studentAdd3, await examAdd2, { from: address8 });
       // getMark for student address7
       ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
         const profAdd1 = listUsersInstance.getUser(address3);
@@ -107,11 +115,16 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
           .publishMark(await examAdd1, await studentAdd2, 21, await profAdd1, { from: address3 });
         await professorFacadeInstance
           .publishMark(await examAdd2, await studentAdd2, 22, await profAdd2, { from: address4 });
-        // accept mark for student 7
+
+        await professorFacadeInstance
+          .publishMark(await examAdd1, await studentAdd3, 25, await profAdd1, { from: address3 });
+        await professorFacadeInstance
+          .publishMark(await examAdd2, await studentAdd3, 26, await profAdd2, { from: address4 });
+        // accept mark for student 8
         await studentFacadeInstance
-          .manageMark(await studentAdd2, await examAdd1, true, { from: address7 });
+          .manageMark(await studentAdd3, await examAdd1, true, { from: address8 });
         await studentFacadeInstance
-          .manageMark(await studentAdd2, await examAdd2, true, { from: address7 });
+          .manageMark(await studentAdd3, await examAdd2, true, { from: address8 });
       });
     });
   });

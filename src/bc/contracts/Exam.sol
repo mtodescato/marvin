@@ -10,6 +10,7 @@ contract Exam is Ownable {
     mapping(address => uint) private studentToInt;
     mapping(address => uint8) private studentToResult; // 0 quando il Mark non e' stato assegnato
     mapping(address => bool) private acceptedMarks;
+    mapping(address => bool) private managedMarks;
     uint private last = 0;
     uint private insertedMarks = 0;
     bytes private date;
@@ -27,6 +28,14 @@ contract Exam is Ownable {
     */
     modifier onlyPassed(address student) {
         require(studentToResult[student] >= 18);
+        _;
+    }
+
+    /** @dev Check if the student has managed the mark
+    *   @param student address of the student contract
+    */
+    modifier onlyManaged(address student) {
+        require(managedMarks[student] == true);
         _;
     }
 
@@ -94,7 +103,21 @@ contract Exam is Ownable {
     onlyStudentFacade() 
     onlyPassed(student) 
     {
+        managedMarks[student] = true;
         acceptedMarks[student] = mark;
+    }
+
+    /** @dev Get true if student has accepted the given marks
+    *   @param student address of the student contract
+    *   @return bool true if is accepted, false if is not accepted
+    */
+    function getMarkStatus(address student)
+    public
+    onlyManaged(student)
+    view
+    returns(bool)
+    {
+        return acceptedMarks[student];
     }
 
     /** @dev Get a mark given an index.

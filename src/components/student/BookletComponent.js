@@ -22,7 +22,6 @@ class BookletComponent extends React.Component {
               <h2> Welcome {this.props.user.name} {this.props.user.surname}
                 {' '} n. {this.props.user.matricola}
               </h2>
-              <h4> Weighted Average: {this.props.user.media}</h4>
               <h3> Exams in your Booklet</h3>
               <Table responsive>
                 <thead>

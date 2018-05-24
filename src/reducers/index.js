@@ -14,6 +14,7 @@ import AddTeaching from './Admin/addTeaching';
 import ListTeachings from './Admin/listTeachings';
 import ListCoursesStudent from './Student/listCourses';
 import ListBookingExams from './Student/listBookingExams';
+import ListExamsResults from './Student/listExamsResults';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -30,6 +31,7 @@ export default combineReducers({
   [ListTeachings.store]: ListTeachings.reducer,
   [ListCoursesStudent.store]: ListCoursesStudent.reducer,
   [ListBookingExams.store]: ListBookingExams.reducer,
+  [ListExamsResults.store]: ListExamsResults.reducer,
 });
 
 // export all reducers
@@ -48,4 +50,5 @@ export {
   ListTeachings,
   ListCoursesStudent,
   ListBookingExams,
+  ListExamsResults,
 };
