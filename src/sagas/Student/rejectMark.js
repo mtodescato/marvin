@@ -2,7 +2,7 @@ import { put, takeLatest, call } from 'redux-saga/effects';
 import { ListExamsResults } from '../../reducers';
 import { rejectMark } from '../web3calls/getter';
 
-export function* runAction(payload) {
+export function* runAction({ payload }) {
   try {
     yield call(rejectMark, payload.address);
     yield put(ListExamsResults.creators.rejectSuccess(payload.address));

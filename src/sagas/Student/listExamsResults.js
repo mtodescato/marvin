@@ -4,7 +4,7 @@ import { getStudentTeachings } from '../web3calls/getter';
 
 export function* runAction() {
   try {
-    const teachings = (yield call(getStudentTeachings)).filter(item => item.markStatus === 'subscribed');
+    const teachings = (yield call(getStudentTeachings)).filter(item => item.markStatus === 'published');
     yield put(ListExamsResults.creators.listExamsResultsSuccess({
       exams: teachings,
       size: teachings.length,
