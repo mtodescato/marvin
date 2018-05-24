@@ -82,3 +82,6 @@ export const numberToCourseType = (number) => {
       return 'Altro';
   }
 };
+
+export const createArray = size => Array(size).fill().map((i, index) => index);
+

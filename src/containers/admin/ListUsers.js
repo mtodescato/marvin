@@ -32,7 +32,6 @@ ListUsers.propTypes = {
   deleteAction: PropTypes.func.isRequired,
 };
 
-// basterebbe collegare solo initialize
 const mapDispatchToProps = dispatch => ({
   deleteAction: (address) => { dispatch(ListUserReducer.creators.deleteRequest(address)); },
   initialize: () => { dispatch(ListUserReducer.creators.listUsersRequest()); },

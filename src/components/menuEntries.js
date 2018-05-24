@@ -8,8 +8,8 @@ export const menuEntriesStudent = [
 
 export const menuEntriesProfessor = [
   'List Teachings',
-  'Etc',
-  'Etc',
+  'Manage Exams',
+  'Create Exam',
 ];
 
 export const menuEntriesAdmin = [

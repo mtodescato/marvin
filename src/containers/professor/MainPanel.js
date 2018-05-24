@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Dashboard from '../../components/shared/Dashboard';
 import Home from '../../containers/professor/Home';
-import ListTeachings from './ListTeachings'; /*
+import ListTeachings from './ListTeachings';
 import ListExams from './ListExams';
-import CreateExam from './CreateExam'; */
+import CreateExam from './CreateExam';
 
 const MainPanel = ({ DashboardComponent }) => (
   <div>
@@ -22,11 +22,11 @@ const mapStateToProps = (state) => {
     case 0:
       return { DashboardComponent: Home };
     case 1:
-      return { DashboardComponent: ListTeachings }; /*
+      return { DashboardComponent: ListTeachings };
     case 2:
       return { DashboardComponent: ListExams };
     case 3:
-      return { DashboardComponent: CreateExam }; */
+      return { DashboardComponent: CreateExam };
     default:
       return { DashboardComponent: Home };
   }
