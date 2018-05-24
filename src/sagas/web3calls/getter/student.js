@@ -4,7 +4,7 @@ import { createArray } from '../../../utils/global';
 import { getUserContractAddress } from './contract';
 
 import StudentFacade from '../../../bc/build/contracts/StudentFacade.json';
-// import DegreeCourse from '../../../bc/build/contracts/DegreeCourse.json';
+import Teaching from '../../../bc/build/contracts/Teaching.json';
 import Student from '../../../bc/build/contracts/Student.json';
 import Exam from '../../../bc/build/contracts/Exam.json';
 
@@ -75,5 +75,24 @@ export const getStudentInfo = async () =>
       media: await getAverage(),
     }));
 
+const isSubscribedToExam = (examAddress, index, stdC) => at(Exam, examAddress)
+  .then(exam => exam.getStudentSubscribed.call(index))
+  .then(add => add === stdC);
 
-export const getSubscribedExams = () => [];
+const isSubscribedToTeaching = async (teachingAddress, stdC) => {
+  const results = await at(Teaching, teachingAddress)
+    .then(teaching => teaching.getExam.call(0))
+    .then(examAdd => at(Exam, examAdd))
+    .then(exam => ({ exam, size: exam.getNumberOfStudents.call() }))
+    .then(({ exam, size }) => createArray(size)
+      .map(index => isSubscribedToExam(exam.address, index, stdC)));
+  return Boolean(results.filter(i => i).length);
+};
+
+export const getSubscribedExams = async () => {
+  const teachings = await getStudentTeachings();
+  const stdC = await studentContractAddress();
+  return teachings
+    .filter(teaching => isSubscribedToTeaching(teaching.address, stdC))
+    .map(teaching => teaching.address);
+};
