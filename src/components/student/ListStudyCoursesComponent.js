@@ -73,7 +73,7 @@ const ListStudyCoursesComponent = ({
         {
           coursesEntries.map((element, index) => (
             <CourseEntry
-              key={[element.address]}
+              key={[element.ID]}
               index={index}
               {...element}
               activeCourseName={activeCourseName}
@@ -89,9 +89,9 @@ const ListStudyCoursesComponent = ({
 ListStudyCoursesComponent.propTypes = {
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    role: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
+    president: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired,
+    ID: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
