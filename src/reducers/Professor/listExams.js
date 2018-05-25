@@ -7,7 +7,7 @@ export default AsyncFlow({
     size: 0,
     year: 2018,
   },
-  actions: ['LIST_EXAMS', 'MANAGE_VOTE'],
+  actions: ['LIST_EXAMS'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
@@ -21,12 +21,6 @@ export default AsyncFlow({
         return {
           ...state,
           year: action.payload.year,
-        };
-      case types.MANAGE_VOTE_SUCCESS:
-        return {
-          ...state,
-          size: state.size - 1,
-          exams: state.exams.filter(exam => exam.examAddress !== action.payload.address),
         };
       default:
         return state;
@@ -43,19 +37,6 @@ export default AsyncFlow({
     }),
     listExamsFailed: error => ({
       type: types.LIST_EXAMS_FAILED,
-      error: true,
-      payload: { error },
-    }),
-    manageVoteRequest: address => ({
-      type: types.MANAGE_VOTE_REQUEST,
-      payload: { address },
-    }),
-    manageVoteSuccess: address => ({
-      type: types.MANAGE_VOTE_SUCCESS,
-      payload: { address },
-    }),
-    manageVoteFailed: error => ({
-      type: types.MANAGE_VOTE_FAILED,
       error: true,
       payload: { error },
     }),
