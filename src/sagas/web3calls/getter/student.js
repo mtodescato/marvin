@@ -1,5 +1,10 @@
 import { deployed, getAccount, at } from '../deployed';
-import { getUserInfoFromCAddress, getNumberOfTeachings, getTeachings, getCourseNameFromAddress } from '.';
+import {
+  getUserInfoFromCAddress,
+  getNumberOfTeachings,
+  getTeachings,
+  getCourseNameFromAddress,
+} from '.';
 import { createArray } from '../../../utils/global';
 import { getUserContractAddress } from './contract';
 
@@ -104,6 +109,8 @@ export const getExamFromTeaching = teachingAdd => at(Teaching, teachingAdd)
       examAddress: examAdd,
       name: window.web3.toAscii(await teaching.getName.call()),
       responsible: await teaching.getReferenceProfessor.call(),
+      responsibleName: (await getUserInfoFromCAddress(await teaching.getReferenceProfessor.call()))
+        .name,
       date: window.web3.toAscii(await exam.getDate.call()),
       markStatus,
       mark,

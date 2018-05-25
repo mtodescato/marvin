@@ -23,6 +23,7 @@ import * as listTeachingsProfessor from './Professor/listTeachings';
 import * as listExams from './Professor/listExams';
 import * as manageResults from './Professor/manageResults';
 import * as addMark from './Professor/addMark';
+import * as listExamsFromTeaching from './Professor/listExamsFromTeaching';
 
 export default function* rootSaga() {
   yield all([
@@ -50,6 +51,7 @@ export default function* rootSaga() {
     fork(listExams.triggerAction),
     fork(manageResults.triggerAction),
     fork(addMark.triggerAction),
+    fork(listExamsFromTeaching.triggerAction),
   ]);
 }
 
@@ -78,4 +80,5 @@ export {
   listExams,
   manageResults,
   addMark,
+  listExamsFromTeaching,
 };

@@ -17,7 +17,11 @@ export function* runAction({ payload: { year } }) {
       // prendo tutti i teachings di quel corso
       const partOfTeachings = yield call(getTeachings, ({ course: courses[i].ID, size }));
       // inserisco nell'array globale i teachings di questo corso
-      partOfTeachings.forEach(el => teachings.push({ ...el, course: courses[i].name }));
+      partOfTeachings.forEach(el => teachings.push({
+        ...el,
+        course: courses[i].name,
+        responsible: el.responsibleName,
+      }));
     }
     yield put(ListTeachings.creators.listTeachingsSuccess({ teachings, size: teachings.length }));
   } catch (e) {

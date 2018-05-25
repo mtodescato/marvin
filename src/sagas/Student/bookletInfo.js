@@ -12,7 +12,10 @@ export function* runAction() {
         exams[i] = yield call(addExamToPassedTeaching, exams[i]);
       }
     }
-    const booklet = { user, exams };
+    const booklet = {
+      user,
+      exams: exams.map(exam => ({ ...exam, responsabile: exam.responsibleName })),
+    };
     yield put(BookletInfo.creators.bookletInfoSuccess(booklet));
   } catch (e) {
     yield put(BookletInfo.creators.bookletInfoFailed(e.message)); // fail the promise getWeb3
