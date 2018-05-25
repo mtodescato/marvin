@@ -201,7 +201,7 @@ class CreateTeachingComponent extends React.Component {
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
-                <FormField label="Responsible:">
+                <FormField label="Professor in charge:">
                   <Select
                     id="responsible"
                     name="Responsible"

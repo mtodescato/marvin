@@ -73,7 +73,7 @@ const ListTeachingsComponent = ({ size, teachings, initialize }) => (
           <th>#</th>
           <th>Teaching</th>
           <th>Course</th>
-          <th>Responsible</th>
+          <th>Professor in charge</th>
         </tr>
       </thead>
       <tbody>

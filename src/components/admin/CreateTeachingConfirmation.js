@@ -75,7 +75,7 @@ class CreateTeachingConfirmation extends React.Component {
                 margin="none"
               >
                 <Heading tag="h4" margin="none">
-                  Responsible:
+                  Professor in charge:
                 </Heading>
                 <Heading tag="h4" margin="none">
                   {this.props.teachingResponsible}
