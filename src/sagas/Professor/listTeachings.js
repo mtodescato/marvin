@@ -28,7 +28,7 @@ export function* runAction({ payload: { year } }) {
     const professorAddress = yield call(professorContractAddress);
     yield put(ListTeachingsProfessor.creators.listTeachingsSuccess({
       teachings: teachings.filter(item => item.responsible === professorAddress),
-      size: teachings.length,
+      size: teachings.filter(item => item.responsible === professorAddress).length,
     }));
   } catch (e) {
     yield put(ListTeachingsProfessor.creators.listTeachingsFailed(e.message));

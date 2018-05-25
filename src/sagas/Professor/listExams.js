@@ -1,6 +1,13 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { ListTeachings } from '../../reducers';
-import { getNumberOfTeachings, getTeachings, getDegreeCourses, getNumberOfDC } from '../web3calls/getter';
+import { ListExams } from '../../reducers';
+import {
+  getNumberOfTeachings,
+  getTeachings,
+  getDegreeCourses,
+  getNumberOfDC,
+  professorContractAddress,
+  getExamsFromTeachingsAdd,
+} from '../web3calls/getter';
 
 export function* runAction({ payload: { year } }) {
   try {
@@ -17,18 +24,22 @@ export function* runAction({ payload: { year } }) {
       // prendo tutti i teachings di quel corso
       const partOfTeachings = yield call(getTeachings, ({ course: courses[i].ID, size }));
       // inserisco nell'array globale i teachings di questo corso
-      partOfTeachings.forEach(el => teachings.push({
-        ...el,
-        course: courses[i].name,
-        responsible: el.responsibleName,
-      }));
+      partOfTeachings.forEach(el => teachings.push({ ...el, course: courses[i].name }));
     }
-    yield put(ListTeachings.creators.listTeachingsSuccess({ teachings, size: teachings.length }));
+    const professorAddress = yield call(professorContractAddress);
+
+    const exams = yield call(getExamsFromTeachingsAdd, teachings
+      .filter(item => item.responsible === professorAddress)
+      .map(teaching => teaching.address));
+    yield put(ListExams.creators.listExamsSuccess({
+      exams,
+      size: exams.length,
+    }));
   } catch (e) {
-    yield put(ListTeachings.creators.listTeachingsFailed(e.message));
+    yield put(ListExams.creators.listExamsFailed(e.message));
   }
 }
 
 export function* triggerAction() {
-  yield takeLatest(ListTeachings.types.LIST_TEACHINGS_REQUEST, runAction);
+  yield takeLatest(ListExams.types.LIST_EXAMS_REQUEST, runAction);
 }

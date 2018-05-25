@@ -1,6 +1,6 @@
 import { deployed, at, getAccount } from '../deployed';
 import { numberToCourseType, createArray } from '../../../utils/global';
-import { getUserInfoFromInt } from '.';
+import { getUserInfoFromInt, getUserInfoFromCAddress } from '.';
 import { professorFacadeAddress } from './contract';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
@@ -86,14 +86,18 @@ export const getNumberOfTeachings = course => at(DegreeCourse, course)
   .then(inst => inst.getNumberOfTeachings.call())
   .then(Number);
 
-export const getTeaching = (course, index) => at(DegreeCourse, course)
-  .then(inst => inst.getTeaching.call(index))
-  .then(teachingAddress => at(Teaching, teachingAddress))
+export const getTeachingInfoFromAdd = teachingAdd => at(Teaching, teachingAdd)
   .then(async teaching => ({
     address: teaching.address,
     name: window.web3.toAscii(await teaching.getName.call()),
+    responsibleName: (await getUserInfoFromCAddress(await teaching.getReferenceProfessor.call()))
+      .name,
     responsible: await teaching.getReferenceProfessor.call(),
   }));
+
+export const getTeaching = (course, index) => at(DegreeCourse, course)
+  .then(inst => inst.getTeaching.call(index))
+  .then(getTeachingInfoFromAdd);
 
 export const getTeachings = ({ course, size }) =>
   Promise.all(createArray(size)
@@ -107,3 +111,9 @@ export const getCourseNameFromAddress = (address) => {
       name: window.web3.toAscii(await degree.getDegreeCourseName.call()),
     }));
 };
+
+export const getTeachingNameFromAddress = address => at(Teaching, address)
+  .then(async teaching => ({
+    address,
+    name: window.web3.toAscii(await teaching.getName.call()),
+  }));

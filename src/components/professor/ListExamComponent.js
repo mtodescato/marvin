@@ -49,7 +49,7 @@ const ListExamComponent = ({ size, exams }) => (
     {
           exams.map((element, index) => (
             <ListExamEntry
-              key={[element.address]}
+              key={[element.examAddress]}
               index={index}
               {...element}
             />
@@ -63,7 +63,7 @@ ListExamComponent.propTypes = {
     ID: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    examAddress: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
 };

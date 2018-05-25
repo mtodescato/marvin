@@ -1,5 +1,10 @@
 import { deployed, getAccount, at } from '../deployed';
-import { getUserInfoFromCAddress, getNumberOfTeachings, getTeachings, getCourseNameFromAddress } from '.';
+import {
+  getUserInfoFromCAddress,
+  getNumberOfTeachings,
+  getTeachings,
+  getCourseNameFromAddress,
+} from '.';
 import { createArray } from '../../../utils/global';
 import { getUserContractAddress } from './contract';
 
@@ -49,12 +54,15 @@ export const addExamToPassedTeaching = async (teaching) => {
       })));
 };
 
-export const getStudentInfo = async () =>
-  getUserInfoFromCAddress(await studentContractAddress())
+export const getStudentInfoFromCAddress = async stdAddress =>
+  getUserInfoFromCAddress(stdAddress)
     .then(async result => ({
       ...result,
       matricola: result.serial,
     }));
+
+export const getStudentInfo = async () =>
+  getStudentInfoFromCAddress(await studentContractAddress());
 
 const isSubscribedToExam = (examAddress, index, stdC) => at(Exam, examAddress)
   .then(exam => exam.getStudentSubscribed.call(index))
@@ -101,6 +109,8 @@ export const getExamFromTeaching = teachingAdd => at(Teaching, teachingAdd)
       examAddress: examAdd,
       name: window.web3.toAscii(await teaching.getName.call()),
       responsible: await teaching.getReferenceProfessor.call(),
+      responsibleName: (await getUserInfoFromCAddress(await teaching.getReferenceProfessor.call()))
+        .name,
       date: window.web3.toAscii(await exam.getDate.call()),
       markStatus,
       mark,
