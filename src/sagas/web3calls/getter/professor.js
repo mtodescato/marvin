@@ -1,5 +1,10 @@
 import { deployed, getAccount, at } from '../deployed';
-import { getUserContractAddress, studentFacadeAddress, getTeachingInfoFromAdd, getStudentInfoFromCAddress } from '.';
+import {
+  getUserContractAddress,
+  studentFacadeAddress,
+  getTeachingInfoFromAdd,
+  getStudentInfoFromCAddress,
+} from '.';
 import { createArray } from '../../../utils/global';
 
 import ProfessorFacade from '../../../bc/build/contracts/ProfessorFacade.json';
@@ -15,7 +20,7 @@ export const addExam = exam => deployed(ProfessorFacade)
     return inst.insertExam(exam.teachingAddress, exam.date, stdC, stuFacC, { from: getAccount() });
   });
 
-const getExamsFromTeachingAdd = teachingAdd => at(Teaching, teachingAdd)
+export const getExamsFromTeachingAdd = teachingAdd => at(Teaching, teachingAdd)
   .then(async (teaching) => {
     const size = Number(await teaching.getNumberOfExams.call());
     return Promise.all(createArray(size).map(index => teaching.getExam.call(index)));
