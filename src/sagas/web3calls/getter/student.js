@@ -49,12 +49,15 @@ export const addExamToPassedTeaching = async (teaching) => {
       })));
 };
 
-export const getStudentInfo = async () =>
-  getUserInfoFromCAddress(await studentContractAddress())
+export const getStudentInfoFromCAddress = async stdAddress =>
+  getUserInfoFromCAddress(stdAddress)
     .then(async result => ({
       ...result,
       matricola: result.serial,
     }));
+
+export const getStudentInfo = async () =>
+  getStudentInfoFromCAddress(await studentContractAddress());
 
 const isSubscribedToExam = (examAddress, index, stdC) => at(Exam, examAddress)
   .then(exam => exam.getStudentSubscribed.call(index))
