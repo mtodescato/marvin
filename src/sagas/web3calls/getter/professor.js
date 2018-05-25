@@ -1,5 +1,5 @@
 import { deployed, getAccount, at } from '../deployed';
-import { getUserContractAddress, studentFacadeAddress, getTeachingInfoFromAdd } from '.';
+import { getUserContractAddress, studentFacadeAddress, getTeachingInfoFromAdd, getStudentInfoFromCAddress } from '.';
 import { createArray } from '../../../utils/global';
 
 import ProfessorFacade from '../../../bc/build/contracts/ProfessorFacade.json';
@@ -33,3 +33,10 @@ export const getExamsFromTeachingsAdd = async (teachingsAdd) => {
     .map(teachingAdd => getExamsFromTeachingAdd(teachingAdd)));
   return exams.reduce((acc, item) => acc.concat(...item), []); // flattern array
 };
+
+export const getResultsFromExamAdd = async examAdd => at(Exam, examAdd)
+  .then(async (exam) => {
+    const size = Number(await exam.getNumberOfStudents.call());
+    return Promise.all(createArray(size).map(index => exam.getSubscribedStudent.call(index)));
+  }).then(async stdAddresses => Promise.all(stdAddresses
+    .map(stdAdd => getStudentInfoFromCAddress(stdAdd))));
