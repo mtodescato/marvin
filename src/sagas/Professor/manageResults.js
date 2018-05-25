@@ -1,20 +1,20 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
-import { ManageResult } from '../../reducers';
+import { ManageResults } from '../../reducers';
 import { getResultsFromExamAdd } from '../web3calls/getter';
 
 export function* runAction({ payload: { examAddress } }) {
   try {
     const students = yield call(getResultsFromExamAdd, examAddress);
 
-    yield put(ManageResult.creators.manageResultSuccess({
+    yield put(ManageResults.creators.manageResultsSuccess({
       students,
       size: students.length,
     }));
   } catch (e) {
-    yield put(ManageResult.creators.manageResultFailed(e.message));
+    yield put(ManageResults.creators.manageResultsFailed(e.message));
   }
 }
 
 export function* triggerAction() {
-  yield takeLatest(ManageResult.types.MANAGE_RESULT_REQUEST, runAction);
+  yield takeLatest(ManageResults.types.MANAGE_RESULTS_REQUEST, runAction);
 }

@@ -1,16 +1,16 @@
 import AsyncFlow from '../asyncFlow';
 
 export default AsyncFlow({
-  store: 'manage-result',
+  store: 'manage-results',
   initialState: {
     students: [],
     size: 0,
   },
-  actions: ['MANAGE_RESULT', 'ADD_MARK'],
+  actions: ['MANAGE_RESULTS', 'ADD_MARK'],
 }).extend({
   reducer: (state, action, { types }) => {
     switch (action.type) {
-      case types.MANAGE_RESULT_SUCCESS:
+      case types.MANAGE_RESULTS_SUCCESS:
         return {
           ...state,
           size: action.payload.size,
@@ -28,16 +28,16 @@ export default AsyncFlow({
     }
   },
   creators: ({ types }) => ({
-    manageResultRequest: examAddress => ({
-      type: types.MANAGE_RESULT_REQUEST,
+    manageResultsRequest: examAddress => ({
+      type: types.MANAGE_RESULTS_REQUEST,
       payload: { examAddress },
     }),
-    manageResultSuccess: ({ students, size }) => ({
-      type: types.MANAGE_RESULT_SUCCESS,
+    manageResultsSuccess: ({ students, size }) => ({
+      type: types.MANAGE_RESULTS_SUCCESS,
       payload: { students, size },
     }),
-    manageResultFailed: error => ({
-      type: types.MANAGE_RESULT_FAILED,
+    manageResultsFailed: error => ({
+      type: types.MANAGE_RESULTS_FAILED,
       error: true,
       payload: { error },
     }),
