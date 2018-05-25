@@ -37,6 +37,6 @@ export const getExamsFromTeachingsAdd = async (teachingsAdd) => {
 export const getResultsFromExamAdd = async examAdd => at(Exam, examAdd)
   .then(async (exam) => {
     const size = Number(await exam.getNumberOfStudents.call());
-    return Promise.all(createArray(size).map(index => exam.getSubscribedStudent.call(index)));
+    return Promise.all(createArray(size).map(index => exam.getStudentSubscribed.call(index)));
   }).then(async stdAddresses => Promise.all(stdAddresses
     .map(stdAdd => getStudentInfoFromCAddress(stdAdd))));
