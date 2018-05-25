@@ -25,7 +25,12 @@ class ListStudyCourses extends React.Component {
 }
 
 ListStudyCourses.propTypes = {
-  courses: PropTypes.arrayOf().isRequired,
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    role: PropTypes.number.isRequired,
+    address: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   activeCourseName: PropTypes.string.isRequired,
   initialize: PropTypes.func.isRequired,
