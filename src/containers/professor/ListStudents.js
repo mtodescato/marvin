@@ -2,29 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ListStudentsComponent from '../../components/professor/ListStudentsComponent';
-// import { ListStudents as ListStudentsReducer } from '../../reducerst';
+import { ManageResults as ListStudentsReducer } from '../../reducers';
 
-export const examsResults = [{
-  name: 'Marco',
-  surname: 'Carta',
-  socialNumber: '52526',
-  address: 'sdgfjskfsfkldfa',
-}, {
-  name: 'Marco',
-  surname: 'Carta',
-  socialNumber: '52526',
-  address: 'sdgfj345skkldfa',
-}, {
-  name: 'Marco',
-  surname: 'Carta',
-  socialNumber: '52526',
-  address: 'sdgfjkhlskkldfa',
-},
-];
-/*
 class ListStudents extends React.Component {
   componentWillMount() {
-    this.props.initialize();
+    this.props.initialize(this.props.address);
   }
 
   render() {
@@ -32,47 +14,33 @@ class ListStudents extends React.Component {
       <ListStudentsComponent
         size={this.props.size}
         examsResults={this.props.exams}
-        examAddress={props.examAddress}
+        examAddress={this.props.address}
         publishMark={this.props.publishMark}
       />
     );
   }
-} */
-
-const ListStudents = props => (
-  <ListStudentsComponent
-    size={3}
-    examsResults={examsResults}
-    examAddress={props.examAddress}
-  />
-);
+}
 
 ListStudents.propTypes = {
-  examAddress: PropTypes.string.isRequired,
-  /*
-  examsResults: PropTypes.arrayOf(PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    socialNumber: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired,
+  address: PropTypes.string.isRequired,
+  exams: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired,
-  publishMark: PropTypes.func.isRequired, */
+  publishMark: PropTypes.func.isRequired,
 };
 
-const mapDispatchToProps = () => ({
-/* const mapDispatchToProps = dispatch => ({
-  publishMark: (address) => {
-    dispatch(ListStudentsReducer.creators.publishMarkRequest(address));
-},
-  initialize: () => { dispatch(ListStudentsReducer.creators.listStudentssRequest()); }, */
+const mapDispatchToProps = dispatch => ({
+  publishMark: (stdAddress, examAddress, mark) => {
+    dispatch(ListStudentsReducer.creators.addMarkRequest(stdAddress, examAddress, mark));
+  },
+  initialize: (examAddress) => {
+    dispatch(ListStudentsReducer.creators.manageResultsRequest(examAddress));
+  },
 });
 
-const mapStateToProps = () => ({
-/* const mapStateToProps = state => ({
-  examsResults: state['list-students'].exams,
-  size: state['list-students'].size, */
+const mapStateToProps = state => ({
+  exams: state['manage-results'].students,
+  size: state['manage-results'].size,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListStudents);

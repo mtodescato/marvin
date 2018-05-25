@@ -63,6 +63,13 @@ contract Teaching is Ownable {
         return intToExam[index];
     }
 
+    /** @dev Get the number of exams for this teaching
+    *   @return uint number of exams for this teaching
+    */
+    function getNumberOfExams() public view returns(uint) {
+        return last;
+    } 
+
     /** @dev Get refernce professor.
     *   @return address refernce professor address. 
     */
