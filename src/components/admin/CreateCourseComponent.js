@@ -37,7 +37,7 @@ class CreateCourseComponent extends React.Component {
       name: '',
       president: '',
       type: 0,
-      typeString: 'Tree-year',
+      typeString: 'Bachelor\'s',
       academicYear: 2018,
       errors: {
         name: '',
@@ -90,7 +90,7 @@ class CreateCourseComponent extends React.Component {
   }
 
   handleChangeType(e) {
-    if (e.target.value === 'Master') {
+    if (e.target.value === 'Master\'s') {
       this.setState({ type: 1 });
     } else {
       this.setState({ type: 0 });
@@ -221,7 +221,7 @@ class CreateCourseComponent extends React.Component {
                 <FormField label="Degree Type:">
                   <Select
                     id="type"
-                    options={['Tree-year', 'Master']}
+                    options={['Tree-year', 'Master\'s']}
                     value={this.state.typeString}
                     onChange={this.handleChangeType}
                   />

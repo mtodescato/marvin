@@ -75,9 +75,9 @@ export const validateAddress = (address, error = 'Address must be valid') => {
 export const numberToCourseType = (number) => {
   switch (number) {
     case 0:
-      return 'Three-year';
+      return 'Bachelor\'s';
     case 1:
-      return 'Master';
+      return 'Master\'s';
     default:
       return 'Altro';
   }
