@@ -76,7 +76,12 @@ const ListPendingResultsComponent = ({
 );
 
 ListPendingResultsComponent.propTypes = {
-  examsResults: PropTypes.arrayOf().isRequired,
+  examsResults: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    mark: PropTypes.string.isRequired,
+    examAddress: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
