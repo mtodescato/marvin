@@ -1,73 +1,38 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { ListExams } from '../../reducers';
+import PropTypes from 'prop-types';
+import { ListExams } from '../../reducers';
 import ListExamComponent from '../../components/professor/ListExamComponent';
 
-export const exams = [{
-  ID: '12345',
-  name: 'Swe',
-  date: '12/12/2018',
-  address: 'sdgfjfskkldfa',
-}, {
-  ID: '35655',
-  name: 'Swe',
-  date: '12/12/2018',
-  address: 'sdgfjskkl3dfa',
-}, {
-  ID: '45663',
-  name: 'Swe',
-  date: '12/12/2018',
-  address: 'sdgfj5skkldfa',
-},
-];
-
-const ListExams = () => (
-  <ListExamComponent
-        // exams={this.props.exams}
-    exams={exams}
-    // size={this.props.size}
-    size={3}
-  />
-);
-
-/*
-class ListExams extends React.Component {
+class ListExamsContainer extends React.Component {
   componentWillMount() {
-    this.props.initialize();
+    this.props.initialize(2018);
   }
   render() {
     return (
       <ListExamComponent
-        // exams={this.props.exams}
-        exams={exams}
+        exams={this.props.exams}
         size={this.props.size}
       />
     );
   }
-} */
+}
 
-ListExams.propTypes = {
-  /* exams: PropTypes.arrayOf(PropTypes.shape({
-    ID: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    cfu: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
-  })).isRequired,
+ListExamsContainer.propTypes = {
+  exams: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired, */
+  initialize: PropTypes.func.isRequired,
 };
-/*
+
 const mapStateToProps = state => ({
-  // exams: state['list-exams'].exams,
-  // size: state['list-exams'].size,
+  exams: state['list-exams'].exams,
+  size: state['list-exams'].size,
 });
 
 const mapDispatchToProps = dispatch => ({
   initialize: (year) => {
-    dispatch(ListExams.creators.listTeachingsRequest(year));
+    dispatch(ListExams.creators.listExamsRequest(year));
   },
-}); */
+});
 
-export default connect(null, null)(ListExams);
+export default connect(mapStateToProps, mapDispatchToProps)(ListExamsContainer);
