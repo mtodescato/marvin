@@ -61,7 +61,7 @@ const DegreeProceduresComponent = ({ size, degreeProcedureEntries }) => (
           <th>Student</th>
           <th>Student #</th>
           <th>Thesis title</th>
-          <th>Relator</th>
+          <th>Supervisor</th>
           <th>State</th>
           <th>Manage</th>
         </tr>
