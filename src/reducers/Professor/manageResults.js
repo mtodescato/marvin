@@ -41,9 +41,9 @@ export default AsyncFlow({
       error: true,
       payload: { error },
     }),
-    addMarkRequest: ({ stdAddress, examAddress }) => ({
+    addMarkRequest: (stdAddress, examAddress, mark) => ({
       type: types.ADD_MARK_REQUEST,
-      payload: { stdAddress, examAddress },
+      payload: { stdAddress, examAddress, mark },
     }),
     addMarkSuccess: ({ stdAddress, examAddress }) => ({
       type: types.ADD_MARK_SUCCESS,
