@@ -14,7 +14,6 @@ const ListExamEntry = props => (
   </Accordion>
 );
 
-
 ListExamEntry.propTypes = {
   index: PropTypes.number.isRequired,
   ID: PropTypes.string.isRequired,

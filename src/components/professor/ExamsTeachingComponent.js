@@ -30,7 +30,7 @@ const ExamsTeachingComponent = ({ size, exams }) => (
         <thead>
           <tr>
             <th>#</th>
-            <th>Serial Number</th>
+            <th>Address</th>
             <th>Date</th>
           </tr>
         </thead>
@@ -52,7 +52,7 @@ const ExamsTeachingComponent = ({ size, exams }) => (
 
 ExamsTeachingComponent.propTypes = {
   exams: PropTypes.arrayOf(PropTypes.shape({
-    serialNumber: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,

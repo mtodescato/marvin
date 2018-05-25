@@ -62,7 +62,7 @@ ListStudentsComponent.propTypes = {
   examsResults: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
-    socialNumber: PropTypes.number.isRequired,
+    socialNumber: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,

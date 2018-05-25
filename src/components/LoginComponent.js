@@ -31,7 +31,10 @@ const LoginComponent = props => (
         label="Login"
         icon={<LoginIcon />}
       />
-      <p>{props.address}</p>
+      <p>
+        {// props.address
+        }
+      </p>
       <Box direction="row" align="center">
         <Image src={ethMetUnipd} alt="logo" size="large" />
       </Box>
@@ -43,7 +46,7 @@ const LoginComponent = props => (
 LoginComponent.propTypes = {
   type: PropTypes.string.isRequired,
   loginRequest: PropTypes.func.isRequired,
-  address: PropTypes.string.isRequired,
+  // address: PropTypes.string.isRequired,
 };
 
 export default LoginComponent;

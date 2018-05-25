@@ -8,16 +8,19 @@ export const teachings = [{
   name: 'Analisi',
   course: 'Informatica',
   responsible: 'Francescfopaolo Montefalcone',
+  address: 'fdsjkhfkjdhgskjghkjs',
 },
 {
   name: 'Basi',
   course: 'Informatica',
   responsible: 'Giacobbe',
+  address: 'fdsjkhfdkjdhgskjghkjs',
 },
 {
   name: 'Tecweb',
   course: 'Inform7atica',
   responsible: 'Momo Sissoko',
+  address: 'fdsjkhfkjdhgsskjghkjs',
 },
 ];
 
@@ -49,8 +52,9 @@ class ListTeachings extends React.Component {
 ListTeachings.propTypes = {
   /* teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    responsible: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
+    responsible: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired, */

@@ -119,7 +119,12 @@ const HomeComponent = props => (
 );
 
 HomeComponent.propTypes = {
-  user: PropTypes.arrayOf.isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    matricola: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  }).isRequired,
   message: PropTypes.string.isRequired,
 };
 
