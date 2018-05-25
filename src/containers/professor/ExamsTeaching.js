@@ -1,35 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-// import PropTypes from 'prop-types';
-// import { ListTeachings } from '../../reducers';
+import PropTypes from 'prop-types';
+import { ListExams } from '../../reducers';
 import ExamsTeachingComponent from '../../components/professor/ExamsTeachingComponent';
 
-export const exams = [{
-  address: '39A6789ghdkjsh876',
-  date: '23/05/2018',
-},
-{
-  address: '39poiuytreA876',
-  date: '23/05/2018',
-},
-{
-  address: '39Asfhdgjhfkj876',
-  date: '23/05/2018',
-},
-];
-
-const ExamsTeaching = () => (
-  <ExamsTeachingComponent
-    // exams={this.props.exams}
-    exams={exams}
-    size={3}
-  />
-);
-
-/*
 class ExamsTeaching extends React.Component {
   componentWillMount() {
-    this.props.initialize();
+    this.props.initialize(this.props.teachingAddress);
   }
   render() {
     return (
@@ -39,30 +16,24 @@ class ExamsTeaching extends React.Component {
       />
     );
   }
-} */
+}
 
 ExamsTeaching.propTypes = {
-  // teachingAddress: PropTypes.string.isRequired,
-  /* exams: PropTypes.arrayOf(PropTypes.shape({
-    address: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-  })).isRequired,
+  teachingAddress: PropTypes.string.isRequired,
+  exams: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired, */
+  initialize: PropTypes.func.isRequired,
 };
-/*
+
 const mapStateToProps = state => ({
-  // exams: state['list-exams'].exams,
-  // size: state['list-exams'].size,
+  exams: state['list-exams'].exams,
+  size: state['list-exams'].size,
 });
 
 const mapDispatchToProps = dispatch => ({
   initialize: (teachingAddress) => {
-    dispatch(ListExams.creators.listExamsRequest(teachingAddress));
+    dispatch(ListExams.creators.listExamsFromTeachingRequest(teachingAddress));
   },
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExamsTeaching);
-*/
-
-export default connect(null, null)(ExamsTeaching);
