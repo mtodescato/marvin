@@ -3,8 +3,12 @@ import PropTypes from 'prop-types';
 import { Box, Table, Heading } from 'grommet';
 import StudentEntry from './StudentEntry';
 
-// const ListStudentsComponent = ({ size, examsResults, publishMark }) => (
-const ListStudentsComponent = ({ size, examsResults, examAddress }) => (
+const ListStudentsComponent = ({
+  size,
+  examsResults,
+  examAddress,
+  publishMark,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -44,7 +48,7 @@ const ListStudentsComponent = ({ size, examsResults, examAddress }) => (
               index={index}
               {...element}
               examAddress={examAddress}
-              // publishMark={publishMark}
+              publishMark={publishMark}
             />
           ))
         }
@@ -62,7 +66,7 @@ ListStudentsComponent.propTypes = {
     address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
-  // publishMark: PropTypes.func.isRequired,
+  publishMark: PropTypes.func.isRequired,
 };
 
 export default ListStudentsComponent;

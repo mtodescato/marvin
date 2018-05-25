@@ -9,7 +9,7 @@ const ListExamEntry = props => (
       pad="none"
       heading={`${props.index + 1}. ${props.ID} - ${props.name} - ${props.date}`}
     >
-      <ListStudents address={props.address} />
+      <ListStudents address={props.examAddress} />
     </AccordionPanel>
   </Accordion>
 );
@@ -20,7 +20,7 @@ ListExamEntry.propTypes = {
   ID: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
+  examAddress: PropTypes.string.isRequired,
 };
 
 export default ListExamEntry;
