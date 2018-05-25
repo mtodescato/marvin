@@ -18,7 +18,7 @@ import ListExamsResults from './Student/listExamsResults';
 import AddExam from './Professor/addExam';
 import ListTeachingsProfessor from './Professor/listTeachings';
 import ListExams from './Professor/listExams';
-import ManageResult from './Professor/manageResults';
+import ManageResults from './Professor/manageResults';
 
 export default combineReducers({
   [BookletInfo.store]: BookletInfo.reducer,
@@ -39,7 +39,7 @@ export default combineReducers({
   [AddExam.store]: AddExam.reducer,
   [ListTeachingsProfessor.store]: ListTeachingsProfessor.reducer,
   [ListExams.store]: ListExams.reducer,
-  [ManageResult.store]: ManageResult.reducer,
+  [ManageResults.store]: ManageResults.reducer,
 });
 
 // export all reducers
@@ -62,5 +62,5 @@ export {
   AddExam,
   ListTeachingsProfessor,
   ListExams,
-  ManageResult,
+  ManageResults,
 };
