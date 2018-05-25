@@ -37,6 +37,22 @@ export const getExamsFromTeachingsAdd = async (teachingsAdd) => {
 export const getResultsFromExamAdd = async examAdd => at(Exam, examAdd)
   .then(async (exam) => {
     const size = Number(await exam.getNumberOfStudents.call());
-    return Promise.all(createArray(size).map(index => exam.getStudentSubscribed.call(index)));
+    const studentsAddress = await Promise.all(createArray(size)
+      .map(index => exam.getStudentSubscribed.call(index)));
+    const booked = await Promise.all(studentsAddress.map(async (add) => {
+      try {
+        await exam.getMark.call(add);
+        return true;
+      } catch (e) {
+        return false;
+      }
+    }));
+    return studentsAddress.filter((item, index) => !booked[index]);
   }).then(async stdAddresses => Promise.all(stdAddresses
     .map(stdAdd => getStudentInfoFromCAddress(stdAdd))));
+
+export const addMark = ({ stdAddress, examAddress, mark }) => deployed(ProfessorFacade)
+  .then(async (inst) => {
+    const stdC = await professorContractAddress();
+    return inst.publishMark(examAddress, stdAddress, mark, stdC, { from: getAccount() });
+  });
