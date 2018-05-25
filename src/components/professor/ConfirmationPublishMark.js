@@ -10,7 +10,7 @@ class ConfirmationPublishMark extends React.Component {
   }
 
   onConfirm() {
-    // this.props.manageVote(this.props.examAddress, this.props.studAddress, this.props.mark);
+    this.props.publishMark(this.props.stdAddress, this.props.examAddress, this.props.mark);
     this.props.setLayer();
   }
 
@@ -84,7 +84,7 @@ class ConfirmationPublishMark extends React.Component {
                 Vote:
                 </Heading>
                 <Heading tag="h4" margin="none">
-                  {this.props.examMark}
+                  {this.props.mark}
                 </Heading>
               </ListItem>
             </List>
@@ -117,13 +117,13 @@ class ConfirmationPublishMark extends React.Component {
 
 ConfirmationPublishMark.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  mark: PropTypes.func.isRequired,
   studentName: PropTypes.string.isRequired,
   studentSurname: PropTypes.string.isRequired,
   studSocialNumber: PropTypes.number.isRequired,
-  // studAddress: PropTypes.string.isRequired,
-  examMark: PropTypes.number.isRequired,
-  // examAddress: PropTypes.string.isRequired,
-  // manageVote: PropTypes.func.isRequired,
+  stdAddress: PropTypes.string.isRequired,
+  examAddress: PropTypes.string.isRequired,
+  publishMark: PropTypes.func.isRequired,
 };
 
 export default ConfirmationPublishMark;

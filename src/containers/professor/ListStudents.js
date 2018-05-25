@@ -30,8 +30,8 @@ ListStudents.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  publishMark: (stdAddress, examAddress) => {
-    dispatch(ListStudentsReducer.creators.addMarkRequest({ stdAddress, examAddress }));
+  publishMark: (stdAddress, examAddress, mark) => {
+    dispatch(ListStudentsReducer.creators.addMarkRequest(stdAddress, examAddress, mark));
   },
   initialize: (examAddress) => {
     dispatch(ListStudentsReducer.creators.manageResultsRequest(examAddress));

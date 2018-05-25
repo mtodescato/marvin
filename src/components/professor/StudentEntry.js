@@ -88,8 +88,8 @@ class StudentEntry extends React.Component {
             studentName={this.props.name}
             studentSurname={this.props.surname}
             studSocialNumber={this.props.socialNumber}
-            studAddress={this.props.address}
-            examMark={this.state.mark}
+            stdAddress={this.props.address}
+            mark={this.state.mark}
             examAddress={this.props.examAddress}
             publishMark={this.props.publishMark}
           />
