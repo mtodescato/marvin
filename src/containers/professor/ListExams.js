@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ListExams } from '../../reducers';
+import { ListExams as ListExamsReducer } from '../../reducers';
 import ListExamComponent from '../../components/professor/ListExamComponent';
 
-class ListExamsContainer extends React.Component {
+class ListExams extends React.Component {
   componentWillMount() {
     this.props.initialize(2018);
   }
@@ -18,8 +18,13 @@ class ListExamsContainer extends React.Component {
   }
 }
 
-ListExamsContainer.propTypes = {
-  exams: PropTypes.arrayOf().isRequired,
+ListExams.propTypes = {
+  exams: PropTypes.arrayOf(PropTypes.shape({
+    ID: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    examAddress: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired,
 };
@@ -31,8 +36,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   initialize: (year) => {
-    dispatch(ListExams.creators.listExamsRequest(year));
+    dispatch(ListExamsReducer.creators.listExamsRequest(year));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListExamsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ListExams);
