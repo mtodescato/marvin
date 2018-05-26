@@ -40,7 +40,7 @@ const mapStateToProps = state => ({
     status: state['add-exam-professor'].status,
   },
   teachingsEntries: state['list-teachings-professor'].teachings.map(teaching => ({
-    value: teaching.address,
+    value: teaching.name,
     address: teaching.address,
     label: `${teaching.name}`,
   })),
