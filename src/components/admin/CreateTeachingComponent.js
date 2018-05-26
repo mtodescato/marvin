@@ -14,9 +14,9 @@ import {
   Select,
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
-// import TeachingConfirmation from './CreateTeachingConfirmation';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-import { stringFormValidation } from '../formValidator';
+import TeachingConfirmation from './CreateTeachingConfirmation';
+import { stringFormValidation, selectValidation } from '../formValidator';
 
 /*
 const options = {[{
@@ -44,8 +44,8 @@ class CreateTeachingComponent extends React.Component {
     this.handleValidation = this.handleValidation.bind(this);
 
     this.handleChangeName = this.handleChangeName.bind(this);
-    this.handleChangeCourse = this.handleChangeCourse.bind(this);
     this.handleChangeResponsible = this.handleChangeResponsible.bind(this);
+    this.handleChangeCourse = this.handleChangeCourse.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
 
@@ -57,8 +57,8 @@ class CreateTeachingComponent extends React.Component {
       responsibleRef: '',
       errors: {
         name: '',
-        course: '',
         responsible: '',
+        course: '',
         formIsValid: false,
       },
       showLayer: false,
@@ -67,12 +67,7 @@ class CreateTeachingComponent extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const teaching = {
-      name: this.state.name,
-      responsible: this.state.responsibleRef,
-      course: this.state.courseRef,
-    };
-    this.props.actions.addTeachingRequest(teaching);
+    this.setLayer();
   }
 
   setLayer() {
@@ -82,36 +77,53 @@ class CreateTeachingComponent extends React.Component {
   }
 
 
-  handleValidation() {
-    const errors = Object.assign({}, this.state.errors);
-    /*
-    if ((errors.name === 'isValid'
-          && errors.surname === 'isValid'
-          && errors.address === 'isValid')) {
-      errors.formIsValid = true;
-    } else errors.formIsValid = false;
-    */
-    errors.formIsValid = true;
+  handleValidation(errors) {
+    const newLocal = this.state.errors.formIsValid;
+    let formIsValid = newLocal;
 
-    this.setState({ errors });
-    return this.state.errors.formIsValid;
+    if ((errors.name === 'isValid' && errors.course === 'isValid' && errors.responsible === 'isValid')) {
+      formIsValid = true;
+      return formIsValid;
+    }
+    return false;
   }
 
   handleChangeName(e) {
     const errors = Object.assign({}, this.state.errors);
 
     errors.name = stringFormValidation(e.target.value);
+    errors.formIsValid = this.handleValidation(errors);
 
-    this.setState({ name: e.target.value });
-    this.setState({ errors });
-  }
-
-  handleChangeCourse(e) {
-    this.setState({ course: e.value.label, courseRef: e.value.value });
+    this.setState({
+      name: e.target.value,
+      errors,
+    });
   }
 
   handleChangeResponsible(e) {
-    this.setState({ responsible: e.value.label, responsibleRef: e.value.value });
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.responsible = selectValidation(e.value.label);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      responsible: e.value.label,
+      responsibleRef: e.value.value,
+      errors,
+    });
+  }
+
+  handleChangeCourse(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.course = selectValidation(e.value.label);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      course: e.value.label,
+      courseRef: e.value.value,
+      errors,
+    });
   }
 
   render() {
@@ -201,7 +213,24 @@ class CreateTeachingComponent extends React.Component {
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
-                <FormField label="Professor in charge:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Professor in charge:
+                    </Label>
+                    {this.state.errors.responsible !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.responsible}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.responsible === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <Select
                     id="responsible"
                     name="Responsible"
@@ -213,7 +242,24 @@ class CreateTeachingComponent extends React.Component {
                     onChange={this.handleChangeResponsible}
                   />
                 </FormField>
-                <FormField label="Course:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Course:
+                    </Label>
+                    {this.state.errors.course !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.course}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.course === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <Select
                     id="course"
                     name="Course"
@@ -230,16 +276,19 @@ class CreateTeachingComponent extends React.Component {
                 <Button
                   label="Submit"
                   primary
-                  onClick={this.onSubmit}
-                  // onClick={this.setLayer}
+                  onClick={this.state.errors.formIsValid ? this.onSubmit : null}
                 />
-                {/* {this.state.showLayer ?
+                {this.state.showLayer ?
                   <TeachingConfirmation
                     setLayer={this.setLayer}
                     teachingName={this.state.name}
-                    teachingResponsible={this.state.responsible}
+                    course={this.state.course}
+                    courseRef={this.state.courseRef}
+                    responsible={this.state.responsible}
+                    responsibleRef={this.state.responsibleRef}
+                    addTeachingRequest={this.props.actions.addTeachingRequest}
                   /> : null
-                  } */}
+                  }
               </Footer>
             </Form>
 
