@@ -7,7 +7,6 @@ import marvinLogo from '../../images/marvin_logo.png';
 
 const MarvinHeader = props => (
   <Header
-    fixed
     size="medium"
     splash={false}
     colorIndex="light-2"
