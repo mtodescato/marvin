@@ -15,9 +15,22 @@ import {
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-import { stringFormValidation, addressValidation } from '../formValidator';
+import { stringFormValidation, addressValidation, selectValidation } from '../formValidator';
 import CreateUserConfirmation from './CreateUserConfirmation';
 
+export const selectEntries = [{
+  role: 0,
+  label: 'Student',
+},
+{
+  role: 1,
+  label: 'Professor',
+},
+{
+  role: 2,
+  label: 'University (admin)',
+},
+];
 
 class CreateUserComponent extends React.Component {
   constructor(props) {
@@ -39,11 +52,12 @@ class CreateUserComponent extends React.Component {
       surname: '',
       address: '0x0',
       role: 0,
-      roleString: 'Student',
+      roleString: '',
       errors: {
         name: '',
         surname: '',
         address: '',
+        role: '',
         formIsValid: false,
       },
       showLayer: false,
@@ -68,7 +82,8 @@ class CreateUserComponent extends React.Component {
 
     if ((errors.name === 'isValid'
     && errors.surname === 'isValid'
-    && errors.address === 'isValid')) {
+    && errors.address === 'isValid'
+    && errors.role === 'isValid')) {
       formIsValid = true;
       return formIsValid;
     }
@@ -113,20 +128,16 @@ class CreateUserComponent extends React.Component {
   }
 
   handleChangeRole(e) {
-    switch (e.option) {
-      case 'Student':
-        this.setState({ role: '0' });
-        break;
-      case 'Professor':
-        this.setState({ role: '1' });
-        break;
-      case 'University (admin)':
-        this.setState({ role: '2' });
-        break;
-      default:
-        this.setState({ role: '0' });
-    }
-    this.setState({ roleString: e.option });
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.role = selectValidation(e.value.label);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      role: e.value.role,
+      roleString: e.value.label,
+      errors,
+    });
   }
 
   render() {
@@ -267,10 +278,30 @@ class CreateUserComponent extends React.Component {
                     onDOMChange={this.handleChangeAddress}
                   />
                 </FormField>
-                <FormField label="Role:">
+
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Role:
+                    </Label>
+                    {this.state.errors.role !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.role}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.role === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <Select
                     id="role"
-                    options={['Student', 'Professor', 'University (admin)']}
+                    name="Role"
+                    placeHolder="Student"
+                    options={selectEntries}
                     value={this.state.roleString}
                     onChange={this.handleChangeRole}
                   />
