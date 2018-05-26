@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Layer, Header, Heading, Paragraph, Footer, Button, List, ListItem } from 'grommet';
+import { Box, Layer, Header, Heading, Paragraph, Footer, Button, List, ListItem, Label } from 'grommet';
 
 class CreateTeachingConfirmation extends React.Component {
   constructor(props) {
@@ -10,20 +10,18 @@ class CreateTeachingConfirmation extends React.Component {
   }
 
   onSubmit() {
-    /*
     const teaching = {
-      course: this.props.teachingCourse,
-      responsible: this.props.teachingResponsible,
       name: this.props.teachingName,
-    }; */
-
-    // this.props.addTeachingRequest(teaching);
+      responsible: this.props.responsibleRef,
+      course: this.props.courseRef,
+    };
+    this.props.addTeachingRequest(teaching);
     this.props.setLayer();
   }
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -32,7 +30,7 @@ class CreateTeachingConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -52,7 +50,7 @@ class CreateTeachingConfirmation extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box pad={{ vertical: 'none', horizontal: 'none' }} colorIndex="light-2" separator="all">
             <List >
               <ListItem
                 justify="between"
@@ -60,40 +58,61 @@ class CreateTeachingConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Name:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.teachingName}
                 </Heading>
               </ListItem>
 
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                   Professor in charge:
                 </Heading>
-                <Heading tag="h4" margin="none">
-                  {this.props.teachingResponsible}
+                <Heading tag="h5" margin="none">
+                  {this.props.responsible}
                 </Heading>
               </ListItem>
 
               <ListItem
-                justify="between"
-                separator="bottom"
+                justify="end"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Label size="small">
+                  {this.props.responsibleRef}
+                </Label>
+              </ListItem>
+
+              <ListItem
+                justify="between"
+                separator="none"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                margin="none"
+              >
+                <Heading tag="h5" margin="none" strong>
                   Course:
                 </Heading>
-                <Heading tag="h4" margin="none">
-                  {this.props.teachingCourse}
+                <Heading tag="h5" margin="none">
+                  {this.props.course}
                 </Heading>
+              </ListItem>
+
+              <ListItem
+                justify="end"
+                separator="none"
+                pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                margin="none"
+              >
+                <Label size="small">
+                  {this.props.courseRef}
+                </Label>
               </ListItem>
             </List>
           </Box>
@@ -126,9 +145,11 @@ class CreateTeachingConfirmation extends React.Component {
 CreateTeachingConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
   teachingName: PropTypes.string.isRequired,
-  teachingResponsible: PropTypes.string.isRequired,
-  teachingCourse: PropTypes.string.isRequired,
-  // addTeachingRequest: PropTypes.func.isRequired,
+  responsible: PropTypes.string.isRequired,
+  responsibleRef: PropTypes.string.isRequired,
+  course: PropTypes.string.isRequired,
+  courseRef: PropTypes.string.isRequired,
+  addTeachingRequest: PropTypes.func.isRequired,
 };
 
 export default CreateTeachingConfirmation;
