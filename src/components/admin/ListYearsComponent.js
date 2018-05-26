@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading } from 'grommet';
+import { Box, Table, TableHeader, Heading } from 'grommet';
 import YearEntry from './YearEntry';
 
 const ListYearsComponent = ({ size, years }) => (
@@ -27,13 +27,7 @@ const ListYearsComponent = ({ size, years }) => (
         responsive
         selectable
       >
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Academic Year</th>
-            <th>Address</th>
-          </tr>
-        </thead>
+        <TableHeader labels={['#', 'Academic Year', 'Address']} />
         <tbody>
           {
             years.map((element, index) => (

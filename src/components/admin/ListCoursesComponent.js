@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Table, Heading, Search, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Label } from 'grommet';
 import PropTypes from 'prop-types';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseEntry from './CourseEntry';
@@ -71,15 +71,7 @@ const ListCoursesComponent = props => (
       responsive
       selectable
     >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>President</th>
-          <th>Type</th>
-          <th>Address</th>
-        </tr>
-      </thead>
+      <TableHeader labels={['#', 'Name', 'President', 'Type', 'Address']} />
       <tbody>
         {
           props.coursesEntries.map((element, index) => (

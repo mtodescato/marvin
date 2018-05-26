@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading } from 'grommet';
+import { Box, Table, TableHeader, Heading } from 'grommet';
 import StudentEntry from './StudentEntry';
 
 const ListStudentsComponent = ({
@@ -28,18 +28,8 @@ const ListStudentsComponent = ({
 
     <Table
       responsive
-      selectable
     >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Social Number</th>
-          <th>Name</th>
-          <th>Surname</th>
-          <th>Mark</th>
-          <th>Action</th>
-        </tr>
-      </thead>
+      <TableHeader labels={['#', 'Social Number', 'Name', 'Surname', 'Publish mark']} />
       <tbody>
         {
           examsResults.map((element, index) => (

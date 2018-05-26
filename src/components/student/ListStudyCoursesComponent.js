@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Search, Label, Animate } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseEntry from './CourseEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
@@ -66,15 +66,7 @@ const ListStudyCoursesComponent = ({
           responsive
           selectable
         >
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>President</th>
-              <th>Type</th>
-              <th>Subscribe</th>
-            </tr>
-          </thead>
+          <TableHeader labels={['#', 'Name', 'President', 'Type', 'Subscribe']} />
           <tbody>
             {
               coursesEntries.map((element, index) => (
