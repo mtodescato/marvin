@@ -84,6 +84,7 @@ const ListCoursesComponent = props => (
         {
           props.coursesEntries.map((element, index) => (
             <CourseEntry
+              key={[element.ID]}
               index={index}
               {...element}
             />
