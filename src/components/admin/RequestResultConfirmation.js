@@ -17,7 +17,7 @@ class RequestResultConfirmation extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -26,7 +26,7 @@ class RequestResultConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}

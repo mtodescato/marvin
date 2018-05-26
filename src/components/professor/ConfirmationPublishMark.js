@@ -17,7 +17,7 @@ class ConfirmationPublishMark extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -26,7 +26,7 @@ class ConfirmationPublishMark extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -46,7 +46,7 @@ class ConfirmationPublishMark extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box pad={{ vertical: 'none', horizontal: 'none' }} colorIndex="light-2" separator="all">
             <List >
               <ListItem
                 justify="between"
@@ -54,10 +54,10 @@ class ConfirmationPublishMark extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Studente:
+                <Heading tag="h5" margin="none" strong>
+                  Studente:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.studentName} {this.props.studentSurname}
                 </Heading>
               </ListItem>
@@ -67,23 +67,23 @@ class ConfirmationPublishMark extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Matricola:
+                <Heading tag="h5" margin="none" strong>
+                  Matricola:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.studSocialNumber}
                 </Heading>
               </ListItem>
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Vote:
+                <Heading tag="h5" margin="none" strong>
+                  Vote:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.mark}
                 </Heading>
               </ListItem>
