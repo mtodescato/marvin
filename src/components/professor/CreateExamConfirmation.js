@@ -21,7 +21,7 @@ class CreateExamConfirmation extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -30,7 +30,7 @@ class CreateExamConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -50,7 +50,7 @@ class CreateExamConfirmation extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box pad={{ vertical: 'none', horizontal: 'none' }} colorIndex="light-2" separator="all">
             <List >
               <ListItem
                 justify="between"
@@ -58,23 +58,23 @@ class CreateExamConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                   Date:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.examDate}
                 </Heading>
               </ListItem>
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Teaching:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.teachingName}
                 </Heading>
               </ListItem>
