@@ -4,24 +4,19 @@ import { connect } from 'react-redux';
 import { AddUser } from '../../reducers';
 import CreateUserComponent from '../../components/admin/CreateUserComponent';
 
-const CreateUser = ({ state, actions }) => (
-  <CreateUserComponent state={state} actions={actions} />
+const CreateUser = ({ status, actions }) => (
+  <CreateUserComponent status={status} actions={actions} />
 );
 
 CreateUser.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  state: {
-    status: state['add-user'].status,
-  },
+  status: state['add-user'].status,
 });
 
 const mapDispatchToProps = dispatch => ({
