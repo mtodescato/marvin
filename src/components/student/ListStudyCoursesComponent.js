@@ -6,12 +6,12 @@ import CourseEntry from './CourseEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
 const ListStudyCoursesComponent = ({
-  status,
+  initialize,
+  statusCoursesInfo,
   activeCourseName,
   size,
   coursesEntries,
   subscribeToCourse,
-  initialize,
 }) => (
   <Box
     className="PanelBox"
@@ -57,7 +57,8 @@ const ListStudyCoursesComponent = ({
         onDOMChange={e => initialize(e.target.value)}
       />
     </Box>
-    {status === 'RESOLVED' ?
+
+    {statusCoursesInfo === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
         keep
@@ -83,7 +84,7 @@ const ListStudyCoursesComponent = ({
         </Table>
       </Animate>
     : <MetamaskStatus
-      status={status}
+      status={statusCoursesInfo}
       tryAgainRequest={initialize}
       initializeValue="2018"
     />
@@ -92,7 +93,8 @@ const ListStudyCoursesComponent = ({
 );
 
 ListStudyCoursesComponent.propTypes = {
-  status: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
+  statusCoursesInfo: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,
@@ -102,7 +104,6 @@ ListStudyCoursesComponent.propTypes = {
   size: PropTypes.number.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
   activeCourseName: PropTypes.string.isRequired,
-  initialize: PropTypes.func.isRequired,
 };
 
 export default ListStudyCoursesComponent;

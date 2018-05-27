@@ -13,22 +13,27 @@ class ExamsTeaching extends React.Component {
       <ExamsTeachingComponent
         size={this.props.size}
         exams={this.props.exams}
+        initializeValue={this.props.teachingAddress}
+        initialize={this.props.initialize}
+        statusListExamsRequest={this.props.statusListExamsRequest}
       />
     );
   }
 }
 
 ExamsTeaching.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusListExamsRequest: PropTypes.string.isRequired,
   teachingAddress: PropTypes.string.isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
     address: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
+  statusListExamsRequest: state['list-exams'].status,
   exams: state['list-exams'].exams,
   size: state['list-exams'].size,
 });

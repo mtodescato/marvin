@@ -15,15 +15,18 @@ class ListAvaiableExams extends React.Component {
         size={this.props.size}
         examsEntries={this.props.exams}
         subscribeToExam={this.props.subscribeToExam}
+        initialize={this.props.initialize}
+        statusExamsInfo={this.props.statusExamsInfo}
       />
     );
   }
 }
 
 ListAvaiableExams.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusExamsInfo: PropTypes.string.isRequired,
   exams: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired,
   subscribeToExam: PropTypes.func.isRequired,
 };
 
@@ -35,6 +38,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  statusExamsInfo: state['list-booking-exams-student'].status,
+  // statusBookExam: state['list-booking-exams-student'].status,
   exams: state['list-booking-exams-student'].exams,
   size: state['list-booking-exams-student'].size,
 });

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import PendingResultEntry from './PendingResultEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
 const ListPendingResultsComponent = ({
+  initialize,
+  statusResultsInfo,
   size,
   examsResults,
   accept,
@@ -45,29 +48,42 @@ const ListPendingResultsComponent = ({
       </Heading>
     </Box>
 
-    <Table
-      responsive
-      selectable
-    >
-      <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
-      <tbody>
-        {
-          examsResults.map((element, index) => (
-            <PendingResultEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-              accept={accept}
-              reject={reject}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+    {statusResultsInfo === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        <Table
+          responsive
+          selectable
+        >
+          <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
+          <tbody>
+            {
+              examsResults.map((element, index) => (
+                <PendingResultEntry
+                  key={[element.address]}
+                  index={index}
+                  {...element}
+                  accept={accept}
+                  reject={reject}
+                />
+              ))
+            }
+          </tbody>
+        </Table>
+      </Animate>
+    : <MetamaskStatus
+      status={statusResultsInfo}
+      tryAgainRequest={initialize}
+    />
+    }
   </Box>
 );
 
 ListPendingResultsComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusResultsInfo: PropTypes.string.isRequired,
   examsResults: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,

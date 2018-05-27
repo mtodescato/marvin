@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Heading, Label } from 'grommet';
+import { Box, Heading, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import ListExamEntry from './ListExamEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
-const ListExamComponent = ({ size, exams }) => (
+const ListExamComponent = ({
+  initialize,
+  statusListExamsRequest,
+  size,
+  exams,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -46,7 +52,12 @@ const ListExamComponent = ({ size, exams }) => (
       </Heading>
     </Box>
 
-    {
+    {statusListExamsRequest === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        {
           exams.map((element, index) => (
             <ListExamEntry
               key={[element.examAddress]}
@@ -55,10 +66,19 @@ const ListExamComponent = ({ size, exams }) => (
             />
           ))
         }
+      </Animate>
+    : <MetamaskStatus
+      status={statusListExamsRequest}
+      tryAgainRequest={initialize}
+      initializeValue="2018"
+    />
+    }
   </Box>
 );
 
 ListExamComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusListExamsRequest: PropTypes.string.isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
     ID: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,

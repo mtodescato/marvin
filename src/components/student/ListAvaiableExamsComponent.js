@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import ExamApplicationEntry from './ExamApplicationEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
-const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => (
+const ListAvaiableExamsComponent = ({
+  initialize,
+  statusExamsInfo,
+  size,
+  examsEntries,
+  subscribeToExam,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -40,28 +47,41 @@ const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => 
       </Heading>
     </Box>
 
-    <Table
-      responsive
-      selectable
-    >
-      <TableHeader labels={['#', 'Name', 'Date', 'Subscribe']} />
-      <tbody>
-        {
-          examsEntries.map((element, index) => (
-            <ExamApplicationEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-              subscribeToExam={subscribeToExam}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+    {statusExamsInfo === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        <Table
+          responsive
+          selectable
+        >
+          <TableHeader labels={['#', 'Name', 'Date', 'Subscribe']} />
+          <tbody>
+            {
+              examsEntries.map((element, index) => (
+                <ExamApplicationEntry
+                  key={[element.address]}
+                  index={index}
+                  {...element}
+                  subscribeToExam={subscribeToExam}
+                />
+              ))
+            }
+          </tbody>
+        </Table>
+      </Animate>
+    : <MetamaskStatus
+      status={statusExamsInfo}
+      tryAgainRequest={initialize}
+    />
+    }
   </Box>
 );
 
 ListAvaiableExamsComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusExamsInfo: PropTypes.string.isRequired,
   examsEntries: PropTypes.arrayOf().isRequired,
   size: PropTypes.number.isRequired,
   subscribeToExam: PropTypes.func.isRequired,

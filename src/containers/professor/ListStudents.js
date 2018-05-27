@@ -16,12 +16,15 @@ class ListStudents extends React.Component {
         examsResults={this.props.exams}
         examAddress={this.props.address}
         publishMark={this.props.publishMark}
+        initialize={this.props.initialize}
+        statusListStudentRequest={this.props.statusListStudentRequest}
       />
     );
   }
 }
 
 ListStudents.propTypes = {
+  statusListStudentRequest: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -44,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  statusListStudentRequest: state['manage-results'].status,
   exams: state['manage-results'].students,
   size: state['manage-results'].size,
 });

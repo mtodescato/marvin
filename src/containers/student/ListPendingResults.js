@@ -16,12 +16,16 @@ class ListAvaiableExams extends React.Component {
         examsResults={this.props.examsResults}
         accept={this.props.accept}
         reject={this.props.reject}
+        initialize={this.props.initialize}
+        statusResultsInfo={this.props.statusResultsInfo}
       />
     );
   }
 }
 
 ListAvaiableExams.propTypes = {
+  statusResultsInfo: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
   examsResults: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     date: PropTypes.string.isRequired,
@@ -29,7 +33,6 @@ ListAvaiableExams.propTypes = {
     examAddress: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
 };
@@ -45,6 +48,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  statusResultsInfo: state['list-exams-results-student'].status,
   examsResults: state['list-exams-results-student'].exams,
   size: state['list-exams-results-student'].size,
 });

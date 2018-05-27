@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Search, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import UserEntry from './UserEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
-const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
+const ListUsersComponent = ({
+  initialize,
+  statusListUsersRequest,
+  size,
+  userEntries,
+  deleteAction,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -50,6 +57,7 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
+      {statusListUsersRequest}
       <Heading tag="h4" >
         Users found: {size}
       </Heading>
@@ -64,28 +72,42 @@ const ListUsersComponent = ({ size, userEntries, deleteAction }) => (
       />
     </Box>
 
-    <Table
-      responsive
-      selectable
-    >
-      <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
-      <tbody>
-        {
-          userEntries.map((element, index) => (
-            <UserEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-              deleteAction={deleteAction}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+
+    {statusListUsersRequest === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        <Table
+          responsive
+          selectable
+        >
+          <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
+          <tbody>
+            {
+            userEntries.map((element, index) => (
+              <UserEntry
+                key={[element.address]}
+                index={index}
+                {...element}
+                deleteAction={deleteAction}
+              />
+            ))
+          }
+          </tbody>
+        </Table>
+      </Animate>
+    : <MetamaskStatus
+      status={statusListUsersRequest}
+      tryAgainRequest={initialize}
+      // initializeValue="2018"
+    />
+    }
   </Box>
 );
 
 ListUsersComponent.propTypes = {
+  statusListUsersRequest: PropTypes.string.isRequired,
   userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
@@ -93,6 +115,7 @@ ListUsersComponent.propTypes = {
     address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
+  initialize: PropTypes.func.isRequired,
   deleteAction: PropTypes.func.isRequired,
 };
 
