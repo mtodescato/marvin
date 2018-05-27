@@ -23,7 +23,7 @@ class CreateUserConfirmation extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -32,7 +32,7 @@ class CreateUserConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -52,7 +52,11 @@ class CreateUserConfirmation extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box
+            pad={{ vertical: 'none', horizontal: 'none' }}
+            colorIndex="light-2"
+            separator="all"
+          >
             <List >
               <ListItem
                 justify="between"
@@ -60,49 +64,52 @@ class CreateUserConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Name:
+                <Heading tag="h5" margin="none" strong>
+                  Name:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.userName}
                 </Heading>
               </ListItem>
+
               <ListItem
                 justify="between"
                 separator="bottom"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Surname:
+                <Heading tag="h5" margin="none" strong>
+                  Surname:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.userSurname}
                 </Heading>
               </ListItem>
+
               <ListItem
                 justify="between"
                 separator="bottom"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Address:
+                <Heading tag="h5" margin="none" strong>
+                  Address:
                 </Heading>
                 <Label size="small">
                   {this.props.userAddress}
                 </Label>
               </ListItem>
+
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                Role:
+                <Heading tag="h5" margin="none" strong>
+                  Role:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.userRole === 2 ? 'Admin' : null}
                   {this.props.userRole === 1 ? 'Professor' : null}
                   {this.props.userRole === 0 ? 'Student' : null}

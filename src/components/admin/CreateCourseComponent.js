@@ -15,8 +15,13 @@ import {
 } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-import { stringFormValidation } from '../formValidator';
+import { stringFormValidation, selectValidation } from '../formValidator';
 import CreateCourseConfirmation from './CreateCourseConfirmation';
+
+export const typeEntries = [
+  { type: 0, label: 'Bachelor\'s' },
+  { type: 1, label: 'Master\'s' },
+];
 
 class CreateCourseComponent extends React.Component {
   constructor(props) {
@@ -37,12 +42,13 @@ class CreateCourseComponent extends React.Component {
       name: '',
       president: '',
       type: 0,
-      typeString: 'Tree-year',
+      typeString: '',
       academicYear: 2018,
       errors: {
         name: '',
         president: '',
         type: '',
+        year: '',
         formIsValid: false,
       },
       showLayer: false,
@@ -51,13 +57,7 @@ class CreateCourseComponent extends React.Component {
 
   onSubmit(e) {
     e.preventDefault();
-    const course = {
-      name: this.state.name,
-      president: this.state.president,
-      type: this.state.type,
-      academicYear: this.state.academicYear,
-    };
-    this.props.actions.addCourseRequest(course);
+    this.setLayer();
   }
 
   setLayer() {
@@ -66,17 +66,19 @@ class CreateCourseComponent extends React.Component {
     });
   }
 
-  handleValidation() {
-    const errors = Object.assign({}, this.state.errors);
+  handleValidation(errors) {
+    const newLocal = this.state.errors.formIsValid;
+    let formIsValid = newLocal;
 
     if ((errors.name === 'isValid'
-    /* && errors.president === 'isValid'
-  && errors.type === 'isValid' */)) {
-      errors.formIsValid = true;
-    } else errors.formIsValid = false;
-
-    this.setState({ errors });
-    return this.state.errors.formIsValid;
+    // && errors.president === 'isValid'
+    && errors.type === 'isValid'
+    // && errors.year === 'isValid'
+    )) {
+      formIsValid = true;
+      return formIsValid;
+    }
+    return false;
   }
 
 
@@ -84,24 +86,32 @@ class CreateCourseComponent extends React.Component {
     const errors = Object.assign({}, this.state.errors);
 
     errors.name = stringFormValidation(e.target.value);
+    errors.formIsValid = this.handleValidation(errors);
 
-    this.setState({ name: e.target.value });
-    this.setState({ errors });
+    this.setState({
+      name: e.target.value,
+      errors,
+    });
   }
 
   handleChangeType(e) {
-    if (e.target.value === 'Master') {
-      this.setState({ type: 1 });
-    } else {
-      this.setState({ type: 0 });
-    }
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.type = selectValidation(e.value.label);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      type: e.value.type,
+      typeString: e.value.label,
+      errors,
+    });
   }
 
-  handleChangePresident(e) {
+  handleChangePresident(e) { // TODO
     this.setState({ president: e.target.value });
   }
 
-  handleChangeAcademicYear(e) {
+  handleChangeAcademicYear(e) { // TODO
     this.setState({ academicYear: Number(e.target.value) });
   }
 
@@ -218,15 +228,50 @@ class CreateCourseComponent extends React.Component {
                     onDOMChange={this.handleChangePresident}
                   />
                 </FormField>
-                <FormField label="Degree Type:">
+                <FormField>
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Degree Type:
+                    </Label>
+                    {this.state.errors.type !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.type}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.type === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <Select
                     id="type"
-                    options={['Tree-year', 'Master']}
+                    placeHolder="Bachelor's"
+                    options={typeEntries}
                     value={this.state.typeString}
                     onChange={this.handleChangeType}
                   />
                 </FormField>
-                <FormField label="Academic Year:">
+                <FormField >
+                  <Box
+                    direction="row"
+                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                    margin="none"
+                  >
+                    <Label size="small">
+                      Academic Year:
+                    </Label>
+                    {this.state.errors.year !== 'isValid' ?
+                      <Label size="small">
+                        <span style={{ color: 'red' }}>{this.state.errors.year}</span>
+                      </Label> : null
+                    }
+                    {this.state.errors.year === 'isValid' ?
+                      <Checkmark colorIndex="ok" /> : null
+                    }
+                  </Box>
                   <TextInput
                     id="academicYear"
                     name="Name"

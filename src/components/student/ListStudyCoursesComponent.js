@@ -1,10 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Search, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseEntry from './CourseEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
 const ListStudyCoursesComponent = ({
+  status,
   activeCourseName,
   size,
   coursesEntries,
@@ -55,43 +57,47 @@ const ListStudyCoursesComponent = ({
         onDOMChange={e => initialize(e.target.value)}
       />
     </Box>
-
-    <Table
-      responsive
-      selectable
-    >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>President</th>
-          <th>Type</th>
-          <th>Subscribe</th>
-        </tr>
-      </thead>
-      <tbody>
-        {
-          coursesEntries.map((element, index) => (
-            <CourseEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-              activeCourseName={activeCourseName}
-              subscribeToCourse={subscribeToCourse}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+    {status === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        <Table
+          responsive
+          selectable
+        >
+          <TableHeader labels={['#', 'Name', 'President', 'Type', 'Subscribe']} />
+          <tbody>
+            {
+              coursesEntries.map((element, index) => (
+                <CourseEntry
+                  key={[element.ID]}
+                  index={index}
+                  {...element}
+                  activeCourseName={activeCourseName}
+                  subscribeToCourse={subscribeToCourse}
+                />
+              ))
+            }
+          </tbody>
+        </Table>
+      </Animate>
+    : <MetamaskStatus
+      status={status}
+      tryAgainRequest={initialize}
+      initializeValue="2018"
+    />
+    }
   </Box>
 );
 
 ListStudyCoursesComponent.propTypes = {
+  status: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
-    surname: PropTypes.string.isRequired,
-    role: PropTypes.number.isRequired,
-    address: PropTypes.string.isRequired,
+    president: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired,
+    ID: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,

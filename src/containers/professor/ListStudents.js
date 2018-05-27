@@ -23,7 +23,12 @@ class ListStudents extends React.Component {
 
 ListStudents.propTypes = {
   address: PropTypes.string.isRequired,
-  exams: PropTypes.arrayOf().isRequired,
+  exams: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    socialNumber: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired,
   publishMark: PropTypes.func.isRequired,

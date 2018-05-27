@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import ExamApplicationEntry from './ExamApplicationEntry';
 
@@ -44,14 +44,7 @@ const ListAvaiableExamsComponent = ({ size, examsEntries, subscribeToExam }) => 
       responsive
       selectable
     >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Subscribe</th>
-        </tr>
-      </thead>
+      <TableHeader labels={['#', 'Name', 'Date', 'Subscribe']} />
       <tbody>
         {
           examsEntries.map((element, index) => (

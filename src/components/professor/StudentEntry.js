@@ -57,7 +57,7 @@ class StudentEntry extends React.Component {
             <FormFields>
               <Box
                 direction="row"
-                pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                pad={{ vertical: 'none', horizontal: 'small', between: 'small' }}
                 size="medium"
                 margin="none"
               >
@@ -74,13 +74,11 @@ class StudentEntry extends React.Component {
                     }
                 {this.state.errors.mark === 'isValid' ?
                   <Checkmark colorIndex="ok" /> : null
-                    }
+                }
+                <Button primary onClick={this.state.errors.formIsValid ? () => this.setLayer() : null} label="Publish" />
               </Box>
             </FormFields>
           </Form>
-        </td>
-        <td>
-          <Button primary onClick={this.state.errors.formIsValid ? () => this.setLayer() : null} label="Publish" />
         </td>
         {this.state.showLayer ?
           <ConfirmationPublishMark

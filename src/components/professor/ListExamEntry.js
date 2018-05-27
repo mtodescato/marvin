@@ -7,7 +7,7 @@ const ListExamEntry = props => (
   <Accordion>
     <AccordionPanel
       pad="none"
-      heading={`${props.index + 1}. ${props.ID} - ${props.name} - ${props.date}`}
+      heading={`${props.index + 1}. ${props.name} - ${props.date} - ${props.ID}`}
     >
       <ListStudents address={props.examAddress} />
     </AccordionPanel>

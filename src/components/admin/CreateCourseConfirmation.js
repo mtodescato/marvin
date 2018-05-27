@@ -14,7 +14,7 @@ class CreateCourseConfirmation extends React.Component {
       name: this.props.courseName,
       president: this.props.coursePresident,
       type: this.props.courseType,
-      year: this.props.courseYear,
+      academicYear: this.props.courseYear,
     };
 
     this.props.addCourseRequest(course);
@@ -23,7 +23,7 @@ class CreateCourseConfirmation extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -32,7 +32,7 @@ class CreateCourseConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -52,7 +52,7 @@ class CreateCourseConfirmation extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box pad={{ vertical: 'none', horizontal: 'none' }} colorIndex="light-2" separator="all">
             <List >
               <ListItem
                 justify="between"
@@ -60,10 +60,10 @@ class CreateCourseConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
-                  Year:
+                <Heading tag="h5" margin="none" strong>
+                  Academic Year:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" >
                   {this.props.courseYear}
                 </Heading>
               </ListItem>
@@ -73,10 +73,10 @@ class CreateCourseConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Name:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" >
                   {this.props.courseName}
                 </Heading>
               </ListItem>
@@ -86,24 +86,26 @@ class CreateCourseConfirmation extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 President:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" >
                   {this.props.coursePresident}
                 </Heading>
               </ListItem>
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Type:
                 </Heading>
-                <Heading tag="h4" margin="none">
-                  {this.props.courseType}
+                <Heading tag="h5" margin="none" >
+
+                  {this.props.courseType === 0 ? 'Bachelor\'s' : null}
+                  {this.props.courseType === 1 ? 'Master\'s' : null}
                 </Heading>
               </ListItem>
             </List>

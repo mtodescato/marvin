@@ -17,7 +17,7 @@ class CreateUserConfirmation extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -26,7 +26,7 @@ class CreateUserConfirmation extends React.Component {
           pad={{ vertical: 'small', horizontal: 'small' }}
         >
           <Header
-            colorIndex="light-2"
+            colorIndex="brand"
             justify="center"
             full="horizontal"
             pad={{ vertical: 'none', horizontal: 'none', between: 'medium' }}
@@ -42,8 +42,8 @@ class CreateUserConfirmation extends React.Component {
             pad={{ vertical: 'small', horizontal: 'small' }}
           >
             <Paragraph margin="none" align="center">
-                    Are you sure you want to send the transaction to create
-              {this.props.year} academic year?
+                    Are you sure you want to send the transaction to create {this.props.year}
+                    /{parseInt(this.props.year, 10) + 1} Academic Year?
             </Paragraph>
           </Box>
 

@@ -23,7 +23,7 @@ class ConfirmationResult extends React.Component {
   render() {
     return (
       <Layer
-        closer
+        overlayClose
         onClose={this.props.setLayer}
         align="center"
         flush
@@ -52,7 +52,7 @@ class ConfirmationResult extends React.Component {
             </Paragraph>
           </Box>
 
-          <Box pad={{ vertical: 'none', horizontal: 'none' }}>
+          <Box pad={{ vertical: 'none', horizontal: 'none' }} colorIndex="light-2" separator="all">
             <List >
               <ListItem
                 justify="between"
@@ -60,10 +60,10 @@ class ConfirmationResult extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Date:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.examDate}
                 </Heading>
               </ListItem>
@@ -73,23 +73,23 @@ class ConfirmationResult extends React.Component {
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Course name:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.examName}
                 </Heading>
               </ListItem>
               <ListItem
                 justify="between"
-                separator="bottom"
+                separator="none"
                 pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                 margin="none"
               >
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none" strong>
                 Vote:
                 </Heading>
-                <Heading tag="h4" margin="none">
+                <Heading tag="h5" margin="none">
                   {this.props.examMark}
                 </Heading>
               </ListItem>

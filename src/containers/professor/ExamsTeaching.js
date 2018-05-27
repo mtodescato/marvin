@@ -20,7 +20,10 @@ class ExamsTeaching extends React.Component {
 
 ExamsTeaching.propTypes = {
   teachingAddress: PropTypes.string.isRequired,
-  exams: PropTypes.arrayOf().isRequired,
+  exams: PropTypes.arrayOf(PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   initialize: PropTypes.func.isRequired,
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { ListTeachings } from '../../reducers';
+import { ListTeachings as ListTeachingsReducer } from '../../reducers';
 import ListTeachingsComponent from '../../components/admin/ListTeachingsComponent';
 
-class ListTeachingsContainer extends React.Component {
+class ListTeachings extends React.Component {
   componentWillMount() {
     this.props.initialize(2018);
   }
@@ -19,7 +19,7 @@ class ListTeachingsContainer extends React.Component {
   }
 }
 
-ListTeachingsContainer.propTypes = {
+ListTeachings.propTypes = {
   teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
@@ -36,8 +36,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   initialize: (year) => {
-    dispatch(ListTeachings.creators.listTeachingsRequest(year));
+    dispatch(ListTeachingsReducer.creators.listTeachingsRequest(year));
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ListTeachingsContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ListTeachings);

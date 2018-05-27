@@ -34,8 +34,18 @@ const Booklet = ({
 
 Booklet.propTypes = {
   status: PropTypes.string.isRequired,
-  user: PropTypes.arrayOf().isRequired,
-  exams: PropTypes.arrayOf().isRequired,
+  user: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    surname: PropTypes.string.isRequired,
+    matricola: PropTypes.string.isRequired,
+  }).isRequired,
+  exams: PropTypes.arrayOf(PropTypes.shape({
+    nome: PropTypes.string.isRequired,
+    responsabile: PropTypes.string.isRequired,
+    stato: PropTypes.string.isRequired,
+    voto: PropTypes.number.isRequired,
+    data: PropTypes.string.isRequired,
+  })).isRequired,
   bookletInfoRequest: PropTypes.func.isRequired,
 };
 

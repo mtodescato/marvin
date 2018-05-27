@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, Heading, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Label } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import PendingResultEntry from './PendingResultEntry';
 
@@ -49,15 +49,7 @@ const ListPendingResultsComponent = ({
       responsive
       selectable
     >
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Result</th>
-          <th>Action</th>
-        </tr>
-      </thead>
+      <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
       <tbody>
         {
           examsResults.map((element, index) => (
@@ -76,7 +68,12 @@ const ListPendingResultsComponent = ({
 );
 
 ListPendingResultsComponent.propTypes = {
-  examsResults: PropTypes.arrayOf().isRequired,
+  examsResults: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    mark: PropTypes.string.isRequired,
+    examAddress: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,

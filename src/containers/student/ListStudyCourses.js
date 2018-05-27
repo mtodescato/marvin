@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -19,13 +18,20 @@ class ListStudyCourses extends React.Component {
         subscribeToCourse={this.props.subscribeRequest}
         activeCourseName={this.props.activeCourseName}
         initialize={this.props.initialize}
+        status={this.props.status}
       />
     );
   }
 }
 
 ListStudyCourses.propTypes = {
-  courses: PropTypes.arrayOf().isRequired,
+  status: PropTypes.string.isRequired,
+  courses: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    president: PropTypes.string.isRequired,
+    type: PropTypes.number.isRequired,
+    ID: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   activeCourseName: PropTypes.string.isRequired,
   initialize: PropTypes.func.isRequired,
@@ -41,6 +47,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  status: state['list-courses-student'].status,
   courses: state['list-courses-student'].courses,
   size: state['list-courses-student'].size,
   activeCourseName: state['list-courses-student'].activeCourseName,
