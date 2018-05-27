@@ -118,12 +118,12 @@ class CreateCourseComponent extends React.Component {
   render() {
     return (
       <div>
-        { this.props.state.status === 'RESOLVED' && (
+        { this.props.status === 'RESOLVED' && (
           <Toast status="ok">
             <strong>Course created correctly</strong>
           </Toast>
         )}
-        {this.props.state.status === 'ERRORED' && (
+        {this.props.status === 'ERRORED' && (
           <Toast status="critical">
             <strong>Course creation error: &quot;Transaction rejected&quot;</strong>
           </Toast>
@@ -175,7 +175,7 @@ class CreateCourseComponent extends React.Component {
             justify="start"
             separator="bottom"
             pad={{ horizontal: 'medium' }}
-          >
+          > {this.props.status}
             <Form>
               <FormFields>
                 <FormField>
@@ -296,7 +296,7 @@ class CreateCourseComponent extends React.Component {
                   courseType={this.state.type}
                   courseYear={this.state.academicYear}
                   addCourseRequest={this.props.actions.addCourseRequest}
-                  state={this.props.state}
+                  status={this.props.status}
                 /> : null
                   }
             </Footer>
@@ -310,9 +310,7 @@ CreateCourseComponent.propTypes = {
   actions: PropTypes.shape({
     addCourseRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    status: PropTypes.bool.isRequired,
-  }).isRequired,
+  status: PropTypes.bool.isRequired,
 };
 
 export default CreateCourseComponent;
