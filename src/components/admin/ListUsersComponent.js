@@ -71,8 +71,7 @@ const ListUsersComponent = ({
         placeHolder="Search: #"
       />
     </Box>
-
-
+    {statusListUsersRequest}
     {statusListUsersRequest === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}

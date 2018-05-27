@@ -1,10 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Search, Label } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import TeachingEntry from './TeachingEntry';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
-const ListTeachingsComponent = ({ size, teachings, initialize }) => (
+const ListTeachingsComponent = ({
+  initialize,
+  statusListTeachingsRequest,
+  size,
+  teachings,
+}) => (
   <Box
     className="PanelBox"
     direction="column"
@@ -63,35 +69,47 @@ const ListTeachingsComponent = ({ size, teachings, initialize }) => (
         onDOMChange={(e) => { initialize(e.target.value); }}
       />
     </Box>
-
-    <Table
-      responsive
-      selectable
-    >
-      <TableHeader labels={['#', 'Teaching', 'Course', 'Professor in charge']} />
-      <tbody>
-        {
-          teachings.map((element, index) => (
-            <TeachingEntry
-              key={[element.address]}
-              index={index}
-              {...element}
-            />
-          ))
-        }
-      </tbody>
-    </Table>
+    {statusListTeachingsRequest === 'RESOLVED' ?
+      <Animate
+        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+        keep
+      >
+        <Table
+          responsive
+          selectable
+        >
+          <TableHeader labels={['#', 'Teaching', 'Course', 'Professor in charge']} />
+          <tbody>
+            {
+              teachings.map((element, index) => (
+                <TeachingEntry
+                  key={[element.address]}
+                  index={index}
+                  {...element}
+                />
+              ))
+            }
+          </tbody>
+        </Table>
+      </Animate>
+    : <MetamaskStatus
+      status={statusListTeachingsRequest}
+      tryAgainRequest={initialize}
+      initializeValue="2018"
+    />
+    }
   </Box>
 );
 
 ListTeachingsComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
+  statusListTeachingsRequest: PropTypes.string.isRequired,
   teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
     responsible: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
-  initialize: PropTypes.func.isRequired,
 };
 
 export default ListTeachingsComponent;
