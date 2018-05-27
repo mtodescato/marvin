@@ -6,7 +6,6 @@ import {
   Form,
   FormField,
   Button,
-  Toast,
   Heading,
   FormFields,
   TextInput,
@@ -17,6 +16,7 @@ import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { stringFormValidation, addressValidation, selectValidation } from '../formValidator';
 import CreateUserConfirmation from './CreateUserConfirmation';
+import TransactionStatus from '../../components/shared/TransactionStatus';
 
 export const selectEntries = [{
   role: 0,
@@ -143,16 +143,6 @@ class CreateUserComponent extends React.Component {
   render() {
     return (
       <div>
-        {this.props.state.status === 'RESOLVED' && (
-          <Toast status="ok">
-            <strong>User Signed Up correctly</strong>
-          </Toast>
-        )}
-        {this.props.state.status === 'ERRORED' && (
-          <Toast status="critical">
-            <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
-          </Toast>
-        )}
         <Box
           className="PanelBox"
           direction="column"
@@ -192,7 +182,10 @@ class CreateUserComponent extends React.Component {
               must fill all the fields below with the user informations.
             </Heading>
           </Box>
-
+          <TransactionStatus />
+          {this.props.status === 'PENDING' || this.props.status === 'RESOLVED' || this.props.status === 'ERRORED' ?
+            <TransactionStatus /> : null
+          }
           <Box
             className="formBox"
             direction="column"
@@ -323,7 +316,7 @@ class CreateUserComponent extends React.Component {
                   userAddress={this.state.address}
                   userRole={this.state.role}
                   addUserRequest={this.props.actions.addUserRequest}
-                  state={this.props.state}
+                  status={this.props.status}
                 />
                       : null
                     }
@@ -339,9 +332,7 @@ CreateUserComponent.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    status: PropTypes.string.isRequired,
-  }).isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 export default CreateUserComponent;
