@@ -5,6 +5,7 @@ export default AsyncFlow({
   initialState: {
     users: [],
     size: 0,
+    statusAction: 'READY',
   },
   actions: ['LIST_USERS', 'DELETE'],
 }).extend({
@@ -21,6 +22,12 @@ export default AsyncFlow({
           ...state,
           size: state.size - 1,
           users: state.users.filter(item => item.address !== action.payload.address),
+          statusAction: 'RESOLVED',
+        };
+      case types.DELETE_FAILED:
+        return {
+          ...state,
+          statusAction: 'RESOLVED',
         };
       default:
         return state;
