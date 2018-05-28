@@ -12,11 +12,13 @@ export default AsyncFlow({
     switch (action.type) {
       case types.LIST_USERS_SUCCESS:
         return {
+          ...state,
           size: action.payload.size,
           users: action.payload.users,
         };
       case types.DELETE_SUCCESS:
         return {
+          ...state,
           size: state.size - 1,
           users: state.users.filter(item => item.address !== action.payload.address),
         };
