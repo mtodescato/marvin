@@ -20,7 +20,7 @@ class TransactionStatus extends React.Component {
       <Animate
         enter={{ animation: 'slide-down', duration: 1000, delay: 0 }}
         keep
-      > 
+      >
         <Box colorIndex="ok" direction="row" pad="none" margin="small">
           <Box direction="row" pad={{ vertical: 'small', horizontal: 'small' }} margin="none">
             <Checkmark colorIndex="light-1" />
