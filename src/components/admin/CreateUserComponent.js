@@ -46,6 +46,7 @@ class CreateUserComponent extends React.Component {
     this.handleChangeRole = this.handleChangeRole.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
+    this.setStatus = this.setStatus.bind(this);
 
     this.state = {
       name: '',
@@ -61,6 +62,7 @@ class CreateUserComponent extends React.Component {
         formIsValid: false,
       },
       showLayer: false,
+      showStatus: false,
     };
   }
 
@@ -73,6 +75,12 @@ class CreateUserComponent extends React.Component {
   setLayer() {
     this.setState({
       showLayer: !this.state.showLayer,
+    });
+  }
+
+  setStatus() {
+    this.setState({
+      showStatus: !this.state.showStatus,
     });
   }
 
@@ -182,9 +190,12 @@ class CreateUserComponent extends React.Component {
               must fill all the fields below with the user informations.
             </Heading>
           </Box>
-          <TransactionStatus />
-          {this.props.status === 'PENDING' || this.props.status === 'RESOLVED' || this.props.status === 'ERRORED' ?
-            <TransactionStatus /> : null
+          <TransactionStatus setStatus={this.state.setStatus} />
+          {(this.props.status === 'PENDING' || this.props.status === 'RESOLVED' ||
+           this.props.status === 'ERRORED') && this.state.showStatus ?
+             <TransactionStatus
+               setStatus={this.state.setStatus}
+             /> : null
           }
           <Box
             className="formBox"
@@ -311,6 +322,7 @@ class CreateUserComponent extends React.Component {
               {this.state.showLayer ?
                 <CreateUserConfirmation
                   setLayer={this.setLayer}
+                  setStatus={this.setStatus}
                   userName={this.state.name}
                   userSurname={this.state.surname}
                   userAddress={this.state.address}
