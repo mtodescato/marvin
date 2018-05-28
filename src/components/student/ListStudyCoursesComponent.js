@@ -96,7 +96,7 @@ const ListStudyCoursesComponent = ({
 ListStudyCoursesComponent.propTypes = {
   initialize: PropTypes.func.isRequired,
   statusCoursesInfo: PropTypes.string.isRequired,
-  statusSubscribeRequest:  PropTypes.string.isRequired,
+  statusSubscribeRequest: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,
