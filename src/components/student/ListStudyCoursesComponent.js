@@ -12,6 +12,7 @@ const ListStudyCoursesComponent = ({
   size,
   coursesEntries,
   subscribeToCourse,
+  statusSubscribeRequest,
 }) => (
   <Box
     className="PanelBox"
@@ -57,7 +58,7 @@ const ListStudyCoursesComponent = ({
         onDOMChange={e => initialize(e.target.value)}
       />
     </Box>
-
+    { statusSubscribeRequest}
     {statusCoursesInfo === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
@@ -95,6 +96,7 @@ const ListStudyCoursesComponent = ({
 ListStudyCoursesComponent.propTypes = {
   initialize: PropTypes.func.isRequired,
   statusCoursesInfo: PropTypes.string.isRequired,
+  statusSubscribeRequest: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,

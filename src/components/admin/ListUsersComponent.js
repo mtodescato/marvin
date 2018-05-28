@@ -8,6 +8,7 @@ import MetamaskStatus from '../../components/shared/MetamaskStatus';
 const ListUsersComponent = ({
   initialize,
   statusListUsersRequest,
+  statusDeleteRequest,
   size,
   userEntries,
   deleteAction,
@@ -57,6 +58,7 @@ const ListUsersComponent = ({
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
+      {statusDeleteRequest}
       {statusListUsersRequest}
       <Heading tag="h4" >
         Users found: {size}
@@ -107,6 +109,7 @@ const ListUsersComponent = ({
 
 ListUsersComponent.propTypes = {
   statusListUsersRequest: PropTypes.string.isRequired,
+  statusDeleteRequest: PropTypes.string.isRequired,
   userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,

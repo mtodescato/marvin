@@ -19,6 +19,7 @@ class ListStudyCourses extends React.Component {
         activeCourseName={this.props.activeCourseName}
         initialize={this.props.initialize}
         statusCoursesInfo={this.props.statusCoursesInfo}
+        statusSubscribeRequest={this.props.statusSubscribeRequest}
       />
     );
   }
@@ -27,6 +28,7 @@ class ListStudyCourses extends React.Component {
 ListStudyCourses.propTypes = {
   initialize: PropTypes.func.isRequired,
   statusCoursesInfo: PropTypes.string.isRequired,
+  statusSubscribeRequest: PropTypes.string.isRequired,
   courses: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,
@@ -51,6 +53,7 @@ const mapStateToProps = state => ({
   courses: state['list-courses-student'].courses,
   size: state['list-courses-student'].size,
   activeCourseName: state['list-courses-student'].activeCourseName,
+  statusSubscribeRequest: state['list-courses-student'].statusAction,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListStudyCourses);

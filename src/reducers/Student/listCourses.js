@@ -7,6 +7,7 @@ export default AsyncFlow({
     courses: [],
     size: 0,
     year: 2018,
+    statusAction: 'READY',
   },
   actions: ['LIST_COURSES', 'SUBSCRIBE'],
 }).extend({
@@ -23,6 +24,12 @@ export default AsyncFlow({
         return {
           ...state,
           activeCourseName: action.payload.activeCourseName,
+          statusAction: 'RESOLVED',
+        };
+      case types.SUBSCRIBE_FAILED:
+        return {
+          ...state,
+          statusAction: 'ERRORED',
         };
       default:
         return state;

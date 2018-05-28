@@ -13,6 +13,7 @@ export default AsyncFlow({
     switch (action.type) {
       case types.LIST_STUDY_COURSES_SUCCESS:
         return {
+          ...state,
           size: action.payload.size,
           courses: action.payload.courses,
         };
