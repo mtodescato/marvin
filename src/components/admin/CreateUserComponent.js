@@ -47,11 +47,12 @@ class CreateUserComponent extends React.Component {
 
     this.setLayer = this.setLayer.bind(this);
     this.setStatus = this.setStatus.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       name: '',
       surname: '',
-      address: '0x0',
+      address: '',
       role: 0,
       roleString: '',
       errors: {
@@ -64,6 +65,8 @@ class CreateUserComponent extends React.Component {
       showLayer: false,
       showStatus: false,
     };
+
+    this.defaultState = this.state;
   }
 
   onSubmit(e) {
@@ -82,6 +85,10 @@ class CreateUserComponent extends React.Component {
     this.setState({
       showStatus: !this.state.showStatus,
     });
+  }
+
+  resetState() {
+    this.setState(this.defaultState);
   }
 
   handleValidation(errors) {
@@ -190,13 +197,14 @@ class CreateUserComponent extends React.Component {
               must fill all the fields below with the user informations.
             </Heading>
           </Box>
-          <TransactionStatus setStatus={this.state.setStatus} />
+
           {(this.props.status === 'PENDING' || this.props.status === 'RESOLVED' ||
            this.props.status === 'ERRORED') && this.state.showStatus ?
              <TransactionStatus
                setStatus={this.state.setStatus}
              /> : null
           }
+          
           <Box
             className="formBox"
             direction="column"
@@ -228,6 +236,7 @@ class CreateUserComponent extends React.Component {
                     id="name"
                     name="Name"
                     placeHolder="Mario"
+                    value={this.state.name}
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
@@ -254,6 +263,7 @@ class CreateUserComponent extends React.Component {
                     id="surname"
                     name="Surname"
                     placeHolder="Rossi"
+                    value={this.state.surname}
                     onDOMChange={this.handleChangeSurname}
                   />
                 </FormField>
@@ -279,6 +289,7 @@ class CreateUserComponent extends React.Component {
                     id="address"
                     name="Address"
                     placeHolder="0x0"
+                    value={this.state.address}
                     onDOMChange={this.handleChangeAddress}
                   />
                 </FormField>
@@ -322,13 +333,14 @@ class CreateUserComponent extends React.Component {
               {this.state.showLayer ?
                 <CreateUserConfirmation
                   setLayer={this.setLayer}
-                  setStatus={this.setStatus}
                   userName={this.state.name}
                   userSurname={this.state.surname}
                   userAddress={this.state.address}
                   userRole={this.state.role}
                   addUserRequest={this.props.actions.addUserRequest}
                   status={this.props.status}
+                  setStatus={this.state.setStatus}
+                  resetState={this.resetState}
                 />
                       : null
                     }
