@@ -4,11 +4,12 @@ import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'gromme
 import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import UserEntry from './UserEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
+// import TransactionStatus from '../../components/shared/TransactionStatus';
 
 const ListUsersComponent = ({
   initialize,
   statusListUsersRequest,
-  statusDeleteRequest,
+  // statusDeleteRequest,
   size,
   userEntries,
   deleteAction,
@@ -52,14 +53,13 @@ const ListUsersComponent = ({
         or based on their role.
       </Heading>
     </Box>
-
+    { // <TransactionStatus status={statusDeleteRequest} />
+    }
     <Box
       className="searchBox"
       size="medium"
       pad={{ horizontal: 'medium', vertical: 'small' }}
     >
-      {statusDeleteRequest}
-      {statusListUsersRequest}
       <Heading tag="h4" >
         Users found: {size}
       </Heading>
@@ -73,7 +73,6 @@ const ListUsersComponent = ({
         placeHolder="Search: #"
       />
     </Box>
-    {statusListUsersRequest}
     {statusListUsersRequest === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
@@ -109,7 +108,7 @@ const ListUsersComponent = ({
 
 ListUsersComponent.propTypes = {
   statusListUsersRequest: PropTypes.string.isRequired,
-  statusDeleteRequest: PropTypes.string.isRequired,
+  // statusDeleteRequest: PropTypes.string.isRequired,
   userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
