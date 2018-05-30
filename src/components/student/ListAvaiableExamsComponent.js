@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Label, Animate } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import { Box, Table, TableHeader, Heading, Animate } from 'grommet';
 import ExamApplicationEntry from './ExamApplicationEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
@@ -18,7 +17,7 @@ const ListAvaiableExamsComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box className="titleBox" alignSelf="center" >
+    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
         Booking Exams
       </Heading>

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import { Box, Table, TableHeader, Heading, Search, Animate } from 'grommet';
 import UserEntry from './UserEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 // import TransactionStatus from '../../components/shared/TransactionStatus';
@@ -20,7 +19,7 @@ const ListUsersComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box className="titleBox" alignSelf="center" >
+    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
           List Users
       </Heading>

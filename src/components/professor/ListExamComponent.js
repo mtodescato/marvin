@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Heading, Label, Animate } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import { Box, Heading, Animate } from 'grommet';
 import ListExamEntry from './ListExamEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
@@ -17,7 +16,7 @@ const ListExamComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box className="titleBox" alignSelf="center" >
+    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
         Manage Exams
       </Heading>

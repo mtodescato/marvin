@@ -13,7 +13,6 @@ import {
   Select,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { dateTimeValidation, selectValidation } from '../formValidator';
 import CreateExamConfirmation from './CreateExamConfirmation';
@@ -110,7 +109,7 @@ class CreateExamComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box className="titleBox" alignSelf="center" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
             New exam creation
             </Heading>

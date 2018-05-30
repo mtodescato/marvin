@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Search, Label } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import { Box, Table, TableHeader, Heading, Search } from 'grommet';
 import DegreeProcedureEntry from './DegreeProcedureEntry';
 
 // const DegreeProceduresComponent = ({ size, degreeProcedureEntries, manageDPRequest }) => (
@@ -12,7 +11,7 @@ const DegreeProceduresComponent = ({ size, degreeProcedureEntries }) => (
     margin="small"
     separator="bottom"
   >
-    <Box className="titleBox" alignSelf="center" >
+    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
           Degree Procedures Request
       </Heading>

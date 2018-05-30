@@ -12,7 +12,6 @@ import {
   TextInput,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { yearValidation } from '../formValidator';
 import CreateYearConfirmation from './CreateYearConfirmation';
@@ -84,7 +83,7 @@ class CreateYearComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box className="titleBox" alignSelf="center" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               Academic year creation
             </Heading>

@@ -13,7 +13,6 @@ import {
   Footer,
   Select,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import TeachingConfirmation from './CreateTeachingConfirmation';
 import { stringFormValidation, selectValidation } from '../formValidator';
@@ -145,7 +144,7 @@ class CreateTeachingComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box className="titleBox" alignSelf="center" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New teaching creation
             </Heading>

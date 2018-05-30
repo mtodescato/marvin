@@ -1,7 +1,6 @@
 import React from 'react';
-import { Box, Table, TableHeader, Heading, Search, Label, Animate } from 'grommet';
+import { Box, Table, TableHeader, Heading, Search, Animate } from 'grommet';
 import PropTypes from 'prop-types';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import CourseEntry from './CourseEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
@@ -17,7 +16,7 @@ const ListCoursesComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box className="titleBox" alignSelf="center" >
+    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
         List Study Courses
       </Heading>

@@ -13,7 +13,6 @@ import {
   Select,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { stringFormValidation, selectValidation } from '../formValidator';
 import CreateCourseConfirmation from './CreateCourseConfirmation';
@@ -134,7 +133,7 @@ class CreateCourseComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box className="titleBox" alignSelf="center" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New course creation
             </Heading>
