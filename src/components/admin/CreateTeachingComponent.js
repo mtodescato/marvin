@@ -145,23 +145,6 @@ class CreateTeachingComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="bottom"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Manage Teachings
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
-                Create Teaching
-            </Label>
-          </Box>
-
           <Box className="titleBox" alignSelf="center" >
             <Heading tag="h2" strong>
               New teaching creation
@@ -182,9 +165,12 @@ class CreateTeachingComponent extends React.Component {
           <Box
             className="formBox"
             direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
+            separator="horizontal"
+            pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+            align="center"
+            alignSelf="center"
+            colorIndex="light-2"
+            full="horizontal"
           >
             <Form>
               <FormFields>

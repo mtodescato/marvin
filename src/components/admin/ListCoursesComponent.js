@@ -17,23 +17,6 @@ const ListCoursesComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box
-      className="PanelHeader"
-      direction="row"
-      justify="start"
-      align="center"
-      separator="bottom"
-    >
-      <FormNextLinkIcon />
-      <Label>
-        Manage Courses
-      </Label>
-      <FormNextLinkIcon />
-      <Label>
-        List Courses
-      </Label>
-    </Box>
-
     <Box className="titleBox" alignSelf="center" >
       <Heading tag="h2" strong>
         List Study Courses

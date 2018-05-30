@@ -19,19 +19,6 @@ const ListPendingResultsComponent = ({
     margin="small"
     separator="bottom"
   >
-    <Box
-      className="PanelHeader"
-      direction="row"
-      justify="start"
-      align="center"
-      separator="bottom"
-    >
-      <FormNextLinkIcon />
-      <Label>
-        Exams Results
-      </Label>
-    </Box>
-
     <Box className="titleBox" alignSelf="center" >
       <Heading tag="h2" strong>
         Exams Results

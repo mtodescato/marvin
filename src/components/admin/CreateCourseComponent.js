@@ -134,24 +134,6 @@ class CreateCourseComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="horizontal"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Manage Courses
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
-                Create Course
-            </Label>
-          </Box>
-
           <Box className="titleBox" alignSelf="center" >
             <Heading tag="h2" strong>
               New course creation
@@ -172,10 +154,13 @@ class CreateCourseComponent extends React.Component {
           <Box
             className="formBox"
             direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
-          > {this.props.status}
+            separator="horizontal"
+            pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+            align="center"
+            alignSelf="center"
+            colorIndex="light-2"
+            full="horizontal"
+          >
             <Form>
               <FormFields>
                 <FormField>

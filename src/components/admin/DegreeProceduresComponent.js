@@ -12,19 +12,6 @@ const DegreeProceduresComponent = ({ size, degreeProcedureEntries }) => (
     margin="small"
     separator="bottom"
   >
-    <Box
-      className="PanelHeader"
-      direction="row"
-      justify="start"
-      align="center"
-      separator="bottom"
-    >
-      <FormNextLinkIcon />
-      <Label>
-        Manage Degree Procedures
-      </Label>
-    </Box>
-
     <Box className="titleBox" alignSelf="center" >
       <Heading tag="h2" strong>
           Degree Procedures Request

@@ -11,19 +11,6 @@ const HomeComponent = props => (
     margin="small"
   >
     <Box
-      className="PanelHeader"
-      direction="row"
-      justify="start"
-      align="center"
-      separator="horizontal"
-    >
-      <FormNextLinkIcon />
-      <Label>
-        Home
-      </Label>
-    </Box>
-
-    <Box
       className="PanelInfo"
       direction="column"
       justify="center"

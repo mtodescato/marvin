@@ -84,23 +84,6 @@ class CreateYearComponent extends React.Component {
           margin="small"
           separator="bottom"
         >
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="bottom"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Manage Years
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
-                Create Year
-            </Label>
-          </Box>
-
           <Box className="titleBox" alignSelf="center" >
             <Heading tag="h2" strong>
               Academic year creation
@@ -121,9 +104,12 @@ class CreateYearComponent extends React.Component {
           <Box
             className="formBox"
             direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
+            separator="horizontal"
+            pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+            align="center"
+            alignSelf="center"
+            colorIndex="light-2"
+            full="horizontal"
           >
             <Form>
               <FormFields>
