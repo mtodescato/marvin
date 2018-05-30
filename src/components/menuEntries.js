@@ -1,6 +1,6 @@
 export const menuEntriesStudent = [
   'Booklet',
-  'Booking exams',
+  'Exam session',
   'Exam results',
   'Course application',
   'Degree procedure',
