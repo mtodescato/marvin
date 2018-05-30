@@ -1,19 +1,40 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
-import { Image, Section, Animate, Button } from 'grommet';
+import { Box, Animate, Heading } from 'grommet';
 import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
-import loading from '../../images/loading.gif';
-import notFound from '../../images/404.gif';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
 class BookletComponent extends React.Component {
   componentWillMount() {
     this.props.bookletInfoRequest();
   }
   render() {
-    switch (this.props.status) {
-      case 'RESOLVED':
-        return (
+    return (
+      <Box
+        className="PanelBox"
+        direction="column"
+        margin="small"
+        separator="bottom"
+      >
+        <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+          <Heading tag="h2" strong>
+            Booklet
+          </Heading>
+        </Box>
+
+        <Box
+          className="infoBox"
+          pad={{ horizontal: 'medium', vertical: 'small' }}
+        >
+          <Heading tag="h5" >
+          This page displays the list of the users registered in the system.
+          In order to manage the users you can filter them by their unique address
+          or based on their role. TODO
+          </Heading>
+        </Box>
+
+        {this.props.status === 'RESOLVED' ?
           <Animate
             enter={{ animation: 'fade', duration: 1000, delay: 0 }}
             keep
@@ -35,47 +56,28 @@ class BookletComponent extends React.Component {
                 </thead>
                 <tbody>
                   {
-          this.props.exams.map(element => (
-            <ExamEntry {...element} />
-          ))
-        }
+        this.props.exams.map(element => (
+          <ExamEntry {...element} />
+        ))
+      }
                 </tbody>
               </Table>
             </div>
+
           </Animate>
-        );
-      case 'PENDING':
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={loading} size="medium" />
-            <h3>Request sent ...</h3>
-          </Section>
-        );
-      case 'ERRORED':
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={notFound} size="large" />
-            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
-          </Section>
-        );
-      default:
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={notFound} size="large" />
-            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
-          </Section>
-        );
-    }
+      : <MetamaskStatus
+        status={this.props.status}
+        tryAgainRequest={this.props.initialize}
+        // initializeValue="2018"
+      />
+      }
+      </Box>
+    );
   }
 }
 
 BookletComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,

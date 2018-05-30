@@ -28,6 +28,7 @@ const Booklet = ({
       status={status}
       user={user}
       exams={exams}
+      initialize={bookletInfoRequest}
     />
   </div>
 );
