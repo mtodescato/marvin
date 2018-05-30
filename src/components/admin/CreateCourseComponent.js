@@ -200,7 +200,7 @@ class CreateCourseComponent extends React.Component {
                   <TextInput
                     id="president"
                     name="President"
-                    placeHolder="Massimo Marchiori"
+                    placeHolder="Mario Rossi"
                     onDOMChange={this.handleChangePresident}
                   />
                 </FormField>
