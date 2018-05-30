@@ -31,6 +31,7 @@ class BookletComponent extends React.Component {
           className="studentInfoBox"
           alignSelf="center"
           pad={{ vertical: 'none', horizontal: 'none' }}
+          margin={{ bottom: 'medium' }}
           colorIndex="light-2"
           separator="all"
           size="large"
@@ -88,7 +89,7 @@ class BookletComponent extends React.Component {
                 Address:
               </Heading>
               <Heading tag="h4" margin="none">
-                TODO
+                {this.props.user.address}
               </Heading>
             </ListItem>
 
@@ -145,6 +146,7 @@ BookletComponent.propTypes = {
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     matricola: PropTypes.string.isRequired,
   }).isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
