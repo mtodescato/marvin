@@ -22,10 +22,7 @@ const ListTeachingsComponent = ({
       </Heading>
     </Box>
 
-    <Box
-      className="infoBox"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Teachings found: {size}
       </Heading>

@@ -150,10 +150,7 @@ class CreateTeachingComponent extends React.Component {
             </Heading>
           </Box>
 
-          <Box
-            className="infoBox"
-            pad={{ horizontal: 'medium', vertical: 'small' }}
-          >
+          <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
             <Heading tag="h5" >
               This page allows you to create and add teachings into the system. In order to send
               the transaction to complete the creation operation you

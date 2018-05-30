@@ -22,21 +22,14 @@ const ListTeachingsComponent = ({
       </Heading>
     </Box>
 
-    <Box
-      className="infoBox"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h5" >
         This page displays the list of the teachings in the system.
         In order to see a specific teaching details you can filter them by academic year.
       </Heading>
     </Box>
 
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Teachings found: {size}
       </Heading>

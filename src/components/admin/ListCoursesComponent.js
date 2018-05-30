@@ -22,21 +22,14 @@ const ListCoursesComponent = ({
       </Heading>
     </Box>
 
-    <Box
-      className="infoBox"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h5" >
         This page displays the list of the courses in the system.
         In order to see specific course details you can filter them by academic year.
       </Heading>
     </Box>
 
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Courses found: {size}
       </Heading>

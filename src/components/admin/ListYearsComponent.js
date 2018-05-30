@@ -10,15 +10,12 @@ const ListYearsComponent = ({ size, years }) => (
     margin={{ vertical: 'none', horizontal: 'large' }}
     separator="bottom"
   >
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Academic Years found: {size}
       </Heading>
     </Box>
+
     <Box
       className="tableBox"
       size="xlarge"

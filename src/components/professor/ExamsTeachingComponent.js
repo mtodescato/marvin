@@ -17,11 +17,7 @@ const ExamsTeachingComponent = ({
     margin={{ vertical: 'none', horizontal: 'large' }}
     separator="bottom"
   >
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Exams found: {size}
       </Heading>

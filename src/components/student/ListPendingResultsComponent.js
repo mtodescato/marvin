@@ -24,11 +24,7 @@ const ListPendingResultsComponent = ({
       </Heading>
     </Box>
 
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Pending results: {size}
       </Heading>

@@ -25,10 +25,7 @@ const ListUsersComponent = ({
       </Heading>
     </Box>
 
-    <Box
-      className="infoBox"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h5" >
         This page displays the list of the users registered in the system.
         In order to manage the users you can filter them by their unique address
@@ -37,11 +34,8 @@ const ListUsersComponent = ({
     </Box>
     { // <TransactionStatus status={statusDeleteRequest} />
     }
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Users found: {size}
       </Heading>
@@ -55,6 +49,7 @@ const ListUsersComponent = ({
         placeHolder="Search: #"
       />
     </Box>
+
     {statusListUsersRequest === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
@@ -67,15 +62,15 @@ const ListUsersComponent = ({
           <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
           <tbody>
             {
-            userEntries.map((element, index) => (
-              <UserEntry
-                key={[element.address]}
-                index={index}
-                {...element}
-                deleteAction={deleteAction}
-              />
-            ))
-          }
+              userEntries.map((element, index) => (
+                <UserEntry
+                  key={[element.address]}
+                  index={index}
+                  {...element}
+                  deleteAction={deleteAction}
+                />
+              ))
+            }
           </tbody>
         </Table>
       </Animate>

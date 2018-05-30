@@ -17,11 +17,7 @@ const DegreeProceduresComponent = ({ size, degreeProcedureEntries }) => (
       </Heading>
     </Box>
 
-    <Box
-      className="searchBox"
-      size="medium"
-      pad={{ horizontal: 'medium', vertical: 'small' }}
-    >
+    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Requests found: {size}
       </Heading>
