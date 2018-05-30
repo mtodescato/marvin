@@ -12,7 +12,6 @@ import {
   Select,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { stringFormValidation, addressValidation, selectValidation } from '../formValidator';
 import CreateUserConfirmation from './CreateUserConfirmation';
@@ -161,27 +160,10 @@ class CreateUserComponent extends React.Component {
         <Box
           className="PanelBox"
           direction="column"
-          margin="small"
+          margin={{ vertical: 'none', horizontal: 'small' }}
           separator="bottom"
         >
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="bottom"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Manage Users
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
-                Create User
-            </Label>
-          </Box>
-
-          <Box className="titleBox" alignSelf="center" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New user creation
             </Heading>
@@ -204,13 +186,16 @@ class CreateUserComponent extends React.Component {
                setStatus={this.state.setStatus}
              /> : null
           }
-          
+
           <Box
             className="formBox"
             direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
+            separator="horizontal"
+            pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+            align="center"
+            alignSelf="center"
+            colorIndex="light-2"
+            full="horizontal"
           >
             <Form>
               <FormFields>
@@ -324,7 +309,7 @@ class CreateUserComponent extends React.Component {
               </FormFields>
             </Form>
 
-            <Footer pad={{ vertical: 'medium' }}>
+            <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
               <Button
                 label="Submit"
                 primary
