@@ -29,7 +29,7 @@ ListStudents.propTypes = {
   exams: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
-    socialNumber: PropTypes.string.isRequired,
+    serial: PropTypes.string.isRequired,
     address: PropTypes.string.isRequired,
   })).isRequired,
   size: PropTypes.number.isRequired,
