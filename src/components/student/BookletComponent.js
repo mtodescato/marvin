@@ -1,6 +1,6 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
-import { Box, Animate, Heading } from 'grommet';
+import { Box, Animate, Heading, List, ListItem, TableHeader } from 'grommet';
 import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
@@ -11,58 +11,122 @@ class BookletComponent extends React.Component {
   }
   render() {
     return (
-      <Box
-        className="PanelBox"
-        direction="column"
-        margin="small"
-        separator="bottom"
-      >
+      <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
         <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
           <Heading tag="h2" strong>
             Booklet
           </Heading>
         </Box>
 
-        <Box
-          className="infoBox"
-          pad={{ horizontal: 'medium', vertical: 'small' }}
-        >
-          <Heading tag="h5" >
-          This page displays the list of the users registered in the system.
-          In order to manage the users you can filter them by their unique address
-          or based on their role. TODO
+        <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h4" >
+            This page shows the user information and the academic activities in the student’s
+            booklet. In the case of
+            activities not yet passed and attended, just click ‘Exam Session’ in the menu entry
+            that provides access to the list of the exam sessions.
           </Heading>
         </Box>
+
+        <Box
+          className="studentInfoBox"
+          alignSelf="center"
+          pad={{ vertical: 'none', horizontal: 'none' }}
+          colorIndex="light-2"
+          separator="all"
+          size="large"
+        >
+          <List >
+            <ListItem
+              justify="between"
+              separator="bottom"
+              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+              margin="none"
+            >
+              <Heading tag="h4" margin="none" strong>
+                    First Name:
+              </Heading>
+              <Heading tag="h4" margin="none">
+                {this.props.user.name}
+              </Heading>
+            </ListItem>
+
+            <ListItem
+              justify="between"
+              separator="bottom"
+              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+              margin="none"
+            >
+              <Heading tag="h4" margin="none" strong>
+                Surname:
+              </Heading>
+              <Heading tag="h4" margin="none">
+                {this.props.user.surname}
+              </Heading>
+            </ListItem>
+
+            <ListItem
+              justify="between"
+              separator="bottom"
+              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+              margin="none"
+            >
+              <Heading tag="h4" margin="none" strong>
+                Social number:
+              </Heading>
+              <Heading tag="h4" margin="none">
+                {this.props.user.matricola}
+              </Heading>
+            </ListItem>
+
+            <ListItem
+              justify="between"
+              separator="bottom"
+              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+              margin="none"
+            >
+              <Heading tag="h4" margin="none" strong>
+                Address:
+              </Heading>
+              <Heading tag="h4" margin="none">
+                TODO
+              </Heading>
+            </ListItem>
+
+            <ListItem
+              justify="between"
+              separator="none"
+              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+              margin="none"
+            >
+              <Heading tag="h4" margin="none" strong>
+                Study Course:
+              </Heading>
+              <Heading tag="h4" margin="none">
+                TODO
+              </Heading>
+            </ListItem>
+
+          </List>
+        </Box>
+
+        { /* this.props.activeCourse ? TODO deve iscriversi al corso prima
+        di accedere al booklet bla bla bla */}
 
         {this.props.status === 'RESOLVED' ?
           <Animate
             enter={{ animation: 'fade', duration: 1000, delay: 0 }}
             keep
           >
-            <div>
-              <h2> Welcome {this.props.user.name} {this.props.user.surname}
-                {' '} n. {this.props.user.matricola}
-              </h2>
-              <h3> Exams in your Booklet</h3>
-              <Table responsive>
-                <thead>
-                  <tr>
-                    <th>Referent</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>Result</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-        this.props.exams.map(element => (
-          <ExamEntry {...element} />
-        ))
-      }
-                </tbody>
-              </Table>
-            </div>
+            <Table responsive>
+              <TableHeader labels={['Professor in charge', 'Academic Activities', 'Status', 'Grade', 'Date']} />
+              <tbody>
+                {
+                  this.props.exams.map(element => (
+                    <ExamEntry {...element} />
+                  ))
+                }
+              </tbody>
+            </Table>
 
           </Animate>
       : <MetamaskStatus
