@@ -157,12 +157,7 @@ class CreateUserComponent extends React.Component {
   render() {
     return (
       <div>
-        <Box
-          className="PanelBox"
-          direction="column"
-          margin={{ vertical: 'none', horizontal: 'small' }}
-          separator="bottom"
-        >
+        <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
           <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New user creation

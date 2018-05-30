@@ -127,12 +127,7 @@ class CreateCourseComponent extends React.Component {
             <strong>Course creation error: &quot;Transaction rejected&quot;</strong>
           </Toast>
         )}
-        <Box
-          className="PanelBox"
-          direction="column"
-          margin="small"
-          separator="bottom"
-        >
+        <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
           <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New course creation

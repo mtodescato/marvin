@@ -4,11 +4,7 @@ import { Section, Box, Heading, Tiles, Tile, Paragraph, Image } from 'grommet';
 import ethMetUnipd from '../../images/ethereum_metamask_unipd.png';
 
 const HomeComponent = props => (
-  <Box
-    className="PanelBox"
-    direction="column"
-    margin="small"
-  >
+  <Box className="PanelBox" direction="column" margin="small" >
     <Box
       className="PanelInfo"
       direction="column"

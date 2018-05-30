@@ -12,12 +12,7 @@ const ListStudentsComponent = ({
   examAddress,
   publishMark,
 }) => (
-  <Box
-    className="PanelBox"
-    direction="column"
-    margin="small"
-    separator="bottom"
-  >
+  <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
     <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Enrolled students: {size}

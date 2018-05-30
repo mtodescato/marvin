@@ -5,12 +5,7 @@ import DegreeProcedureEntry from './DegreeProcedureEntry';
 
 // const DegreeProceduresComponent = ({ size, degreeProcedureEntries, manageDPRequest }) => (
 const DegreeProceduresComponent = ({ size, degreeProcedureEntries }) => (
-  <Box
-    className="PanelBox"
-    direction="column"
-    margin="small"
-    separator="bottom"
-  >
+  <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
     <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
           Degree Procedures Request

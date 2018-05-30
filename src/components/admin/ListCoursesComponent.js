@@ -10,12 +10,7 @@ const ListCoursesComponent = ({
   size,
   coursesEntries,
 }) => (
-  <Box
-    className="PanelBox"
-    direction="column"
-    margin="small"
-    separator="bottom"
-  >
+  <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
     <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
       <Heading tag="h2" strong>
         List Study Courses
