@@ -257,26 +257,26 @@ class CreateTeachingComponent extends React.Component {
                   />
                 </FormField>
               </FormFields>
-
-              <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
-                <Button
-                  label="Submit"
-                  primary
-                  onClick={this.state.errors.formIsValid ? this.onSubmit : null}
-                />
-                {this.state.showLayer ?
-                  <TeachingConfirmation
-                    setLayer={this.setLayer}
-                    teachingName={this.state.name}
-                    course={this.state.course}
-                    courseRef={this.state.courseRef}
-                    responsible={this.state.responsible}
-                    responsibleRef={this.state.responsibleRef}
-                    addTeachingRequest={this.props.actions.addTeachingRequest}
-                  /> : null
-                  }
-              </Footer>
             </Form>
+
+            <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
+              <Button
+                label="Submit"
+                primary
+                onClick={this.state.errors.formIsValid ? this.onSubmit : null}
+              />
+              {this.state.showLayer ?
+                <TeachingConfirmation
+                  setLayer={this.setLayer}
+                  teachingName={this.state.name}
+                  course={this.state.course}
+                  courseRef={this.state.courseRef}
+                  responsible={this.state.responsible}
+                  responsibleRef={this.state.responsibleRef}
+                  addTeachingRequest={this.props.actions.addTeachingRequest}
+                /> : null
+                }
+            </Footer>
 
           </Box>
         </Box>
