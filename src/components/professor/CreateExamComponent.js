@@ -195,7 +195,7 @@ class CreateExamComponent extends React.Component {
               </FormFields>
             </Form>
 
-            <Footer pad={{ vertical: 'medium' }}>
+            <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
               <Button
                 label="Submit"
                 primary

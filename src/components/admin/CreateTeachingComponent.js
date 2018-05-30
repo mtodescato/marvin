@@ -257,7 +257,8 @@ class CreateTeachingComponent extends React.Component {
                   />
                 </FormField>
               </FormFields>
-              <Footer pad={{ vertical: 'small' }}>
+
+              <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
                 <Button
                   label="Submit"
                   primary
