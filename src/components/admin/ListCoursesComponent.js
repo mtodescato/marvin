@@ -42,7 +42,7 @@ const ListCoursesComponent = ({
         }}
       />
     </Box>
-    {statusListCoursesRequest}
+
     {statusListCoursesRequest === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
