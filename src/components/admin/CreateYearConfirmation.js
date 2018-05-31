@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box, Layer, Header, Heading, Paragraph, Footer, Button } from 'grommet';
 
-class CreateUserConfirmation extends React.Component {
+class CreateYearConfirmation extends React.Component {
   constructor(props) {
     super(props);
 
@@ -11,6 +11,8 @@ class CreateUserConfirmation extends React.Component {
 
   onSubmit() {
     this.props.addYearRequest();
+    this.props.resetState();
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -73,10 +75,12 @@ class CreateUserConfirmation extends React.Component {
   }
 }
 
-CreateUserConfirmation.propTypes = {
+CreateYearConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
-  year: PropTypes.number.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
+  year: PropTypes.string.isRequired,
   addYearRequest: PropTypes.func.isRequired,
 };
 
-export default CreateUserConfirmation;
+export default CreateYearConfirmation;
