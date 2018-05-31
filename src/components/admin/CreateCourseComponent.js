@@ -152,7 +152,6 @@ class CreateCourseComponent extends React.Component {
             <TransactionStatus setStatus={this.setStatus} /> : null
         }
 
-
         <Box
           className="formBox"
           direction="column"
@@ -187,6 +186,7 @@ class CreateCourseComponent extends React.Component {
                   id="name"
                   name="Name"
                   placeHolder="Informatica"
+                  value={this.state.name}
                   onDOMChange={this.handleChangeName}
                 />
               </FormField>
