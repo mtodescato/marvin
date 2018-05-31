@@ -19,36 +19,45 @@ const ListStudentsComponent = ({
       </Heading>
     </Box>
 
-    {statusListStudentRequest === 'RESOLVED' ?
-      <Animate
-        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
-        keep
-      >
-        <Table
-          responsive
+    <Box
+      className="tableBox"
+      colorIndex="light-2"
+      separator="horizontal"
+      pad="small"
+      align="center"
+      alignSelf="center"
+    >
+      {statusListStudentRequest === 'RESOLVED' ?
+        <Animate
+          enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+          keep
         >
-          <TableHeader labels={['#', 'Social Number', 'Name', 'Surname', 'Publish mark']} />
-          <tbody>
-            {
-              examsResults.map((element, index) => (
-                <StudentEntry
-                  key={[element.address]}
-                  index={index}
-                  {...element}
-                  examAddress={examAddress}
-                  publishMark={publishMark}
-                />
-              ))
-            }
-          </tbody>
-        </Table>
-      </Animate>
-    : <MetamaskStatus
-      status={statusListStudentRequest}
-      tryAgainRequest={initialize}
-      initializeValue={examAddress}
-    />
-    }
+          <Table
+            responsive
+          >
+            <TableHeader labels={['#', 'Social Number', 'Name', 'Surname', 'Publish mark']} />
+            <tbody>
+              {
+                examsResults.map((element, index) => (
+                  <StudentEntry
+                    key={[element.address]}
+                    index={index}
+                    {...element}
+                    examAddress={examAddress}
+                    publishMark={publishMark}
+                  />
+                ))
+              }
+            </tbody>
+          </Table>
+        </Animate>
+      : <MetamaskStatus
+        status={statusListStudentRequest}
+        tryAgainRequest={initialize}
+        initializeValue={examAddress}
+      />
+      }
+    </Box>
   </Box>
 );
 
