@@ -172,8 +172,8 @@ class CreateUserComponent extends React.Component {
             </Heading>
           </Box>
 
-          {(this.props.status === 'PENDING' || this.props.status === 'RESOLVED' ||
-            this.props.status === 'ERRORED') && this.state.showStatus ?
+          {(this.props.statusAddUserRequest === 'PENDING' || this.props.statusAddUserRequest === 'RESOLVED' ||
+            this.props.statusAddUserRequest === 'ERRORED') && this.state.showStatus ?
               <TransactionStatus setStatus={this.setStatus} /> : null
           }
 
@@ -313,7 +313,7 @@ class CreateUserComponent extends React.Component {
                   userAddress={this.state.address}
                   userRole={this.state.role}
                   addUserRequest={this.props.actions.addUserRequest}
-                  status={this.props.status}
+                  status={this.props.statusAddUserRequest}
                   setStatus={this.setStatus}
                   resetState={this.resetState}
                 />
@@ -331,7 +331,7 @@ CreateUserComponent.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
-  status: PropTypes.string.isRequired,
+  statusAddUserRequest: PropTypes.string.isRequired,
 };
 
 export default CreateUserComponent;
