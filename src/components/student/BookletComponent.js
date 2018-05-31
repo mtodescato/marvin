@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
+
 class BookletComponent extends React.Component {
   componentWillMount() {
     this.props.bookletInfoRequest();
@@ -27,109 +28,94 @@ class BookletComponent extends React.Component {
           </Heading>
         </Box>
 
-        <Box
-          className="studentInfoBox"
-          alignSelf="center"
-          pad={{ vertical: 'none', horizontal: 'none' }}
-          margin={{ bottom: 'medium' }}
-          colorIndex="light-2"
-          separator="all"
-          size="large"
-        >
-          <List >
-            <ListItem
-              justify="between"
-              separator="bottom"
-              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-              margin="none"
-            >
-              <Heading tag="h4" margin="none" strong>
-                    First Name:
-              </Heading>
-              <Heading tag="h4" margin="none">
-                {this.props.user.name}
-              </Heading>
-            </ListItem>
-
-            <ListItem
-              justify="between"
-              separator="bottom"
-              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-              margin="none"
-            >
-              <Heading tag="h4" margin="none" strong>
-                Surname:
-              </Heading>
-              <Heading tag="h4" margin="none">
-                {this.props.user.surname}
-              </Heading>
-            </ListItem>
-
-            <ListItem
-              justify="between"
-              separator="bottom"
-              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-              margin="none"
-            >
-              <Heading tag="h4" margin="none" strong>
-                Social number:
-              </Heading>
-              <Heading tag="h4" margin="none">
-                {this.props.user.matricola}
-              </Heading>
-            </ListItem>
-
-            <ListItem
-              justify="between"
-              separator="bottom"
-              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-              margin="none"
-            >
-              <Heading tag="h4" margin="none" strong>
-                Address:
-              </Heading>
-              <Heading tag="h4" margin="none">
-                {this.props.user.address}
-              </Heading>
-            </ListItem>
-
-            <ListItem
-              justify="between"
-              separator="none"
-              pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
-              margin="none"
-            >
-              <Heading tag="h4" margin="none" strong>
-                Study Course:
-              </Heading>
-              <Heading tag="h4" margin="none">
-                TODO
-              </Heading>
-            </ListItem>
-
-          </List>
-        </Box>
-
-        { /* this.props.activeCourse ? TODO deve iscriversi al corso prima
-        di accedere al booklet bla bla bla */}
-
         {this.props.status === 'RESOLVED' ?
-          <Animate
-            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
-            keep
-          >
-            <Table responsive>
-              <TableHeader labels={['Professor in charge', 'Academic Activities', 'Status', 'Grade', 'Date']} />
-              <tbody>
-                {
-                  this.props.exams.map(element => (
-                    <ExamEntry {...element} />
-                  ))
-                }
-              </tbody>
-            </Table>
+          <Box pad="none" margin="none">
+            <Box
+              className="studentInfoBox"
+              alignSelf="center"
+              pad={{ vertical: 'none', horizontal: 'none' }}
+              margin={{ bottom: 'medium' }}
+              colorIndex="light-2"
+              separator="all"
+              size="large"
+            >
+              <List >
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                        First Name:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.name}
+                  </Heading>
+                </ListItem>
 
-          </Animate>
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Surname:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.surname}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Social number:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.matricola}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="none"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Address:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.address}
+                  </Heading>
+                </ListItem>
+
+              </List>
+            </Box>
+
+            <Animate
+              enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+              keep
+            >
+              <Table responsive>
+                <TableHeader labels={['Professor in charge', 'Academic Activities', 'Status', 'Grade', 'Date']} />
+                <tbody>
+                  {
+                    this.props.exams.map(element => (
+                      <ExamEntry {...element} />
+                    ))
+                  }
+                </tbody>
+              </Table>
+
+            </Animate>
+          </Box>
       : <MetamaskStatus
         status={this.props.status}
         tryAgainRequest={this.props.initialize}
