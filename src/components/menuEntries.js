@@ -1,8 +1,8 @@
 export const menuEntriesStudent = [
   'Booklet',
-  'Exam session',
-  'Exam results',
-  'Course application',
+  'Exam Session',
+  'Exam Results',
+  'Course Application',
 ];
 
 export const menuEntriesProfessor = [

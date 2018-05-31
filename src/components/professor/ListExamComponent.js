@@ -24,7 +24,7 @@ const ListExamComponent = ({
 
       <Heading tag="h5" >
         This page displays the list of the exams of the teachings of which you are the
-        reference professor.
+        professor in charge.
         In order to see and manage marks of the enrolled students click on the icon alongside
         each exam entry.
       </Heading>

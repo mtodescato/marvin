@@ -19,9 +19,13 @@ const ExamsTeachingComponent = ({
     </Box>
     <Box
       className="tableBox"
-      size="large"
+      size="xlarge"
+      colorIndex="light-2"
+      separator="horizontal"
+      pad="small"
+      align="center"
+      alignSelf="center"
     >
-
       {statusListExamsRequest === 'RESOLVED' ?
         <Animate
           enter={{ animation: 'fade', duration: 1000, delay: 0 }}

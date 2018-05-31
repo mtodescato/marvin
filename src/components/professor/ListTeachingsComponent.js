@@ -23,7 +23,7 @@ const ListTeachingsComponent = ({
       </Heading>
 
       <Heading tag="h5" >
-        This page displays the list of the teachings of which you are the reference professor.
+        This page displays the list of the teachings of which you are the professor in charge.
         In order to see the exams available click on the icon alongside each teaching entry.
       </Heading>
     </Box>
