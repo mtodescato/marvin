@@ -3,7 +3,7 @@ import { Section, Split, Box } from 'grommet';
 import MenuProfessor from '../containers/professor/MenuProfessor';
 import MainPanel from '../containers/professor/MainPanel';
 import MarvinHeader from '../containers/shared/MarvinHeader';
-import MarvinFooter from '../containers/shared/MarvinFooter';
+import MarvinFooter from '../components/shared/MarvinFooter';
 
 const Professor = () => (
   <div className="Professor">

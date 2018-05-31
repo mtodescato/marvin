@@ -3,7 +3,7 @@ import { Section, Split, Box } from 'grommet';
 import MenuAdmin from '../containers/admin/MenuAdmin';
 import MainPanel from '../containers/admin/MainPanelAdmin';
 import MarvinHeader from '../containers/shared/MarvinHeader';
-import MarvinFooter from '../containers/shared/MarvinFooter';
+import MarvinFooter from '../components/shared/MarvinFooter';
 
 
 const Admin = () => (
