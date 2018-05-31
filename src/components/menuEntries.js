@@ -3,7 +3,6 @@ export const menuEntriesStudent = [
   'Exam session',
   'Exam results',
   'Course application',
-  'Degree procedure',
 ];
 
 export const menuEntriesProfessor = [
@@ -17,5 +16,4 @@ export const menuEntriesAdmin = [
   { entry: 'Courses', subEntries: ['List Study Courses', 'Create Study Course'] },
   { entry: 'Teachings', subEntries: ['List Teachings', 'Create Teaching'] },
   { entry: 'Academic Years', subEntries: ['Create Academic Year'] },
-  { entry: 'Degree Procedures', subEntries: ['Acceptances'] },
 ];
