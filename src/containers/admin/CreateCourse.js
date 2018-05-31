@@ -2,21 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { AddCourse } from '../../reducers';
-import CreateCourse from '../../components/admin/CreateCourseComponent';
+import CreateCourseComponent from '../../components/admin/CreateCourseComponent';
 
-const CreateCourseContainer = ({ status, actions }) => (
-  <CreateCourse status={status} actions={actions} />
+const CreateCourse = ({ statusAddCourseRequest, actions }) => (
+  <CreateCourseComponent statusAddCourseRequest={statusAddCourseRequest} actions={actions} />
 );
 
-CreateCourseContainer.propTypes = {
+CreateCourse.propTypes = {
   actions: PropTypes.shape({
     addCourseRequest: PropTypes.func.isRequired,
   }).isRequired,
-  status: PropTypes.bool.isRequired,
+  statusAddCourseRequest: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  status: state['add-user'].status,
+  statusAddCourseRequest: state['add-course'].status,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -27,4 +27,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreateCourseContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateCourse);
