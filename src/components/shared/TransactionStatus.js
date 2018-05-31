@@ -12,7 +12,7 @@ class TransactionStatus extends React.Component {
   }
 
   onClose() {
-    this.props.setStatus();
+    this.props.setStatus(false);
   }
 
   render() {
@@ -43,7 +43,7 @@ class TransactionStatus extends React.Component {
               icon={<Close size="xsmall" />}
               type="submit"
               primary={false}
-              onClick={this.props.setStatus}
+              onClick={this.onClose}
             />
           </Box>
         </Box>

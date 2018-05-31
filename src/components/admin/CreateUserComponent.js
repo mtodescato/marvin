@@ -80,9 +80,9 @@ class CreateUserComponent extends React.Component {
     });
   }
 
-  setStatus() {
+  setStatus(e) {
     this.setState({
-      showStatus: !this.state.showStatus,
+      showStatus: e,
     });
   }
 
@@ -173,10 +173,8 @@ class CreateUserComponent extends React.Component {
           </Box>
 
           {(this.props.status === 'PENDING' || this.props.status === 'RESOLVED' ||
-           this.props.status === 'ERRORED') && this.state.showStatus ?
-             <TransactionStatus
-               setStatus={this.state.setStatus}
-             /> : null
+            this.props.status === 'ERRORED') && this.state.showStatus ?
+              <TransactionStatus setStatus={this.setStatus} /> : null
           }
 
           <Box
@@ -316,7 +314,7 @@ class CreateUserComponent extends React.Component {
                   userRole={this.state.role}
                   addUserRequest={this.props.actions.addUserRequest}
                   status={this.props.status}
-                  setStatus={this.state.setStatus}
+                  setStatus={this.setStatus}
                   resetState={this.resetState}
                 />
                       : null
