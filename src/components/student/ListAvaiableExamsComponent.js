@@ -18,12 +18,12 @@ const ListAvaiableExamsComponent = ({
       </Heading>
     </Box>
 
-
     <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h5" >
-            TODO This page shows the academic activities in the student’s booklet. In the case of
-            activities not yet passed and attended, just click ‘Exam Session’ in the menu entry
-            that provides access to the list of the exam sessions.
+        This page displays the list of the exams of the course of which you are the
+        enrolled.
+        In order to sign up for an exam click on the ‘Subscribe’ button alongside
+        each exam entry.
       </Heading>
     </Box>
 

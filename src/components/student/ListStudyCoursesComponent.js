@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Search, Animate } from 'grommet';
+import { Box, Table, TableHeader, Heading, Animate } from 'grommet';
 import CourseEntry from './CourseEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 
@@ -11,7 +11,7 @@ const ListStudyCoursesComponent = ({
   size,
   coursesEntries,
   subscribeToCourse,
-  statusSubscribeRequest,
+  // statusSubscribeRequest,
 }) => (
   <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
     <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
@@ -20,22 +20,22 @@ const ListStudyCoursesComponent = ({
       </Heading>
     </Box>
 
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+      <Heading tag="h5" >
+        This page displays the list of the study courses avaible in the system.
+        In order to have access to all the features of your private area you have
+        to sign up for the study course in which you want to graduate by clicking
+        on the ‘Subscribe’ button alongside
+        each study course entry.
+      </Heading>
+    </Box>
+
     <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Courses found: {size}
       </Heading>
-      <Heading tag="h5" >
-          Filter courses by Academic Year :
-      </Heading>
-      <Search
-        inline
-        full="false"
-        size="small"
-        placeHolder="2018"
-        onDOMChange={e => initialize(e.target.value)}
-      />
     </Box>
-    { statusSubscribeRequest}
+
     {statusCoursesInfo === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
@@ -73,7 +73,7 @@ const ListStudyCoursesComponent = ({
 ListStudyCoursesComponent.propTypes = {
   initialize: PropTypes.func.isRequired,
   statusCoursesInfo: PropTypes.string.isRequired,
-  statusSubscribeRequest: PropTypes.string.isRequired,
+  // statusSubscribeRequest: PropTypes.string.isRequired,
   coursesEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,
