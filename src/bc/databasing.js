@@ -29,27 +29,27 @@ const address9 = '0x98b8a8c987ab6037ff014178e7ee05a7605d38f3';
  * 2*8*19 exams, 1 exam for each teachings
  */
 AdminFacade.deployed().then(async (adminFacadeInstance) => {
-  await adminFacadeInstance.addUser('owner', 'ballarin', 'bllsmn7580297584', 123335, address0, 2, { from: address0 });
-  await adminFacadeInstance.addUser('simone2', 'ballarin', 'bllsmn7580297584', 123355, address1, 2, { from: address0 });
-  await adminFacadeInstance.addUser('simone3', 'ballarin', 'bllsmn7580297584', 123315, address2, 2, { from: address0 });
-  await adminFacadeInstance.addUser('simone4', 'ballarin', 'bllsmn7580297584', 1233365, address3, 1, { from: address0 });
-  await adminFacadeInstance.addUser('simone5', 'ballarin', 'bllsmn7580297584', 123385, address4, 1, { from: address0 });
-  await adminFacadeInstance.addUser('simone6', 'ballarin', 'bllsmn7580297584', 123335, address5, 1, { from: address0 });
-  await adminFacadeInstance.addUser('simone7', 'ballarin', 'bllsmn7580297584', 123385, address6, 0, { from: address0 });
-  await adminFacadeInstance.addUser('simone8', 'ballarin', 'bllsmn7580297584', 123345, address7, 0, { from: address0 });
-  await adminFacadeInstance.addUser('simone9', 'ballarin', 'bllsmn7580297584', 123305, address8, 0, { from: address0 });
-  await adminFacadeInstance.addUser('simone10', 'ballarin', 'bllsmn7580297584', 1233135, address9, 0, { from: address0 });
+  await adminFacadeInstance.addUser('Marvin', 'Owner', 'bllsmn7580297584', 169335, address0, 2, { from: address0 });
+  await adminFacadeInstance.addUser('Mario1', 'Rossi1', 'bllsmn7580297584', 112355, address1, 2, { from: address0 });
+  await adminFacadeInstance.addUser('Mario2', 'Verde2', 'bllsmn7580297584', 129315, address2, 2, { from: address0 });
+  await adminFacadeInstance.addUser('Mario3', 'Giallo3', 'bllsmn7580297584', 1983365, address3, 1, { from: address0 });
+  await adminFacadeInstance.addUser('Mario4', 'Blu4', 'bllsmn7580297584', 188385, address4, 1, { from: address0 });
+  await adminFacadeInstance.addUser('Mario5', 'Rosa5', 'bllsmn7580297584', 505335, address5, 1, { from: address0 });
+  await adminFacadeInstance.addUser('Mario6', 'Viola6', 'bllsmn7580297584', 653385, address6, 0, { from: address0 });
+  await adminFacadeInstance.addUser('Mario7', 'Bordeaux7', 'bllsmn7580297584', 123345, address7, 0, { from: address0 });
+  await adminFacadeInstance.addUser('Mario8', 'Vaniglia8', 'bllsmn7580297584', 123305, address8, 0, { from: address0 });
+  await adminFacadeInstance.addUser('Mario9', 'Crema9', 'bllsmn7580297584', 193135, address9, 0, { from: address0 });
   await adminFacadeInstance.addAcademicYear(2012, { from: address0 });
   const y = 2018;
   await adminFacadeInstance.addAcademicYear(y, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Informatica', 'Ranzato Franzo', 0, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Matematica', 'Ranzato Franzo', 0, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Data Science', 'Ranzato Franzo', 0, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Filosofia', 'Ranzato Franzo', 0, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Informatica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Matematica Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Data Science Magistrale', 'Ranzato Franzo', 1, { from: address0 });
-  await adminFacadeInstance.addDegreeCourse(y, 'Filosofia Magistrale', 'Ranzato Franzo', 1, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Informatica', 'Mario3 Giallo3', 0, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Matematica', 'Mario3 Giallo3', 0, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Data Science', 'Mario3 Giallo3', 0, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Filosofia', 'Mario4 Blu4', 0, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Informatica Magistrale', 'Mario4 Blu4', 1, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Matematica Magistrale', 'Mario5 Rosa5', 1, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Data Science Magistrale', 'Mario5 Rosa5', 1, { from: address0 });
+  await adminFacadeInstance.addDegreeCourse(y, 'Filosofia Magistrale', 'Mario5 Rosa5', 1, { from: address0 });
 
   const i = 0; // Informatica
   const infAdd = await adminFacadeInstance.getDegreeCourse(y, i);
