@@ -12,9 +12,9 @@ class CreateExam extends React.Component {
   render() {
     return (
       <CreateExamComponent
-        state={this.props.state}
         actions={this.props.actions}
         teachingsEntries={this.props.teachingsEntries}
+        statusAddExamRequest={this.props.statusAddExamRequest}
       />
     );
   }
@@ -30,15 +30,11 @@ CreateExam.propTypes = {
     addExamRequest: PropTypes.func.isRequired,
   }).isRequired,
   initialize: PropTypes.func.isRequired,
-  state: PropTypes.shape({
-    status: PropTypes.bool.isRequired,
-  }).isRequired,
+  statusAddExamRequest: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = state => ({
-  state: {
-    status: state['add-exam-professor'].status,
-  },
+  statusAddExamRequest: state['add-exam-professor'].status,
   teachingsEntries: state['list-teachings-professor'].teachings.map(teaching => ({
     value: teaching.name,
     address: teaching.address,

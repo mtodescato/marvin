@@ -16,6 +16,8 @@ class CreateExamConfirmation extends React.Component {
     };
 
     this.props.addExamRequest(exam);
+    this.props.resetState();
+    this.props.setStatus(true);
     this.props.setLayer();
   }
   render() {
@@ -108,6 +110,8 @@ class CreateExamConfirmation extends React.Component {
 
 CreateExamConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
   examDate: PropTypes.string.isRequired,
   teachingName: PropTypes.string.isRequired,
   teachingAddress: PropTypes.number.isRequired,
