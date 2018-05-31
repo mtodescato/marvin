@@ -22,6 +22,7 @@ class CreateCourseConfirmation extends React.Component {
     this.props.setStatus(true);
     this.props.setLayer();
   }
+
   render() {
     return (
       <Layer
