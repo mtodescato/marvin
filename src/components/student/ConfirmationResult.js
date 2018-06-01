@@ -48,7 +48,7 @@ class ConfirmationResult extends React.Component {
             pad={{ vertical: 'small', horizontal: 'small' }}
           >
             <Paragraph margin="none" align="center">
-                  Are you sure you want to send the transaction to manage this esam mark?
+              Are you sure you want to send the transaction to manage this esam mark?
             </Paragraph>
           </Box>
 
@@ -103,7 +103,7 @@ class ConfirmationResult extends React.Component {
             direction="row"
           >
             <Button
-              label="Confirm"
+              label="Accept"
               type="submit"
               primary
               onClick={this.onConfirm}
