@@ -140,7 +140,7 @@ class CreateTeachingComponent extends React.Component {
               must fill all the fields below with the teaching informations.
           </Heading>
         </Box>
-        
+
         {(this.props.statusAddTeachingRequest === 'PENDING' || this.props.statusAddTeachingRequest === 'RESOLVED' ||
           this.props.statusAddTeachingRequest === 'ERRORED') && this.state.showStatus ?
             <TransactionStatus setStatus={this.setStatus} /> : null
