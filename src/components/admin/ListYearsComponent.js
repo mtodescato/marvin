@@ -11,11 +11,10 @@ const ListYearsComponent = ({ size, years }) => (
       </Heading>
     </Box>
 
-    
     <Box
       className="tableBox"
       size="xlarge"
-      colorIndex="light-2" 
+      colorIndex="light-2"
       separator="horizontal"
       pad="small"
       align="center"

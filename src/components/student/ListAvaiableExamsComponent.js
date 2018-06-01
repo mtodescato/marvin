@@ -20,7 +20,7 @@ const ListAvaiableExamsComponent = ({
 
     <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h5" >
-        This page displays the list of the exams of the course of which you are the
+        This page displays the list of the exams of the study courses of which you are the
         enrolled.
         In order to sign up for an exam click on the ‘Subscribe’ button alongside
         each exam entry.

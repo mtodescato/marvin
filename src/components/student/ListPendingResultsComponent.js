@@ -19,6 +19,14 @@ const ListPendingResultsComponent = ({
       </Heading>
     </Box>
 
+    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+      <Heading tag="h5" >
+        This page displays the list of the exams with pending results of the study
+        courses of which you are enrolled. In order to accept or refuse a mark just
+        click on the ‘Accept’ or ‘Reject’ buttons alongside each exam entry.
+      </Heading>
+    </Box>
+
     <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
       <Heading tag="h4" >
         Pending results: {size}

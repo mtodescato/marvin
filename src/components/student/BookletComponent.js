@@ -21,7 +21,7 @@ class BookletComponent extends React.Component {
 
         <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
           <Heading tag="h4" >
-            This page shows the user information and the academic activities in the student’s
+            This page shows the user informations and the academic activities in the student’s
             booklet. In the case of
             activities not yet passed and attended, just click ‘Exam Session’ in the menu entry
             that provides access to the list of the exam sessions.
