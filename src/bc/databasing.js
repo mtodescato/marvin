@@ -56,29 +56,18 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
   await ListUsers.deployed().then(async (listUsersInstance) => {
     const professorContract1 = listUsersInstance.getUser(address3);
     const professorContract2 = listUsersInstance.getUser(address4);
-
     ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
       adminFacadeInstance
-        .addTeaching(await infAdd, await professorContract1, 'Operative Systems', professorFacadeInstance.address, { from: address0 });
+        .addTeaching(await infAdd, await professorContract1, 'Inglese B2', professorFacadeInstance.address, { from: address0 });
       adminFacadeInstance
-        .addTeaching(await infAdd, await professorContract1, 'Database', professorFacadeInstance.address, { from: address0 });
-      adminFacadeInstance
-        .addTeaching(await infAdd, await professorContract1, 'Probability and Statistics', professorFacadeInstance.address, { from: address0 });
-      adminFacadeInstance
-        .addTeaching(await infAdd, await professorContract2, 'Software Engineering', professorFacadeInstance.address, { from: address0 });
-      adminFacadeInstance
-        .addTeaching(await infAdd, await professorContract2, 'Web Technologies', professorFacadeInstance.address, { from: address0 });
-
-
+        .addTeaching(await infAdd, await professorContract2, 'Stage', professorFacadeInstance.address, { from: address0 });
       StudentFacade.deployed().then(async (studentFacadeInstance) => {
         const teachingAdd1 = adminFacadeInstance.getTeaching(await infAdd, 0);
-
         professorFacadeInstance
           .insertExam(await teachingAdd1, '15/5/2018', await professorContract1, studentFacadeInstance.address, { from: address3 });
-
         const teachingAdd2 = adminFacadeInstance.getTeaching(await infAdd, 1);
         professorFacadeInstance
-          .insertExam(await teachingAdd2, '21/5/2018', await professorContract2, studentFacadeInstance.address, { from: address4 });
+          .insertExam(await teachingAdd2, '15/5/2018', await professorContract2, studentFacadeInstance.address, { from: address4 });
       });
     });
   });
@@ -118,12 +107,10 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
         .subscribeToExam(await studentAdd3, await examAdd1, { from: address8 });
       await studentFacadeInstance
         .subscribeToExam(await studentAdd3, await examAdd2, { from: address8 });
-
       // getMark for student address7
       ProfessorFacade.deployed().then(async (professorFacadeInstance) => {
         const profAdd1 = listUsersInstance.getUser(address3);
         const profAdd2 = listUsersInstance.getUser(address4);
-
         await professorFacadeInstance
           .publishMark(await examAdd1, await studentAdd2, 21, await profAdd1, { from: address3 });
         await professorFacadeInstance
@@ -133,7 +120,6 @@ AdminFacade.deployed().then(async (adminFacadeInstance) => {
           .publishMark(await examAdd1, await studentAdd3, 25, await profAdd1, { from: address3 });
         await professorFacadeInstance
           .publishMark(await examAdd2, await studentAdd3, 26, await profAdd2, { from: address4 });
-
         // accept mark for student 8
         await studentFacadeInstance
           .manageMark(await studentAdd3, await examAdd1, true, { from: address8 });
