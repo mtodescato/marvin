@@ -35,31 +35,34 @@ const ListStudyCoursesComponent = ({
         Courses found: {size}
       </Heading>
     </Box>
-
+    {activeCourseName}
     {statusCoursesInfo === 'RESOLVED' ?
       <Animate
         enter={{ animation: 'fade', duration: 1000, delay: 0 }}
         keep
       >
-        <Table
-          responsive
-          selectable
-        >
-          <TableHeader labels={['#', 'Name', 'President', 'Type', 'Subscribe']} />
-          <tbody>
-            {
-              coursesEntries.map((element, index) => (
-                <CourseEntry
-                  key={[element.ID]}
-                  index={index}
-                  {...element}
-                  activeCourseName={activeCourseName}
-                  subscribeToCourse={subscribeToCourse}
-                />
-              ))
-            }
-          </tbody>
-        </Table>
+        {activeCourseName !== 'N/A' || activeCourseName !== '' || activeCourseName !== null || activeCourseName !== 'undefined' ?
+          <Table
+            responsive
+            selectable
+          >
+            <TableHeader labels={['#', 'Name', 'President', 'Type', 'Subscribe']} />
+            <tbody>
+              {
+                coursesEntries.map((element, index) => (
+                  <CourseEntry
+                    key={[element.ID]}
+                    index={index}
+                    {...element}
+                    activeCourseName={activeCourseName}
+                    subscribeToCourse={subscribeToCourse}
+                  />
+                ))
+              }
+            </tbody>
+          </Table>
+          : <Box> Subscribed </Box>
+        }
       </Animate>
     : <MetamaskStatus
       status={statusCoursesInfo}
