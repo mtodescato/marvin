@@ -3,84 +3,97 @@ import PropTypes from 'prop-types';
 import { Box, Table, TableHeader, Heading, Search, Animate } from 'grommet';
 import UserEntry from './UserEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
-// import TransactionStatus from '../../components/shared/TransactionStatus';
+import TransactionStatus from '../../components/shared/TransactionStatus';
 
-const ListUsersComponent = ({
-  initialize,
-  statusListUsersRequest,
-  // statusDeleteRequest,
-  size,
-  userEntries,
-  deleteAction,
-}) => (
-  <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
-    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
-      <Heading tag="h2" strong>
-          List Users
-      </Heading>
-    </Box>
+class ListUsersComponent extends React.Component {
+  constructor(props) {
+    super(props);
 
-    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
-      <Heading tag="h5" >
-        This page displays the list of the users registered in the system.
-        In order to manage the users you can filter them by their unique address
-        or based on their role.
-      </Heading>
-    </Box>
-    { // <TransactionStatus status={statusDeleteRequest} />
-    }
+    this.setStatus = this.setStatus.bind(this);
 
-    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
-      <Heading tag="h4" >
-        Users found: {size}
-      </Heading>
-      <Heading tag="h5" >
-          Filter users by serial number :
-      </Heading>
-      <Search
-        inline
-        full="false"
-        size="small"
-        placeHolder="Search: #"
-      />
-    </Box>
+    this.state = {
+      showStatus: false,
+    };
+  }
 
-    {statusListUsersRequest === 'RESOLVED' ?
-      <Animate
-        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
-        keep
-      >
-        <Table
-          responsive
-          selectable
-        >
-          <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
-          <tbody>
-            {
-              userEntries.map((element, index) => (
-                <UserEntry
-                  key={[element.address]}
-                  index={index}
-                  {...element}
-                  deleteAction={deleteAction}
-                />
-              ))
-            }
-          </tbody>
-        </Table>
-      </Animate>
-    : <MetamaskStatus
-      status={statusListUsersRequest}
-      tryAgainRequest={initialize}
-      // initializeValue="2018"
-    />
-    }
-  </Box>
-);
+  setStatus(e) {
+    this.setState({
+      showStatus: e,
+    });
+  }
+
+  render() {
+    return (
+      <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
+        <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+          <Heading tag="h2" strong>
+              List Users
+          </Heading>
+        </Box>
+
+        <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h5" >
+            This page displays the list of the users registered in the system.
+            In order to manage the users you can filter them by their unique address
+            or based on their role.
+          </Heading>
+        </Box>
+
+        {this.state.showStatus ? <TransactionStatus setStatus={this.setStatus} /> : null }
+
+        <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h4" >
+            Users found: {this.props.size}
+          </Heading>
+          <Heading tag="h5" >
+              Filter users by serial number :
+          </Heading>
+          <Search
+            inline
+            full="false"
+            size="small"
+            placeHolder="Search: #"
+          />
+        </Box>
+
+        {this.props.statusListUsersRequest === 'RESOLVED' ?
+          <Animate
+            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+            keep
+          >
+            <Table
+              responsive
+              selectable
+            >
+              <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
+              <tbody>
+                {
+                  this.props.userEntries.map((element, index) => (
+                    <UserEntry
+                      key={[element.address]}
+                      index={index}
+                      {...element}
+                      deleteAction={this.props.deleteAction}
+                      setStatus={this.setStatus}
+                    />
+                  ))
+                }
+              </tbody>
+            </Table>
+          </Animate>
+        : <MetamaskStatus
+          status={this.props.statusListUsersRequest}
+          tryAgainRequest={this.props.initialize}
+        />
+        }
+      </Box>
+    );
+  }
+}
 
 ListUsersComponent.propTypes = {
   statusListUsersRequest: PropTypes.string.isRequired,
-  // statusDeleteRequest: PropTypes.string.isRequired,
+  statusDeleteRequest: PropTypes.string.isRequired,
   userEntries: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
