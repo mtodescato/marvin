@@ -1,9 +1,18 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
-import { Box, Animate, Heading, List, ListItem, TableHeader } from 'grommet';
+import { Box, Animate, Heading, List, ListItem, TableHeader, Legend } from 'grommet';
 import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
+
+const legendEntries = [
+  {
+    label: 'Passed', colorIndex: 'ok',
+  }, {
+    label: 'Attended', colorIndex: 'warning',
+  }, {
+    label: 'Planned', colorIndex: 'critical',
+  }];
 
 
 class BookletComponent extends React.Component {
@@ -113,6 +122,20 @@ class BookletComponent extends React.Component {
                   }
                 </tbody>
               </Table>
+
+              <Box
+                className="legendBox"
+                margin={{ horizontal: 'medium', bottom: 'medium' }}
+                pad="small"
+                separator="top"
+              >
+                <Legend
+                  series={legendEntries}
+                  onClick={false}
+                  total={false}
+                  size="medium"
+                />
+              </Box>
 
             </Animate>
           </Box>
