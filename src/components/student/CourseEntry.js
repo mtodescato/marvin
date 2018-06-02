@@ -40,6 +40,7 @@ class CourseEntry extends React.Component {
             courseType={this.props.type}
             courseAddress={this.props.ID}
             subscribeToCourse={this.props.subscribeToCourse}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -56,6 +57,7 @@ CourseEntry.propTypes = {
   ID: PropTypes.string.isRequired,
   subscribeToCourse: PropTypes.func.isRequired,
   activeCourseName: PropTypes.string.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default CourseEntry;
