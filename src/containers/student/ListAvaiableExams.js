@@ -25,7 +25,11 @@ class ListAvaiableExams extends React.Component {
 ListAvaiableExams.propTypes = {
   initialize: PropTypes.func.isRequired,
   statusExamsInfo: PropTypes.string.isRequired,
-  exams: PropTypes.arrayOf().isRequired,
+  exams: PropTypes.arrayOf(PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
+  })).isRequired,
   size: PropTypes.number.isRequired,
   subscribeToExam: PropTypes.func.isRequired,
 };
