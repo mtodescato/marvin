@@ -13,10 +13,10 @@ import {
   Select,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { dateTimeValidation, selectValidation } from '../formValidator';
 import CreateExamConfirmation from './CreateExamConfirmation';
+import TransactionStatus from '../../components/shared/TransactionStatus';
 
 class CreateExamComponent extends React.Component {
   constructor(props) {
@@ -30,6 +30,8 @@ class CreateExamComponent extends React.Component {
     this.handleChangeTeaching = this.handleChangeTeaching.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
+    this.setStatus = this.setStatus.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       date: '',
@@ -41,17 +43,30 @@ class CreateExamComponent extends React.Component {
         formIsValid: false,
       },
       showLayer: false,
+      showStatus: false,
     };
+
+    this.defaultState = this.state;
   }
 
   onSubmit() {
     this.setLayer();
   }
 
+  setStatus(e) {
+    this.setState({
+      showStatus: e,
+    });
+  }
+
   setLayer() {
     this.setState({
       showLayer: !this.state.showLayer,
     });
+  }
+
+  resetState() {
+    this.setState(this.defaultState);
   }
 
   handleValidation(errors) {
@@ -93,140 +108,116 @@ class CreateExamComponent extends React.Component {
 
   render() {
     return (
-      <div>
-        {/* this.props.state.status === 'RESOLVED' && (
-          <Toast status="ok">
-            <strong>Exam created correctly</strong>
-          </Toast>
-        ) */}
-        {/* this.props.state.status === 'ERRORED' && (
-          <Toast status="critical">
-            <strong>Exam creation error: &quot;Transaction rejected&quot;</strong>
-          </Toast>
-        ) */}
-        <Box
-          className="PanelBox"
-          direction="column"
-          margin="small"
-          separator="bottom"
-        >
-
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="horizontal"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Create Exam
-            </Label>
-          </Box>
-
-          <Box className="titleBox" alignSelf="center" >
-            <Heading tag="h2" strong>
+      <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
+        <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+          <Heading tag="h2" strong>
             New exam creation
-            </Heading>
-          </Box>
+          </Heading>
+        </Box>
 
-          <Box
-            className="infoBox"
-            pad={{ horizontal: 'medium', vertical: 'small' }}
-          >
-            <Heading tag="h5" >
+        <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h5" >
               This page allows you to create exams of the teachings of which you are the reference
               professor. In order to send the transaction to complete the creation operation you
               must fill all the fields below with the exam informations.
-            </Heading>
-          </Box>
-
-          <Box
-            className="formBox"
-            direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
-          >
-            <Form>
-              <FormFields>
-                <FormField>
-                  <Box
-                    direction="row"
-                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
-                    margin="none"
-                  >
-                    <Label size="small">
-                      Teaching:
-                    </Label>
-                    {this.state.errors.teaching !== 'isValid' ?
-                      <Label size="small">
-                        <span style={{ color: 'red' }}>{this.state.errors.teaching}</span>
-                      </Label> : null
-                    }
-                    {this.state.errors.teaching === 'isValid' ?
-                      <Checkmark colorIndex="ok" /> : null
-                    }
-                  </Box>
-                  <Select
-                    id="teaching"
-                    name="Teaching"
-                    placeHolder="Teaching"
-                    multiple={false}
-                    options={this.props.teachingsEntries}
-                    value={this.state.teachingName}
-                    onChange={this.handleChangeTeaching}
-                  />
-                </FormField>
-                <FormField>
-                  <Box
-                    direction="row"
-                    pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
-                    margin="none"
-                  >
-                    <Label size="small">
-                      Data:
-                    </Label>
-                    {this.state.errors.date !== 'isValid' ?
-                      <Label size="small">
-                        <span style={{ color: 'red' }}>{this.state.errors.date}</span>
-                      </Label> : null
-                    }
-                    {this.state.errors.date === 'isValid' ?
-                      <Checkmark colorIndex="ok" /> : null
-                    }
-                  </Box>
-                  <DateTime
-                    id="date"
-                    name="Date"
-                    format="DD/MM/YYYY"
-                    value={this.state.date}
-                    onChange={this.handleChangeDate}
-                  />
-                </FormField>
-              </FormFields>
-            </Form>
-
-            <Footer pad={{ vertical: 'medium' }}>
-              <Button
-                label="Submit"
-                primary
-                onClick={this.state.errors.formIsValid ? this.onSubmit : null}
-              />
-              {this.state.showLayer ?
-                <CreateExamConfirmation
-                  setLayer={this.setLayer}
-                  examDate={this.state.date}
-                  teachingName={this.state.teachingName}
-                  teachingAddress={this.state.teachingAddress}
-                  addExamRequest={this.props.actions.addExamRequest}
-                  state={this.props.state}
-                /> : null
-                  }
-            </Footer>
-          </Box>
+          </Heading>
         </Box>
-      </div>
+
+        {(this.props.statusAddExamRequest === 'PENDING' || this.props.statusAddExamRequest === 'RESOLVED' ||
+            this.props.statusAddExamRequest === 'ERRORED') && this.state.showStatus ?
+              <TransactionStatus setStatus={this.setStatus} /> : null
+          }
+
+        <Box
+          className="formBox"
+          direction="column"
+          separator="horizontal"
+          pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+          align="center"
+          alignSelf="center"
+          colorIndex="light-2"
+          full="horizontal"
+        >
+          <Form>
+            <FormFields>
+              <FormField>
+                <Box
+                  direction="row"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                  margin="none"
+                >
+                  <Label size="small">
+                      Teaching:
+                  </Label>
+                  {this.state.errors.teaching !== 'isValid' ?
+                    <Label size="small">
+                      <span style={{ color: 'red' }}>{this.state.errors.teaching}</span>
+                    </Label> : null
+                    }
+                  {this.state.errors.teaching === 'isValid' ?
+                    <Checkmark colorIndex="ok" /> : null
+                    }
+                </Box>
+                <Select
+                  id="teaching"
+                  name="Teaching"
+                  placeHolder="Teaching"
+                  multiple={false}
+                  options={this.props.teachingsEntries}
+                  value={this.state.teachingName}
+                  onChange={this.handleChangeTeaching}
+                />
+              </FormField>
+              <FormField>
+                <Box
+                  direction="row"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'large' }}
+                  margin="none"
+                >
+                  <Label size="small">
+                      Data:
+                  </Label>
+                  {this.state.errors.date !== 'isValid' ?
+                    <Label size="small">
+                      <span style={{ color: 'red' }}>{this.state.errors.date}</span>
+                    </Label> : null
+                    }
+                  {this.state.errors.date === 'isValid' ?
+                    <Checkmark colorIndex="ok" /> : null
+                    }
+                </Box>
+                <DateTime
+                  id="date"
+                  name="Date"
+                  format="DD/MM/YYYY"
+                  value={this.state.date}
+                  onChange={this.handleChangeDate}
+                />
+              </FormField>
+            </FormFields>
+          </Form>
+
+          <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
+            <Button
+              label="Submit"
+              primary
+              onClick={this.state.errors.formIsValid ? this.onSubmit : null}
+            />
+            {this.state.showLayer ?
+              <CreateExamConfirmation
+                setLayer={this.setLayer}
+                examDate={this.state.date}
+                teachingName={this.state.teachingName}
+                teachingAddress={this.state.teachingAddress}
+                addExamRequest={this.props.actions.addExamRequest}
+                status={this.props.statusAddExamRequest}
+                setStatus={this.setStatus}
+                resetState={this.resetState}
+              /> : null
+                  }
+          </Footer>
+        </Box>
+      </Box>
     );
   }
 }
@@ -239,9 +230,7 @@ CreateExamComponent.propTypes = {
   actions: PropTypes.shape({
     addExamRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    status: PropTypes.bool.isRequired,
-  }).isRequired,
+  statusAddExamRequest: PropTypes.string.isRequired,
 };
 
 export default CreateExamComponent;

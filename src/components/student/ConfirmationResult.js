@@ -12,11 +12,13 @@ class ConfirmationResult extends React.Component {
 
   onConfirm() {
     this.props.accept(this.props.examAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
   onReject() {
     this.props.reject(this.props.examAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -48,7 +50,7 @@ class ConfirmationResult extends React.Component {
             pad={{ vertical: 'small', horizontal: 'small' }}
           >
             <Paragraph margin="none" align="center">
-                  Are you sure you want to send the transaction to manage this esam mark?
+              Are you sure you want to send the transaction to manage this esam mark?
             </Paragraph>
           </Box>
 
@@ -103,7 +105,7 @@ class ConfirmationResult extends React.Component {
             direction="row"
           >
             <Button
-              label="Confirm"
+              label="Accept"
               type="submit"
               primary
               onClick={this.onConfirm}
@@ -129,6 +131,7 @@ ConfirmationResult.propTypes = {
   examAddress: PropTypes.string.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default ConfirmationResult;

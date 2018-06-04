@@ -11,6 +11,7 @@ class ConfirmationExam extends React.Component {
 
   onSubscribe() {
     this.props.subscribeToExam(this.props.examAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -104,6 +105,7 @@ class ConfirmationExam extends React.Component {
 
 ConfirmationExam.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   examName: PropTypes.string.isRequired,
   examDate: PropTypes.string.isRequired,
   examAddress: PropTypes.string.isRequired,

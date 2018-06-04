@@ -13,12 +13,15 @@ class ListTeachings extends React.Component {
       <ListTeachingsComponent
         teachings={this.props.teachings}
         size={this.props.size}
+        initialize={this.props.initialize}
+        statusListTeachingRequest={this.props.statusListTeachingRequest}
       />
     );
   }
 }
 
 ListTeachings.propTypes = {
+  statusListTeachingRequest: PropTypes.string.isRequired,
   teachings: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     course: PropTypes.string.isRequired,
@@ -29,15 +32,16 @@ ListTeachings.propTypes = {
   initialize: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = state => ({
-  teachings: state['list-teachings-professor'].teachings,
-  size: state['list-teachings-professor'].size,
-});
-
 const mapDispatchToProps = dispatch => ({
   initialize: (year) => {
     dispatch(ListTeachingsReducer.creators.listTeachingsRequest(year));
   },
+});
+
+const mapStateToProps = state => ({
+  statusListTeachingRequest: state['list-teachings-professor'].status,
+  teachings: state['list-teachings-professor'].teachings,
+  size: state['list-teachings-professor'].size,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListTeachings);

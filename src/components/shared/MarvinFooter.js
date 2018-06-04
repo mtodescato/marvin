@@ -1,6 +1,5 @@
 import React from 'react';
-import { Footer, Box, Menu, Anchor, Paragraph } from 'grommet';
-// import uniwebLogo from '../../images/unipd.png';
+import { Footer, Box, Paragraph } from 'grommet';
 
 const MarvinFooter = () => (
   <Footer
@@ -17,18 +16,6 @@ const MarvinFooter = () => (
       <Paragraph margin="none">
             ©2018 Marvin by NOVE Group
       </Paragraph>
-      <Menu
-        direction="row"
-        size="small"
-        dropAlign={{ right: 'right' }}
-      >
-        <Anchor href="#">
-          Contact
-        </Anchor>
-        <Anchor href="#">
-          About
-        </Anchor>
-      </Menu>
     </Box>
   </Footer>
 );

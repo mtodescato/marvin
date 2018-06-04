@@ -18,8 +18,11 @@ class CreateCourseConfirmation extends React.Component {
     };
 
     this.props.addCourseRequest(course);
+    this.props.resetState();
+    this.props.setStatus(true);
     this.props.setLayer();
   }
+
   render() {
     return (
       <Layer
@@ -138,6 +141,8 @@ class CreateCourseConfirmation extends React.Component {
 
 CreateCourseConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
   courseName: PropTypes.string.isRequired,
   coursePresident: PropTypes.string.isRequired,
   courseType: PropTypes.number.isRequired,

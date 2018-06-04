@@ -106,7 +106,8 @@ class DegreeRequestComponent extends React.Component {
 
             </fieldset>
           </FormFields>
-          <Footer pad={{ vertical: 'medium' }} >
+
+          <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
             <Button
               label="Crea"
               type="submit"

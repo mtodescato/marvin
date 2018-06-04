@@ -18,14 +18,17 @@ class ListStudyCourses extends React.Component {
         subscribeToCourse={this.props.subscribeRequest}
         activeCourseName={this.props.activeCourseName}
         initialize={this.props.initialize}
-        status={this.props.status}
+        statusCoursesInfo={this.props.statusCoursesInfo}
+        statusSubscribeRequest={this.props.statusSubscribeRequest}
       />
     );
   }
 }
 
 ListStudyCourses.propTypes = {
-  status: PropTypes.string.isRequired,
+  initialize: PropTypes.func.isRequired,
+  statusCoursesInfo: PropTypes.string.isRequired,
+  statusSubscribeRequest: PropTypes.string.isRequired,
   courses: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     president: PropTypes.string.isRequired,
@@ -34,7 +37,6 @@ ListStudyCourses.propTypes = {
   })).isRequired,
   size: PropTypes.number.isRequired,
   activeCourseName: PropTypes.string.isRequired,
-  initialize: PropTypes.func.isRequired,
   subscribeRequest: PropTypes.func.isRequired,
 };
 
@@ -47,10 +49,11 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  status: state['list-courses-student'].status,
+  statusCoursesInfo: state['list-courses-student'].status,
   courses: state['list-courses-student'].courses,
   size: state['list-courses-student'].size,
   activeCourseName: state['list-courses-student'].activeCourseName,
+  statusSubscribeRequest: state['list-courses-student'].statusAction,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ListStudyCourses);

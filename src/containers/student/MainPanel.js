@@ -7,8 +7,6 @@ import ListStudyCourses from '../../containers/student/ListStudyCourses';
 import Booklet from '../../containers/student/Booklet';
 import ListAvaiableExams from '../../containers/student/ListAvaiableExams';
 import ListPendingResults from '../../containers/student/ListPendingResults';
-import CreateDegreeRequest from '../../containers/student/DegreeRequest';
-
 
 const MainPanel = ({ DashboardComponent }) => (
   <div>
@@ -32,8 +30,6 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: ListPendingResults };
     case 4:
       return { DashboardComponent: ListStudyCourses };
-    case 5:
-      return { DashboardComponent: CreateDegreeRequest };
     default:
       return { DashboardComponent: Home };
   }

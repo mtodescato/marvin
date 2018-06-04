@@ -14,12 +14,14 @@ class CreateTeachingContainer extends React.Component {
         professors={this.props.professors}
         courses={this.props.courses}
         actions={this.props.actions}
+        statusAddTeachingRequest={this.props.statusAddTeachingRequest}
       />
     );
   }
 }
 
 CreateTeachingContainer.propTypes = {
+  statusAddTeachingRequest: PropTypes.string.isRequired,
   actions: PropTypes.shape({
     addTeachingRequest: PropTypes.func.isRequired,
     initialize: PropTypes.func.isRequired,
@@ -35,6 +37,7 @@ CreateTeachingContainer.propTypes = {
 };
 
 const mapStateToProps = state => ({
+  statusAddTeachingRequest: state['add-teaching'].status,
   professors: state['list-professors'].professors.map(professor => ({
     value: professor.address,
     label: `${professor.name} ${professor.surname}`,

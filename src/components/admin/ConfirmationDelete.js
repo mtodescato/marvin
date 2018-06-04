@@ -11,6 +11,7 @@ class ConfirmationDelete extends React.Component {
 
   onDelete() {
     this.props.deleteAction(this.props.userAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -132,6 +133,7 @@ class ConfirmationDelete extends React.Component {
 
 ConfirmationDelete.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
   userSurname: PropTypes.string.isRequired,
   userAddress: PropTypes.string.isRequired,

@@ -18,6 +18,8 @@ class CreateUserConfirmation extends React.Component {
     };
 
     this.props.addUserRequest(user);
+    this.props.resetState();
+    this.props.setStatus(true);
     this.props.setLayer();
   }
   render() {
@@ -145,6 +147,8 @@ class CreateUserConfirmation extends React.Component {
 
 CreateUserConfirmation.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
+  resetState: PropTypes.func.isRequired,
   userName: PropTypes.string.isRequired,
   userSurname: PropTypes.string.isRequired,
   userAddress: PropTypes.string.isRequired,

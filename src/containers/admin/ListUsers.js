@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ListUsersComponent from '../../components/admin/ListUsersComponent';
 import { ListUsers as ListUserReducer } from '../../reducers';
 
+
 class ListUsers extends React.Component {
   componentWillMount() {
     this.props.initialize();
@@ -15,12 +16,17 @@ class ListUsers extends React.Component {
         size={this.props.size}
         userEntries={this.props.users}
         deleteAction={this.props.deleteAction}
+        initialize={this.props.initialize}
+        statusListUsersRequest={this.props.statusListUsersRequest}
+        statusDeleteRequest={this.props.statusDeleteRequest}
       />
     );
   }
 }
 
 ListUsers.propTypes = {
+  statusListUsersRequest: PropTypes.string.isRequired,
+  statusDeleteRequest: PropTypes.string.isRequired,
   users: PropTypes.arrayOf(PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
@@ -38,6 +44,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
+  statusListUsersRequest: state['list-users'].status,
+  statusDeleteRequest: state['list-users'].statusAction,
   users: state['list-users'].users,
   size: state['list-users'].size,
 });

@@ -36,6 +36,7 @@ class ExamApplicationEntry extends React.Component {
             examDate={this.props.date}
             examAddress={this.props.address}
             subscribeToExam={this.props.subscribeToExam}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -50,6 +51,7 @@ ExamApplicationEntry.propTypes = {
   date: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   subscribeToExam: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default ExamApplicationEntry;

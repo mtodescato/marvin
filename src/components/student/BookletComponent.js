@@ -1,84 +1,161 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
-import { Image, Section, Animate, Button } from 'grommet';
+import { Box, Animate, Heading, List, ListItem, TableHeader, Legend } from 'grommet';
 import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
-import loading from '../../images/loading.gif';
-import notFound from '../../images/404.gif';
+import MetamaskStatus from '../../components/shared/MetamaskStatus';
+
+const legendEntries = [
+  {
+    label: 'Passed', colorIndex: 'ok',
+  }, {
+    label: 'Attended', colorIndex: 'warning',
+  }, {
+    label: 'Planned', colorIndex: 'critical',
+  }];
+
 
 class BookletComponent extends React.Component {
   componentWillMount() {
     this.props.bookletInfoRequest();
   }
   render() {
-    switch (this.props.status) {
-      case 'RESOLVED':
-        return (
-          <Animate
-            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
-            keep
-          >
-            <div>
-              <h2> Welcome {this.props.user.name} {this.props.user.surname}
-                {' '} n. {this.props.user.matricola}
-              </h2>
-              <h3> Exams in your Booklet</h3>
+    return (
+      <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
+        <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+          <Heading tag="h2" strong>
+            Booklet
+          </Heading>
+        </Box>
+
+        <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h4" >
+            This page shows the user informations and the academic activities in the student’s
+            booklet. In the case of
+            activities not yet passed and attended, just click ‘Exam Session’ in the menu entry
+            that provides access to the list of the exam sessions.
+          </Heading>
+        </Box>
+
+        {this.props.status === 'RESOLVED' ?
+          <Box pad="none" margin="none">
+            <Box
+              className="studentInfoBox"
+              alignSelf="center"
+              pad={{ vertical: 'none', horizontal: 'none' }}
+              margin={{ bottom: 'medium' }}
+              colorIndex="light-2"
+              separator="all"
+              size="large"
+            >
+              <List >
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                        First Name:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.name}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Surname:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.surname}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="bottom"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Social number:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.matricola}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="none"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Address:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.user.address}
+                  </Heading>
+                </ListItem>
+
+              </List>
+            </Box>
+
+            <Animate
+              enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+              keep
+            >
               <Table responsive>
-                <thead>
-                  <tr>
-                    <th>Referent</th>
-                    <th>Name</th>
-                    <th>State</th>
-                    <th>Result</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
+                <TableHeader labels={['Professor in charge', 'Academic Activities', 'Status', 'Grade', 'Date']} />
                 <tbody>
                   {
-          this.props.exams.map(element => (
-            <ExamEntry {...element} />
-          ))
-        }
+                    this.props.exams.map(element => (
+                      <ExamEntry {...element} />
+                    ))
+                  }
                 </tbody>
               </Table>
-            </div>
-          </Animate>
-        );
-      case 'PENDING':
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={loading} size="medium" />
-            <h3>Request sent ...</h3>
-          </Section>
-        );
-      case 'ERRORED':
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={notFound} size="large" />
-            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
-          </Section>
-        );
-      default:
-        return (
-          <Section
-            align="center"
-          >
-            <Image src={notFound} size="large" />
-            <Button onClick={() => this.props.bookletInfoRequest()} label="Try again" />
-          </Section>
-        );
-    }
+
+              <Box
+                className="legendBox"
+                margin={{ horizontal: 'medium', bottom: 'medium' }}
+                pad="small"
+                separator="top"
+              >
+                <Legend
+                  series={legendEntries}
+                  onClick={false}
+                  total={false}
+                  size="medium"
+                />
+              </Box>
+
+            </Animate>
+          </Box>
+      : <MetamaskStatus
+        status={this.props.status}
+        tryAgainRequest={this.props.initialize}
+        // initializeValue="2018"
+      />
+      }
+      </Box>
+    );
   }
 }
 
 BookletComponent.propTypes = {
+  initialize: PropTypes.func.isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
+    address: PropTypes.string.isRequired,
     matricola: PropTypes.string.isRequired,
   }).isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({

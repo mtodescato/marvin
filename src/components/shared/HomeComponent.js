@@ -1,28 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Section, Box, Label, Heading, Tiles, Tile, Paragraph, Image } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
+import { Section, Box, Heading, Tiles, Tile, Paragraph, Image } from 'grommet';
 import ethMetUnipd from '../../images/ethereum_metamask_unipd.png';
 
 const HomeComponent = props => (
-  <Box
-    className="PanelBox"
-    direction="column"
-    margin="small"
-  >
-    <Box
-      className="PanelHeader"
-      direction="row"
-      justify="start"
-      align="center"
-      separator="horizontal"
-    >
-      <FormNextLinkIcon />
-      <Label>
-        Home
-      </Label>
-    </Box>
-
+  <Box className="PanelBox" direction="column" margin="small" >
     <Box
       className="PanelInfo"
       direction="column"

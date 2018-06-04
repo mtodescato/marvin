@@ -6,17 +6,16 @@ import {
   Form,
   FormField,
   Button,
-  Toast,
   Heading,
   FormFields,
   TextInput,
   Select,
   Footer,
 } from 'grommet';
-import FormNextLinkIcon from 'grommet/components/icons/base/FormNextLink';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
 import { stringFormValidation, addressValidation, selectValidation } from '../formValidator';
 import CreateUserConfirmation from './CreateUserConfirmation';
+import TransactionStatus from '../../components/shared/TransactionStatus';
 
 export const selectEntries = [{
   role: 0,
@@ -46,11 +45,13 @@ class CreateUserComponent extends React.Component {
     this.handleChangeRole = this.handleChangeRole.bind(this);
 
     this.setLayer = this.setLayer.bind(this);
+    this.setStatus = this.setStatus.bind(this);
+    this.resetState = this.resetState.bind(this);
 
     this.state = {
       name: '',
       surname: '',
-      address: '0x0',
+      address: '',
       role: 0,
       roleString: '',
       errors: {
@@ -61,7 +62,10 @@ class CreateUserComponent extends React.Component {
         formIsValid: false,
       },
       showLayer: false,
+      showStatus: false,
     };
+
+    this.defaultState = this.state;
   }
 
   onSubmit(e) {
@@ -74,6 +78,16 @@ class CreateUserComponent extends React.Component {
     this.setState({
       showLayer: !this.state.showLayer,
     });
+  }
+
+  setStatus(e) {
+    this.setState({
+      showStatus: e,
+    });
+  }
+
+  resetState() {
+    this.setState(this.defaultState);
   }
 
   handleValidation(errors) {
@@ -143,49 +157,14 @@ class CreateUserComponent extends React.Component {
   render() {
     return (
       <div>
-        {this.props.state.status === 'RESOLVED' && (
-          <Toast status="ok">
-            <strong>User Signed Up correctly</strong>
-          </Toast>
-        )}
-        {this.props.state.status === 'ERRORED' && (
-          <Toast status="critical">
-            <strong>User SignUp error: &quot;Transaction rejected&quot;</strong>
-          </Toast>
-        )}
-        <Box
-          className="PanelBox"
-          direction="column"
-          margin="small"
-          separator="bottom"
-        >
-          <Box
-            className="PanelHeader"
-            direction="row"
-            justify="start"
-            align="center"
-            separator="bottom"
-          >
-            <FormNextLinkIcon />
-            <Label>
-                Manage Users
-            </Label>
-            <FormNextLinkIcon />
-            <Label>
-                Create User
-            </Label>
-          </Box>
-
-          <Box className="titleBox" alignSelf="center" >
+        <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
+          <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
             <Heading tag="h2" strong>
               New user creation
             </Heading>
           </Box>
 
-          <Box
-            className="infoBox"
-            pad={{ horizontal: 'medium', vertical: 'small' }}
-          >
+          <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
             <Heading tag="h5" >
               This page allows you to create and add users into the system. In order to send
               the transaction to complete the creation operation you
@@ -193,12 +172,20 @@ class CreateUserComponent extends React.Component {
             </Heading>
           </Box>
 
+          {(this.props.statusAddUserRequest === 'PENDING' || this.props.statusAddUserRequest === 'RESOLVED' ||
+            this.props.statusAddUserRequest === 'ERRORED') && this.state.showStatus ?
+              <TransactionStatus setStatus={this.setStatus} /> : null
+          }
+
           <Box
             className="formBox"
             direction="column"
-            justify="start"
-            separator="bottom"
-            pad={{ horizontal: 'medium' }}
+            separator="horizontal"
+            pad={{ horizontal: 'medium', vertical: 'small', between: 'small' }}
+            align="center"
+            alignSelf="center"
+            colorIndex="light-2"
+            full="horizontal"
           >
             <Form>
               <FormFields>
@@ -224,6 +211,7 @@ class CreateUserComponent extends React.Component {
                     id="name"
                     name="Name"
                     placeHolder="Mario"
+                    value={this.state.name}
                     onDOMChange={this.handleChangeName}
                   />
                 </FormField>
@@ -250,6 +238,7 @@ class CreateUserComponent extends React.Component {
                     id="surname"
                     name="Surname"
                     placeHolder="Rossi"
+                    value={this.state.surname}
                     onDOMChange={this.handleChangeSurname}
                   />
                 </FormField>
@@ -275,6 +264,7 @@ class CreateUserComponent extends React.Component {
                     id="address"
                     name="Address"
                     placeHolder="0x0"
+                    value={this.state.address}
                     onDOMChange={this.handleChangeAddress}
                   />
                 </FormField>
@@ -309,7 +299,7 @@ class CreateUserComponent extends React.Component {
               </FormFields>
             </Form>
 
-            <Footer pad={{ vertical: 'medium' }}>
+            <Footer justify="center" align="center" pad={{ horizontal: 'none' }} direction="row" >
               <Button
                 label="Submit"
                 primary
@@ -323,7 +313,9 @@ class CreateUserComponent extends React.Component {
                   userAddress={this.state.address}
                   userRole={this.state.role}
                   addUserRequest={this.props.actions.addUserRequest}
-                  state={this.props.state}
+                  status={this.props.statusAddUserRequest}
+                  setStatus={this.setStatus}
+                  resetState={this.resetState}
                 />
                       : null
                     }
@@ -339,9 +331,7 @@ CreateUserComponent.propTypes = {
   actions: PropTypes.shape({
     addUserRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    status: PropTypes.string.isRequired,
-  }).isRequired,
+  statusAddUserRequest: PropTypes.string.isRequired,
 };
 
 export default CreateUserComponent;

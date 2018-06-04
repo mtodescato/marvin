@@ -1,7 +1,7 @@
 import React from 'react';
 import { Section } from 'grommet';
 import MarvinHeader from '../containers/shared/MarvinHeader';
-import MarvinFooter from '../containers/shared/MarvinFooter';
+import MarvinFooter from '../components/shared/MarvinFooter';
 import Login from '../containers/Login';
 
 const Home = () => (

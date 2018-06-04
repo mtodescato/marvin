@@ -49,7 +49,7 @@ class StudentEntry extends React.Component {
     return (
       <TableRow>
         <td>{this.props.index + 1}</td>
-        <td>{this.props.socialNumber}</td>
+        <td>{this.props.serial}</td>
         <td>{this.props.name}</td>
         <td>{this.props.surname}</td>
         <td>
@@ -85,11 +85,12 @@ class StudentEntry extends React.Component {
             setLayer={this.setLayer}
             studentName={this.props.name}
             studentSurname={this.props.surname}
-            studSocialNumber={this.props.socialNumber}
+            studSocialNumber={this.props.serial}
             stdAddress={this.props.address}
             mark={this.state.mark}
             examAddress={this.props.examAddress}
             publishMark={this.props.publishMark}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -102,10 +103,11 @@ StudentEntry.propTypes = {
   index: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   surname: PropTypes.string.isRequired,
-  socialNumber: PropTypes.string.isRequired,
+  serial: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
   examAddress: PropTypes.string.isRequired,
   publishMark: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default StudentEntry;

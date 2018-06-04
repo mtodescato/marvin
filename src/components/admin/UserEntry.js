@@ -45,6 +45,7 @@ class UserEntry extends React.Component {
             userAddress={this.props.address}
             userRole={this.props.role}
             deleteAction={this.props.deleteAction}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -60,6 +61,7 @@ UserEntry.propTypes = {
   role: PropTypes.number.isRequired,
   address: PropTypes.string.isRequired,
   deleteAction: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default UserEntry;

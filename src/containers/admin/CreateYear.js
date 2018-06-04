@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import { Box } from 'grommet';
 import { AddAcademicYear } from '../../reducers';
 import CreateYearComponent from '../../components/admin/CreateYearComponent';
-import ListYears from '../../containers/admin/ListYears';
 
-const CreateYear = ({ state, actions }) => (
+const CreateYear = ({ statusAddYearRequest, actions }) => (
   <Box>
-    <CreateYearComponent state={state} actions={actions} />
-    <ListYears />
+    <CreateYearComponent statusAddYearRequest={statusAddYearRequest} actions={actions} />
   </Box>
 );
 
@@ -17,11 +15,12 @@ CreateYear.propTypes = {
   actions: PropTypes.shape({
     addYearRequest: PropTypes.func.isRequired,
   }).isRequired,
-  state: PropTypes.shape({
-    isSuccess: PropTypes.bool.isRequired,
-    isFailed: PropTypes.bool.isRequired,
-  }).isRequired,
+  statusAddYearRequest: PropTypes.string.isRequired,
 };
+
+const mapStateToProps = state => ({
+  statusAddYearRequest: state['add-academic-year'].status,
+});
 
 const mapDispatchToProps = dispatch => ({
   actions: {
@@ -31,5 +30,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-
-export default connect(null, mapDispatchToProps)(CreateYear);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateYear);

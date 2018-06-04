@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Sticker from 'grommet/components/icons/base/RadialSelected';
 import TableRow from 'grommet/components/TableRow';
 
 const ExamEntry = props => (
@@ -7,8 +8,12 @@ const ExamEntry = props => (
   <TableRow>
     <td>{props.responsabile}</td>
     <td>{props.nome}</td>
-    <td>{props.stato}</td>
-    <td>{props.voto}</td>
+    <td>
+      {props.stato === 'pending' || props.stato === 'rejected' ? <Sticker colorIndex="critical" /> : null }
+      {props.stato === 'subscribed' || props.stato === 'published' ? <Sticker colorIndex="warning" /> : null }
+      {props.stato === 'published' ? <Sticker colorIndex="ok" /> : null }
+    </td>
+    <td>{props.voto === 'undefined' ? '-' : props.voto}</td>
     <td>{props.data}</td>
   </TableRow>
 );
