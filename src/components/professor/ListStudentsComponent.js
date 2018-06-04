@@ -60,6 +60,7 @@ class ListStudentsComponent extends React.Component {
                         {...element}
                         examAddress={this.props.examAddress}
                         publishMark={this.props.publishMark}
+                        setStatus={this.setStatus}
                       />
                     ))
                   }
