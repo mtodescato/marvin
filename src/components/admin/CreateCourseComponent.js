@@ -13,7 +13,7 @@ import {
   Footer,
 } from 'grommet';
 import Checkmark from 'grommet/components/icons/base/Checkmark';
-import { stringFormValidation, selectValidation } from '../formValidator';
+import { stringFormValidation, selectValidation, yearValidation } from '../formValidator';
 import CreateCourseConfirmation from './CreateCourseConfirmation';
 import TransactionStatus from '../../components/shared/TransactionStatus';
 
@@ -86,9 +86,9 @@ class CreateCourseComponent extends React.Component {
     let formIsValid = newLocal;
 
     if ((errors.name === 'isValid'
-    // && errors.president === 'isValid'
-    && errors.type === 'isValid'
-    // && errors.year === 'isValid'
+          && errors.president === 'isValid'
+          && errors.type === 'isValid'
+          && errors.year === 'isValid'
     )) {
       formIsValid = true;
       return formIsValid;
@@ -122,12 +122,31 @@ class CreateCourseComponent extends React.Component {
     });
   }
 
-  handleChangePresident(e) { // TODO
-    this.setState({ president: e.target.value });
+  handleChangePresident(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.president = stringFormValidation(e.target.value);
+    errors.formIsValid = this.handleValidation(errors);
+
+    this.setState({
+      president: e.target.value,
+      errors,
+    });
   }
 
-  handleChangeAcademicYear(e) { // TODO
-    this.setState({ academicYear: Number(e.target.value) });
+  handleChangeAcademicYear(e) {
+    const errors = Object.assign({}, this.state.errors);
+
+    errors.year = yearValidation(e.target.value);
+
+    if ((errors.year === 'isValid')) {
+      errors.formIsValid = true;
+    } else errors.formIsValid = false;
+
+    this.setState({
+      academicYear: e.target.value,
+      errors,
+    });
   }
 
   render() {
@@ -199,7 +218,7 @@ class CreateCourseComponent extends React.Component {
                   <Label size="small">
                         President:
                   </Label>
-                  {this.state.errors.name !== 'isValid' ?
+                  {this.state.errors.president !== 'isValid' ?
                     <Label size="small">
                       <span style={{ color: 'red' }}>{this.state.errors.president}</span>
                     </Label> : null
@@ -211,6 +230,7 @@ class CreateCourseComponent extends React.Component {
                 <TextInput
                   id="president"
                   name="President"
+                  value={this.state.president}
                   placeHolder="Mario Rossi"
                   onDOMChange={this.handleChangePresident}
                 />
@@ -273,7 +293,7 @@ class CreateCourseComponent extends React.Component {
             <Button
               label="Submit"
               primary
-              onClick={this.onSubmit}
+              onClick={this.state.errors.formIsValid ? this.onSubmit : null}
             />
             {this.state.showLayer ?
               <CreateCourseConfirmation
