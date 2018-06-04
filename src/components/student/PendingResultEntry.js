@@ -41,6 +41,7 @@ class PendingResultEntry extends React.Component {
             examAddress={this.props.examAddress}
             accept={this.props.accept}
             reject={this.props.reject}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -57,6 +58,7 @@ PendingResultEntry.propTypes = {
   examAddress: PropTypes.string.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default PendingResultEntry;

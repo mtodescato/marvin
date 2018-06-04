@@ -12,11 +12,13 @@ class ConfirmationResult extends React.Component {
 
   onConfirm() {
     this.props.accept(this.props.examAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
   onReject() {
     this.props.reject(this.props.examAddress);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -129,6 +131,7 @@ ConfirmationResult.propTypes = {
   examAddress: PropTypes.string.isRequired,
   accept: PropTypes.func.isRequired,
   reject: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default ConfirmationResult;

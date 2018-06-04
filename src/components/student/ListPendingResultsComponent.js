@@ -3,68 +3,85 @@ import PropTypes from 'prop-types';
 import { Box, Table, TableHeader, Heading, Animate } from 'grommet';
 import PendingResultEntry from './PendingResultEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
+import TransactionStatus from '../../components/shared/TransactionStatus';
 
-const ListPendingResultsComponent = ({
-  initialize,
-  statusResultsInfo,
-  size,
-  examsResults,
-  accept,
-  reject,
-}) => (
-  <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
-    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
-      <Heading tag="h2" strong>
-        Exams Results
-      </Heading>
-    </Box>
+class ListPendingResultsComponent extends React.Component {
+  constructor(props) {
+    super(props);
 
-    <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
-      <Heading tag="h5" >
-        This page displays the list of the exams with pending results of the study
-        courses of which you are enrolled. In order to accept or refuse a mark just
-        click on the ‘Accept’ or ‘Reject’ buttons alongside each exam entry.
-      </Heading>
-    </Box>
+    this.setStatus = this.setStatus.bind(this);
 
-    <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
-      <Heading tag="h4" >
-        Pending results: {size}
-      </Heading>
-    </Box>
+    this.state = {
+      showStatus: false,
+    };
+  }
 
-    {statusResultsInfo === 'RESOLVED' ?
-      <Animate
-        enter={{ animation: 'fade', duration: 1000, delay: 0 }}
-        keep
-      >
-        <Table
-          responsive
-          selectable
-        >
-          <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
-          <tbody>
-            {
-              examsResults.map((element, index) => (
-                <PendingResultEntry
-                  key={[element.address]}
-                  index={index}
-                  {...element}
-                  accept={accept}
-                  reject={reject}
-                />
-              ))
-            }
-          </tbody>
-        </Table>
-      </Animate>
-    : <MetamaskStatus
-      status={statusResultsInfo}
-      tryAgainRequest={initialize}
-    />
-    }
-  </Box>
-);
+  setStatus(e) {
+    this.setState({
+      showStatus: e,
+    });
+  }
+
+  render() {
+    return (
+      <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
+        <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+          <Heading tag="h2" strong>
+            Exams Results
+          </Heading>
+        </Box>
+
+        <Box className="infoBox" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h5" >
+            This page displays the list of the exams with pending results of the study
+            courses of which you are enrolled. In order to accept or refuse a mark just
+            click on the ‘Accept’ or ‘Reject’ buttons alongside each exam entry.
+          </Heading>
+        </Box>
+
+        {this.state.showStatus ? <TransactionStatus setStatus={this.setStatus} /> : null }
+
+        <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
+          <Heading tag="h4" >
+            Pending results: {this.props.size}
+          </Heading>
+        </Box>
+
+        {this.props.statusResultsInfo === 'RESOLVED' ?
+          <Animate
+            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+            keep
+          >
+            <Table
+              responsive
+              selectable
+            >
+              <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
+              <tbody>
+                {
+                  this.props.examsResults.map((element, index) => (
+                    <PendingResultEntry
+                      key={[element.address]}
+                      index={index}
+                      {...element}
+                      accept={this.props.accept}
+                      reject={this.props.reject}
+                      setStatus={this.setStatus}
+                    />
+                  ))
+                }
+              </tbody>
+            </Table>
+          </Animate>
+        : <MetamaskStatus
+          status={this.props.statusResultsInfo}
+          tryAgainRequest={this.props.initialize}
+        />
+        }
+      </Box>
+    );
+  }
+}
 
 ListPendingResultsComponent.propTypes = {
   initialize: PropTypes.func.isRequired,
