@@ -11,6 +11,7 @@ class ConfirmationPublishMark extends React.Component {
 
   onConfirm() {
     this.props.publishMark(this.props.stdAddress, this.props.examAddress, this.props.mark);
+    this.props.setStatus(true);
     this.props.setLayer();
   }
 
@@ -117,6 +118,7 @@ class ConfirmationPublishMark extends React.Component {
 
 ConfirmationPublishMark.propTypes = {
   setLayer: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
   mark: PropTypes.func.isRequired,
   studentName: PropTypes.string.isRequired,
   studentSurname: PropTypes.string.isRequired,

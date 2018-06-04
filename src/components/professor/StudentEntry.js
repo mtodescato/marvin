@@ -90,6 +90,7 @@ class StudentEntry extends React.Component {
             mark={this.state.mark}
             examAddress={this.props.examAddress}
             publishMark={this.props.publishMark}
+            setStatus={this.props.setStatus}
           />
                       : null
                     }
@@ -106,6 +107,7 @@ StudentEntry.propTypes = {
   address: PropTypes.string.isRequired,
   examAddress: PropTypes.string.isRequired,
   publishMark: PropTypes.func.isRequired,
+  setStatus: PropTypes.func.isRequired,
 };
 
 export default StudentEntry;
