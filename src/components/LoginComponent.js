@@ -1,5 +1,6 @@
 import React from 'react';
-import { Button, Section, Image, Box } from 'grommet';
+import { Button, Section, Image, Box, Animate, Label } from 'grommet';
+import Alert from 'grommet/components/icons/base/Alert';
 import LoginIcon from 'grommet/components/icons/base/Login';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -31,10 +32,38 @@ const LoginComponent = props => (
         label="Login"
         icon={<LoginIcon />}
       />
-      <p>
-        {// props.address
-        }
-      </p>
+
+      {props.status === 'ERRORED' ?
+        <Animate
+          enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+          keep
+        >
+          <Box
+            colorIndex="critical"
+            direction="row"
+            pad={{ vertical: 'none', horizontal: 'small', between: 'none' }}
+            margin="small"
+          >
+            <Box direction="row" pad={{ vertical: 'small', horizontal: 'small' }} margin="none">
+              <Alert colorIndex="light-1" />
+            </Box>
+            <Box flex direction="column" margin={{ top: 'none' }} pad={{ vertical: 'small', horizontal: 'none', between: 'none' }}>
+              <Label size="medium" margin="none">
+                <font color="white">
+                  Oops!
+                </font>
+              </Label>
+              <Label size="small" margin="none">
+                <font color="white">
+                  Seems like your Metamsk account is not recognised by our system.
+                  Try again or check your account.
+                </font>
+              </Label>
+            </Box>
+          </Box>
+        </Animate>
+      : null }
+
       <Box direction="row" align="center">
         <Image src={ethMetUnipd} alt="logo" size="large" />
       </Box>
@@ -45,8 +74,9 @@ const LoginComponent = props => (
 
 LoginComponent.propTypes = {
   type: PropTypes.string.isRequired,
+  // error: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
   loginRequest: PropTypes.func.isRequired,
-  // address: PropTypes.string.isRequired,
 };
 
 export default LoginComponent;

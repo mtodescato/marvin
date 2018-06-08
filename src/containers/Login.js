@@ -9,7 +9,8 @@ const Login = props => (
     <LoginComponent
       loginRequest={props.onLoginUserClick}
       type={props.type}
-      // address={props.address}
+      error={props.error}
+      status={props.status}
     />
   </div>
 );
@@ -17,7 +18,8 @@ const Login = props => (
 Login.propTypes = {
   onLoginUserClick: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  // address: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired,
+  status: PropTypes.string.isRequired,
 };
 
 const mapDispatchToProps = dispatch => ({
@@ -26,6 +28,8 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = state => ({
   type: state['web-3-user-info'].type,
+  status: state['web-3-user-info'].status,
+  error: state['web-3-user-info'].error,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
