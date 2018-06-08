@@ -56,7 +56,7 @@ const LoginComponent = props => (
               <Label size="small" margin="none">
                 <font color="white">
                   Seems like your Metamask wallet is not recognised by our system.
-                  Try again or check your account.
+                  Try again or check your wallet.
                 </font>
               </Label>
             </Box>
