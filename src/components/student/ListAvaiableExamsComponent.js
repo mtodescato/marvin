@@ -59,7 +59,7 @@ class ListAvaiableExamsComponent extends React.Component {
             >
               <TableHeader labels={['#', 'Name', 'Date', 'Subscribe']} />
               <tbody>
-                {
+                { this.props.size !== 0 ?
                   this.props.examsEntries.map((element, index) => (
                     <ExamApplicationEntry
                       key={[element.address]}
@@ -69,6 +69,7 @@ class ListAvaiableExamsComponent extends React.Component {
                       setStatus={this.setStatus}
                     />
                   ))
+                  : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                 }
               </tbody>
             </Table>

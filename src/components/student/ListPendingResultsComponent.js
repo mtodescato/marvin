@@ -58,7 +58,7 @@ class ListPendingResultsComponent extends React.Component {
             >
               <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
               <tbody>
-                {
+                { this.props.size !== 0 ?
                   this.props.examsResults.map((element, index) => (
                     <PendingResultEntry
                       key={[element.address]}
@@ -69,6 +69,7 @@ class ListPendingResultsComponent extends React.Component {
                       setStatus={this.setStatus}
                     />
                   ))
+                  : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                 }
               </tbody>
             </Table>
