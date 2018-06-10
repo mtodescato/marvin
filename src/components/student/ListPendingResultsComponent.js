@@ -42,17 +42,16 @@ class ListPendingResultsComponent extends React.Component {
 
         {this.state.showStatus ? <TransactionStatus setStatus={this.setStatus} /> : null }
 
-        <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
-          <Heading tag="h4" >
-            Pending results: {this.props.size}
-          </Heading>
-        </Box>
-
         {this.props.statusResultsInfo === 'RESOLVED' ?
           <Animate
             enter={{ animation: 'fade', duration: 1000, delay: 0 }}
             keep
           >
+            <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
+              <Heading tag="h4" >
+                Pending results: {this.props.size}
+              </Heading>
+            </Box>
             <Table
               responsive
               selectable
