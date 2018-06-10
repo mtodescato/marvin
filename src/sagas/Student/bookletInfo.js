@@ -1,10 +1,14 @@
 import { put, takeLatest, call } from 'redux-saga/effects';
 import { BookletInfo } from '../../reducers';
-import { getStudentInfo, getStudentTeachings, getPassedTeachings, addExamToPassedTeaching } from '../web3calls/getter';
+import { getStudentInfo, getStudentTeachings, getPassedTeachings, addExamToPassedTeaching, getUserContractAddress, getActiveDegreeCourse } from '../web3calls/getter';
+import { getAccount } from '../web3calls';
+
 
 export function* runAction() {
   try {
     const user = yield call(getStudentInfo);
+    const studentCAddress = yield call(getUserContractAddress, getAccount());
+    const activeCourseName = yield call(getActiveDegreeCourse, studentCAddress);
     const exams = yield call(getStudentTeachings);
     const passedAddresses = yield call(getPassedTeachings);
     for (let i = 0; i < exams.length; i += 1) {
@@ -14,6 +18,7 @@ export function* runAction() {
     }
     const booklet = {
       user,
+      activeCourseName,
       exams: exams.map(exam => ({ ...exam, responsabile: exam.responsibleName })),
     };
     yield put(BookletInfo.creators.bookletInfoSuccess(booklet));

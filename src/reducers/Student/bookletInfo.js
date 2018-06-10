@@ -9,6 +9,7 @@ export default AsyncFlow({
       matricola: '',
       media: '',
     },
+    activeCourseName: 'N/A',
     exams: [],
   },
   actions: ['BOOKLET_INFO'],
@@ -20,11 +21,12 @@ export default AsyncFlow({
           return {
             ...state,
             user: action.payload.booklet.user,
+            activeCourseName: action.payload.booklet.activeCourseName,
             exams: action.payload.booklet.exams,
           };
-        } return state;
+        } return { ...state, activeCourseName: 'N/A' };
       default:
-        return state;
+        return { ...state, activeCourseName: 'N/A' };
     }
   },
   creators: ({ types }) => ({

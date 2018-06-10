@@ -18,6 +18,7 @@ import BookletComponent from '../../components/student/BookletComponent';
 
 const Booklet = ({
   status,
+  activeCourseName,
   user,
   bookletInfoRequest,
   exams,
@@ -28,6 +29,7 @@ const Booklet = ({
       status={status}
       user={user}
       exams={exams}
+      activeCourseName={activeCourseName}
       initialize={bookletInfoRequest}
     />
   </div>
@@ -35,17 +37,21 @@ const Booklet = ({
 
 Booklet.propTypes = {
   status: PropTypes.string.isRequired,
+  activeCourseName: PropTypes.PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
-    address: PropTypes.string.isRequired,
+    address: PropTypes.string,
     matricola: PropTypes.string.isRequired,
   }).isRequired,
   exams: PropTypes.arrayOf(PropTypes.shape({
     nome: PropTypes.string.isRequired,
     responsabile: PropTypes.string.isRequired,
     stato: PropTypes.string.isRequired,
-    voto: PropTypes.number.isRequired,
+    voto: PropTypes.string.isRequired,
     data: PropTypes.string.isRequired,
   })).isRequired,
   bookletInfoRequest: PropTypes.func.isRequired,
@@ -59,6 +65,7 @@ const mapStateToProps = state => ({
   status: state['booklet-info-student'].status,
   user: state['booklet-info-student'].user,
   exams: state['booklet-info-student'].exams,
+  activeCourseName: state['booklet-info-student'].activeCourseName,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Booklet);
