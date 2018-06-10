@@ -15,10 +15,14 @@ const Login = props => (
   </div>
 );
 
+Login.defaultProps = {
+  error: '',
+};
+
 Login.propTypes = {
   onLoginUserClick: PropTypes.func.isRequired,
   type: PropTypes.string.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   status: PropTypes.string.isRequired,
 };
 
