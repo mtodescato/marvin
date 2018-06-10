@@ -5,8 +5,8 @@
  * @param {String} string the given HEX adress
  * @return {String}
 */export function stringFormValidation(string) {
-  if (string.length < 3) {
-    return 'name too short(min. 3 characters)';
+  if (string.length < 2) {
+    return 'name too short(min. 2 characters)';
   } else
   if (!string.match(/^[A-Za-z ]+$/)) {
     return 'only letters allowed';
