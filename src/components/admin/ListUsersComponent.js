@@ -67,7 +67,7 @@ class ListUsersComponent extends React.Component {
             >
               <TableHeader labels={['#', 'First Name', 'Surname', 'Role', 'Address', 'Delete']} />
               <tbody>
-                {
+                { this.props.size !== 0 ?
                   this.props.userEntries.map((element, index) => (
                     <UserEntry
                       key={[element.address]}
@@ -77,6 +77,7 @@ class ListUsersComponent extends React.Component {
                       setStatus={this.setStatus}
                     />
                   ))
+                  : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                 }
               </tbody>
             </Table>

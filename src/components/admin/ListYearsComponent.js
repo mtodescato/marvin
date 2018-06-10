@@ -26,7 +26,7 @@ const ListYearsComponent = ({ size, years }) => (
       >
         <TableHeader labels={['#', 'Academic Year', 'Address']} />
         <tbody>
-          {
+          { this.size !== 0 ?
             years.map((element, index) => (
               <YearEntry
                 key={[element.address]}
@@ -34,6 +34,7 @@ const ListYearsComponent = ({ size, years }) => (
                 {...element}
               />
             ))
+            : <tr><td colSpan="5" align="justify">No results found.</td></tr>
           }
         </tbody>
       </Table>
