@@ -21,7 +21,6 @@ script:
 - cd src/bc
 - sed -i -e 's/metamask 20 word seed/drop where coast put actress bulk story pool margin cake slice age/g' truffle.js
 - sed -i -e 's/<Infura key>/Rb9eRuYiPahM5vygdz1l/g' truffle.js
-- cat truffle.js
 - solhint ./contracts/*
 - truffle compile
 - ganache-cli -p 7545 -m velociraptor > artifacts.txt &
