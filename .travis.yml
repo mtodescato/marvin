@@ -19,8 +19,9 @@ all_branches: true
 script:
 - npm install --silent
 - cd src/bc
-- sed -i -e 's/metamaskKey/$metamaskKey/g' truffle.js
-- sed -i -e 's/<Infura key>/$infuraKey/g' truffle.js
+- sed -i -e 's/metamask 20 word seed/drop where coast put actress bulk story pool margin cake slice age/g' truffle.js
+- sed -i -e 's/<Infura key>/Rb9eRuYiPahM5vygdz1l/g' truffle.js
+- cat truffle.js
 - solhint ./contracts/*
 - truffle compile
 - ganache-cli -p 7545 -m velociraptor > artifacts.txt &
@@ -31,6 +32,9 @@ script:
 - npm run test
 
 before_deploy:
+- cd ./src/bc
+- truffle migrate --network ropsten
+- cd ../..
 - npm run build
 - ls
 - cd build
@@ -40,16 +44,10 @@ before_deploy:
 - ls
 
 deploy:
-  - provider: surge
-    file_glob: true
-    skip_cleanup: true
-    project: ./build/
-    domain: velociraptor.surge.sh
-    on:
-      branch: master
-  - provider: script
-    script: 
-      - cd ./src/bc
-      - truffle migrate --network ropsten
-    on:
-      branch: master
+  provider: surge
+  file_glob: true
+  skip_cleanup: true
+  project: ./build/
+  domain: velociraptor.surge.sh
+  on:
+    branch: master
