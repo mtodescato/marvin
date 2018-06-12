@@ -41,8 +41,8 @@ ListStudyCourses.propTypes = {
 };
 
 const mapDispatchToProps = dispatch => ({
-  subscribeRequest: (address) => {
-    dispatch(ListCourseReducer.creators.subscribeRequest(address));
+  subscribeRequest: (address, name) => {
+    dispatch(ListCourseReducer.creators.subscribeRequest(address, name));
   },
 
   initialize: (year) => { dispatch(ListCourseReducer.creators.listCoursesRequest(year)); },

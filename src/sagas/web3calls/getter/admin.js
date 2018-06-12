@@ -1,7 +1,7 @@
 import { deployed, at, getAccount } from '../deployed';
 import { numberToCourseType, createArray } from '../../../utils/global';
 import { getUserInfoFromInt, getUserInfoFromCAddress } from '.';
-import { professorFacadeAddress } from './contract';
+import { professorFacadeAddress, getUserContractAddress } from './contract';
 
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 import AdminFacade from '../../../bc/build/contracts/AdminFacade.json';
@@ -73,9 +73,10 @@ export const getDegreeCourses = ({ year, size }) =>
 export const addTeaching = teaching => deployed(AdminFacade)
   .then(async (inst) => {
     const professorAddress = await professorFacadeAddress();
+    const address = await getUserContractAddress(teaching.responsible);
     return inst.addTeaching(
       teaching.course,
-      teaching.responsible,
+      address,
       teaching.name,
       professorAddress,
       { from: getAccount() },

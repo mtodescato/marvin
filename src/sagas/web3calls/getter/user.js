@@ -1,4 +1,3 @@
-import { validateAddress } from '../../../utils/global';
 import { getUserContract, getUserContractAddress } from './contract';
 import { deployed } from '../deployed';
 
@@ -14,7 +13,7 @@ const getUserSocialNumber = address => getUserSpecificInfo(address, 'getSocialNu
 const getUserSerial = address => getUserSpecificInfo(address, 'getSerial').then(Number);
 
 export const getUserType = address => // real address
-  deployed(ListUsers).then(inst => inst.getType.call(validateAddress(address))).then(Number);
+  deployed(ListUsers).then(inst => inst.getType.call(address)).then(Number);
 
 export const getUserInfoFromCAddress = async cAddress => ({
   name: await getUserName(cAddress),
