@@ -52,7 +52,7 @@ class ListStudentsComponent extends React.Component {
               >
                 <TableHeader labels={['#', 'Social Number', 'Name', 'Surname', 'Publish mark']} />
                 <tbody>
-                  {
+                  { this.props.size !== 0 ?
                     this.props.examsResults.map((element, index) => (
                       <StudentEntry
                         key={[element.address]}
@@ -63,6 +63,7 @@ class ListStudentsComponent extends React.Component {
                         setStatus={this.setStatus}
                       />
                     ))
+                    : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                   }
                 </tbody>
               </Table>

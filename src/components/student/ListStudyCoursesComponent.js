@@ -60,7 +60,7 @@ class ListStudyCoursesComponent extends React.Component {
             >
               <TableHeader labels={['#', 'Name', 'President', 'Type', 'Subscribe']} />
               <tbody>
-                {
+                { this.props.size !== 0 ?
                     this.props.coursesEntries.map((element, index) => (
                       <CourseEntry
                         key={[element.ID]}
@@ -71,6 +71,7 @@ class ListStudyCoursesComponent extends React.Component {
                         setStatus={this.setStatus}
                       />
                    ))
+                   : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                 }
               </tbody>
             </Table>

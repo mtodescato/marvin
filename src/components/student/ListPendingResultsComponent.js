@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Table, TableHeader, Heading, Animate } from 'grommet';
+import { Box, Table, TableHeader, Heading, Animate, Label } from 'grommet';
+import Alert from 'grommet/components/icons/base/Alert';
 import PendingResultEntry from './PendingResultEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
 import TransactionStatus from '../../components/shared/TransactionStatus';
@@ -41,24 +42,23 @@ class ListPendingResultsComponent extends React.Component {
 
         {this.state.showStatus ? <TransactionStatus setStatus={this.setStatus} /> : null }
 
-        <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
-          <Heading tag="h4" >
-            Pending results: {this.props.size}
-          </Heading>
-        </Box>
-
         {this.props.statusResultsInfo === 'RESOLVED' ?
           <Animate
             enter={{ animation: 'fade', duration: 1000, delay: 0 }}
             keep
           >
+            <Box className="searchBox" size="medium" pad={{ horizontal: 'medium', vertical: 'small' }} >
+              <Heading tag="h4" >
+                Pending results: {this.props.size}
+              </Heading>
+            </Box>
             <Table
               responsive
               selectable
             >
               <TableHeader labels={['#', 'Name', 'Date', 'Result', 'Action']} />
               <tbody>
-                {
+                { this.props.size !== 0 ?
                   this.props.examsResults.map((element, index) => (
                     <PendingResultEntry
                       key={[element.address]}
@@ -69,14 +69,43 @@ class ListPendingResultsComponent extends React.Component {
                       setStatus={this.setStatus}
                     />
                   ))
+                  : <tr><td colSpan="5" align="justify">No results found.</td></tr>
                 }
               </tbody>
             </Table>
           </Animate>
-        : <MetamaskStatus
-          status={this.props.statusResultsInfo}
-          tryAgainRequest={this.props.initialize}
-        />
+        : null
+        }
+
+        {this.props.statusResultsInfo === 'ERRORED' ?
+          <Animate
+            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+            keep
+          >
+            <Box colorIndex="warning" direction="row" pad="none" margin="small">
+              <Box direction="row" pad={{ vertical: 'small', horizontal: 'small' }} margin="none">
+                <Alert />
+              </Box>
+              <Box flex direction="column" margin={{ top: 'none' }} pad={{ vertical: 'small', horizontal: 'none', between: 'none' }}>
+                <Label size="medium" margin="none">
+                    Oops! Seems like you are not enrolled in any study course.
+                </Label>
+                <Label size="small" margin="none">
+                    In order to have access to all the features of your private area such
+                    as ‘Booklet’ or ‘Exam Session’ you have
+                    to sign up for the study course in which you want to graduate
+                    on the ‘Course Application’ section.
+                </Label>
+              </Box>
+            </Box>
+          </Animate>
+        : null
+        }
+        { this.props.statusResultsInfo === 'PENDING' ?
+          <MetamaskStatus
+            status={this.props.statusResultsInfo}
+            tryAgainRequest={this.props.initialize}
+          /> : null
         }
       </Box>
     );
