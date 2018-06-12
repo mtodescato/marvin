@@ -10,7 +10,7 @@ class ConfirmationSubscribe extends React.Component {
   }
 
   onSubscribe() {
-    this.props.subscribeToCourse(this.props.courseAddress);
+    this.props.subscribeToCourse(this.props.courseAddress, this.props.courseName);
     this.props.setStatus(true);
     this.props.setLayer();
   }
