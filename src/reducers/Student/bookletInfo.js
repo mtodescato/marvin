@@ -24,9 +24,9 @@ export default AsyncFlow({
             activeCourseName: action.payload.booklet.activeCourseName,
             exams: action.payload.booklet.exams,
           };
-        } return { ...state, activeCourseName: 'N/A' };
+        } return state;
       default:
-        return { ...state, activeCourseName: 'N/A' };
+        return state;
     }
   },
   creators: ({ types }) => ({
