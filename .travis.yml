@@ -10,15 +10,17 @@ node_js:
 
 before_install:
 - sudo apt-get update
-- npm install -g truffle@4.1.7
-- npm install -g solhint@1.2.1
-- npm install -g ganache-cli@6.0.3
+- npm install -g truffle@4.1.7 --silent
+- npm install -g solhint@1.2.1 --silent
+- npm install -g ganache-cli@6.0.3 --silent
 
 all_branches: true
 
 script:
-- npm install 
+- npm install --silent
 - cd src/bc
+- sed -i -e 's/metamask 20 word seed/drop where coast put actress bulk story pool margin cake slice age/g' truffle.js
+- sed -i -e 's/<Infura key>/Rb9eRuYiPahM5vygdz1l/g' truffle.js
 - solhint ./contracts/*
 - truffle compile
 - ganache-cli -p 7545 -m velociraptor > artifacts.txt &
@@ -29,6 +31,9 @@ script:
 - npm run test
 
 before_deploy:
+- cd ./src/bc
+- truffle migrate --network ropsten
+- cd ../..
 - npm run build
 - ls
 - cd build

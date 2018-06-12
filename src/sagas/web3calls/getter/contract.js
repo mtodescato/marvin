@@ -1,5 +1,3 @@
-import { validateAddress } from '../../../utils/global';
-
 import { deployed, at } from '../deployed';
 
 import User from '../../../bc/build/contracts/User.json';
@@ -14,16 +12,14 @@ import ProfessorFacade from '../../../bc/build/contracts/ProfessorFacade.json';
 import ListUsers from '../../../bc/build/contracts/ListUsers.json';
 
 // getter Contract user from contract address
-const errMsg = 'contract address isn\'t valid';
-export const getUserContract = address => at(User, validateAddress(address, errMsg));
-export const getStudentContract = address => at(Student, validateAddress(address, errMsg));
-export const getProfessorContract = address => at(Professor, validateAddress(address, errMsg));
-export const getAdminContract = address => at(Admin, validateAddress(address, errMsg));
+export const getUserContract = address => at(User, address);
+export const getStudentContract = address => at(Student, address);
+export const getProfessorContract = address => at(Professor, address);
+export const getAdminContract = address => at(Admin, address);
 
 // getter contract address from user address
-const errMsg1 = 'user address isn\' valid';
 export const getUserContractAddress = address =>
-  deployed(ListUsers).then(inst => inst.getUser.call(validateAddress(address, errMsg1)));
+  deployed(ListUsers).then(inst => inst.getUser.call(address));
 
 // facade's address, for ownerships
 export const professorFacadeAddress = () => deployed(ProfessorFacade).then(inst => inst.address);

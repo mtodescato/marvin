@@ -44,8 +44,8 @@ export default AsyncFlow({
     listCoursesFailed: error => (
       { type: types.LIST_COURSES_FAILED, error: true, payload: { error } }
     ),
-    subscribeRequest: courseAdd => (
-      { type: types.SUBSCRIBE_REQUEST, payload: { courseAdd } }
+    subscribeRequest: (courseAdd, name) => (
+      { type: types.SUBSCRIBE_REQUEST, payload: { courseAdd, name } }
     ),
     subscribeSuccess: activeCourseName => (
       { type: types.SUBSCRIBE_SUCCESS, payload: { activeCourseName } }
