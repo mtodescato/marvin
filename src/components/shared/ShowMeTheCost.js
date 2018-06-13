@@ -19,7 +19,13 @@ export const pricesEntries = [
 
 const ShowMeTheCost = () => (
   <Box className="PanelBox" direction="column" margin="small" separator="bottom" >
-    <Box className="titleBox" align="center" alignSelf="center" colorIndex="brand" full="horizontal" >
+    <Box
+      className="titleBox"
+      align="center"
+      alignSelf="center"
+      colorIndex="brand"
+      full="horizontal"
+    >
       <Heading tag="h2" strong>
             Show Me The Cost
       </Heading>
