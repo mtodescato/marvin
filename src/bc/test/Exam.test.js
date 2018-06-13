@@ -48,29 +48,29 @@ contract('Testing Exam', () => {
       .publishMark(exam, studentContractAddress, 27, professorContract, { from: address1 });
   });
 
-  it('TS0026 can get a mark', async () => {
+  it('TS0027 can get a mark', async () => {
     const intMark = await examInstance.getMarkIndex.call(0);
     const addressMark = await examInstance.getMark.call(studentContractAddress);
     assert.equal(addressMark.toNumber(), intMark.toNumber(), 'functions returns the same');
     assert.equal(intMark.toNumber(), 27, 'correct mark');
   });
 
-  it('TS0026 can get teaching', async () => {
+  it('TS0028 can get teaching', async () => {
     const teachingAddress = await examInstance.getTeaching.call();
     assert.notEqual(teachingAddress, '0x0000000000000000000000000000000000000000', 'address not null');
   });
 
-  it('TS0027 can get number of students', async () => {
+  it('TS0029 can get number of students', async () => {
     const numberOfStudents = await examInstance.getNumberOfStudents.call();
     assert.equal(numberOfStudents.toNumber(), 1, 'Correct number of students');
   });
 
-  it('TS0028 can get the number of inserted marks', async () => {
+  it('TS0030 can get the number of inserted marks', async () => {
     const numberOfMarks = await examInstance.getNumberOfMarks.call();
     assert.equal(numberOfMarks.toNumber(), 1, 'correct number of marks');
   });
 
-  it('TS0029 can get a subscribed student', async () => {
+  it('TS0031 can get a subscribed student', async () => {
     const studentSubscribed = await examInstance.getStudentSubscribed.call(0);
     assert.equal(studentSubscribed, studentContractAddress, 'address is correct');
   });

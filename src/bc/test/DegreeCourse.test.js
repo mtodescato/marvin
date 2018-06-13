@@ -29,17 +29,17 @@ contract('Testing DegreeCourse', () => {
     assert.equal(numberOfTeachings.toNumber(), 1, 'correct number of teachings');
   });
 
-  it('TS0023 can get the degree course name', async () => {
+  it('TS0024 can get the degree course name', async () => {
     const degreeCourseName = await degreeCourseInstance.getDegreeCourseName.call();
     assert.equal(web3.toAscii(degreeCourseName), 'computer science', 'correct degree course name');
   });
 
-  it('TS0024 can get the degree course president', async () => {
+  it('TS0025 can get the degree course president', async () => {
     const degreeCoursePresident = await degreeCourseInstance.getDegreeCoursePresident.call();
     assert.equal(web3.toAscii(degreeCoursePresident), 'Mario Rossi', 'correct degree course president');
   });
 
-  it('TS0025 can get the degree course type', async () => {
+  it('TS0026 can get the degree course type', async () => {
     const type = await degreeCourseInstance.getDegreeCourseType.call();
     assert.equal(type.toNumber(), 1, 'correct degree type');
   });
