@@ -37,7 +37,7 @@ const ExamsTeachingComponent = ({
           >
             <TableHeader labels={['#', 'Address', 'Date']} />
             <tbody>
-              {
+              { this.size !== 0 ?
                 exams.map((element, index) => (
                   <ExamEntry
                     key={[element.address]}
@@ -45,6 +45,7 @@ const ExamsTeachingComponent = ({
                     {...element}
                   />
                 ))
+                : <tr><td colSpan="5" align="justify">No results found.</td></tr>
             }
             </tbody>
           </Table>

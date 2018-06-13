@@ -1,6 +1,7 @@
 import React from 'react';
 import Table from 'grommet/components/Table';
-import { Box, Animate, Heading, List, ListItem, TableHeader, Legend } from 'grommet';
+import { Box, Animate, Heading, List, ListItem, TableHeader, Label, Legend } from 'grommet';
+import Alert from 'grommet/components/icons/base/Alert';
 import PropTypes from 'prop-types';
 import ExamEntry from './ExamEntry';
 import MetamaskStatus from '../../components/shared/MetamaskStatus';
@@ -93,7 +94,7 @@ class BookletComponent extends React.Component {
 
                 <ListItem
                   justify="between"
-                  separator="none"
+                  separator="bottom"
                   pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
                   margin="none"
                 >
@@ -102,6 +103,20 @@ class BookletComponent extends React.Component {
                   </Heading>
                   <Heading tag="h4" margin="none">
                     {this.props.user.address}
+                  </Heading>
+                </ListItem>
+
+                <ListItem
+                  justify="between"
+                  separator="none"
+                  pad={{ vertical: 'none', horizontal: 'small', between: 'medium' }}
+                  margin="none"
+                >
+                  <Heading tag="h4" margin="none" strong>
+                    Study Course:
+                  </Heading>
+                  <Heading tag="h4" margin="none">
+                    {this.props.activeCourseName.name}
                   </Heading>
                 </ListItem>
 
@@ -117,7 +132,7 @@ class BookletComponent extends React.Component {
                 <tbody>
                   {
                     this.props.exams.map(element => (
-                      <ExamEntry {...element} />
+                      <ExamEntry {...element} key={[element.nome]} />
                     ))
                   }
                 </tbody>
@@ -131,7 +146,6 @@ class BookletComponent extends React.Component {
               >
                 <Legend
                   series={legendEntries}
-                  onClick={false}
                   total={false}
                   size="medium"
                 />
@@ -139,12 +153,38 @@ class BookletComponent extends React.Component {
 
             </Animate>
           </Box>
-      : <MetamaskStatus
-        status={this.props.status}
-        tryAgainRequest={this.props.initialize}
-        // initializeValue="2018"
-      />
+      : null
       }
+        {this.props.status === 'ERRORED' ?
+          <Animate
+            enter={{ animation: 'fade', duration: 1000, delay: 0 }}
+            keep
+          >
+            <Box colorIndex="warning" direction="row" pad="none" margin="small">
+              <Box direction="row" pad={{ vertical: 'small', horizontal: 'small' }} margin="none">
+                <Alert />
+              </Box>
+              <Box flex direction="column" margin={{ top: 'none' }} pad={{ vertical: 'small', horizontal: 'none', between: 'none' }}>
+                <Label size="medium" margin="none">
+                    Oops! Seems like you are not enrolled in any study course.
+                </Label>
+                <Label size="small" margin="none">
+                    In order to have access to all the features of your private area such
+                    as ‘Booklet’ or ‘Exam Session’ you have
+                    to sign up for the study course in which you want to graduate
+                    on the ‘Course Application’ section.
+                </Label>
+              </Box>
+            </Box>
+          </Animate>
+        : null
+        }
+        { this.props.status === 'PENDING' ?
+          <MetamaskStatus
+            status={this.props.status}
+            tryAgainRequest={this.props.initialize}
+          /> : null
+        }
       </Box>
     );
   }
@@ -152,6 +192,10 @@ class BookletComponent extends React.Component {
 
 BookletComponent.propTypes = {
   initialize: PropTypes.func.isRequired,
+  activeCourseName: PropTypes.PropTypes.shape({
+    address: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
   user: PropTypes.shape({
     name: PropTypes.string.isRequired,
     surname: PropTypes.string.isRequired,
@@ -162,7 +206,7 @@ BookletComponent.propTypes = {
     nome: PropTypes.string.isRequired,
     responsabile: PropTypes.string.isRequired,
     stato: PropTypes.string.isRequired,
-    voto: PropTypes.number.isRequired,
+    voto: PropTypes.string.isRequired,
     data: PropTypes.string.isRequired,
   })).isRequired,
   bookletInfoRequest: PropTypes.func.isRequired,

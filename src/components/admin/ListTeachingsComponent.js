@@ -51,7 +51,7 @@ const ListTeachingsComponent = ({
         >
           <TableHeader labels={['#', 'Teaching', 'Course', 'Professor in charge']} />
           <tbody>
-            {
+            { this.size !== 0 ?
               teachings.map((element, index) => (
                 <TeachingEntry
                   key={[element.address]}
@@ -59,6 +59,7 @@ const ListTeachingsComponent = ({
                   {...element}
                 />
               ))
+              : <tr><td colSpan="5" align="justify">No results found.</td></tr>
             }
           </tbody>
         </Table>
