@@ -10,6 +10,7 @@ import CreateCourse from './CreateCourse';
 import ListTeachings from './ListTeachings';
 import CreateYear from './CreateYear';
 import CreateTeaching from './CreateTeaching';
+import ShowMeTheCost from '../../components/shared/ShowMeTheCost';
 
 const MainPanelAdmin = ({ DashboardComponent }) => (
   <div>
@@ -39,6 +40,8 @@ const mapStateToProps = (state) => {
       return { DashboardComponent: CreateTeaching };
     case 7:
       return { DashboardComponent: CreateYear };
+    case 9:
+      return { DashboardComponent: ShowMeTheCost };
     default:
       return { DashboardComponent: Home };
   }

@@ -3,12 +3,14 @@ export const menuEntriesStudent = [
   'Exam Session',
   'Exam Results',
   'Course Application',
+  'Show Me The Cost',
 ];
 
 export const menuEntriesProfessor = [
   'List Teachings',
   'Manage Exams',
   'Create Exam',
+  'Show Me The Cost',
 ];
 
 export const menuEntriesAdmin = [

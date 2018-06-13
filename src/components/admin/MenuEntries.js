@@ -26,19 +26,28 @@ const MenuEntries = ({ active = 0, action, entries }) => (
             primary
             inline
           >
-            {value.subEntries.map((v, i) => (
-              <Anchor
-                key={[v]}
-                className={(2 * index) + i + 1 === active ? 'active' : ''}
-                onClick={() => action((2 * index) + i + 1)}
-              >
-                {v}
-              </Anchor>))}
+            {
+              value.subEntries.map((v, i) => (
+                <Anchor
+                  key={[v]}
+                  className={(2 * index) + i + 1 === active ? 'active' : ''}
+                  onClick={() => action((2 * index) + i + 1)}
+                >
+                  {v}
+                </Anchor>
+              ))
+            }
           </Menu>
         </Box>
       </AccordionPanel>
 
   ))}
+    <Accordion onActive={() => action(9)} >
+      <AccordionPanel
+        heading="Show Me The Cost"
+        primary
+      />
+    </Accordion>
   </Accordion>
 );
 
