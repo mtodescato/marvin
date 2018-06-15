@@ -10,8 +10,8 @@ const ExamEntry = props => (
     <td>{props.nome}</td>
     <td>
       {props.stato === 'pending' || props.stato === 'rejected' ? <Sticker colorIndex="critical" /> : null }
-      {props.stato === 'subscribed' ? <Sticker colorIndex="warning" /> : null }
-      {props.stato === 'published' || props.stato === 'accepted' ? <Sticker colorIndex="ok" /> : null }
+      {props.stato === 'subscribed' || props.stato === 'published' ? <Sticker colorIndex="warning" /> : null }
+      {props.stato === 'accepted' ? <Sticker colorIndex="ok" /> : null }
     </td>
     <td>{props.voto === 'undefined' ? '-' : props.voto}</td>
     <td>{props.data}</td>
