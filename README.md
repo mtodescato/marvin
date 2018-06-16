@@ -7,6 +7,22 @@ This project test if it is feasible to make a managerial application in a blockc
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
+> **Warning:** Windows have problems with the last version of marvin, a package called *truffle-hdwallet-provider* produce an error in the installation, we will solve it next time, but if you want to use marvin in Windows there are some steps to follow:
+> 1. delete *truffle-hdwallet-provider* dependence reference in [package.json](./package.json)
+> 2. replace [truffle.js](./src/bc/truffle.js) with this content:
+>    ```
+>    module.exports = {
+>      networks: {
+>        development: {
+>          host: '127.0.0.1',
+>          port: 7545,
+>          network_id: '*', // Match any network id
+>        },
+>      },
+>    };
+>    ```
+> Then you can run installation and running steps.
+
 ### Prerequisites
 
 This project use Node 8, please install before installing dependencies, [installing node](https://nodejs.org/it/download/).
@@ -32,7 +48,6 @@ npm install
 ```
 
 ## Running
-
 To try Marvin you should run
 
 ```bash
@@ -156,4 +171,4 @@ this script add:
 
 ## License
 
-This project is licensed under the MIT License.
+This project is licensed under the MIT License - see [LICENSE](./LICENSE) file for details
